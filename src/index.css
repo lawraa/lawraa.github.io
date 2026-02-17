@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --color-bg: #fafaf8;
+  --color-text: #111111;
+  --color-secondary: #6b6b6b;
+  --color-accent: #3a6ff7;
+  --color-border: #e5e5e5;
+  --color-surface: #f0f0ee;
+  --color-surface-hover: #e8e8e5;
+}
+
+.dark {
+  --color-bg: #1a1a1a;
+  --color-text: #e8e8e8;
+  --color-secondary: #999999;
+  --color-accent: #5b8af7;
+  --color-border: #333333;
+  --color-surface: #242424;
+  --color-surface-hover: #2e2e2e;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  transition: background-color 0.2s, color 0.2s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animated underline links */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+  color: var(--color-accent);
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent);
+  transition: width 0.2s ease;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Expand/collapse transition */
+.expand-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.expand-content.expanded {
+  grid-template-rows: 1fr;
+}
+
+.expand-inner {
+  overflow: hidden;
+}
