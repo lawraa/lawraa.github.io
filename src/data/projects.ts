@@ -12,51 +12,83 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'realtime-fraud',
-    title: 'Real-Time Fraud Detection Pipeline',
-    subtitle: 'Sub-50ms inference at 2M events/day with adaptive thresholds',
-    tags: ['PyTorch', 'Kafka', 'Feature Store', 'MLOps'],
+    id: 'assistive-device',
+    title: 'AI-Driven Personalized Assistive Device',
+    subtitle: 'Closed-loop RL optimization for mechanical assistive arm design',
+    tags: ['Reinforcement Learning', 'Simulation', 'PyTorch', 'MuJoCo'],
     problem:
-      'Legacy rule-based system missed 34% of fraudulent transactions and generated excessive false positives, costing ~$2.1M annually in chargebacks.',
+      'Designing assistive mechanical arms requires extensive manual iteration — each design must be simulated, evaluated against task-specific criteria, and refined. This loop is slow and doesn\'t scale to new tasks.',
     approach:
-      'Built an ensemble of gradient-boosted trees for fast classification and a transformer-based sequence model for behavioral anomaly detection. Designed a real-time feature store with sub-10ms lookups for user history aggregations.',
+      'Built a closed-loop system: design → simulate → evaluate → modify → repeat. Created an extensible task interface so new evaluation environments could be added without rewriting the optimization pipeline.',
     architecture:
-      'Kafka ingestion → Flink feature computation → Redis feature store → Model serving via Triton Inference Server → Decision engine with configurable thresholds → Feedback loop for online learning.',
+      'Parameterized design generator → MuJoCo simulation → Task-specific evaluation metrics → RL-based design refinement → Automated iteration loop with convergence checks.',
     results:
-      'Reduced fraud losses by 61%. False positive rate dropped from 8.2% to 1.7%. P99 latency held under 47ms. System processes 2.3M events/day.',
+      'Automated the design refinement pipeline end-to-end. The extensible task interface allowed adding new evaluation scenarios without modifying the core optimization loop.',
     lessons:
-      'Feature freshness matters more than model complexity for fraud. The biggest win came from real-time aggregation of user session features, not from a larger model.',
+      'The real engineering challenge was the evaluation interface, not the RL algorithm. A well-designed task abstraction made the system useful beyond the original use case.',
   },
   {
-    id: 'document-understanding',
-    title: 'Document Understanding System',
-    subtitle: 'Multimodal extraction from unstructured financial documents',
-    tags: ['Vision Transformers', 'OCR', 'NLP', 'AWS'],
+    id: 'vision-fairness',
+    title: 'Vision Fairness Analysis — CNN vs Vision Transformer',
+    subtitle: 'Evaluation methodology for demographic robustness under distribution shift',
+    tags: ['Vision Models', 'CNN', 'ViT', 'Evaluation'],
     problem:
-      'Manual processing of 50K+ financial documents per month required 12 FTEs and had a 4.3% error rate on key field extraction.',
+      'Aggregate model accuracy hides demographic performance differences. Standard benchmarks don\'t surface how models behave under distribution shift across subgroups.',
     approach:
-      'Fine-tuned a LayoutLMv3 model on domain-specific documents with a custom pre-training objective. Built a confidence-calibrated pipeline that routes low-confidence extractions to human review.',
+      'Built a training and evaluation pipeline comparing CNN and Vision Transformer architectures. Focused on evaluation methodology — measuring not just accuracy but consistency across demographic groups under shift.',
     architecture:
-      'S3 ingestion → Lambda preprocessing → OCR (Textract + custom post-processing) → LayoutLMv3 inference on SageMaker → Confidence routing → Human review UI → Active learning feedback.',
+      'Data pipeline with demographic splits → Parallel training (CNN, ViT) → Multi-metric evaluation (PSNR, SSIM, classification accuracy, demographic consistency) → Comparative analysis framework.',
     results:
-      'Automated 87% of documents end-to-end. Error rate on automated extractions: 0.8%. Reduced processing team from 12 to 3 FTEs. ROI positive within 4 months.',
+      'Surfaced meaningful performance gaps that aggregate metrics missed. The evaluation framework provided a structured way to compare architectural robustness beyond top-line accuracy.',
     lessons:
-      'Confidence calibration was the key design decision. A model that knows when it doesn\'t know is far more valuable than one that\'s slightly more accurate on average.',
+      'Evaluation design matters more than model selection for fairness work. The right metrics reveal problems that accuracy averages hide.',
   },
   {
-    id: 'recommendation-engine',
-    title: 'Content Recommendation Engine',
-    subtitle: 'Contextual bandits for personalized content ranking',
-    tags: ['Contextual Bandits', 'A/B Testing', 'Spark', 'Python'],
+    id: 'llm-text-gen',
+    title: 'LLM Text Generation Workflow',
+    subtitle: 'Parameterized prompting with automated evaluation loops',
+    tags: ['LLMs', 'Evaluation', 'Python', 'API Integration'],
     problem:
-      'Existing collaborative filtering recommendations had a cold-start problem and couldn\'t adapt to real-time user intent signals.',
+      'Generated text was inconsistent and difficult to control. Prompt engineering alone didn\'t produce reliable quality improvements.',
     approach:
-      'Implemented a contextual bandit framework (LinUCB variant) that balances exploration/exploitation while incorporating real-time session context. Built offline evaluation infrastructure using replay methods.',
+      'Built a parameterized prompting system with automated evaluation loops. Instead of rewriting prompts manually, used structured parameter sweeps with measurable quality signals to guide iteration.',
     architecture:
-      'Event stream → Session context builder → Bandit policy server → Action logging → Offline replay evaluation → Policy update pipeline (daily retrain, hourly context refresh).',
+      'Parameterized prompt templates → LLM API integration → Automated output evaluation → Quality metric tracking → Iterative refinement pipeline.',
     results:
-      'CTR improved 23% over collaborative filtering baseline. Cold-start performance improved 41%. Exploration overhead kept under 5% of traffic.',
+      'Quality improved through systematic evaluation rather than ad-hoc prompt rewriting. The evaluation loop made improvements measurable and reproducible.',
     lessons:
-      'Offline evaluation with proper replay methods saved months of A/B testing. Invest heavily in evaluation infrastructure before optimizing the model.',
+      'The key insight was treating prompt engineering as an optimization problem with a feedback loop, not a creative writing exercise. Evaluation infrastructure drove the real gains.',
+  },
+  {
+    id: 'defect-detection',
+    title: 'Visual Prompt Defect Detection',
+    subtitle: 'In-context learning pipeline for manufacturing defect detection at Pegatron',
+    tags: ['Vision', 'In-Context Learning', 'Gradio', 'Data Ingestion'],
+    problem:
+      'Manufacturing defect detection required labeled training data for each new defect type — slow to set up and expensive to maintain.',
+    approach:
+      'Built a defect detection pipeline using visual prompting and in-context learning, reducing the need for large labeled datasets. Created a Gradio-based UI demo and a backend data ingestion API.',
+    architecture:
+      'Data ingestion API → Image preprocessing → Visual prompt-based detection model → Gradio demo interface → Results logging.',
+    results:
+      '1st place in internal project competition. The system demonstrated practical defect detection with minimal labeled data setup.',
+    lessons:
+      'In-context learning dramatically reduced the data labeling bottleneck. The Gradio demo made it easy for non-ML stakeholders to evaluate and trust the system.',
+  },
+  {
+    id: 'robotics-autodriving',
+    title: 'Robotics Auto-Driving & Mapping',
+    subtitle: 'ROS-based autonomous navigation on embedded hardware',
+    tags: ['ROS', 'Raspberry Pi', 'Control Systems', 'Mapping'],
+    problem:
+      'Needed an autonomous driving and mapping system running on constrained embedded hardware (Raspberry Pi) with real-time requirements.',
+    approach:
+      'Built a ROS-based software stack handling sensor fusion, mapping, and control on Raspberry Pi hardware. Focused on reliability within the compute constraints of the target platform.',
+    architecture:
+      'Sensor drivers → ROS message pipeline → SLAM mapping node → Path planning → Motor control interface → All running on Raspberry Pi.',
+    results:
+      'Working autonomous navigation and mapping system on embedded hardware. The ROS architecture made it straightforward to swap sensor and control modules.',
+    lessons:
+      'Embedded constraints force good engineering decisions. Working within tight compute budgets made every architectural choice deliberate.',
   },
 ]

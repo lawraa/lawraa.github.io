@@ -1,5 +1,5 @@
 export default function Hero() {
-  const specializations = ['Deep Learning', 'MLOps', 'Real-Time Systems', 'NLP']
+  const specializations = ['Reinforcement Learning', 'LLM Evaluation', 'Vision Systems', 'Simulation & Embodied AI', 'ML Infrastructure']
 
   return (
     <section className="pt-32 pb-20">
@@ -7,7 +7,7 @@ export default function Hero() {
         Lawrance Chen
       </h1>
       <p className="text-lg mb-6" style={{ color: 'var(--color-secondary)' }}>
-        ML Engineer — building systems that learn from data and work in production.
+        ML Engineer — turning messy real-world data into working AI systems through automated evaluation and feedback loops.
       </p>
       <div className="flex flex-wrap gap-2 mb-8">
         {specializations.map((s) => (

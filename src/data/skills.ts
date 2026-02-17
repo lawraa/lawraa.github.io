@@ -5,43 +5,43 @@ export interface SkillCategory {
 
 export const skills: SkillCategory[] = [
   {
-    title: 'Modeling & Algorithms',
+    title: 'Machine Learning',
     items: [
-      'Deep learning (transformers, CNNs, sequence models)',
-      'Gradient-boosted trees, ensemble methods',
-      'Contextual bandits, reinforcement learning',
-      'Probabilistic inference, Bayesian methods',
-      'NLP, information extraction, document understanding',
+      'Reinforcement learning systems',
+      'LLM prompting & evaluation',
+      'Vision models (CNN & ViT)',
+      'RLHF / DPO',
+      'Metric design and evaluation methodology',
     ],
   },
   {
     title: 'Systems & Infrastructure',
     items: [
-      'Real-time feature stores (Redis, Feast)',
-      'Model serving (Triton, TorchServe, SageMaker)',
-      'Stream processing (Kafka, Flink)',
-      'Distributed training (DeepSpeed, FSDP)',
-      'CI/CD for ML (MLflow, Weights & Biases, DVC)',
+      'PyTorch training pipelines',
+      'Automated evaluation loops',
+      'Modular task environments',
+      'Data ingestion pipelines',
+      'API integration',
+    ],
+  },
+  {
+    title: 'Simulation & Robotics',
+    items: [
+      'MuJoCo simulation',
+      'ROS',
+      'Control systems',
+      'Mapping & navigation',
+      'Hardware integration',
     ],
   },
   {
     title: 'Languages & Tools',
     items: [
-      'Python, SQL, Rust (learning), TypeScript',
-      'PyTorch, JAX, scikit-learn, XGBoost',
-      'AWS (SageMaker, Lambda, ECS, S3), GCP (Vertex AI)',
-      'Docker, Kubernetes, Terraform',
-      'PostgreSQL, Redis, DynamoDB, BigQuery',
-    ],
-  },
-  {
-    title: 'Practices',
-    items: [
-      'Experiment design and offline evaluation',
-      'Data quality monitoring and contracts',
-      'Model calibration and uncertainty quantification',
-      'Technical writing and documentation',
-      'Cross-functional collaboration with product and engineering',
+      'Python, C++, Golang, Matlab',
+      'PyTorch',
+      'Docker, Kubernetes',
+      'MongoDB',
+      'Gradio',
     ],
   },
 ]

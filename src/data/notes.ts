@@ -9,35 +9,27 @@ export interface Note {
 
 export const notes: Note[] = [
   {
-    id: 'feature-stores',
-    title: 'Design Patterns for Real-Time Feature Stores',
-    date: '2025-12-14',
+    id: 'colm-llm-discussion',
+    title: 'Multi-Agent LLM Discussion Framework',
+    date: 'COLM',
     summary:
-      'Notes on architectures for low-latency feature serving — comparing point-in-time joins, streaming aggregation, and hybrid approaches. Includes latency benchmarks from a production migration.',
-    tags: ['Systems', 'MLOps'],
+      'Multi-agent discussion framework where LLM agents debate and refine outputs. Improved creativity scores by 20% compared to single-agent baselines. Designed evaluation metric achieving 0.7 correlation with human judgment.',
+    tags: ['LLMs', 'Multi-Agent', 'Evaluation'],
   },
   {
-    id: 'calibration',
-    title: 'On Calibration in Production ML Systems',
-    date: '2025-10-22',
+    id: 'iclr-dynamic-superb',
+    title: 'Dynamic-SUPERB Benchmark',
+    date: 'ICLR',
     summary:
-      'Why Platt scaling breaks down on non-stationary data, and a simple isotonic regression approach that degrades more gracefully. Practical advice for monitoring calibration drift.',
-    tags: ['ML Theory', 'Monitoring'],
+      'Contributed to a dynamic benchmarking framework for evaluating speech and language models across evolving task distributions.',
+    tags: ['Benchmarking', 'Evaluation'],
   },
   {
-    id: 'llm-evaluation',
-    title: 'Evaluating LLM Outputs Without Ground Truth',
-    date: '2025-08-30',
+    id: 'ieee-slt-review',
+    title: 'IEEE SLT Workshop — Reviewer',
+    date: 'IEEE',
     summary:
-      'A framework for evaluating generative model outputs in domains where reference answers don\'t exist. Covers human evaluation protocol design, inter-annotator agreement, and LLM-as-judge approaches.',
-    tags: ['LLMs', 'Evaluation'],
-  },
-  {
-    id: 'data-contracts',
-    title: 'Data Contracts for ML Pipelines',
-    date: '2025-06-15',
-    summary:
-      'Schema enforcement between data producers and ML consumers. How we reduced training failures by 73% with a simple contract system built on Great Expectations.',
-    tags: ['Data Engineering', 'MLOps'],
+      'Served as reviewer for the IEEE Spoken Language Technology Workshop, evaluating submissions on speech processing and language understanding.',
+    tags: ['Review', 'Speech'],
   },
 ]

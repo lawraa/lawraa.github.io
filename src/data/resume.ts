@@ -8,53 +8,52 @@ export interface Experience {
 export interface Education {
   degree: string
   school: string
-  period: string
+  period?: string
   note?: string
 }
 
 export const experience: Experience[] = [
   {
-    role: 'Senior ML Engineer',
-    company: 'Acme Corp',
-    period: '2023 — Present',
+    role: 'ML Engineer — Visual Prompt Defect Detection',
+    company: 'Pegatron',
+    period: 'Industry Project',
     description: [
-      'Lead ML platform team (4 engineers) building real-time inference infrastructure serving 50M+ predictions/day.',
-      'Designed and deployed fraud detection system that reduced losses by 61% ($1.3M annually).',
-      'Built internal feature store with sub-10ms p99 latency, adopted by 6 product teams.',
+      'Built defect detection pipeline using visual prompting and in-context learning for manufacturing inspection.',
+      'Developed Gradio-based demo UI and backend data ingestion API.',
+      '1st place in internal project competition.',
     ],
   },
   {
-    role: 'ML Engineer',
-    company: 'DataCo',
-    period: '2021 — 2023',
+    role: 'ML Research — Multi-Agent LLM Systems',
+    company: 'UC Berkeley',
+    period: 'Research',
     description: [
-      'Built document understanding pipeline processing 50K+ financial documents/month with 99.2% accuracy.',
-      'Developed A/B testing framework for ML models with proper offline evaluation via replay methods.',
-      'Reduced model training costs by 40% through spot instance orchestration and checkpoint optimization.',
+      'Designed multi-agent LLM discussion framework that improved creativity scores by 20% over single-agent baselines.',
+      'Built evaluation metric achieving 0.7 correlation with human judgment.',
+      'Published at COLM (LLM Discussion Framework) and ICLR (Dynamic-SUPERB Benchmark).',
     ],
   },
   {
-    role: 'Data Scientist',
-    company: 'StartupXYZ',
-    period: '2019 — 2021',
+    role: 'Graduate Researcher — Robotics & Embedded Software',
+    company: 'UC Berkeley',
+    period: 'MEng Program',
     description: [
-      'First ML hire. Built recommendation engine that improved content CTR by 23%.',
-      'Established MLOps practices: CI/CD for models, experiment tracking, data versioning.',
-      'Shipped 5 production models across search, recommendations, and content moderation.',
+      'Built closed-loop RL system for automated assistive device design refinement.',
+      'Developed ROS-based autonomous driving and mapping system on Raspberry Pi hardware.',
+      'Coursework: Machine Learning, Deep Reinforcement Learning, Embedded Systems, Data Science.',
     ],
   },
 ]
 
 export const education: Education[] = [
   {
-    degree: 'M.S. Computer Science (Machine Learning)',
-    school: 'Stanford University',
-    period: '2017 — 2019',
-    note: 'Research focus: probabilistic inference, approximate Bayesian methods.',
+    degree: 'Master of Engineering, EECS (Robotics & Embedded Software)',
+    school: 'UC Berkeley',
+    note: 'GPA: 4.0. Courses: Machine Learning, Deep RL, Embedded Systems, Data Science.',
   },
   {
-    degree: 'B.S. Mathematics & Computer Science',
-    school: 'UC Berkeley',
-    period: '2013 — 2017',
+    degree: 'Bachelor of Science, Electrical Engineering',
+    school: 'National Taiwan University',
+    note: 'Top 5% of class.',
   },
 ]

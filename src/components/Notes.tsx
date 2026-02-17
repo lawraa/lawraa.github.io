@@ -3,9 +3,9 @@ import { notes } from '../data/notes'
 export default function Notes() {
   return (
     <section id="notes" className="py-16">
-      <h2 className="text-2xl font-semibold tracking-tight mb-2">Notes</h2>
+      <h2 className="text-2xl font-semibold tracking-tight mb-2">Research & Publications</h2>
       <p className="text-sm mb-8" style={{ color: 'var(--color-secondary)' }}>
-        Technical writing and research notes.
+        Published work and academic contributions.
       </p>
       <div className="space-y-6">
         {notes.map((note) => (
