@@ -1,8 +1,12 @@
+import { Link } from 'react-router-dom'
 import { experience, education } from '../data/resume'
 
 export default function Resume() {
   return (
-    <section id="resume" className="py-16">
+    <div className="max-w-[680px] mx-auto px-6 pt-32 pb-20">
+      <Link to="/" className="link-underline text-sm mb-8 inline-block">
+        &larr; Back
+      </Link>
       <h2 className="text-2xl font-semibold tracking-tight mb-8">Resume</h2>
 
       <div className="mb-12">
@@ -53,6 +57,6 @@ export default function Resume() {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   )
 }

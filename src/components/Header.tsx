@@ -1,16 +1,35 @@
+import { Link, useLocation } from 'react-router-dom'
+
 interface HeaderProps {
   dark: boolean
   onToggleDark: () => void
 }
 
+const navLinks = [
+  { to: '/', label: 'Home' },
+  { to: '/work', label: 'Work' },
+  { to: '/publications', label: 'Publications' },
+  { to: '/resume', label: 'Resume' },
+  { to: '/bouldering', label: 'Bouldering' },
+]
+
 export default function Header({ dark, onToggleDark }: HeaderProps) {
+  const location = useLocation()
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md" style={{ backgroundColor: 'color-mix(in srgb, var(--color-bg) 85%, transparent)' }}>
       <div className="max-w-[680px] mx-auto px-6 py-4 flex items-center justify-between">
         <nav className="flex gap-6 text-sm" style={{ color: 'var(--color-secondary)' }}>
-          <a href="#work" className="link-underline">Work</a>
-          <a href="#notes" className="link-underline">Notes</a>
-          <a href="#resume" className="link-underline">Resume</a>
+          {navLinks.map(({ to, label }) => (
+            <Link
+              key={to}
+              to={to}
+              className="link-underline"
+              style={location.pathname === to ? { color: 'var(--color-text)' } : undefined}
+            >
+              {label}
+            </Link>
+          ))}
         </nav>
         <button
           onClick={onToggleDark}

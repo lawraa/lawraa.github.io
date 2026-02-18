@@ -1,8 +1,12 @@
+import { Link } from 'react-router-dom'
 import { notes } from '../data/notes'
 
 export default function Notes() {
   return (
-    <section id="notes" className="py-16">
+    <div className="max-w-[680px] mx-auto px-6 pt-32 pb-20">
+      <Link to="/" className="link-underline text-sm mb-8 inline-block">
+        &larr; Back
+      </Link>
       <h2 className="text-2xl font-semibold tracking-tight mb-2">Research & Publications</h2>
       <p className="text-sm mb-8" style={{ color: 'var(--color-secondary)' }}>
         Published work and academic contributions.
@@ -47,6 +51,6 @@ export default function Notes() {
           </article>
         ))}
       </div>
-    </section>
+    </div>
   )
 }

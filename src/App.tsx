@@ -1,11 +1,23 @@
 import { useState, useEffect } from 'react'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import Skills from './components/Skills'
+import Footer from './components/Footer'
 import Projects from './components/Projects'
 import Notes from './components/Notes'
-import Skills from './components/Skills'
 import Resume from './components/Resume'
-import Footer from './components/Footer'
+import Bouldering from './components/Bouldering'
+
+function HomePage() {
+  return (
+    <main className="max-w-[800px] mx-auto px-6">
+      <Hero />
+      <Skills />
+      <Footer />
+    </main>
+  )
+}
 
 function App() {
   const [dark, setDark] = useState(() => {
@@ -20,17 +32,16 @@ function App() {
   }, [dark])
 
   return (
-    <>
+    <HashRouter>
       <Header dark={dark} onToggleDark={() => setDark(!dark)} />
-      <main className="max-w-[680px] mx-auto px-6">
-        <Hero />
-        <Projects />
-        <Notes />
-        <Skills />
-        <Resume />
-        <Footer />
-      </main>
-    </>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/work" element={<Projects />} />
+        <Route path="/publications" element={<Notes />} />
+        <Route path="/resume" element={<Resume />} />
+        <Route path="/bouldering" element={<Bouldering />} />
+      </Routes>
+    </HashRouter>
   )
 }
 
