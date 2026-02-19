@@ -151,8 +151,13 @@ export default function Bouldering() {
         &larr; Back
       </Link>
 
-      <h1 className="text-4xl font-semibold tracking-tight mb-3">Bouldering</h1>
-      <p className="text-lg mb-8" style={{ color: 'var(--color-secondary)' }}>
+      {/* <h1 className="text-4xl font-semibold tracking-tight mb-3">Bouldering</h1> */}
+      
+      <h2 className="text-2xl font-semibold tracking-tight mb-8">Bouldering</h2>
+      {/* <p className="text-lg mb-8" style={{ color: 'var(--color-secondary)' }}>
+        Bouldering is my favorite way to think with my body. I like studying a route, planning moves, and slowly improving each attempt. It teaches patience and builds a kind of strength you don’t always see from the outside. Always happy to climb together or exchange beta.
+      </p> */}
+      <p className="text-base mb-8" style={{ color: 'var(--color-secondary)' }}>
         Bouldering is my favorite way to think with my body. I like studying a route, planning moves, and slowly improving each attempt. It teaches patience and builds a kind of strength you don’t always see from the outside. Always happy to climb together or exchange beta.
       </p>
 
