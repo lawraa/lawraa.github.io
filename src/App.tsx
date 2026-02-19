@@ -5,7 +5,7 @@ import Hero from './components/Hero'
 import Skills from './components/Skills'
 import Footer from './components/Footer'
 import Projects from './components/Projects'
-import Notes from './components/Notes'
+import Research from './components/Research'
 import Resume from './components/Resume'
 import Bouldering from './components/Bouldering'
 
@@ -37,7 +37,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/work" element={<Projects />} />
-        <Route path="/publications" element={<Notes />} />
+        <Route path="/publications" element={<Research />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/bouldering" element={<Bouldering />} />
       </Routes>

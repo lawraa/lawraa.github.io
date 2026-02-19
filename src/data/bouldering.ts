@@ -1,8 +1,7 @@
 export interface ClimbingStats {
   highestGrade: string
-  totalSends: number
-  favoriteCrag: string
-  yearsClimbing: number
+  apeIndex: string
+  homegym: string
   instagram: string
 }
 
@@ -11,66 +10,114 @@ export interface ClimbingPhoto {
   caption: string
   grade: string
   location: string
-  color: string // placeholder color until real photos are added
+  color: string
+  src?: string
 }
 
 export const stats: ClimbingStats = {
   highestGrade: 'V7',
-  totalSends: 200,
-  favoriteCrag: 'Bishop, CA',
-  yearsClimbing: 3,
+  apeIndex: '+9 cm',
+  homegym: 'Oaks, CA',
   instagram: 'climblog.lawry',
 }
 
-export const gradeDistribution = [
-  { grade: 'V0–V2', count: 45 },
-  { grade: 'V3–V4', count: 68 },
-  { grade: 'V5', count: 42 },
-  { grade: 'V6', count: 30 },
-  { grade: 'V7', count: 15 },
+// Self-rated 0–10 per style
+export const styleRatings = [
+  { label: 'Technical',        value: 8 },
+  { label: 'Static',    value: 9 },
+  { label: 'Dynamic',     value: 6 },
+  { label: 'Balance',        value: 8 },
+  { label: 'Power',     value: 5 },
+  { label: 'Slab',      value: 7 },
+  
+
 ]
 
 export const photos: ClimbingPhoto[] = [
   {
     id: '1',
-    caption: 'Heel hook crux on a steep overhang',
-    grade: 'V6',
-    location: 'Bishop, CA',
+    caption: 'First competition ever',
+    grade: '2nd Place',
+    location: 'Taipei, Taiwan',
     color: '#4a6741',
+    src: 'public/bouldering/comp.JPG',
   },
   {
     id: '2',
-    caption: 'Slab balance problem',
-    grade: 'V4',
-    location: 'Castle Rock, CA',
+    caption: 'Taiwan Home Gym',
+    grade: 'Gym Bros',
+    location: 'Taipei, Taiwan',
     color: '#7a6b5d',
+    src: 'public/bouldering/home_gym_taiwan.JPG',
   },
   {
     id: '3',
-    caption: 'Crimpy face climb',
-    grade: 'V7',
-    location: 'Yosemite, CA',
+    caption: 'Thailand Climbing Trip',
+    grade: 'Go Bould',
+    location: 'Phuket, Thailand',
     color: '#5b6e8a',
+    src: 'public/bouldering/thailand.JPG',
   },
   {
     id: '4',
-    caption: 'Dynamic move to a jug',
-    grade: 'V5',
-    location: 'Stinson Beach, CA',
+    caption: 'Climbing in the States',
+    grade: 'U.S. Home Gym',
+    location: 'Berkeley, CA',
     color: '#8a7a5b',
+    src: 'public/bouldering/oaks.jpeg',
   },
   {
     id: '5',
-    caption: 'Technical arête problem',
-    grade: 'V6',
-    location: 'Tramway, CA',
+    caption: 'Climbing in LA',
+    grade: 'Bouldering Date',
+    location: 'Los Angeles, CA',
     color: '#6b5b7a',
+    src: 'public/bouldering/LA.JPG',
   },
   {
     id: '6',
-    caption: 'Roof problem with kneebar rest',
-    grade: 'V5',
-    location: 'Red Rocks, NV',
+    caption: '2nd Competition',
+    grade: 'Gym Bros',
+    location: 'Redwood City, CA',
     color: '#7a5b5b',
+    src: 'public/bouldering/comp2.JPG',
   },
+]
+
+export interface ClimbingGym {
+  name: string
+  city: string
+  country: string
+}
+
+export const gyms: ClimbingGym[] = [
+  
+  { name: 'The Oaks Climbing', city: 'Berkeley', country: 'USA' },
+  { name: 'Pacific Pipe', city: 'Oakland', country: 'USA' },
+  { name: 'Berkeley Ironworks', city: 'Berkeley', country: 'USA' },
+  { name: 'Mosaic Boulders', city: 'Berkeley', country: 'USA' },
+  { name: 'Dogpatch Boulders', city: 'San Francisco', country: 'USA' },
+  { name: 'Hyperion Climbing', city: 'Redwood City', country: 'USA' },
+  { name: 'Touchstone Climbing - The Studio', city: 'San Francisco', country: 'USA' },
+  { name: 'Cliffs of Id', city: 'Los Angeles', country: 'USA' },
+  { name: 'UCB Recreational Sports Facility', city: 'Berkeley', country: 'USA' },
+
+  { name: 'YongHe Climbing Gym', city: 'Taipei', country: 'Taiwan' },
+  { name: '千手抱石', city: 'Taoyuan', country: 'Taiwan' },
+  { name: 'RedRock Hsinchu', city: 'Hsinchu', country: 'Taiwan' },
+  { name: 'BABO PAPAK', city: 'Hsinchu', country: 'Taiwan' },
+  { name: 'CORNER Bouldering Gym - Huashan', city: 'Taipei', country: 'Taiwan' },
+  { name: 'CORNER Bouldering Gym - Zhongshan', city: 'Taipei', country: 'Taiwan' },
+  { name: 'T-UP Climbing Gym - A19', city: 'Taoyuan', country: 'Taiwan' },
+  { name: 'T-UP Climbing Gym - Nangang', city: 'Taipei', country: 'Taiwan' },
+  { name: 'T-UP Climbing Gym - Wanhua', city: 'Taipei', country: 'Taiwan' },
+  { name: 'JT久淘 Climbing', city: 'New Taipei', country: 'Taiwan' },
+  { name: 'Flow-Bouldering Gym', city: 'Taipei', country: 'Taiwan' },
+  { name: 'Civic Bouldergym Taipei', city: 'Taipei', country: 'Taiwan' },
+
+
+  { name: 'Go Bould', city: 'Phuket', country: 'Thailand' },
+  { name: 'Alpine Outpost', city: 'Chiang Mai', country: 'Thailand' },
+  { name: 'Main Wall Climbing Gym', city: 'Chiang Mai', country: 'Thailand' },
+
 ]
