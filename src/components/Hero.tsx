@@ -111,7 +111,7 @@ export default function Hero() {
         </div>
 
         <img
-          src="/portrait.jpg"
+          src="/lawry/portrait.jpg"
           alt="Lawrance Chen"
           className="shrink-0 w-60 h-60 rounded-lg object-cover self-center sm:self-start"
         />

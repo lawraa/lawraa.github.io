@@ -40,7 +40,7 @@ export const photos: ClimbingPhoto[] = [
     grade: '2nd Place',
     location: 'Taipei, Taiwan',
     color: '#4a6741',
-    src: 'public/bouldering/comp.JPG',
+    src: '/bouldering/comp.JPG',
   },
   {
     id: '2',
@@ -48,7 +48,7 @@ export const photos: ClimbingPhoto[] = [
     grade: 'Gym Bros',
     location: 'Taipei, Taiwan',
     color: '#7a6b5d',
-    src: 'public/bouldering/home_gym_taiwan.JPG',
+    src: '/bouldering/home_gym_taiwan.JPG',
   },
   {
     id: '3',
@@ -56,7 +56,7 @@ export const photos: ClimbingPhoto[] = [
     grade: 'Go Bould',
     location: 'Phuket, Thailand',
     color: '#5b6e8a',
-    src: 'public/bouldering/thailand.JPG',
+    src: '/bouldering/thailand.JPG',
   },
   {
     id: '4',
@@ -64,7 +64,7 @@ export const photos: ClimbingPhoto[] = [
     grade: 'U.S. Home Gym',
     location: 'Berkeley, CA',
     color: '#8a7a5b',
-    src: 'public/bouldering/oaks.jpeg',
+    src: '/bouldering/oaks.jpeg',
   },
   {
     id: '5',
@@ -72,7 +72,7 @@ export const photos: ClimbingPhoto[] = [
     grade: 'Bouldering Date',
     location: 'Los Angeles, CA',
     color: '#6b5b7a',
-    src: 'public/bouldering/LA.JPG',
+    src: '/bouldering/LA.JPG',
   },
   {
     id: '6',
@@ -80,7 +80,7 @@ export const photos: ClimbingPhoto[] = [
     grade: 'Gym Bros',
     location: 'Redwood City, CA',
     color: '#7a5b5b',
-    src: 'public/bouldering/comp2.JPG',
+    src: '/bouldering/comp2.JPG',
   },
 ]
 
