@@ -48,10 +48,10 @@ export default function Research() {
               <div className="border-t my-8" style={{ borderColor: 'var(--color-border)' }} />
             )}
 
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-8">
               {/* Thumbnail */}
               {pub.imageUrl && (
-                <div className="shrink-0 w-50 h-50 rounded-lg overflow-hidden border-3" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
+                <div className="shrink-0 w-55 h-55 rounded-lg overflow-hidden border-3" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
                   <img
                     src={pub.imageUrl}
                     alt={pub.title}

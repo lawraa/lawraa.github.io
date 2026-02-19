@@ -3,6 +3,11 @@ export interface Project {
   title: string
   subtitle: string
   tags: string[]
+  imageUrl?: string
+  codeUrl?: string
+  videoUrl?: string
+  pdfUrl?: string
+  description: string[]
   problem: string
   approach: string
   architecture: string
@@ -15,7 +20,12 @@ export const projects: Project[] = [
     id: 'assistive-device',
     title: 'AI-Driven Personalized Assistive Device',
     subtitle: 'Closed-loop RL optimization for mechanical assistive arm design',
-    tags: ['Reinforcement Learning', 'Simulation', 'PyTorch', 'MuJoCo'],
+    tags: ['Simulation', 'MuJoCo', 'LLM'],
+    imageUrl: '/projects/dorsal_grasper.jpg',
+    description: [
+      'Designing assistive mechanical arms for individuals with mobility limitations is traditionally a slow, expert-driven process requiring extensive manual iteration.',
+      'This project automates that loop — using reinforcement learning to iteratively simulate, evaluate, and refine arm designs based on task-specific performance metrics.',
+    ],
     problem:
       'Designing assistive mechanical arms requires extensive manual iteration — each design must be simulated, evaluated against task-specific criteria, and refined. This loop is slow and doesn\'t scale to new tasks.',
     approach:
@@ -32,6 +42,11 @@ export const projects: Project[] = [
     title: 'Vision Fairness Analysis — CNN vs Vision Transformer',
     subtitle: 'Evaluation methodology for demographic robustness under distribution shift',
     tags: ['Vision Models', 'CNN', 'ViT', 'Evaluation'],
+    imageUrl: '/projects/vision-fairness.png',
+    description: [
+      'Aggregate model accuracy hides demographic performance gaps. Standard benchmarks don\'t reveal how models behave under distribution shift across subgroups.',
+      'This project builds a structured evaluation framework to surface those gaps, comparing CNN and Vision Transformer architectures across demographic splits.',
+    ],
     problem:
       'Aggregate model accuracy hides demographic performance differences. Standard benchmarks don\'t surface how models behave under distribution shift across subgroups.',
     approach:
@@ -42,12 +57,20 @@ export const projects: Project[] = [
       'Surfaced meaningful performance gaps that aggregate metrics missed. The evaluation framework provided a structured way to compare architectural robustness beyond top-line accuracy.',
     lessons:
       'Evaluation design matters more than model selection for fairness work. The right metrics reveal problems that accuracy averages hide.',
+    codeUrl: 'https://github.com/lawraa/vision-fairness',
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    pdfUrl: 'https://arxiv.org/pdf/2406.12345.pdf', 
   },
   {
     id: 'llm-text-gen',
     title: 'LLM Text Generation Workflow',
     subtitle: 'Parameterized prompting with automated evaluation loops',
     tags: ['LLMs', 'Evaluation', 'Python', 'API Integration'],
+    imageUrl: '/projects/llm-text-gen.png',
+    description: [
+      'Prompt engineering without a feedback loop is guesswork. This project treats text generation quality as an optimization problem — with measurable signals driving iteration.',
+      'Built a parameterized prompting system with automated evaluation, turning ad-hoc prompt tweaking into a structured, reproducible workflow.',
+    ],
     problem:
       'Generated text was inconsistent and difficult to control. Prompt engineering alone didn\'t produce reliable quality improvements.',
     approach:
@@ -64,6 +87,11 @@ export const projects: Project[] = [
     title: 'Visual Prompt Defect Detection',
     subtitle: 'In-context learning pipeline for manufacturing defect detection at Pegatron',
     tags: ['Vision', 'In-Context Learning', 'Gradio', 'Data Ingestion'],
+    imageUrl: '/projects/defect-detection.png',
+    description: [
+      'Traditional defect detection requires labeled datasets for every new defect type — a bottleneck in fast-moving manufacturing environments.',
+      'This project uses visual prompting and in-context learning to detect defects with minimal labeled data, deployed with a Gradio interface for stakeholder evaluation.',
+    ],
     problem:
       'Manufacturing defect detection required labeled training data for each new defect type — slow to set up and expensive to maintain.',
     approach:
@@ -80,6 +108,11 @@ export const projects: Project[] = [
     title: 'Robotics Auto-Driving & Mapping',
     subtitle: 'ROS-based autonomous navigation on embedded hardware',
     tags: ['ROS', 'Raspberry Pi', 'Control Systems', 'Mapping'],
+    imageUrl: '/projects/robotics.png',
+    description: [
+      'Autonomous navigation on constrained embedded hardware (Raspberry Pi) requires tight integration between sensing, mapping, and control — with no room for computational slack.',
+      'This project builds a full ROS-based stack for real-time SLAM and autonomous driving, designed to run reliably within strict hardware limits.',
+    ],
     problem:
       'Needed an autonomous driving and mapping system running on constrained embedded hardware (Raspberry Pi) with real-time requirements.',
     approach:
