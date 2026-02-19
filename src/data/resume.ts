@@ -49,11 +49,11 @@ export const education: Education[] = [
   {
     degree: 'Master of Engineering, EECS (Robotics & Embedded Software)',
     school: 'UC Berkeley',
-    note: 'GPA: 4.0. Courses: Machine Learning, Deep RL, Embedded Systems, Data Science.',
+    note: 'GPA: 4.0/4.0. Courses: Machine Learning, Deep RL, Embedded Systems, Data Science.',
   },
   {
     degree: 'Bachelor of Science, Electrical Engineering',
     school: 'National Taiwan University',
-    note: 'Top 5% of class.',
+  note: '2023 Dean\'s List.'
   },
 ]
