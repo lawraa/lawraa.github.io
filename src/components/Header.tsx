@@ -18,7 +18,7 @@ export default function Header({ dark, onToggleDark }: HeaderProps) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md" style={{ backgroundColor: 'color-mix(in srgb, var(--color-bg) 85%, transparent)' }}>
-      <div className="max-w-[680px] mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-[800px] mx-auto px-6 py-4 flex items-center justify-between">
         <nav className="flex gap-6 text-sm" style={{ color: 'var(--color-secondary)' }}>
           {navLinks.map(({ to, label }) => (
             <Link
