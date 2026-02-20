@@ -1,6 +1,49 @@
 import { useState } from 'react'
 import type { Project } from '../data/projects'
 
+function DetailImage({ src, alt, rows }: { src: string; alt: string; rows?: number }) {
+  const [wide, setWide] = useState(false)
+  const isVideo = /\.(mp4|webm|ogg)$/i.test(src)
+  const rowSpan = rows ?? 1
+
+  return (
+    <div
+      className="rounded-lg overflow-hidden border"
+      style={{
+        borderColor: 'var(--color-border)',
+        gridColumn: wide ? '1 / -1' : undefined,
+        gridRow: rowSpan > 1 ? `span ${rowSpan}` : undefined,
+      }}
+    >
+      {isVideo ? (
+        <video
+          src={src}
+          className="w-full h-full"
+          style={{ objectFit: 'cover' }}
+          controls
+          muted
+          playsInline
+          preload="metadata"
+          onLoadedMetadata={e => {
+            const v = e.currentTarget
+            if (v.videoWidth / v.videoHeight > 1.4) setWide(true)
+          }}
+        />
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover"
+          onLoad={e => {
+            const img = e.currentTarget
+            if (img.naturalWidth / img.naturalHeight > 1.4) setWide(true)
+          }}
+        />
+      )}
+    </div>
+  )
+}
+
 interface ProjectCardProps {
   project: Project
 }
@@ -14,7 +57,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       style={{ backgroundColor: 'var(--color-surface)' }}
     >
       <div className="p-5">
-        <div className="flex gap-5">
+        <div className="flex items-center gap-5">
           {/* Square thumbnail on the left */}
           {project.imageUrl && (
             <div
@@ -35,9 +78,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {/* Content */}
           <div className="min-w-0 flex-1">
             <h3 className="font-semibold text-base mb-0.5">{project.title}</h3>
-            <p className="text-xs font-mono mb-3" style={{ color: 'var(--color-accent)' }}>
+            <p className="text-xs font-mono mb-1" style={{ color: 'var(--color-accent)' }}>
               {project.subtitle}
             </p>
+
+            {project.affiliation && (
+              <p className="text-xs mb-3" style={{ color: 'var(--color-secondary)' }}>
+                {project.affiliation}
+              </p>
+            )}
 
             <div className="flex flex-wrap gap-1.5 mb-3">
               {project.tags.map((tag) => (
@@ -150,13 +199,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {/* Expandable case study */}
         <div className={`expand-content ${expanded ? 'expanded' : ''}`}>
           <div className="expand-inner">
-            <div className="mt-5 pt-5 space-y-4 text-sm" style={{ borderTop: '1px solid var(--color-border)' }}>
+            <div className="mt-5 pt-5 space-y-4 text-xs" style={{ borderTop: '1px solid var(--color-border)' }}>
               {[
                 { label: 'Problem', value: project.problem },
                 { label: 'Approach', value: project.approach },
                 { label: 'Architecture', value: project.architecture },
                 { label: 'Results', value: project.results },
-                { label: 'Lessons', value: project.lessons },
+                { label: 'Reflection', value: project.reflection },
               ].map(({ label, value }) => (
                 <div key={label}>
                   <h4 className="font-medium text-xs uppercase tracking-wider mb-1.5" style={{ color: 'var(--color-accent)' }}>
@@ -165,6 +214,21 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   <p style={{ color: 'var(--color-secondary)' }}>{value}</p>
                 </div>
               ))}
+
+              {project.detailImages && project.detailImages.length > 0 && (
+                <div>
+                  <h4 className="font-medium text-xs uppercase tracking-wider mb-3" style={{ color: 'var(--color-accent)' }}>
+                    Gallery
+                  </h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    {project.detailImages.map((item, i) => {
+                      const src = typeof item === 'string' ? item : item.src
+                      const rows = typeof item === 'string' ? undefined : item.rows
+                      return <DetailImage key={i} src={src} alt={`${project.title} detail ${i + 1}`} rows={rows} />
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

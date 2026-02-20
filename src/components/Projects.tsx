@@ -9,8 +9,14 @@ export default function Projects() {
         &larr; Back
       </Link>
       <h2 className="text-2xl font-semibold tracking-tight mb-2">Projects</h2>
-      <p className="text-sm mb-8" style={{ color: 'var(--color-secondary)' }}>
+      <p className="text-sm mb-1" style={{ color: 'var(--color-secondary)' }}>
         Click a project to expand the full case study.
+      </p>
+      <p className="text-sm mb-8" style={{ color: 'var(--color-secondary)' }}>
+        Also see my{' '}
+        <Link to="/publications" className="link-underline font-medium" style={{ color: 'var(--color-accent)' }}>
+          publications &rarr;
+        </Link>
       </p>
       <div className="space-y-4">
         {projects.map((project) => (

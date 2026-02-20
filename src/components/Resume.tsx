@@ -7,7 +7,22 @@ export default function Resume() {
       <Link to="/" className="link-underline text-sm mb-8 inline-block">
         &larr; Back
       </Link>
-      <h2 className="text-2xl font-semibold tracking-tight mb-8">Resume</h2>
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-2xl font-semibold tracking-tight">Resume</h2>
+        <a
+          href="/resume.pdf"
+          download
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          style={{ backgroundColor: 'var(--color-accent)', color: '#fff' }}
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download PDF
+        </a>
+      </div>
 
       <div className="mb-12">
         <h3 className="text-xs font-mono uppercase tracking-wider mb-6" style={{ color: 'var(--color-accent)' }}>
