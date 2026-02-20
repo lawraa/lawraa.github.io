@@ -57,11 +57,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       style={{ backgroundColor: 'var(--color-surface)' }}
     >
       <div className="p-5">
-        <div className="flex items-center gap-5">
-          {/* Square thumbnail on the left */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-5">
+          {/* Thumbnail — full width on mobile, fixed square on desktop */}
           {project.imageUrl && (
             <div
-              className="shrink-0 w-44 h-44 rounded-lg overflow-hidden border-4"
+              className="shrink-0 w-full h-48 sm:w-44 sm:h-44 rounded-lg overflow-hidden border-4"
               style={{
                 backgroundColor: 'var(--color-surface-hover)',
                 borderColor: 'var(--color-border)',
@@ -220,7 +220,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   <h4 className="font-medium text-xs uppercase tracking-wider mb-3" style={{ color: 'var(--color-accent)' }}>
                     Gallery
                   </h4>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {project.detailImages.map((item, i) => {
                       const src = typeof item === 'string' ? item : item.src
                       const rows = typeof item === 'string' ? undefined : item.rows

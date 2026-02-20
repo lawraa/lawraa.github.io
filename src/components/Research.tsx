@@ -48,10 +48,10 @@ export default function Research() {
               <div className="border-t my-8" style={{ borderColor: 'var(--color-border)' }} />
             )}
 
-            <div className="flex items-center gap-8">
-              {/* Thumbnail */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+              {/* Thumbnail — full width on mobile, fixed square on desktop */}
               {pub.imageUrl && (
-                <div className="shrink-0 w-55 h-55 rounded-lg overflow-hidden border-3" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
+                <div className="shrink-0 w-full h-52 sm:w-52 sm:h-52 rounded-lg overflow-hidden border-2" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
                   <img
                     src={pub.imageUrl}
                     alt={pub.title}
@@ -62,10 +62,10 @@ export default function Research() {
 
               <div className="min-w-0 flex-1">
                 {/* Title + venue */}
-                <div className="flex items-baseline justify-between gap-4 mb-1">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4 mb-1">
                   <h3 className="font-medium text-base">{pub.title}</h3>
                   <span
-                    className="text-xs font-mono shrink-0"
+                    className="text-xs font-mono sm:shrink-0"
                     style={{ color: 'var(--color-secondary)' }}
                   >
                     {pub.venue} {pub.year}
