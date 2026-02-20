@@ -4,7 +4,7 @@ import ProjectCard from './ProjectCard'
 
 export default function Projects() {
   return (
-    <div className="max-w-[800px] mx-auto px-6 pt-32 pb-20">
+    <div className="max-w-[900px] mx-auto px-6 pt-32 pb-20">
       <Link to="/" className="link-underline text-sm mb-8 inline-block">
         &larr; Back
       </Link>

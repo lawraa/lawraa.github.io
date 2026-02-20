@@ -31,8 +31,7 @@ export const projects: Project[] = [
 
     description: [
       'Designed a closed-loop framework that automatically personalizes an assistive wearable device based on individual physical ability.',
-      'Combines physics-based simulation, task performance metrics, and LLM reasoning to iteratively refine mechanical parameters.',
-      'Transforms device design from manual expert tuning into an automated optimization process guided by measurable outcomes.'
+      'Combines physics-based simulation, task performance metrics, and LLM reasoning to iteratively refine mechanical parameters. Transforms device design from manual expert tuning into an automated optimization process guided by measurable outcomes.'
     ],
 
     problem:

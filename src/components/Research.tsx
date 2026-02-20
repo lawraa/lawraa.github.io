@@ -32,7 +32,7 @@ export default function Research() {
   const [openBibtex, setOpenBibtex] = useState<string | null>(null)
 
   return (
-    <div className="max-w-[1000px] mx-auto px-6 pt-32 pb-20">
+    <div className="max-w-[900px] mx-auto px-6 pt-32 pb-20">
       <Link to="/" className="link-underline text-sm mb-8 inline-block">
         &larr; Back
       </Link>
