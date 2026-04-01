@@ -109,6 +109,36 @@ export const projects: Project[] = [
       'Fairness behavior differed strongly by task: reconstruction metrics stayed stable across races, while classification accuracy was sensitive to imbalance. Across both backbones, the dominant driver of unfairness was the training data distribution rather than architecture alone, so evaluation design and subgroup reporting are essential.',
   },
   {
+    id: 'colm-llm-discussion',
+    title: 'LLM Discussion: Enhancing the Creativity of Large Language Models via Discussion Framework and Role-Play',
+    affiliation: 'National Taiwan University · COLM 2024',
+    subtitle: 'Multi-agent discussion framework with role-playing to boost LLM creative reasoning',
+    tags: ['LLMs', 'Multi-Agent', 'NLP', 'Evaluation', 'Creativity'],
+    imageUrl: '/research/llm-discussion.png',
+    codeUrl: 'https://github.com/lawraa/LLM-Discussion',
+    pdfUrl: 'https://arxiv.org/abs/2405.06373',
+
+    description: [
+      'LLMs excel at natural language tasks but tend toward convergent, homogeneous responses on open-ended creative problems.',
+      'We propose a three-phase discussion framework where multiple LLMs with distinct assigned roles engage in structured diverging debate before converging on a creative answer.',
+    ],
+
+    problem:
+      'Large language models frequently produce similar, "safe" responses to open-ended questions, limiting their usefulness for tasks that demand creativity, novelty, or diversity of ideas.',
+
+    approach:
+      'Emulate human collective creativity by having LLMs simulate a multi-participant discussion. Assign distinct roles (personas) to each agent to combat homogeneity, then run a structured three-phase protocol: idea generation, cross-critique, and convergence.',
+
+    architecture:
+      'Input question → role assignment to N LLM agents → Phase 1: independent idea generation → Phase 2: cross-agent critique and divergence → Phase 3: synthesis and convergence → final creative answer. Evaluated on standard creativity benchmarks against single-LLM baselines.',
+
+    results:
+      'The discussion framework significantly improved scores on creativity benchmarks compared to single-LLM and naive ensemble baselines. Role diversity was a key factor — agents with distinct assigned personas produced more varied and higher-quality ideas.',
+
+    reflection:
+      'The key insight is that creativity benefits from structured disagreement, not just aggregation. Simply averaging responses does not help; forcing agents to argue from different perspectives before converging is what drives novelty. Role-play is a surprisingly effective prompt-level intervention for reducing response homogeneity in LLMs.',
+  },
+  {
     id: 'trendforce-news-translation',
     title: 'Automating Technology News Translation & Style Adaptation',
     affiliation: 'NTU RLL Lab x TrendForce · Industry-University Research Collaboration',
