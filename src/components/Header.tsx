@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 interface HeaderProps {
@@ -15,11 +16,13 @@ const navLinks = [
 
 export default function Header({ dark, onToggleDark }: HeaderProps) {
   const location = useLocation()
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md" style={{ backgroundColor: 'color-mix(in srgb, var(--color-bg) 85%, transparent)' }}>
       <div className="max-w-[800px] mx-auto px-6 py-4 flex items-center justify-between">
-        <nav className="flex gap-6 text-sm" style={{ color: 'var(--color-secondary)' }}>
+        {/* Desktop nav */}
+        <nav className="hidden sm:flex gap-6 text-sm" style={{ color: 'var(--color-secondary)' }}>
           {navLinks.map(({ to, label }) => (
             <Link
               key={to}
@@ -31,6 +34,29 @@ export default function Header({ dark, onToggleDark }: HeaderProps) {
             </Link>
           ))}
         </nav>
+
+        {/* Mobile hamburger */}
+        <button
+          className="sm:hidden p-2 rounded-lg transition-colors cursor-pointer"
+          style={{ color: 'var(--color-secondary)' }}
+          aria-label="Toggle navigation"
+          onClick={() => setMenuOpen(prev => !prev)}
+        >
+          {menuOpen ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          )}
+        </button>
+
+        {/* Dark mode toggle */}
         <button
           onClick={onToggleDark}
           className="p-2 rounded-lg transition-colors cursor-pointer"
@@ -56,6 +82,26 @@ export default function Header({ dark, onToggleDark }: HeaderProps) {
           )}
         </button>
       </div>
+
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <nav
+          className="sm:hidden border-t px-6 py-4 space-y-4"
+          style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
+        >
+          {navLinks.map(({ to, label }) => (
+            <Link
+              key={to}
+              to={to}
+              className="block text-sm font-medium"
+              style={{ color: location.pathname === to ? 'var(--color-text)' : 'var(--color-secondary)' }}
+              onClick={() => setMenuOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      )}
     </header>
   )
 }

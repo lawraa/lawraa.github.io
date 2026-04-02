@@ -46,7 +46,7 @@ export const publications: Publication[] = [
     tags: ['Benchmarking', 'Evaluation'],
     imageUrl: '/research/dynamic-superb.png',
     paperUrl: 'https://arxiv.org/abs/2411.05361',
-    codeUrl: ' https://github.com/dynamic-superb/dynamic-superb',
+    codeUrl: 'https://github.com/dynamic-superb/dynamic-superb',
     bibtex: `@inproceedings{
 huang2025dynamicsuperb,
 title={Dynamic-{SUPERB} Phase-2: A Collaboratively Expanding Benchmark for Measuring the Capabilities of Spoken Language Models with 180 Tasks},

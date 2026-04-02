@@ -31,6 +31,9 @@ function Authors({ authors, coFirstAuthors }: { authors: string[], coFirstAuthor
 export default function Research() {
   const [openBibtex, setOpenBibtex] = useState<string | null>(null)
 
+  const papers = publications.filter(pub => !pub.tags.includes('Review'))
+  const service = publications.filter(pub => pub.tags.includes('Review'))
+
   return (
     <div className="max-w-[900px] mx-auto px-6 pt-32 pb-20">
       <Link to="/" className="link-underline text-sm mb-8 inline-block">
@@ -41,15 +44,15 @@ export default function Research() {
         Published work and academic contributions.
       </p>
 
+      {/* Papers */}
       <div>
-        {publications.map((pub, idx) => (
+        {papers.map((pub, idx) => (
           <article key={pub.id}>
             {idx > 0 && (
               <div className="border-t my-8" style={{ borderColor: 'var(--color-border)' }} />
             )}
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-6">
-              {/* Thumbnail — full width on mobile, fixed square on desktop */}
               {pub.imageUrl && (
                 <div className="shrink-0 w-full h-52 sm:w-52 sm:h-52 rounded-lg overflow-hidden border-2" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
                   <img
@@ -61,7 +64,6 @@ export default function Research() {
               )}
 
               <div className="min-w-0 flex-1">
-                {/* Title + venue */}
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4 mb-1">
                   <h3 className="font-medium text-base">{pub.title}</h3>
                   <span
@@ -72,15 +74,12 @@ export default function Research() {
                   </span>
                 </div>
 
-                {/* Authors */}
                 <Authors authors={pub.authors} coFirstAuthors={pub.coFirstAuthors} />
 
-                {/* Summary */}
                 <p className="text-sm mb-3" style={{ color: 'var(--color-secondary)' }}>
                   {pub.summary}
                 </p>
 
-                {/* Tags */}
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {pub.tags.map((tag) => (
                     <span
@@ -96,59 +95,40 @@ export default function Research() {
                   ))}
                 </div>
 
-            {/* Links row */}
-            {(pub.paperUrl || pub.projectUrl || pub.codeUrl || pub.bibtex) && (
-              <div className="flex items-center gap-3 text-xs font-medium">
-                {pub.paperUrl && (
-                  <a
-                    href={pub.paperUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-underline"
-                  >
-                    Paper
-                  </a>
-                )}
-                {pub.projectUrl && (
-                  <a
-                    href={pub.projectUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-underline"
-                  >
-                    Project
-                  </a>
-                )}
-                {pub.codeUrl && (
-                  <a
-                    href={pub.codeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-underline"
-                  >
-                    Code
-                  </a>
-                )}
-                {pub.bibtex && (
-                  <>
-                    {(pub.paperUrl || pub.projectUrl || pub.codeUrl) && (
-                      <span style={{ color: 'var(--color-border)' }}>|</span>
+                {(pub.paperUrl || pub.projectUrl || pub.codeUrl || pub.bibtex) && (
+                  <div className="flex items-center gap-3 text-xs font-medium">
+                    {pub.paperUrl && (
+                      <a href={pub.paperUrl} target="_blank" rel="noopener noreferrer" className="link-underline">
+                        Paper
+                      </a>
                     )}
-                    <button
-                      onClick={() =>
-                        setOpenBibtex(openBibtex === pub.id ? null : pub.id)
-                      }
-                      className="link-underline cursor-pointer"
-                      style={{ background: 'none', border: 'none', padding: 0 }}
-                    >
-                      BibTeX
-                    </button>
-                  </>
+                    {pub.projectUrl && (
+                      <a href={pub.projectUrl} target="_blank" rel="noopener noreferrer" className="link-underline">
+                        Project
+                      </a>
+                    )}
+                    {pub.codeUrl && (
+                      <a href={pub.codeUrl} target="_blank" rel="noopener noreferrer" className="link-underline">
+                        Code
+                      </a>
+                    )}
+                    {pub.bibtex && (
+                      <>
+                        {(pub.paperUrl || pub.projectUrl || pub.codeUrl) && (
+                          <span style={{ color: 'var(--color-border)' }}>|</span>
+                        )}
+                        <button
+                          onClick={() => setOpenBibtex(openBibtex === pub.id ? null : pub.id)}
+                          className="link-underline cursor-pointer"
+                          style={{ background: 'none', border: 'none', padding: 0 }}
+                        >
+                          BibTeX
+                        </button>
+                      </>
+                    )}
+                  </div>
                 )}
-              </div>
-            )}
 
-                {/* BibTeX block */}
                 {openBibtex === pub.id && pub.bibtex && (
                   <pre
                     className="mt-3 p-4 rounded-lg text-xs overflow-x-auto"
@@ -167,6 +147,37 @@ export default function Research() {
           </article>
         ))}
       </div>
+
+      {/* Academic Service */}
+      {service.length > 0 && (
+        <div className="mt-14">
+          <div className="border-t mb-8" style={{ borderColor: 'var(--color-border)' }} />
+          <h3
+            className="text-xs font-mono uppercase tracking-wider mb-6"
+            style={{ color: 'var(--color-accent)' }}
+          >
+            Academic Service
+          </h3>
+          <div className="space-y-4">
+            {service.map(pub => (
+              <div key={pub.id} className="flex items-start gap-3">
+                <span
+                  className="text-xs font-mono px-2 py-0.5 rounded shrink-0 mt-0.5"
+                  style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-secondary)' }}
+                >
+                  Reviewer
+                </span>
+                <div>
+                  <p className="text-sm font-medium">{pub.title.replace(' — Reviewer', '')}</p>
+                  <p className="text-xs mt-0.5" style={{ color: 'var(--color-secondary)' }}>
+                    {pub.venue} {pub.year} · {pub.summary}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import FeaturedProjects from './components/FeaturedProjects'
 import Skills from './components/Skills'
+import Experience from './components/Experience'
 import Footer from './components/Footer'
 import Projects from './components/Projects'
 import Research from './components/Research'
@@ -13,7 +15,9 @@ function HomePage() {
   return (
     <main className="max-w-[800px] mx-auto px-6">
       <Hero />
+      <FeaturedProjects />
       <Skills />
+      <Experience />
       <Footer />
     </main>
   )

@@ -99,6 +99,7 @@ export const gyms: ClimbingGym[] = [
   { name: 'Dogpatch Boulders', city: 'San Francisco', country: 'USA' },
   { name: 'Hyperion Climbing', city: 'Redwood City', country: 'USA' },
   { name: 'Cliffs of Id', city: 'Los Angeles', country: 'USA' },
+  { name: 'Benchmark Climbing', city: 'Berkeley', country: 'USA' },
   { name: 'UCB Recreational Sports Facility', city: 'Berkeley', country: 'USA' },
 
   { name: 'YongHe Climbing Gym', city: 'Taipei', country: 'Taiwan' },
