@@ -20,34 +20,39 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'llm-personalized-assistive-design',
-    title: 'LLM-Driven Personalized Assistive Device Design (Ongoing)',
+    title: 'LLM-Driven Personalized Assistive Device Design (Ongoing Capstone Project)',
     affiliation: 'UC Berkeley · MEng Capstone Project',
-    subtitle: 'Closed-loop simulation-in-the-loop optimization for adaptive wearable robotics',
-    tags: ['Machine Learning', 'Reinforcement Learning', 'Simulation', 'MuJoCo', 'Human-in-the-Loop', 'LLMs'],
+    subtitle: 'LLM guided MuJoCo simulation for automated gripper personalization — 83% convergence across 12 runs, 4 participants',
+    tags: ['LLMs', 'Robotics', 'MuJoCo', 'Simulation', 'Optimization', 'Assistive Technology'],
     imageUrl: '/projects/capstone_dorsal-grasper.jpg',
     codeUrl: undefined,
     videoUrl: undefined,
     pdfUrl: undefined,
 
     description: [
-      'Designed a closed-loop framework that automatically personalizes an assistive wearable device based on individual physical ability.',
-      'Combines physics-based simulation, task performance metrics, and LLM reasoning to iteratively refine mechanical parameters. Transforms device design from manual expert tuning into an automated optimization process guided by measurable outcomes.'
+      'Built a 3-phase AI pipeline that automatically designs a personalized dorsal grasper — a wrist-worn assistive device for users with impaired hand function — by iteratively proposing 15-parameter mechanical designs, evaluating each in MuJoCo physics simulation across 8 grasping tasks, and personalizing to each user\'s measured force limits.',
+      'Achieved an 83% convergence rate across 12 experimental runs and 4 participants. The system found universal gripper designs in as few as 2 iterations, and reduced required grip force to a mean of 2.5 N with 7 of 8 tasks achievable at or below 1.7 N — all within each user\'s physical ceiling.',
     ],
 
     problem:
-      'Assistive devices are typically designed using population averages and manual tuning, resulting in poor usability across users with different strength, mobility, and anatomical constraints. Personalization currently requires repeated expert-driven prototyping.',
+      'People with stroke or spinal cord injury have limited wrist and hand strength. A dorsal grasper must be geometrically tuned so the user can complete everyday tasks using only their residual force. Designing this by hand is expert-intensive and does not scale to individual variation — each user\'s joint range of motion, forearm dimensions, and actuator force limits require a different device geometry.',
 
     approach:
-      'Represent human variability (hand dimensions, ROM, strength) as constraints, evaluate parameterized designs in MuJoCo tasks, extract performance metrics (success, effort, robustness), and use an LLM reasoning agent to propose parameter updates in a closed-loop optimization cycle.',
+      'Represent each user\'s physical profile (forearm radius, joint ROM, wrist torque limit) as hard constraints. In Phase 1, run the LLM independently on each of 8 tasks to find per-task successful designs. In Phase 2, cross-validate all Phase 1 designs across all tasks — if any single design passes all 8 tasks, stop. Otherwise, seed Phase 3 with the best candidate and run a multi-task LLM optimization loop until 3 consecutive universal successes are confirmed.',
 
     architecture:
-      'Human profile → parameterized device generator → MuJoCo simulation → performance metric abstraction → LLM reasoning agent proposes delta parameters → updated design → repeat until convergence.',
+      'User profile (ROM, force cap) → 15-parameter gripper generator → MuJoCo physics simulation + force sweep (15–20 force levels per task) → performance metrics (min grip force, task success) → GPT-4.1 reasoning agent proposes parameter updates → Phase 1: per-task convergence → Phase 2: cross-validation → Phase 3: multi-task joint optimization → universal design.',
 
     results:
-      '(Ongoing) Built a working simulation-in-the-loop personalization pipeline capable of iteratively improving device usability without manual redesign. The framework generalizes across users and task variations.',
-  
+      'Validated across 12 runs and 4 participants (H01–H04): overall convergence rate of 83.3% (10/12). Robustness study (5 seeds): 100% success — even starting from designs with only 2 of 8 tasks solvable, the pipeline found universal designs. Fastest convergence: 2 iterations in Phase 3. '
+      + 'Optimized designs reduced mean minimum grip force to ~2.5 N across all tasks; 7 of 8 tasks are achievable at ≤1.7 N. The hardest tasks — sphere_lift and ring_stack — both require ~2.92 Nm (H01\'s physical ceiling); the best design achieved 2.3 Nm on both, leaving 0.62 Nm of safety headroom. '
+      + 'LLM-guided search outperforms random parameter sampling by a large margin: 0 universal designs found in 250 random attempts vs. 83% success rate in under 60 LLM iterations. '
+      + 'Also built full supporting infrastructure: parallel multi-user runner, result cleanup and renumbering tooling, offscreen MuJoCo video export, and a publication-ready 4-panel results figure.',
+
     reflection:
-      'This is still an ongoing project. The main insight so far is that the bottleneck is not the optimization algorithm but the interface between simulation, metrics, and reasoning. MuJoCo cannot perfectly represent real-world interaction, so the quality of evaluation metrics heavily affects learning outcomes. Likewise, translating a mechanical design into a representation an LLM can reason about requires careful abstraction — most of the engineering effort lies in designing that information bridge rather than the learning model itself.'
+      'The primary failure mode was not budget — it was LLM plateau. Every failed run shared the same pattern: the model anchored on finger_spread_angle=0.09 across 64 of 100 iterations despite the critical threshold being ~0.11, and doubling the iteration budget did not break the loop. This is a reasoning failure, not a compute failure. '
+      + 'The most surprising finding was Phase 2 generalization: in one run, sphere_lift was never solved in 30 Phase 1 iterations, yet the Phase 2 seed — optimized for a different task — passed sphere_lift anyway via geometric coincidence. Missing a task in Phase 1 is not always fatal. '
+      + 'The main engineering insight is that the bottleneck is the information bridge between simulation output and LLM input. Most complexity lives in designing the metric abstraction and prompt structure, not the optimizer itself.',
   },
   {
     id: 'emg-imu-quadruped',
