@@ -15,7 +15,7 @@ export interface ClimbingPhoto {
 }
 
 export const stats: ClimbingStats = {
-  highestGrade: 'V7',
+  highestGrade: 'V8',
   apeIndex: '+9 cm',
   homegym: 'Oaks, CA',
   instagram: 'climblog.lawry',
