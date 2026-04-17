@@ -3,13 +3,14 @@ import { publications } from '../data/research'
 
 const industryItems = [
   { role: 'Pursuing MEng in EECS (Open for Jobs)', org: 'UC Berkeley · MEng Capstone', dates: 'Aug 2025 – Present' },
+  { role: 'Software Engineering Job Simulation', org: 'JPMorgan Chase & Co. (Forage)', dates: 'Apr 2026' },
   { role: 'Industry Researcher', org: 'TrendForce Corporation', dates: 'Oct 2024 – Jun 2025' },
   { role: 'Software Engineer Intern', org: 'Pegatron Corporation', dates: 'Jul – Aug 2023' },
   { role: 'Software Engineer Intern', org: 'IADIY Photonics', dates: '2020 & 2021' },
 ]
 
 const researchItems = [
-  { role: 'Research Assistant', org: 'NTU Robot Learning Lab', dates: 'Oct 2023 – Jun 2025' },
+  { role: 'Research Assistant', org: 'NTU Robot Learning Lab (Shao-Hua, Sun)', dates: 'Oct 2023 – Jun 2025' },
   { role: 'Undergraduate Researcher', org: 'NTU SPMLab (Hung-yi Lee)', dates: 'Jul 2023 – Jun 2025' },
 ]
 
