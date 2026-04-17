@@ -19,6 +19,37 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'jpmorgan-midas-core',
+    title: 'Midas Transaction Processing System',
+    affiliation: 'JPMorgan Chase & Co. · Software Engineering Job Simulation (Forage)',
+    subtitle: 'Spring Boot microservice with Kafka, H2 SQL, and REST API integration for real-time transaction processing',
+    tags: ['Java', 'Spring Boot', 'Kafka', 'SQL', 'REST API', 'Backend', 'Distributed Systems'],
+    imageUrl: undefined,
+    codeUrl: 'https://github.com/lawraa/forage-midas',
+    videoUrl: undefined,
+    pdfUrl: '/projects/JPMorgan_cert.pdf',
+
+    description: [
+      'Built key backend components of Midas, a transaction-processing microservice, as part of JPMorgan Chase\'s Software Engineering Job Simulation on the Forage platform.',
+      'Integrated Kafka message consumption, SQL persistence with Spring Data JPA, an external Incentive REST API, and a balance query endpoint into a cohesive Spring Boot service.',
+    ],
+
+    problem:
+      'Financial transaction systems must reliably ingest high-volume message streams, validate each transaction against sender balances, persist results to a database, incorporate external incentive logic, and expose account balances through a clean HTTP API — all without data loss or race conditions.',
+
+    approach:
+      'Used Spring Boot as the application framework and configured each layer independently: Kafka consumer for message ingestion, H2/JPA for persistence, RestTemplate for external API calls, and a @RestController for the balance endpoint. Configured the application via application.yml (topic names, serializers, server port) to keep the service externally configurable.',
+
+    architecture:
+      'Kafka topic (trader-updates) → @KafkaListener (TransactionListener) deserializes JSON → validate sender balance via H2/JPA → update sender and recipient UserRecord → POST to external Incentive API (RestTemplate) → persist TransactionRecord with incentive → GET /balance?userId=X (BalanceController) → return Balance JSON.',
+
+    results:
+      'All five Maven test suites passed: TaskOneTests through TaskFiveTests. Final submission outputs included Waldorf\'s balance of 627 (Task 3), Wilbur\'s balance of 3089 (Task 4), and all 13 user balances queried via the REST endpoint (Task 5). Received a Certificate of Completion from JPMorgan Chase & Co. issued April 17, 2026.',
+
+    reflection:
+      'The most instructive debugging was Kafka\'s offset-reset behavior: the default "latest" policy caused the consumer to miss messages sent before it fully connected, requiring "earliest" plus allow.auto.create.topics to make the embedded test environment reliable. This highlighted how distributed system defaults are often optimized for production throughput, not test determinism — and that configuration understanding is as important as code correctness in backend systems.',
+  },
+  {
     id: 'llm-personalized-assistive-design',
     title: 'LLM-Driven Personalized Assistive Device Design (Ongoing Capstone Project)',
     affiliation: 'UC Berkeley · MEng Capstone Project',

@@ -59,6 +59,18 @@ export const resumeData: ResumeData = {
 
   experience: [
     {
+      role: 'Software Engineering Job Simulation',
+      org: 'JPMorgan Chase & Co. (via Forage)',
+      dates: 'Apr 2026',
+      type: 'Virtual Experience',
+      bullets: [
+        'Integrated Kafka into a Spring Boot microservice to consume and deserialize high-volume transaction messages using a configurable topic and embedded Kafka test framework.',
+        'Implemented transaction validation and persistence logic with Spring Data JPA and an H2 SQL database, including entity modeling and balance updates across relational user records.',
+        'Connected the service to an external REST Incentive API using RestTemplate, processing incentive responses and incorporating them into transactional workflows.',
+        'Developed a REST balance endpoint returning JSON responses through a Spring controller, maintaining clean architectural boundaries between services.',
+      ],
+    },
+    {
       role: 'Machine Learning Engineer / AI Engineer (Capstone Project)',
       org: 'AI-driven Personalized Assisted Device, UC Berkeley',
       location: 'Berkeley, CA',
