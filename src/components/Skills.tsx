@@ -1,5 +1,6 @@
 import { skills } from '../data/skills'
 import type { JSX } from 'react'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const categoryIcons: Record<string, JSX.Element> = {
   'Machine Learning': (
@@ -33,34 +34,39 @@ const categoryIcons: Record<string, JSX.Element> = {
 }
 
 export default function Skills() {
+  const ref = useScrollReveal()
+
   return (
     <section className="py-16">
-      <h2 className="text-2xl font-semibold tracking-tight mb-8">Capabilities</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {skills.map((category) => (
-          <div
-            key={category.title}
-            className="rounded-xl p-5"
-            style={{ backgroundColor: 'var(--color-surface)' }}
-          >
-            <div className="flex items-center gap-2 mb-4" style={{ color: 'var(--color-text)' }}>
-              {categoryIcons[category.title]}
-              <h3 className="font-medium text-sm">{category.title}</h3>
+      <div ref={ref} className="reveal">
+        <p className="text-xs font-mono uppercase tracking-widest mb-2" style={{ color: 'var(--color-accent)' }}>Skills</p>
+        <h2 className="text-2xl font-semibold tracking-tight mb-8">Capabilities</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {skills.map((category) => (
+            <div
+              key={category.title}
+              className="rounded-xl p-5 card"
+              style={{ backgroundColor: 'var(--color-surface)' }}
+            >
+              <div className="flex items-center gap-2 mb-4" style={{ color: 'var(--color-text)' }}>
+                {categoryIcons[category.title]}
+                <h3 className="font-medium text-sm">{category.title}</h3>
+              </div>
+              <ul className="space-y-2">
+                {category.items.map((item) => (
+                  <li
+                    key={item}
+                    className="text-sm flex items-center gap-2"
+                    style={{ color: 'var(--color-secondary)' }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: 'var(--color-accent)' }} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="space-y-2">
-              {category.items.map((item) => (
-                <li
-                  key={item}
-                  className="text-sm flex items-center gap-2"
-                  style={{ color: 'var(--color-secondary)' }}
-                >
-                  <span className="w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: 'var(--color-accent)' }} />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )

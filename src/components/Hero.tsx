@@ -1,40 +1,31 @@
 import { Link } from 'react-router-dom'
 
 export default function Hero() {
-  const specializations = [ 
-    'Software Engineer',
-    'Machine Learning Engineer',
-    'AI Engineer',
-    'Machine Learning Systems',
-    'Model Evaluation',
-    'LLM Applications',
-    'Embodied & Simulation Learning',
-  ]
-
   return (
-    <section className="pt-32 pb-20">
+    <section className="pt-32 pb-20 hero-animate">
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-8 mb-6">
         <div className="min-w-0">
           <h1 className="text-4xl font-semibold tracking-tight mb-2">
             Shou-Jen (Lawrance) Chen
           </h1>
-          <p className="text-base font-medium mb-4" style={{ color: 'var(--color-secondary)' }}>
+          <p className="text-base font-medium mb-5" style={{ color: 'var(--color-secondary)' }}>
             UC Berkeley EECS MEng · Open to Opportunities
           </p>
 
-          <div className="flex flex-wrap gap-2 mb-4">
-            {specializations.map((s) => (
-              <span
-                key={s}
-                className="text-xs font-mono px-2.5 py-1 rounded-full"
-                style={{
-                  backgroundColor: 'var(--color-surface)',
-                  color: 'var(--color-secondary)',
-                }}
-              >
-                {s}
-              </span>
-            ))}
+          {/* Currently callout */}
+          <div
+            className="mb-5 px-4 py-3 rounded-lg"
+            style={{
+              borderLeft: '2px solid var(--color-accent)',
+              backgroundColor: 'var(--color-surface)',
+            }}
+          >
+            <p className="text-xs font-mono uppercase tracking-wider mb-1" style={{ color: 'var(--color-accent)' }}>
+              Currently
+            </p>
+            <p className="text-sm" style={{ color: 'var(--color-text)' }}>
+              Berkeley MEng Capstone — AI pipeline for patient-adaptive surgical grasper design
+            </p>
           </div>
 
           <div className="flex items-center gap-3 mb-4">
@@ -113,18 +104,22 @@ export default function Hero() {
         <img
           src="/lawry/portrait.jpg"
           alt="Lawrance Chen"
-          className="shrink-0 w-60 h-60 rounded-lg object-cover self-center sm:self-start"
+          className="shrink-0 w-44 h-44 rounded-full object-cover self-center sm:self-start"
+          style={{
+            boxShadow: '0 0 0 3px var(--color-bg), 0 0 0 5px var(--color-accent), 0 8px 24px rgba(0,0,0,0.10)',
+          }}
         />
       </div>
 
       <p className="text-base mb-4" style={{ color: 'var(--color-secondary)' }}>
-        I'm <b>Lawrance</b>, a Master of Engineering student in <b>EECS at the University of California, Berkeley</b>, focusing on <b>robotics and embedded systems</b>. My work sits at the intersection of <b>machine learning, intelligent systems, and software</b>, building systems that not only run but also reason about the world. I am currently working on my Berkeley Capstone project, developing an AI pipeline capable of taking patient profiles based on sizing, movement limitations, and personal preferences to create the optimal hand grasper design. 
+        I'm <b>Lawrance</b>, a Master of Engineering student in <b>EECS at the University of California, Berkeley</b>, focusing on <b>robotics and embedded systems</b>. My work sits at the intersection of <b>machine learning, intelligent systems, and software</b>, building systems that not only run but also reason about the world. I am currently working on my Berkeley Capstone project, developing an AI pipeline capable of taking patient profiles based on sizing, movement limitations, and personal preferences to create the optimal hand grasper design.
       </p>
 
       <p className="text-base mb-4" style={{ color: 'var(--color-secondary)' }}>
-        During my undergraduate studies in Electrical Engineering at National Taiwan University, I worked with Professors <a href="https://shaohua0116.github.io/" target="_blank" className="link-underline ">Shao-Hua Sun</a> and <a href="https://speech.ee.ntu.edu.tw/~hylee/index.php" target="_blank" className="link-underline ">Hung-yi Lee</a>, and published research on multi-agent <a href="https://arxiv.org/abs/2405.06373" target="_blank" className="link-underline ">LLM discussion</a> frameworks for creativity evaluation.
-        I have worked as a software engineering intern at <a href="https://www.pegatroncorp.com/" target="_blank" className="link-underline ">Pegatron</a> and <a href="https://www.iadiy.com/" target="_blank" className="link-underline ">IADIY Photonics</a>, conducted an industry-university research collaboration with <a href="https://www.trendforce.com/" target="_blank" className="link-underline ">TrendForce</a>, completed a software engineering job simulation at <a href="https://www.jpmorganchase.com/" target="_blank" className="link-underline ">JPMorgan Chase</a>, and served as a research assistant in the <a href="https://nturll.xyz/" target="_blank" className="link-underline ">RLL Lab</a>.
+        During my undergraduate studies in Electrical Engineering at National Taiwan University, I worked with Professors <a href="https://shaohua0116.github.io/" target="_blank" className="link-underline">Shao-Hua Sun</a> and <a href="https://speech.ee.ntu.edu.tw/~hylee/index.php" target="_blank" className="link-underline">Hung-yi Lee</a>, and published research on multi-agent <a href="https://arxiv.org/abs/2405.06373" target="_blank" className="link-underline">LLM discussion</a> frameworks for creativity evaluation.
+        I have worked as a software engineering intern at <a href="https://www.pegatroncorp.com/" target="_blank" className="link-underline">Pegatron</a> and <a href="https://www.iadiy.com/" target="_blank" className="link-underline">IADIY Photonics</a>, conducted an industry-university research collaboration with <a href="https://www.trendforce.com/" target="_blank" className="link-underline">TrendForce</a>, completed a software engineering job simulation at <a href="https://www.jpmorganchase.com/" target="_blank" className="link-underline">JPMorgan Chase</a>, and served as a research assistant in the <a href="https://nturll.xyz/" target="_blank" className="link-underline">RLL Lab</a>.
       </p>
+
       <p className="text-base mb-8" style={{ color: 'var(--color-secondary)' }}>
         Across these experiences, I keep returning to the same question: <i>how can we design systems that interact with the real world as naturally as humans do?</i> This portfolio is a collection of my attempts to answer that.
       </p>

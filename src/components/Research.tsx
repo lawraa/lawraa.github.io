@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { publications } from '../data/research'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 
 function Authors({ authors, coFirstAuthors }: { authors: string[], coFirstAuthors?: string[] }) {
   const isCoFirst = (name: string) => coFirstAuthors?.includes(name) ?? false
@@ -30,12 +31,13 @@ function Authors({ authors, coFirstAuthors }: { authors: string[], coFirstAuthor
 
 export default function Research() {
   const [openBibtex, setOpenBibtex] = useState<string | null>(null)
+  const serviceRef = useScrollReveal()
 
   const papers = publications.filter(pub => !pub.tags.includes('Review'))
   const service = publications.filter(pub => pub.tags.includes('Review'))
 
   return (
-    <div className="max-w-[900px] mx-auto px-6 pt-32 pb-20">
+    <div className="max-w-[900px] mx-auto px-6 pt-32 pb-20 page-animate">
       <Link to="/" className="link-underline text-sm mb-8 inline-block">
         &larr; Back
       </Link>
@@ -150,7 +152,7 @@ export default function Research() {
 
       {/* Academic Service */}
       {service.length > 0 && (
-        <div className="mt-14">
+        <div ref={serviceRef} className="mt-14 reveal">
           <div className="border-t mb-8" style={{ borderColor: 'var(--color-border)' }} />
           <h3
             className="text-xs font-mono uppercase tracking-wider mb-6"

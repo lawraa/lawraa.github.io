@@ -4,6 +4,7 @@ export interface Project {
   subtitle: string
   tags: string[]
   imageUrl?: string
+  imageFit?: 'cover' | 'contain'
   detailImages?: (string | { src: string; rows?: number })[]
   codeUrl?: string
   videoUrl?: string
@@ -55,7 +56,8 @@ export const projects: Project[] = [
     affiliation: 'JPMorgan Chase & Co. · Software Engineering Job Simulation (Forage)',
     subtitle: 'Spring Boot microservice with Kafka, H2 SQL, and REST API integration for real-time transaction processing',
     tags: ['Java', 'Spring Boot', 'Kafka', 'SQL', 'REST API', 'Backend', 'Distributed Systems'],
-    imageUrl: undefined,
+    imageUrl: '/projects/JPMorgan_cert.jpg',
+    imageFit: 'contain',
     codeUrl: 'https://github.com/lawraa/forage-midas',
     videoUrl: undefined,
     pdfUrl: '/projects/JPMorgan_cert.pdf',

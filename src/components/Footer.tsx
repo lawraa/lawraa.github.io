@@ -65,6 +65,7 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="py-20 border-t" style={{ borderColor: 'var(--color-border)' }}>
+      <p className="text-xs font-mono uppercase tracking-widest mb-2" style={{ color: 'var(--color-accent)' }}>Contact</p>
       <h2 className="text-2xl font-semibold tracking-tight mb-2">Get in Touch</h2>
       <p className="text-sm mb-8" style={{ color: 'var(--color-secondary)' }}>
         Open to interesting problems, collaborations, and opportunities.
