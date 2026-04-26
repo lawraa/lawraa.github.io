@@ -19,6 +19,37 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'risk-triggered-latent-correction',
+    title: 'Risk-Triggered Latent-Space Corrections for Near-Failure Recovery in Deep RL (Ongoing)',
+    affiliation: 'UC Berkeley · CS 285 Final Project',
+    subtitle: 'Decoupled SAC with risk-triggered latent correction achieving 100% success on Meta-World pick-place-v3, 25–29% more sample-efficient than baseline SAC',
+    tags: ['Deep RL', 'SAC', 'Robotics', 'Meta-World', 'Latent Space', 'PyTorch', 'Research'],
+    imageUrl: undefined,
+    codeUrl: undefined,
+    videoUrl: undefined,
+    pdfUrl: undefined,
+
+    description: [
+      'Studying near-failure recovery in deep RL: detecting when a policy is drifting toward failure but is still recoverable, then applying a targeted correction to the actor\'s internal latent representation — rather than to actions directly — to steer it back on track.',
+      'Designed three experimental conditions (baseline SAC, always-on latent correction, risk-triggered correction) on Meta-World pick-place-v3. Key finding: decoupled training — isolating the base actor and correction module on fully independent gradient paths — is critical for triggered deployment to work, and yields 100% success vs. 80% for baseline at 2.5M steps.',
+    ],
+
+    problem:
+      'Trained RL policies can drift toward failure during execution — for example, stalling pre-grasp or dropping an object mid-transport — without being in a fully unrecoverable state. Standard policies have no mechanism to detect or respond to these near-failure moments. The core question: can targeted editing of the policy\'s internal latent representation (rather than replanning or switching policies) improve recovery without disrupting normal execution?',
+
+    approach:
+      'Compare three conditions under the same SAC framework: (1) baseline SAC with no correction, (2) always-on latent correction applied at every step, and (3) risk-triggered correction applied only when a heuristic near-failure detector fires. The trigger uses sliding-window stall detection in both pre-grasp (hand-to-object distance) and post-grasp (object-to-target distance) phases, with instantaneous drop detection and 15-step hysteresis. The core engineering insight: triggered deployment only works when the base actor and correction module are trained on completely independent gradient paths — isolating them via torch.no_grad() on the frozen base latent in the correction update step.',
+
+    architecture:
+      'GaussianActor with a trunk-head split: trunk maps obs → z (LayerNorm + Tanh + ReLU, 256-dim). LatentCorrectionModule takes [obs; z] → Δz via a two-layer MLP (hidden 128, output_scale=0.1, near-zero init). Corrected latent z\' = z + Δz is fed to actor heads for action sampling. NearFailureTrigger maintains two sliding windows (pre-grasp: hand_to_obj; post-grasp: obj_to_target, W=20, δ_min=0.01m, cooldown=15 steps). Decoupled training runs four sequential steps per update: (1) critic on base policy, (2) base actor via standard SAC, (3) correction on frozen base latent (torch.no_grad()), (4) auto-alpha on base entropy.',
+
+    results:
+      'On pick-place-v3 (MT1, 50 task variants), decoupled triggered correction achieved 100% peak and 100% final success at 2.5M steps, versus 96% peak / 80% final for baseline SAC and 98% peak / 96% final for always-on correction. Sample efficiency improved by 25–29%: the decoupled condition reaches 80–90% success ~350–550k steps earlier than any other condition. The trigger fire rate follows a self-regulating arc — ~3–4% during early pre-grasp stall phases, declining to <0.5% once the base policy reliably grasps — providing targeted correction effort without manual annealing. The original triggered design (without decoupling) catastrophically diverged (alpha → 39.74, 0% final success) due to actor-correction co-adaptation. Multi-task experiments are ongoing across push-v3, door-open-v3, and assembly-v3.',
+
+    reflection:
+      'The core failure mode in the original triggered design was training-deployment inconsistency: correction loss gradients reached the actor trunk, causing the actor to co-adapt and become dependent on the correction. The base actor without correction was then unusable on the 98.56% of steps where the trigger didn\'t fire. The fix — a single torch.no_grad() on the frozen base latent in the correction training step — was architecturally simple but non-obvious to diagnose. The alpha divergence signal (α → 39.74 vs normal 0.05–0.25) was the key indicator. The broader lesson: in modular RL systems, gradient isolation between components is as important as architecture design. Open questions include whether a learned advantage-based trigger can outperform the heuristic, and how well decoupled correction generalizes across diverse Meta-World tasks.',
+  },
+  {
     id: 'jpmorgan-midas-core',
     title: 'Midas Transaction Processing System',
     affiliation: 'JPMorgan Chase & Co. · Software Engineering Job Simulation (Forage)',
