@@ -12,6 +12,7 @@ const navLinks = [
   { to: '/publications', label: 'Publications' },
   { to: '/resume',       label: 'Resume' },
   { to: '/bouldering',   label: 'Bouldering' },
+  { to: '/drawing',      label: 'Drawing' },
 ]
 
 export default function Header({ dark, onToggleDark }: HeaderProps) {

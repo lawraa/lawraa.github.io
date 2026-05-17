@@ -10,6 +10,7 @@ import Projects from './components/Projects'
 import Research from './components/Research'
 import Resume from './components/Resume'
 import Bouldering from './components/Bouldering'
+import Drawing from './components/Drawing'
 
 function HomePage() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/publications" element={<Research />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/bouldering" element={<Bouldering />} />
+        <Route path="/drawing" element={<Drawing />} />
       </Routes>
     </HashRouter>
   )
