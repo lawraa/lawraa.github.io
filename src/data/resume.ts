@@ -39,9 +39,9 @@ export interface ResumeData {
 
 export const resumeData: ResumeData = {
   summary: [
-    'Software engineer focused on building reliable, user-facing AI features.',
-    'Experience integrating LLM and vision models into working applications with evaluation, iteration, and clear product behavior.',
-    'I care about turning model capabilities into consistent user experiences through good abstractions, testing, and collaboration.',
+    'Machine learning engineer and researcher with hands-on experience building RL environments, agent evaluation frameworks, and end-to-end AI pipelines that translate research into working systems.',
+    'Skilled in post-training and fine-tuning techniques including DPO and RLHF, with published research contributions and direct experience across multiple university AI labs.',
+    'Strong in Python and PyTorch, with a track record of shipping rigorous implementations across applied research and client-facing engineering contexts.',
   ],
 
   skills: [
@@ -71,6 +71,18 @@ export const resumeData: ResumeData = {
       ],
     },
     {
+      role: 'Reinforcement Learning Researcher',
+      org: 'Risk-Triggered Latent-Space Corrections for Near-Failure Recovery, UC Berkeley',
+      location: 'Berkeley, CA',
+      dates: 'Feb 2026 – May 2026',
+      type: 'Research Project',
+      bullets: [
+        'Designed a concurrent decoupled correction architecture for SAC where a lightweight MLP applies additive latent corrections Δz to the actor\'s hidden representation; a geometric near-failure trigger gates corrections to only 2–12% of steps at convergence.',
+        'Identified and resolved co-adaptation via gradient isolation: applied stop-gradient on actor encoder during correction update, preventing the encoder from learning latents and ensuring the base actor remains independently capable at deployment.',
+        'Evaluated across 4 Meta-World manipulation tasks; improved mean final success rate by +57pp on push-v3 (32.5%→89.5%) and +27.5pp on pick-place-v3 (66.0%→93.5%), achieving full seed reliability (4/4) versus 0/4 under naive concurrent training.',
+      ],
+    },
+    {
       role: 'Machine Learning Engineer / AI Engineer (Capstone Project)',
       org: 'AI-driven Personalized Assisted Device, UC Berkeley',
       location: 'Berkeley, CA',
@@ -79,6 +91,18 @@ export const resumeData: ResumeData = {
       bullets: [
         'Built an AI-driven optimization loop to iteratively refine the mechanical design of a personalized assistive arm device.',
         'Designed extensible task interfaces enabling integration of new evaluation environments without changing core pipeline logic.',
+      ],
+    },
+    {
+      role: 'Machine Learning Engineer / Robotics Engineer',
+      org: 'IMU-Controlled Quadruped Robot, UC Berkeley',
+      location: 'Berkeley, CA',
+      dates: 'Aug 2025 – Dec 2025',
+      type: 'Research Project',
+      bullets: [
+        'Designed real-time gait generation and inverse kinematics for an 8-DoF quadruped, enabling walking, turning, and jumping at a peak forward velocity of ~17 cm/s.',
+        'Integrated Raspberry Pi control with Dynamixel actuators over UART, achieving synchronized motor commands at up to 100 Hz.',
+        'Prototyped a wearable EMG–IMU interface and evaluated machine-learning-based gesture recognition for robot control.',
       ],
     },
     {
@@ -141,6 +165,7 @@ export const resumeData: ResumeData = {
       bullets: [
         'Introduced an LLM discussion framework that improves creativity via multi-agent discussion and role-playing, outperforming single-agent and existing multi-agent baselines by 20%.',
         'Designed a creativity-focused LLM evaluation metric achieving 0.7 correlation with human evaluations on 1,400+ responses.',
+        'Developed a decision-making agent that optimizes selection between in-context learning with RAG, supervised fine-tuning, and RLHF in a streamlined learning process.',
       ],
     },
     {
@@ -152,6 +177,17 @@ export const resumeData: ResumeData = {
       bullets: [
         'Devised and preprocessed a SoundEffectDetection dataset/task for Dynamic-SUPERB.',
         'Used DPO (RLHF) to train a text-instruction-guided voice conversion model to improve performance.',
+      ],
+    },
+    {
+      role: 'Undergraduate Researcher',
+      org: 'Wireless and Mobile Networking Laboratory (WMNLab), National Taiwan University',
+      location: 'Taipei, Taiwan',
+      dates: 'Jan 2023 – Jan 2024',
+      type: 'Research',
+      bullets: [
+        'Conducted mobile phone experiments on the MRT using UDP to evaluate network handover behavior.',
+        'Analyzed data and presented findings on experiments across a 25-km route to professors and graduate students.',
       ],
     },
   ],

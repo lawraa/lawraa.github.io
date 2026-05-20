@@ -26,7 +26,7 @@ export const projects: Project[] = [
     subtitle: 'Decoupled SAC with risk-triggered latent correction achieving 100% success on Meta-World pick-place-v3, 25–29% more sample-efficient than baseline SAC',
     tags: ['Deep RL', 'SAC', 'Robotics', 'Meta-World', 'Latent Space', 'PyTorch', 'Research'],
     imageUrl: undefined,
-    codeUrl: undefined,
+    codeUrl: 'https://github.com/lawraa/latent-recovery-rl',
     videoUrl: undefined,
     pdfUrl: undefined,
 
@@ -49,6 +49,47 @@ export const projects: Project[] = [
 
     reflection:
       'The core failure mode in the original triggered design was training-deployment inconsistency: correction loss gradients reached the actor trunk, causing the actor to co-adapt and become dependent on the correction. The base actor without correction was then unusable on the 98.56% of steps where the trigger didn\'t fire. The fix — a single torch.no_grad() on the frozen base latent in the correction training step — was architecturally simple but non-obvious to diagnose. The alpha divergence signal (α → 39.74 vs normal 0.05–0.25) was the key indicator. The broader lesson: in modular RL systems, gradient isolation between components is as important as architecture design. Open questions include whether a learned advantage-based trigger can outperform the heuristic, and how well decoupled correction generalizes across diverse Meta-World tasks.',
+  },
+  {
+    id: 'rag-forge',
+    title: 'rag-forge: Modular RAG Pipeline Library',
+    affiliation: 'Personal Project',
+    subtitle: 'Five progressively sophisticated RAG pipelines in one provider-agnostic codebase — from naive baseline to graph and agentic retrieval',
+    tags: ['RAG', 'LLMs', 'Python', 'FastAPI', 'Streamlit', 'Qdrant', 'LangChain', 'NLP'],
+    imageUrl: undefined,
+    codeUrl: 'https://github.com/lawraa/rag-forge',
+    videoUrl: undefined,
+    pdfUrl: undefined,
+
+    description: [
+      'Built a production-ready, modular RAG library implementing five retrieval pipelines that share a common ingest/query interface — from a naive dense-only baseline up to graph-based and agentic pipelines with reflection and corrective grading.',
+      'Runs entirely free with local models via Ollama, or against Anthropic/OpenAI APIs via a single .env line. Every query produces a step-by-step trace showing the exact prompt, retrieval scores, and rerank results.',
+    ],
+
+    problem:
+      'RAG systems are often implemented as one-off scripts tightly coupled to a single LLM provider and retrieval strategy, making it hard to compare approaches or swap components. The goal was a codebase where all five pipelines are benchmarkable side-by-side with a common interface, and where provider, embedding model, and retrieval strategy are each independently swappable.',
+
+    approach:
+      'Designed a layered architecture: a shared document/chunk/response model layer, pluggable LLM and embedding providers, a vector store abstraction over Qdrant, and five pipeline implementations that compose these primitives differently. Added RAGAS-based evaluation (faithfulness, relevancy, context precision/recall) and a Streamlit UI with a full trace viewer so retrieval behavior is inspectable without reading logs.',
+
+    architecture:
+      'Document loader (txt/pdf/docx/html/URL) → chunker (fixed / semantic / late) → Qdrant vector store → five pipelines: '
+      + '(1) Naive: dense cosine only; '
+      + '(2) Advanced: BM25+dense hybrid with RRF fusion → cross-encoder rerank → HyDE query expansion; '
+      + '(3) Graph RAG: LLM entity extraction → NetworkX knowledge graph → local + global retrieval; '
+      + '(4) Agentic: Self-RAG reflection tokens (IsREL/IsSUP/IsUSE) + CRAG adaptive grading; '
+      + '(5) LangChain LCEL: EnsembleRetriever + ContextualCompressionRetriever + chat history. '
+      + 'FastAPI exposes /ingest, /query, /compare endpoints; Streamlit wraps the same pipelines with a trace viewer.',
+
+    results:
+      'All five pipelines are benchmarkable side-by-side via a single /compare endpoint. Test suite (8 unit tests) passes with no API key required, covering chunker correctness and hybrid retrieval fusion logic. '
+      + 'Reference numbers from the literature each pipeline implements: cross-encoder reranking improvements are highly task-dependent (commonly 10–50% over bi-encoder baselines, no universal figure); '
+      + 'Microsoft\'s GraphRAG evaluation reports 3.4× on multi-hop narrative Q&A specifically; '
+      + 'the Self-RAG paper reports 5.8% hallucination on the FactScore biography benchmark. '
+      + 'These numbers reflect what the underlying techniques achieve on their respective benchmarks — actual gains depend heavily on the task and data.',
+
+    reflection:
+      'The most instructive design decision was the shared RAGResponse model with a trace field: it forced every pipeline to emit structured metadata about what it retrieved and why, which made debugging retrieval failures dramatically easier. The second key insight was that "advanced" retrieval (hybrid + rerank + HyDE) improves accuracy not because any single technique is transformative, but because they address orthogonal failure modes — BM25 catches exact-match cases that dense retrieval misses, reranking corrects initial ranking errors, and HyDE closes the query–document vocabulary gap.',
   },
   {
     id: 'jpmorgan-midas-core',
@@ -176,6 +217,37 @@ export const projects: Project[] = [
       + 'FastViT had a smaller average relative performance drop under downsampling than ResNet50, suggesting slightly better robustness depending on fairness metric.',
     reflection:
       'Fairness behavior differed strongly by task: reconstruction metrics stayed stable across races, while classification accuracy was sensitive to imbalance. Across both backbones, the dominant driver of unfairness was the training data distribution rather than architecture alone, so evaluation design and subgroup reporting are essential.',
+  },
+  {
+    id: 'data100-satellite-classification',
+    title: 'Feature-Based Models for Post-Disaster Satellite Image Classification',
+    affiliation: 'UC Berkeley · Data 100',
+    subtitle: '99% accuracy on disaster-type classification using handcrafted LBP/Gabor features; 0.677 weighted F1 on damage severity with a soft-voting ensemble',
+    tags: ['Machine Learning', 'Computer Vision', 'Scikit-learn', 'Feature Engineering', 'XGBoost', 'Python'],
+    imageUrl: undefined,
+    pdfUrl: '/projects/data100_satellite_classification.pdf',
+    codeUrl: undefined,
+
+    description: [
+      'Evaluated interpretable, feature-based ML pipelines for post-disaster satellite image classification on the xView2 dataset, deliberately avoiding deep networks to understand how far handcrafted features can go.',
+      'Addressed two tasks: binary disaster-type classification (Midwest Flooding vs. SoCal Fire) and four-class damage severity classification (no damage → destroyed) on Hurricane Matthew tiles.',
+    ],
+
+    problem:
+      'Rapid damage assessment from satellite imagery is critical for emergency response. Existing work relies on deep CNNs that require significant compute and offer limited interpretability. The question: can handcrafted, physically motivated features provide competitive performance while remaining transparent?',
+
+    approach:
+      'Extracted a 58-dimensional feature vector per image from RGB color statistics, Sobel edge detection, Local Binary Patterns (LBP), and Gabor filters, plus domain-motivated semantic features (Laplacian variance, vegetation index, blue tarp ratio, GLCM). Used Cohen\'s d to systematically rank feature discriminability before training any classifier. Applied SMOTE within CV folds to handle extreme class imbalance (label 2 had only 6 training examples).',
+
+    architecture:
+      'Raw 1024×1024×3 satellite tile → 58-feature extraction (color, Sobel, LBP r∈{1,2,3}, Gabor 4×3 kernels, 8 semantic/GLCM) → StandardScaler (fit on train fold only) → Task A: Logistic Regression; Task B: soft-voting ensemble of Logistic Regression + Random Forest + XGBoost → 5-fold stratified CV evaluation.',
+
+    results:
+      'Task A (disaster type): Logistic Regression achieved 99.0% CV accuracy and 100% on the held-out test set. LBP standard deviation at fine scale (d=2.60) was the dominant feature — flood tiles cluster at high LBP-std, fire tiles at low LBP-std/high blue channel. '
+      + 'Task B (damage severity): soft-voting ensemble reached CV macro-F1 of 0.509 ± 0.044 and Pensieve weighted F1 of 0.677. Both RF and XGBoost perfectly memorized training (Train F1=1.0); XGBoost\'s shallower trees (depth=3) generalized better (Δ=0.493 vs RF Δ=0.509). Label 2 (major damage, 6 examples) achieved zero F1 in all folds — a fundamental data scarcity bottleneck.',
+
+    reflection:
+      'The central finding is a strong task asymmetry: disaster-type separation is nearly solved by LBP texture alone (a linear boundary suffices), while within-disaster damage severity requires richer spatial representations that global tile statistics cannot provide. The dominance of LBP over color and edge features suggests the discriminative signal is local microstructure — the pattern of abrupt vs. smooth pixel transitions — not overall scene appearance. The practical lesson: systematic feature discriminability analysis (Cohen\'s d) before model selection identified the right feature families and saved significant experimentation time.',
   },
   {
     id: 'colm-llm-discussion',
