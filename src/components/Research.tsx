@@ -170,7 +170,7 @@ export default function Research() {
                   Reviewer
                 </span>
                 <div>
-                  <p className="text-sm font-medium">{pub.title.replace(' — Reviewer', '')}</p>
+                  <p className="text-sm font-medium">{pub.title.replace(' - Reviewer', '')}</p>
                   <p className="text-xs mt-0.5" style={{ color: 'var(--color-secondary)' }}>
                     {pub.venue} {pub.year} · {pub.summary}
                   </p>

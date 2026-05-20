@@ -24,7 +24,7 @@ export default function Hero() {
               Currently
             </p>
             <p className="text-sm" style={{ color: 'var(--color-text)' }}>
-              Berkeley MEng Capstone — AI pipeline for patient-adaptive surgical grasper design
+              Berkeley MEng Capstone: AI pipeline for patient-adaptive surgical grasper design
             </p>
           </div>
 

@@ -107,7 +107,7 @@ export const resumeData: ResumeData = {
     },
     {
       role: 'Machine Learning Engineer',
-      org: 'Vision Fairness Analysis — CNN vs Vision Transformer, UC Berkeley',
+      org: 'Vision Fairness Analysis: CNN vs Vision Transformer, UC Berkeley',
       location: 'Berkeley, CA',
       dates: 'Aug 2025 – Dec 2025',
       type: 'Research Project',
@@ -209,7 +209,7 @@ export const resumeData: ResumeData = {
       note: 'Paper',
     },
     {
-      title: 'IEEE Spoken Language Technology Workshop (SLT) — Reviewer',
+      title: 'IEEE Spoken Language Technology Workshop (SLT) - Reviewer',
       venue: 'IEEE SLT',
       year: '2024',
       note: 'Reviewer',

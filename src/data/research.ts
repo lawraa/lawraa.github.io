@@ -57,7 +57,7 @@ year={2025}
   },
   {
     id: 'ieee-slt-review',
-    title: 'IEEE SLT Workshop — Reviewer',
+    title: 'IEEE SLT Workshop - Reviewer',
     authors: ['Shou-Jen Chen'],
     venue: 'IEEE SLT',
     year: '2024',

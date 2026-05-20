@@ -31,30 +31,30 @@ export const projects: Project[] = [
     pdfUrl: undefined,
 
     description: [
-      'Studying near-failure recovery in deep RL: detecting when a policy is drifting toward failure but is still recoverable, then applying a targeted correction to the actor\'s internal latent representation — rather than to actions directly — to steer it back on track.',
-      'Designed three experimental conditions (baseline SAC, always-on latent correction, risk-triggered correction) on Meta-World pick-place-v3. Key finding: decoupled training — isolating the base actor and correction module on fully independent gradient paths — is critical for triggered deployment to work, and yields 100% success vs. 80% for baseline at 2.5M steps.',
+      'Studying near-failure recovery in deep RL: detecting when a policy is drifting toward failure but is still recoverable, then applying a targeted correction to the actor\'s internal latent representation (rather than to actions directly) to steer it back on track.',
+      'Designed three experimental conditions (baseline SAC, always-on latent correction, risk-triggered correction) on Meta-World pick-place-v3. Key finding: decoupled training (isolating the base actor and correction module on fully independent gradient paths) is critical for triggered deployment to work, and yields 100% success vs. 80% for baseline at 2.5M steps.',
     ],
 
     problem:
-      'Trained RL policies can drift toward failure during execution — for example, stalling pre-grasp or dropping an object mid-transport — without being in a fully unrecoverable state. Standard policies have no mechanism to detect or respond to these near-failure moments. The core question: can targeted editing of the policy\'s internal latent representation (rather than replanning or switching policies) improve recovery without disrupting normal execution?',
+      'Trained RL policies can drift toward failure during execution (for example, stalling pre-grasp or dropping an object mid-transport) without being in a fully unrecoverable state. Standard policies have no mechanism to detect or respond to these near-failure moments. The core question: can targeted editing of the policy\'s internal latent representation (rather than replanning or switching policies) improve recovery without disrupting normal execution?',
 
     approach:
-      'Compare three conditions under the same SAC framework: (1) baseline SAC with no correction, (2) always-on latent correction applied at every step, and (3) risk-triggered correction applied only when a heuristic near-failure detector fires. The trigger uses sliding-window stall detection in both pre-grasp (hand-to-object distance) and post-grasp (object-to-target distance) phases, with instantaneous drop detection and 15-step hysteresis. The core engineering insight: triggered deployment only works when the base actor and correction module are trained on completely independent gradient paths — isolating them via torch.no_grad() on the frozen base latent in the correction update step.',
+      'Compare three conditions under the same SAC framework: (1) baseline SAC with no correction, (2) always-on latent correction applied at every step, and (3) risk-triggered correction applied only when a heuristic near-failure detector fires. The trigger uses sliding-window stall detection in both pre-grasp (hand-to-object distance) and post-grasp (object-to-target distance) phases, with instantaneous drop detection and 15-step hysteresis. The core engineering insight: triggered deployment only works when the base actor and correction module are trained on completely independent gradient paths, isolating them via torch.no_grad() on the frozen base latent in the correction update step.',
 
     architecture:
       'GaussianActor with a trunk-head split: trunk maps obs → z (LayerNorm + Tanh + ReLU, 256-dim). LatentCorrectionModule takes [obs; z] → Δz via a two-layer MLP (hidden 128, output_scale=0.1, near-zero init). Corrected latent z\' = z + Δz is fed to actor heads for action sampling. NearFailureTrigger maintains two sliding windows (pre-grasp: hand_to_obj; post-grasp: obj_to_target, W=20, δ_min=0.01m, cooldown=15 steps). Decoupled training runs four sequential steps per update: (1) critic on base policy, (2) base actor via standard SAC, (3) correction on frozen base latent (torch.no_grad()), (4) auto-alpha on base entropy.',
 
     results:
-      'On pick-place-v3 (MT1, 50 task variants), decoupled triggered correction achieved 100% peak and 100% final success at 2.5M steps, versus 96% peak / 80% final for baseline SAC and 98% peak / 96% final for always-on correction. Sample efficiency improved by 25–29%: the decoupled condition reaches 80–90% success ~350–550k steps earlier than any other condition. The trigger fire rate follows a self-regulating arc — ~3–4% during early pre-grasp stall phases, declining to <0.5% once the base policy reliably grasps — providing targeted correction effort without manual annealing. The original triggered design (without decoupling) catastrophically diverged (alpha → 39.74, 0% final success) due to actor-correction co-adaptation. Multi-task experiments are ongoing across push-v3, door-open-v3, and assembly-v3.',
+      'On pick-place-v3 (MT1, 50 task variants), decoupled triggered correction achieved 100% peak and 100% final success at 2.5M steps, versus 96% peak / 80% final for baseline SAC and 98% peak / 96% final for always-on correction. Sample efficiency improved by 25–29%: the decoupled condition reaches 80–90% success ~350–550k steps earlier than any other condition. The trigger fire rate follows a self-regulating arc (~3–4% during early pre-grasp stall phases, declining to <0.5% once the base policy reliably grasps), providing targeted correction effort without manual annealing. The original triggered design (without decoupling) catastrophically diverged (alpha → 39.74, 0% final success) due to actor-correction co-adaptation. Multi-task experiments are ongoing across push-v3, door-open-v3, and assembly-v3.',
 
     reflection:
-      'The core failure mode in the original triggered design was training-deployment inconsistency: correction loss gradients reached the actor trunk, causing the actor to co-adapt and become dependent on the correction. The base actor without correction was then unusable on the 98.56% of steps where the trigger didn\'t fire. The fix — a single torch.no_grad() on the frozen base latent in the correction training step — was architecturally simple but non-obvious to diagnose. The alpha divergence signal (α → 39.74 vs normal 0.05–0.25) was the key indicator. The broader lesson: in modular RL systems, gradient isolation between components is as important as architecture design. Open questions include whether a learned advantage-based trigger can outperform the heuristic, and how well decoupled correction generalizes across diverse Meta-World tasks.',
+      'The core failure mode in the original triggered design was training-deployment inconsistency: correction loss gradients reached the actor trunk, causing the actor to co-adapt and become dependent on the correction. The base actor without correction was then unusable on the 98.56% of steps where the trigger didn\'t fire. The fix, a single torch.no_grad() on the frozen base latent in the correction training step, was architecturally simple but non-obvious to diagnose. The alpha divergence signal (α → 39.74 vs normal 0.05–0.25) was the key indicator. The broader lesson: in modular RL systems, gradient isolation between components is as important as architecture design. Open questions include whether a learned advantage-based trigger can outperform the heuristic, and how well decoupled correction generalizes across diverse Meta-World tasks.',
   },
   {
     id: 'rag-forge',
-    title: 'rag-forge: Modular RAG Pipeline Library',
+    title: 'rag-forge: Exploring RAG Architectures',
     affiliation: 'Personal Project',
-    subtitle: 'Five progressively sophisticated RAG pipelines in one provider-agnostic codebase — from naive baseline to graph and agentic retrieval',
+    subtitle: 'Five RAG pipelines in one codebase, built to understand how different retrieval approaches compare in practice',
     tags: ['RAG', 'LLMs', 'Python', 'FastAPI', 'Streamlit', 'Qdrant', 'LangChain', 'NLP'],
     imageUrl: undefined,
     codeUrl: 'https://github.com/lawraa/rag-forge',
@@ -62,15 +62,15 @@ export const projects: Project[] = [
     pdfUrl: undefined,
 
     description: [
-      'Built a production-ready, modular RAG library implementing five retrieval pipelines that share a common ingest/query interface — from a naive dense-only baseline up to graph-based and agentic pipelines with reflection and corrective grading.',
+      'A personal learning project exploring different RAG architectures. Implemented five retrieval pipelines that share a common ingest/query interface, ranging from a naive dense-only baseline to graph-based and agentic pipelines with reflection and corrective grading.',
       'Runs entirely free with local models via Ollama, or against Anthropic/OpenAI APIs via a single .env line. Every query produces a step-by-step trace showing the exact prompt, retrieval scores, and rerank results.',
     ],
 
     problem:
-      'RAG systems are often implemented as one-off scripts tightly coupled to a single LLM provider and retrieval strategy, making it hard to compare approaches or swap components. The goal was a codebase where all five pipelines are benchmarkable side-by-side with a common interface, and where provider, embedding model, and retrieval strategy are each independently swappable.',
+      'I wanted to understand how different RAG approaches actually differ in practice, not just in theory. The goal was a single codebase where I could implement each architecture faithfully and compare them side-by-side, with a shared interface so differences in retrieval behavior are isolated from differences in surrounding code.',
 
     approach:
-      'Designed a layered architecture: a shared document/chunk/response model layer, pluggable LLM and embedding providers, a vector store abstraction over Qdrant, and five pipeline implementations that compose these primitives differently. Added RAGAS-based evaluation (faithfulness, relevancy, context precision/recall) and a Streamlit UI with a full trace viewer so retrieval behavior is inspectable without reading logs.',
+      'Built a layered architecture: a shared document/chunk/response model layer, pluggable LLM and embedding providers, a vector store abstraction over Qdrant, and five pipeline implementations that compose these primitives differently. Added RAGAS-based evaluation (faithfulness, relevancy, context precision/recall) and a Streamlit UI with a full trace viewer so retrieval behavior is inspectable without reading logs.',
 
     architecture:
       'Document loader (txt/pdf/docx/html/URL) → chunker (fixed / semantic / late) → Qdrant vector store → five pipelines: '
@@ -82,14 +82,14 @@ export const projects: Project[] = [
       + 'FastAPI exposes /ingest, /query, /compare endpoints; Streamlit wraps the same pipelines with a trace viewer.',
 
     results:
-      'All five pipelines are benchmarkable side-by-side via a single /compare endpoint. Test suite (8 unit tests) passes with no API key required, covering chunker correctness and hybrid retrieval fusion logic. '
+      'All five pipelines are runnable side-by-side via a single /compare endpoint. Test suite (8 unit tests) passes with no API key required, covering chunker correctness and hybrid retrieval fusion logic. '
       + 'Reference numbers from the literature each pipeline implements: cross-encoder reranking improvements are highly task-dependent (commonly 10–50% over bi-encoder baselines, no universal figure); '
       + 'Microsoft\'s GraphRAG evaluation reports 3.4× on multi-hop narrative Q&A specifically; '
       + 'the Self-RAG paper reports 5.8% hallucination on the FactScore biography benchmark. '
-      + 'These numbers reflect what the underlying techniques achieve on their respective benchmarks — actual gains depend heavily on the task and data.',
+      + 'These numbers reflect what the underlying techniques achieve on their respective benchmarks. Actual gains depend heavily on the task and data.',
 
     reflection:
-      'The most instructive design decision was the shared RAGResponse model with a trace field: it forced every pipeline to emit structured metadata about what it retrieved and why, which made debugging retrieval failures dramatically easier. The second key insight was that "advanced" retrieval (hybrid + rerank + HyDE) improves accuracy not because any single technique is transformative, but because they address orthogonal failure modes — BM25 catches exact-match cases that dense retrieval misses, reranking corrects initial ranking errors, and HyDE closes the query–document vocabulary gap.',
+      'The most instructive design decision was the shared RAGResponse model with a trace field: it forced every pipeline to emit structured metadata about what it retrieved and why, which made debugging retrieval failures much easier. The main thing I learned is that "advanced" retrieval (hybrid + rerank + HyDE) improves accuracy not because any single technique is transformative, but because they address orthogonal failure modes: BM25 catches exact-match cases that dense retrieval misses, reranking corrects initial ranking errors, and HyDE closes the query–document vocabulary gap.',
   },
   {
     id: 'jpmorgan-midas-core',
@@ -109,7 +109,7 @@ export const projects: Project[] = [
     ],
 
     problem:
-      'Financial transaction systems must reliably ingest high-volume message streams, validate each transaction against sender balances, persist results to a database, incorporate external incentive logic, and expose account balances through a clean HTTP API — all without data loss or race conditions.',
+      'Financial transaction systems must reliably ingest high-volume message streams, validate each transaction against sender balances, persist results to a database, incorporate external incentive logic, and expose account balances through a clean HTTP API, all without data loss or race conditions.',
 
     approach:
       'Used Spring Boot as the application framework and configured each layer independently: Kafka consumer for message ingestion, H2/JPA for persistence, RestTemplate for external API calls, and a @RestController for the balance endpoint. Configured the application via application.yml (topic names, serializers, server port) to keep the service externally configurable.',
@@ -121,13 +121,13 @@ export const projects: Project[] = [
       'All five Maven test suites passed: TaskOneTests through TaskFiveTests. Final submission outputs included Waldorf\'s balance of 627 (Task 3), Wilbur\'s balance of 3089 (Task 4), and all 13 user balances queried via the REST endpoint (Task 5). Received a Certificate of Completion from JPMorgan Chase & Co. issued April 17, 2026.',
 
     reflection:
-      'The most instructive debugging was Kafka\'s offset-reset behavior: the default "latest" policy caused the consumer to miss messages sent before it fully connected, requiring "earliest" plus allow.auto.create.topics to make the embedded test environment reliable. This highlighted how distributed system defaults are often optimized for production throughput, not test determinism — and that configuration understanding is as important as code correctness in backend systems.',
+      'The most instructive debugging was Kafka\'s offset-reset behavior: the default "latest" policy caused the consumer to miss messages sent before it fully connected, requiring "earliest" plus allow.auto.create.topics to make the embedded test environment reliable. This highlighted how distributed system defaults are often optimized for production throughput, not test determinism, and that configuration understanding is as important as code correctness in backend systems.',
   },
   {
     id: 'llm-personalized-assistive-design',
     title: 'LLM-Driven Personalized Assistive Device Design (Ongoing Capstone Project)',
     affiliation: 'UC Berkeley · MEng Capstone Project',
-    subtitle: 'LLM guided MuJoCo simulation for automated gripper personalization — 83% convergence across 12 runs, 4 participants',
+    subtitle: 'LLM guided MuJoCo simulation for automated gripper personalization, 83% convergence across 12 runs, 4 participants',
     tags: ['LLMs', 'Robotics', 'MuJoCo', 'Simulation', 'Optimization', 'Assistive Technology'],
     imageUrl: '/projects/capstone_dorsal-grasper.jpg',
     codeUrl: undefined,
@@ -135,28 +135,28 @@ export const projects: Project[] = [
     pdfUrl: undefined,
 
     description: [
-      'Built a 3-phase AI pipeline that automatically designs a personalized dorsal grasper — a wrist-worn assistive device for users with impaired hand function — by iteratively proposing 15-parameter mechanical designs, evaluating each in MuJoCo physics simulation across 8 grasping tasks, and personalizing to each user\'s measured force limits.',
-      'Achieved an 83% convergence rate across 12 experimental runs and 4 participants. The system found universal gripper designs in as few as 2 iterations, and reduced required grip force to a mean of 2.5 N with 7 of 8 tasks achievable at or below 1.7 N — all within each user\'s physical ceiling.',
+      'Built a 3-phase AI pipeline that automatically designs a personalized dorsal grasper (a wrist-worn assistive device for users with impaired hand function) by iteratively proposing 15-parameter mechanical designs, evaluating each in MuJoCo physics simulation across 8 grasping tasks, and personalizing to each user\'s measured force limits.',
+      'Achieved an 83% convergence rate across 12 experimental runs and 4 participants. The system found universal gripper designs in as few as 2 iterations, and reduced required grip force to a mean of 2.5 N with 7 of 8 tasks achievable at or below 1.7 N, all within each user\'s physical ceiling.',
     ],
 
     problem:
-      'People with stroke or spinal cord injury have limited wrist and hand strength. A dorsal grasper must be geometrically tuned so the user can complete everyday tasks using only their residual force. Designing this by hand is expert-intensive and does not scale to individual variation — each user\'s joint range of motion, forearm dimensions, and actuator force limits require a different device geometry.',
+      'People with stroke or spinal cord injury have limited wrist and hand strength. A dorsal grasper must be geometrically tuned so the user can complete everyday tasks using only their residual force. Designing this by hand is expert-intensive and does not scale to individual variation, since each user\'s joint range of motion, forearm dimensions, and actuator force limits require a different device geometry.',
 
     approach:
-      'Represent each user\'s physical profile (forearm radius, joint ROM, wrist torque limit) as hard constraints. In Phase 1, run the LLM independently on each of 8 tasks to find per-task successful designs. In Phase 2, cross-validate all Phase 1 designs across all tasks — if any single design passes all 8 tasks, stop. Otherwise, seed Phase 3 with the best candidate and run a multi-task LLM optimization loop until 3 consecutive universal successes are confirmed.',
+      'Represent each user\'s physical profile (forearm radius, joint ROM, wrist torque limit) as hard constraints. In Phase 1, run the LLM independently on each of 8 tasks to find per-task successful designs. In Phase 2, cross-validate all Phase 1 designs across all tasks. If any single design passes all 8 tasks, stop. Otherwise, seed Phase 3 with the best candidate and run a multi-task LLM optimization loop until 3 consecutive universal successes are confirmed.',
 
     architecture:
       'User profile (ROM, force cap) → 15-parameter gripper generator → MuJoCo physics simulation + force sweep (15–20 force levels per task) → performance metrics (min grip force, task success) → GPT-4.1 reasoning agent proposes parameter updates → Phase 1: per-task convergence → Phase 2: cross-validation → Phase 3: multi-task joint optimization → universal design.',
 
     results:
-      'Validated across 12 runs and 4 participants (H01–H04): overall convergence rate of 83.3% (10/12). Robustness study (5 seeds): 100% success — even starting from designs with only 2 of 8 tasks solvable, the pipeline found universal designs. Fastest convergence: 2 iterations in Phase 3. '
-      + 'Optimized designs reduced mean minimum grip force to ~2.5 N across all tasks; 7 of 8 tasks are achievable at ≤1.7 N. The hardest tasks — sphere_lift and ring_stack — both require ~2.92 Nm (H01\'s physical ceiling); the best design achieved 2.3 Nm on both, leaving 0.62 Nm of safety headroom. '
+      'Validated across 12 runs and 4 participants (H01–H04): overall convergence rate of 83.3% (10/12). Robustness study (5 seeds): 100% success, even starting from designs with only 2 of 8 tasks solvable, the pipeline found universal designs. Fastest convergence: 2 iterations in Phase 3. '
+      + 'Optimized designs reduced mean minimum grip force to ~2.5 N across all tasks; 7 of 8 tasks are achievable at ≤1.7 N. The hardest tasks, sphere_lift and ring_stack, both require ~2.92 Nm (H01\'s physical ceiling); the best design achieved 2.3 Nm on both, leaving 0.62 Nm of safety headroom. '
       + 'LLM-guided search outperforms random parameter sampling by a large margin: 0 universal designs found in 250 random attempts vs. 83% success rate in under 60 LLM iterations. '
       + 'Also built full supporting infrastructure: parallel multi-user runner, result cleanup and renumbering tooling, offscreen MuJoCo video export, and a publication-ready 4-panel results figure.',
 
     reflection:
-      'The primary failure mode was not budget — it was LLM plateau. Every failed run shared the same pattern: the model anchored on finger_spread_angle=0.09 across 64 of 100 iterations despite the critical threshold being ~0.11, and doubling the iteration budget did not break the loop. This is a reasoning failure, not a compute failure. '
-      + 'The most surprising finding was Phase 2 generalization: in one run, sphere_lift was never solved in 30 Phase 1 iterations, yet the Phase 2 seed — optimized for a different task — passed sphere_lift anyway via geometric coincidence. Missing a task in Phase 1 is not always fatal. '
+      'The primary failure mode was not budget but LLM plateau. Every failed run shared the same pattern: the model anchored on finger_spread_angle=0.09 across 64 of 100 iterations despite the critical threshold being ~0.11, and doubling the iteration budget did not break the loop. This is a reasoning failure, not a compute failure. '
+      + 'The most surprising finding was Phase 2 generalization: in one run, sphere_lift was never solved in 30 Phase 1 iterations, yet the Phase 2 seed (optimized for a different task) passed sphere_lift anyway via geometric coincidence. Missing a task in Phase 1 is not always fatal. '
       + 'The main engineering insight is that the bottleneck is the information bridge between simulation output and LLM input. Most complexity lives in designing the metric abstraction and prompt structure, not the optimizer itself.',
   },
   {
@@ -243,11 +243,11 @@ export const projects: Project[] = [
       'Raw 1024×1024×3 satellite tile → 58-feature extraction (color, Sobel, LBP r∈{1,2,3}, Gabor 4×3 kernels, 8 semantic/GLCM) → StandardScaler (fit on train fold only) → Task A: Logistic Regression; Task B: soft-voting ensemble of Logistic Regression + Random Forest + XGBoost → 5-fold stratified CV evaluation.',
 
     results:
-      'Task A (disaster type): Logistic Regression achieved 99.0% CV accuracy and 100% on the held-out test set. LBP standard deviation at fine scale (d=2.60) was the dominant feature — flood tiles cluster at high LBP-std, fire tiles at low LBP-std/high blue channel. '
-      + 'Task B (damage severity): soft-voting ensemble reached CV macro-F1 of 0.509 ± 0.044 and Pensieve weighted F1 of 0.677. Both RF and XGBoost perfectly memorized training (Train F1=1.0); XGBoost\'s shallower trees (depth=3) generalized better (Δ=0.493 vs RF Δ=0.509). Label 2 (major damage, 6 examples) achieved zero F1 in all folds — a fundamental data scarcity bottleneck.',
+      'Task A (disaster type): Logistic Regression achieved 99.0% CV accuracy and 100% on the held-out test set. LBP standard deviation at fine scale (d=2.60) was the dominant feature: flood tiles cluster at high LBP-std, fire tiles at low LBP-std/high blue channel. '
+      + 'Task B (damage severity): soft-voting ensemble reached CV macro-F1 of 0.509 ± 0.044 and Pensieve weighted F1 of 0.677. Both RF and XGBoost perfectly memorized training (Train F1=1.0); XGBoost\'s shallower trees (depth=3) generalized better (Δ=0.493 vs RF Δ=0.509). Label 2 (major damage, 6 examples) achieved zero F1 in all folds, a fundamental data scarcity bottleneck.',
 
     reflection:
-      'The central finding is a strong task asymmetry: disaster-type separation is nearly solved by LBP texture alone (a linear boundary suffices), while within-disaster damage severity requires richer spatial representations that global tile statistics cannot provide. The dominance of LBP over color and edge features suggests the discriminative signal is local microstructure — the pattern of abrupt vs. smooth pixel transitions — not overall scene appearance. The practical lesson: systematic feature discriminability analysis (Cohen\'s d) before model selection identified the right feature families and saved significant experimentation time.',
+      'The central finding is a strong task asymmetry: disaster-type separation is nearly solved by LBP texture alone (a linear boundary suffices), while within-disaster damage severity requires richer spatial representations that global tile statistics cannot provide. The dominance of LBP over color and edge features suggests the discriminative signal is local microstructure (the pattern of abrupt vs. smooth pixel transitions), not overall scene appearance. The practical lesson: systematic feature discriminability analysis (Cohen\'s d) before model selection identified the right feature families and saved significant experimentation time.',
   },
   {
     id: 'colm-llm-discussion',
@@ -274,7 +274,7 @@ export const projects: Project[] = [
       'Input question → role assignment to N LLM agents → Phase 1: independent idea generation → Phase 2: cross-agent critique and divergence → Phase 3: synthesis and convergence → final creative answer. Evaluated on standard creativity benchmarks against single-LLM baselines.',
 
     results:
-      'The discussion framework significantly improved scores on creativity benchmarks compared to single-LLM and naive ensemble baselines. Role diversity was a key factor — agents with distinct assigned personas produced more varied and higher-quality ideas.',
+      'The discussion framework significantly improved scores on creativity benchmarks compared to single-LLM and naive ensemble baselines. Role diversity was a key factor: agents with distinct assigned personas produced more varied and higher-quality ideas.',
 
     reflection:
       'The key insight is that creativity benefits from structured disagreement, not just aggregation. Simply averaging responses does not help; forcing agents to argue from different perspectives before converging is what drives novelty. Role-play is a surprisingly effective prompt-level intervention for reducing response homogeneity in LLMs.',
@@ -407,7 +407,7 @@ export const projects: Project[] = [
     'Achieved regulated ±15V outputs across wide input range with stable closed-loop control. Efficiency measured around ~87–91% across load conditions. Converter remained thermally stable (~45°C with cooling) and recovered from load transients within ~175–207µs.',
 
     reflection:
-    'Unlike simulation-only circuits, real hardware required debugging parasitics, noise, and measurement mistakes. The key learning was that stability and protection design (snubber, compensation, layout) matter as much as topology — the circuit worked only after understanding real switching behavior rather than ideal equations.'
+    'Unlike simulation-only circuits, real hardware required debugging parasitics, noise, and measurement mistakes. The key learning was that stability and protection design (snubber, compensation, layout) matter as much as topology, and the circuit worked only after understanding real switching behavior rather than ideal equations.'
   },
   {
     id: '5g-handoff-simulator',
@@ -439,7 +439,7 @@ export const projects: Project[] = [
       'Soft handoff consistently improved average allocation (~6% higher) and reduced unstable switching compared to hard handoff across both distance-based and SINR-based strategies.',
 
     reflection:
-      'This project showed me networking systems are not only about formulas — policy decisions matter. The same physical model produced very different performance depending on the decision rule, and careful simulation was necessary to understand tradeoffs between stability and responsiveness.'
+      'This project showed me networking systems are not only about formulas, but that policy decisions matter too. The same physical model produced very different performance depending on the decision rule, and careful simulation was necessary to understand tradeoffs between stability and responsiveness.'
   },
   
   
