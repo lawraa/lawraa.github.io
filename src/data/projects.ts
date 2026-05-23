@@ -125,14 +125,14 @@ export const projects: Project[] = [
   },
   {
     id: 'llm-personalized-assistive-design',
-    title: 'LLM-Driven Personalized Assistive Device Design (Ongoing Capstone Project)',
+    title: 'LLM-Driven Personalized Assistive Device Design',
     affiliation: 'UC Berkeley · MEng Capstone Project',
     subtitle: 'LLM guided MuJoCo simulation for automated gripper personalization, 83% convergence across 12 runs, 4 participants',
     tags: ['LLMs', 'Robotics', 'MuJoCo', 'Simulation', 'Optimization', 'Assistive Technology'],
     imageUrl: '/projects/capstone_dorsal-grasper.jpg',
     codeUrl: undefined,
     videoUrl: undefined,
-    pdfUrl: undefined,
+    pdfUrl: '/projects/AI_Driven_Dorsal_Grasper_IROS2026.pdf',
 
     description: [
       'Built a 3-phase AI pipeline that automatically designs a personalized dorsal grasper (a wrist-worn assistive device for users with impaired hand function) by iteratively proposing 15-parameter mechanical designs, evaluating each in MuJoCo physics simulation across 8 grasping tasks, and personalizing to each user\'s measured force limits.',
