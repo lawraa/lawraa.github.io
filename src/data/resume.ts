@@ -29,7 +29,6 @@ export interface Publication {
 }
 
 export interface ResumeData {
-  summary: string[]
   skills: string[]
   experience: Experience[]
   research: Experience[]
@@ -38,24 +37,25 @@ export interface ResumeData {
 }
 
 export const resumeData: ResumeData = {
-  summary: [
-    'AI engineer with experience building end-to-end intelligent systems, LLM-driven workflows, and practical machine learning applications for real-world use cases.',
-    'Strong in Python, PyTorch, and rapid prototyping, with a track record of translating technical ideas into usable systems through iteration, evaluation, and strong engineering execution.',
-    'Motivated by building ambitious AI-powered products that combine technical depth, product intuition, and high craft.',
-  ],
 
   skills: [
     'Python',
     'C++',
     'PyTorch',
-    'Machine Learning',
-    'Data Structures & Algorithms',
     'Reinforcement Learning',
     'MuJoCo',
     'ROS',
   ],
 
   experience: [
+    {
+      role: 'Software Development Engineer',
+      org: 'Amazon',
+      location: 'Seattle, WA',
+      dates: 'Sep 2026 – Present',
+      type: 'Industry',
+      bullets: [],
+    },
     {
       role: 'Software Engineering Job Simulation',
       org: 'JPMorgan Chase & Co. (via Forage)',
@@ -64,8 +64,8 @@ export const resumeData: ResumeData = {
       bullets: [
         'Integrated Kafka into a Spring Boot microservice to consume and deserialize high-volume transaction messages using a configurable topic and embedded Kafka test framework.',
         'Implemented transaction validation and persistence logic with Spring Data JPA and an H2 SQL database, including entity modeling and balance updates across relational User records.',
-        'Connected the service to an external REST Incentive API using RestTemplate and exposed a balance-query endpoint via a Spring controller, returning JSON responses while maintaining clean architectural boundaries.',
-        'Verified system behavior using Maven test suites and debugger-driven inspection, ensuring reliability across message ingestion, database operations, and external API interactions.',
+        'Connected the service to an external REST Incentive API using RestTemplate and exposed a balance-query endpoint via a Spring controller, returning JSON.',
+        'Verified the service with the provided Maven test suites and the debugger.',
       ],
     },
     {
@@ -121,7 +121,7 @@ export const resumeData: ResumeData = {
       dates: 'Aug 2025 – Dec 2025',
       type: 'Research Project',
       bullets: [
-        'Implemented a modular 4-stage locomotion pipeline — sinusoidal foot trajectory generation, closed-form planar IK (two-link law-of-cosines solver with workspace clamping), phase-offset gait coordination, and synchronized motor dispatch — supporting 5 gaits with stride up to 50 mm and maximum forward velocity of 17 cm/s (>1 body length/s).',
+        'Implemented a modular 4-stage locomotion pipeline (sinusoidal foot trajectory generation, closed-form planar IK with a two-link law-of-cosines solver and workspace clamping, phase-offset gait coordination, and synchronized motor dispatch) supporting 5 gaits with stride up to 50 mm and maximum forward velocity of 17 cm/s (>1 body length/s).',
         'Designed and calibrated trot (50% diagonal phase offset) and walk (25% per-leg offset) gaits; implemented asymmetric stride-length scaling for skid-steer differential turning and a single-cycle jump maneuver with automatic return to neutral stance.',
         'Debugged and established Raspberry Pi 4 to Dynamixel RX-24F communication over U2D2 UART; synchronized all 8 joints at 100 Hz with 0.29° per-tick resolution over a 1 Mbps daisy-chained Dynamixel bus.',
         'Built a finite-state-machine command dispatcher routing IMU/EMG gesture outputs to joint trajectories; evaluated SVM and DNN classifiers on 8-channel sEMG at 250 Hz, reaching up to 40% gesture accuracy and deploying IMU-threshold control for the final demo.',
@@ -147,10 +147,8 @@ export const resumeData: ResumeData = {
       dates: 'Oct 2024 – Jun 2025',
       type: 'Industry Collaboration',
       bullets: [
-        'Developed automated content generation service integrating LLM APIs with structured prompt templates.',
-        'Built LLM-powered text generation workflow with controllable style parameters and automated quality evaluation loops.',
-        'Iteratively refined prompts and model configurations to improve consistency and reliability of generated outputs.',
-        'Implemented style-controlled generation via parameterized prompts and evaluation loops for TrendForce newsletter.',
+        'Built a two-stage LLM pipeline for the TrendForce newsletter: retrieval-augmented translation of English tech news into Traditional Chinese, then rewriting to match TrendForce\'s editorial style.',
+        'Evaluated outputs with COMET, similarity metrics, LLM judges and human pairwise comparison.',
       ],
     },
     {
@@ -162,7 +160,6 @@ export const resumeData: ResumeData = {
       bullets: [
         'Collaborated in a team of three to develop "Visual Prompt Defect Detection" for an internal internship project competition, receiving 1st Place among four groups.',
         'Designed UI using Gradio for project demo and built backend data ingestion pipeline storing image datasets to storage via APIs.',
-        'Completed training on Git, Docker, Kubernetes, Python, Pandas, NumPy, and MongoDB.',
       ],
     },
     {
@@ -172,8 +169,8 @@ export const resumeData: ResumeData = {
       dates: 'Aug 2023 – Jan 2024',
       type: 'Research Project',
       bullets: [
-        'Collaborated with a teammate to develop a smart driving system featuring real-time notifications and auto-parking.',
-        'Integrated PiRacer Pro and STM32 board to boost system capabilities with analytics and imitation learning.',
+        'Built a smart driving system with a teammate: obstacle warnings, emergency braking and learned auto-parking.',
+        'Used a PiRacer Pro with an STM32 board reading ToF sensors, and a camera-based behavioral cloning model for parking.',
       ],
     },
     {
@@ -200,7 +197,7 @@ export const resumeData: ResumeData = {
       bullets: [
         'Introduced an LLM discussion framework that improves creativity via multi-agent discussion and role-playing, outperforming single-agent and existing multi-agent baselines by 20%.',
         'Designed a creativity-focused LLM evaluation metric achieving 0.7 correlation with human evaluations on 1,400+ responses.',
-        'Developed a decision-making agent that optimizes selection between in-context learning with RAG, supervised fine-tuning, and RLHF in a streamlined learning process.',
+        'Developed a decision-making agent that optimizes selection between in-context learning with RAG, supervised fine-tuning, and RLHF.',
         'Investigated test-time compute scaling by measuring the correlation between algorithmic time complexity (Big-O) and the number of tokens required for LLMs to solve algorithmic problems.',
       ],
     },
@@ -212,7 +209,7 @@ export const resumeData: ResumeData = {
       type: 'Research',
       bullets: [
         'Devised and preprocessed a SoundEffectDetection dataset/task for Dynamic-SUPERB.',
-        'Used DPO (RLHF) to train a text-instruction-guided voice conversion model to improve performance.',
+        'Used DPO (RLHF) to train a text-instruction-guided voice conversion model.',
       ],
     },
     {

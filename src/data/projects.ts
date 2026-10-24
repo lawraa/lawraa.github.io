@@ -4,6 +4,7 @@ export interface Project {
   subtitle: string
   tags: string[]
   imageUrl?: string
+  thumbUrl?: string
   imageFit?: 'cover' | 'contain'
   detailImages?: (string | { src: string; rows?: number })[]
   codeUrl?: string
@@ -21,7 +22,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'risk-triggered-latent-correction',
-    title: 'Risk-Triggered Latent-Space Corrections for Near-Failure Recovery in Deep RL (Ongoing)',
+    title: 'Risk-Triggered Latent-Space Corrections for Near-Failure Recovery in Deep RL',
     affiliation: 'UC Berkeley · CS 285 Final Project',
     subtitle: 'Decoupled SAC with risk-triggered latent correction achieving 100% success on Meta-World pick-place-v3, 25–29% more sample-efficient than baseline SAC',
     tags: ['Deep RL', 'SAC', 'Robotics', 'Meta-World', 'Latent Space', 'PyTorch', 'Research'],
@@ -31,7 +32,7 @@ export const projects: Project[] = [
     pdfUrl: undefined,
 
     description: [
-      'Studying near-failure recovery in deep RL: detecting when a policy is drifting toward failure but is still recoverable, then applying a targeted correction to the actor\'s internal latent representation (rather than to actions directly) to steer it back on track.',
+      'Studied near-failure recovery in deep RL: detecting when a policy is drifting toward failure but is still recoverable, then applying a targeted correction to the actor\'s internal latent representation (rather than to actions directly) to steer it back on track.',
       'Designed three experimental conditions (baseline SAC, always-on latent correction, risk-triggered correction) on Meta-World pick-place-v3. Key finding: decoupled training (isolating the base actor and correction module on fully independent gradient paths) is critical for triggered deployment to work, and yields 100% success vs. 80% for baseline at 2.5M steps.',
     ],
 
@@ -39,16 +40,16 @@ export const projects: Project[] = [
       'Trained RL policies can drift toward failure during execution (for example, stalling pre-grasp or dropping an object mid-transport) without being in a fully unrecoverable state. Standard policies have no mechanism to detect or respond to these near-failure moments. The core question: can targeted editing of the policy\'s internal latent representation (rather than replanning or switching policies) improve recovery without disrupting normal execution?',
 
     approach:
-      'Compare three conditions under the same SAC framework: (1) baseline SAC with no correction, (2) always-on latent correction applied at every step, and (3) risk-triggered correction applied only when a heuristic near-failure detector fires. The trigger uses sliding-window stall detection in both pre-grasp (hand-to-object distance) and post-grasp (object-to-target distance) phases, with instantaneous drop detection and 15-step hysteresis. The core engineering insight: triggered deployment only works when the base actor and correction module are trained on completely independent gradient paths, isolating them via torch.no_grad() on the frozen base latent in the correction update step.',
+      'Compare three conditions under the same SAC framework: (1) baseline SAC with no correction, (2) always-on latent correction applied at every step, and (3) risk-triggered correction applied only when a heuristic near-failure detector fires. The trigger uses sliding-window stall detection in both pre-grasp (hand-to-object distance) and post-grasp (object-to-target distance) phases, with instantaneous drop detection and 15-step hysteresis. Triggered deployment only works when the base actor and correction module are trained on completely independent gradient paths, isolating them via torch.no_grad() on the frozen base latent in the correction update step.',
 
     architecture:
       'GaussianActor with a trunk-head split: trunk maps obs → z (LayerNorm + Tanh + ReLU, 256-dim). LatentCorrectionModule takes [obs; z] → Δz via a two-layer MLP (hidden 128, output_scale=0.1, near-zero init). Corrected latent z\' = z + Δz is fed to actor heads for action sampling. NearFailureTrigger maintains two sliding windows (pre-grasp: hand_to_obj; post-grasp: obj_to_target, W=20, δ_min=0.01m, cooldown=15 steps). Decoupled training runs four sequential steps per update: (1) critic on base policy, (2) base actor via standard SAC, (3) correction on frozen base latent (torch.no_grad()), (4) auto-alpha on base entropy.',
 
     results:
-      'On pick-place-v3 (MT1, 50 task variants), decoupled triggered correction achieved 100% peak and 100% final success at 2.5M steps, versus 96% peak / 80% final for baseline SAC and 98% peak / 96% final for always-on correction. Sample efficiency improved by 25–29%: the decoupled condition reaches 80–90% success ~350–550k steps earlier than any other condition. The trigger fire rate follows a self-regulating arc (~3–4% during early pre-grasp stall phases, declining to <0.5% once the base policy reliably grasps), providing targeted correction effort without manual annealing. The original triggered design (without decoupling) catastrophically diverged (alpha → 39.74, 0% final success) due to actor-correction co-adaptation. Multi-task experiments are ongoing across push-v3, door-open-v3, and assembly-v3.',
+      'On pick-place-v3 (MT1, 50 task variants), decoupled triggered correction achieved 100% peak and 100% final success at 2.5M steps, versus 96% peak / 80% final for baseline SAC and 98% peak / 96% final for always-on correction. Sample efficiency improved by 25–29%: the decoupled condition reaches 80–90% success ~350–550k steps earlier than any other condition. The trigger fire rate follows a self-regulating arc (~3–4% during early pre-grasp stall phases, declining to <0.5% once the base policy reliably grasps), providing targeted correction effort without manual annealing. The original triggered design (without decoupling) catastrophically diverged (alpha → 39.74, 0% final success) due to actor-correction co-adaptation.',
 
     reflection:
-      'The core failure mode in the original triggered design was training-deployment inconsistency: correction loss gradients reached the actor trunk, causing the actor to co-adapt and become dependent on the correction. The base actor without correction was then unusable on the 98.56% of steps where the trigger didn\'t fire. The fix, a single torch.no_grad() on the frozen base latent in the correction training step, was architecturally simple but non-obvious to diagnose. The alpha divergence signal (α → 39.74 vs normal 0.05–0.25) was the key indicator. The broader lesson: in modular RL systems, gradient isolation between components is as important as architecture design. Open questions include whether a learned advantage-based trigger can outperform the heuristic, and how well decoupled correction generalizes across diverse Meta-World tasks.',
+      'The core failure mode in the original triggered design was training-deployment inconsistency: correction loss gradients reached the actor trunk, causing the actor to co-adapt and become dependent on the correction. The base actor without correction was then unusable on the 98.56% of steps where the trigger didn\'t fire. The fix, a single torch.no_grad() on the frozen base latent in the correction training step, was architecturally simple but non-obvious to diagnose. The alpha divergence signal (α → 39.74 vs normal 0.05–0.25) was the key indicator. Open questions include whether a learned advantage-based trigger can outperform the heuristic, and how well decoupled correction generalizes across diverse Meta-World tasks.',
   },
   {
     id: 'rag-forge',
@@ -67,7 +68,7 @@ export const projects: Project[] = [
     ],
 
     problem:
-      'I wanted to understand how different RAG approaches actually differ in practice, not just in theory. The goal was a single codebase where I could implement each architecture faithfully and compare them side-by-side, with a shared interface so differences in retrieval behavior are isolated from differences in surrounding code.',
+      'I wanted to see how different RAG approaches compare on the same data: a single codebase where I could implement each architecture faithfully and compare them side-by-side, with a shared interface so differences in retrieval behavior are isolated from differences in surrounding code.',
 
     approach:
       'Built a layered architecture: a shared document/chunk/response model layer, pluggable LLM and embedding providers, a vector store abstraction over Qdrant, and five pipeline implementations that compose these primitives differently. Added RAGAS-based evaluation (faithfulness, relevancy, context precision/recall) and a Streamlit UI with a full trace viewer so retrieval behavior is inspectable without reading logs.',
@@ -82,14 +83,10 @@ export const projects: Project[] = [
       + 'FastAPI exposes /ingest, /query, /compare endpoints; Streamlit wraps the same pipelines with a trace viewer.',
 
     results:
-      'All five pipelines are runnable side-by-side via a single /compare endpoint. Test suite (8 unit tests) passes with no API key required, covering chunker correctness and hybrid retrieval fusion logic. '
-      + 'Reference numbers from the literature each pipeline implements: cross-encoder reranking improvements are highly task-dependent (commonly 10–50% over bi-encoder baselines, no universal figure); '
-      + 'Microsoft\'s GraphRAG evaluation reports 3.4× on multi-hop narrative Q&A specifically; '
-      + 'the Self-RAG paper reports 5.8% hallucination on the FactScore biography benchmark. '
-      + 'These numbers reflect what the underlying techniques achieve on their respective benchmarks. Actual gains depend heavily on the task and data.',
+      'All five pipelines are runnable side-by-side via a single /compare endpoint. Test suite (8 unit tests) passes with no API key required, covering chunker correctness and hybrid retrieval fusion logic.',
 
     reflection:
-      'The most instructive design decision was the shared RAGResponse model with a trace field: it forced every pipeline to emit structured metadata about what it retrieved and why, which made debugging retrieval failures much easier. The main thing I learned is that "advanced" retrieval (hybrid + rerank + HyDE) improves accuracy not because any single technique is transformative, but because they address orthogonal failure modes: BM25 catches exact-match cases that dense retrieval misses, reranking corrects initial ranking errors, and HyDE closes the query–document vocabulary gap.',
+      'The most instructive design decision was the shared RAGResponse model with a trace field: it forced every pipeline to emit structured metadata about what it retrieved and why, which made debugging retrieval failures much easier. Each part of the "advanced" pipeline (hybrid + rerank + HyDE) fixes a different failure: BM25 catches exact-match cases that dense retrieval misses, reranking corrects initial ranking errors, and HyDE closes the query–document vocabulary gap.',
   },
   {
     id: 'jpmorgan-midas-core',
@@ -105,11 +102,11 @@ export const projects: Project[] = [
 
     description: [
       'Built key backend components of Midas, a transaction-processing microservice, as part of JPMorgan Chase\'s Software Engineering Job Simulation on the Forage platform.',
-      'Integrated Kafka message consumption, SQL persistence with Spring Data JPA, an external Incentive REST API, and a balance query endpoint into a cohesive Spring Boot service.',
+      'Integrated Kafka message consumption, SQL persistence with Spring Data JPA, an external Incentive REST API, and a balance query endpoint into one Spring Boot service.',
     ],
 
     problem:
-      'Financial transaction systems must reliably ingest high-volume message streams, validate each transaction against sender balances, persist results to a database, incorporate external incentive logic, and expose account balances through a clean HTTP API, all without data loss or race conditions.',
+      'The simulation task: finish Midas, a service that reads transactions from Kafka, checks them against the sender\'s balance, stores them, adds an incentive from an external API, and serves balances over HTTP.',
 
     approach:
       'Used Spring Boot as the application framework and configured each layer independently: Kafka consumer for message ingestion, H2/JPA for persistence, RestTemplate for external API calls, and a @RestController for the balance endpoint. Configured the application via application.yml (topic names, serializers, server port) to keep the service externally configurable.',
@@ -121,7 +118,7 @@ export const projects: Project[] = [
       'All five Maven test suites passed: TaskOneTests through TaskFiveTests. Final submission outputs included Waldorf\'s balance of 627 (Task 3), Wilbur\'s balance of 3089 (Task 4), and all 13 user balances queried via the REST endpoint (Task 5). Received a Certificate of Completion from JPMorgan Chase & Co. issued April 17, 2026.',
 
     reflection:
-      'The most instructive debugging was Kafka\'s offset-reset behavior: the default "latest" policy caused the consumer to miss messages sent before it fully connected, requiring "earliest" plus allow.auto.create.topics to make the embedded test environment reliable. This highlighted how distributed system defaults are often optimized for production throughput, not test determinism, and that configuration understanding is as important as code correctness in backend systems.',
+      'The most instructive debugging was Kafka\'s offset-reset behavior: the default "latest" policy caused the consumer to miss messages sent before it fully connected, requiring "earliest" plus allow.auto.create.topics to make the embedded test environment reliable.',
   },
   {
     id: 'llm-personalized-assistive-design',
@@ -130,6 +127,7 @@ export const projects: Project[] = [
     subtitle: 'LLM guided MuJoCo simulation for automated gripper personalization, 83% convergence across 12 runs, 4 participants',
     tags: ['LLMs', 'Robotics', 'MuJoCo', 'Simulation', 'Optimization', 'Assistive Technology'],
     imageUrl: '/projects/capstone_dorsal-grasper.jpg',
+    thumbUrl: '/thumbs/capstone_dorsal-grasper.jpg',
     codeUrl: undefined,
     videoUrl: undefined,
     pdfUrl: '/projects/AI_Driven_Dorsal_Grasper_IROS2026.pdf',
@@ -155,9 +153,9 @@ export const projects: Project[] = [
       + 'Also built full supporting infrastructure: parallel multi-user runner, result cleanup and renumbering tooling, offscreen MuJoCo video export, and a publication-ready 4-panel results figure.',
 
     reflection:
-      'The primary failure mode was not budget but LLM plateau. Every failed run shared the same pattern: the model anchored on finger_spread_angle=0.09 across 64 of 100 iterations despite the critical threshold being ~0.11, and doubling the iteration budget did not break the loop. This is a reasoning failure, not a compute failure. '
+      'The primary failure mode was not budget but LLM plateau. Every failed run shared the same pattern: the model anchored on finger_spread_angle=0.09 across 64 of 100 iterations despite the critical threshold being ~0.11, and doubling the iteration budget did not break the loop.' 
       + 'The most surprising finding was Phase 2 generalization: in one run, sphere_lift was never solved in 30 Phase 1 iterations, yet the Phase 2 seed (optimized for a different task) passed sphere_lift anyway via geometric coincidence. Missing a task in Phase 1 is not always fatal. '
-      + 'The main engineering insight is that the bottleneck is the information bridge between simulation output and LLM input. Most complexity lives in designing the metric abstraction and prompt structure, not the optimizer itself.',
+      + 'Most of the work was in how simulation results are summarized for the LLM: the metric abstraction and prompt structure, more than the optimizer itself.',
   },
   {
     id: 'emg-imu-quadruped',
@@ -181,7 +179,7 @@ export const projects: Project[] = [
     results:
       'Achieved synchronized position control at 100 Hz with ~0.29° resolution per tick over a 1 Mbps Dynamixel bus. Implemented 5 gaits with stride lengths up to 50 mm, foot clearance up to 20 mm, and a jump push up to 40 mm. Reached a peak forward velocity of ~17 cm/s (>1 body length/s). Total prototype cost was about $442 USD (excluding shared lab tools).',
     reflection:
-      'The biggest engineering wins came from system integration and reliability: stable real-time scheduling, clean sensor/serial interfaces, and modular gait orchestration mattered more than fancy models. EMG decoding was limited mainly by electrode contact consistency; IMU provided robust low-latency intent while EMG offered higher-resolution cues when signal quality allowed.',
+      'Most of the work was integration: real-time scheduling, the sensor and serial interfaces, and gait sequencing. EMG decoding was limited mainly by electrode contact consistency; IMU provided robust low-latency intent while EMG offered higher-resolution cues when signal quality allowed.',
     detailImages: [
       '/projects/quad_system-architecture.jpg',
       { src: '/projects/quad_control.mp4', rows: 2 },
@@ -216,7 +214,7 @@ export const projects: Project[] = [
       + 'In contrast, classification exhibited clear race-dependent sensitivity to imbalance: Caucasian and Indian groups showed the largest accuracy drops when downsampled (around 16–18%), Asian showed moderate drop (~11.5%), and African remained the most stable (~3%). '
       + 'FastViT had a smaller average relative performance drop under downsampling than ResNet50, suggesting slightly better robustness depending on fairness metric.',
     reflection:
-      'Fairness behavior differed strongly by task: reconstruction metrics stayed stable across races, while classification accuracy was sensitive to imbalance. Across both backbones, the dominant driver of unfairness was the training data distribution rather than architecture alone, so evaluation design and subgroup reporting are essential.',
+      'Fairness behavior differed strongly by task: reconstruction metrics stayed stable across races, while classification accuracy was sensitive to imbalance. For both backbones, unfairness tracked the training data distribution more than the architecture.',
   },
   {
     id: 'data100-satellite-classification',
@@ -234,7 +232,7 @@ export const projects: Project[] = [
     ],
 
     problem:
-      'Rapid damage assessment from satellite imagery is critical for emergency response. Existing work relies on deep CNNs that require significant compute and offer limited interpretability. The question: can handcrafted, physically motivated features provide competitive performance while remaining transparent?',
+      'Can handcrafted features (texture, color, edges) classify post-disaster satellite tiles well without a deep network, while staying interpretable?',
 
     approach:
       'Extracted a 58-dimensional feature vector per image from RGB color statistics, Sobel edge detection, Local Binary Patterns (LBP), and Gabor filters, plus domain-motivated semantic features (Laplacian variance, vegetation index, blue tarp ratio, GLCM). Used Cohen\'s d to systematically rank feature discriminability before training any classifier. Applied SMOTE within CV folds to handle extreme class imbalance (label 2 had only 6 training examples).',
@@ -247,7 +245,7 @@ export const projects: Project[] = [
       + 'Task B (damage severity): soft-voting ensemble reached CV macro-F1 of 0.509 ± 0.044 and Pensieve weighted F1 of 0.677. Both RF and XGBoost perfectly memorized training (Train F1=1.0); XGBoost\'s shallower trees (depth=3) generalized better (Δ=0.493 vs RF Δ=0.509). Label 2 (major damage, 6 examples) achieved zero F1 in all folds, a fundamental data scarcity bottleneck.',
 
     reflection:
-      'The central finding is a strong task asymmetry: disaster-type separation is nearly solved by LBP texture alone (a linear boundary suffices), while within-disaster damage severity requires richer spatial representations that global tile statistics cannot provide. The dominance of LBP over color and edge features suggests the discriminative signal is local microstructure (the pattern of abrupt vs. smooth pixel transitions), not overall scene appearance. The practical lesson: systematic feature discriminability analysis (Cohen\'s d) before model selection identified the right feature families and saved significant experimentation time.',
+      'Disaster-type separation is nearly solved by LBP texture alone (a linear boundary suffices), while within-disaster damage severity requires richer spatial representations that global tile statistics cannot provide. The dominance of LBP over color and edge features suggests the discriminative signal is local microstructure (the pattern of abrupt vs. smooth pixel transitions), not overall scene appearance. Ranking features by Cohen\'s d before choosing a model pointed to the right feature families early.',
   },
   {
     id: 'colm-llm-discussion',
@@ -256,11 +254,12 @@ export const projects: Project[] = [
     subtitle: 'Multi-agent discussion framework with role-playing to boost LLM creative reasoning',
     tags: ['LLMs', 'Multi-Agent', 'NLP', 'Evaluation', 'Creativity'],
     imageUrl: '/research/llm-discussion.png',
+    thumbUrl: '/thumbs/llm-discussion.jpg',
     codeUrl: 'https://github.com/lawraa/LLM-Discussion',
     pdfUrl: 'https://arxiv.org/abs/2405.06373',
 
     description: [
-      'LLMs excel at natural language tasks but tend toward convergent, homogeneous responses on open-ended creative problems.',
+      'LLMs tend to give similar answers to open-ended creative questions.',
       'We propose a three-phase discussion framework where multiple LLMs with distinct assigned roles engage in structured diverging debate before converging on a creative answer.',
     ],
 
@@ -274,10 +273,10 @@ export const projects: Project[] = [
       'Input question → role assignment to N LLM agents → Phase 1: independent idea generation → Phase 2: cross-agent critique and divergence → Phase 3: synthesis and convergence → final creative answer. Evaluated on standard creativity benchmarks against single-LLM baselines.',
 
     results:
-      'The discussion framework significantly improved scores on creativity benchmarks compared to single-LLM and naive ensemble baselines. Role diversity was a key factor: agents with distinct assigned personas produced more varied and higher-quality ideas.',
+      'Outperformed single-agent and existing multi-agent baselines by 20% on creativity benchmarks. Agents with distinct assigned roles produced more varied ideas. A creativity metric I designed reached 0.7 correlation with human ratings on 1,400+ responses.',
 
     reflection:
-      'The key insight is that creativity benefits from structured disagreement, not just aggregation. Simply averaging responses does not help; forcing agents to argue from different perspectives before converging is what drives novelty. Role-play is a surprisingly effective prompt-level intervention for reducing response homogeneity in LLMs.',
+      'Averaging several responses did not help. The gain came from agents with different roles arguing before converging.',
   },
   {
     id: 'trendforce-news-translation',
@@ -288,7 +287,7 @@ export const projects: Project[] = [
     imageUrl: '/projects/trendforce_pipeline.jpg',
 
     description: [
-      'TrendForce writters manually rewrite English tech news into Traditional Chinese, which is slow, expensive, and difficult to scale.',
+      'TrendForce writers rewrite English tech news into Traditional Chinese by hand.',
       'This project builds an automated pipeline that first translates articles accurately, then rewrites them to match TrendForce’s editorial writing style.'
     ],
 
@@ -302,10 +301,10 @@ export const projects: Project[] = [
       'Web-crawled bilingual dataset → embedding retrieval (bge-large) → few-shot LLM translation → style retrieval RAG → LLM rewriting → multi-method evaluation (COMET, similarity metrics, human & LLM judging, pairwise comparison).',
 
     results:
-      'Retrieval-based few-shot prompting significantly improved translation quality over zero-shot. The style-adaptation stage produced consistently preferred articles in pairwise evaluation while preserving semantic correctness.',
+      'Retrieval-based few-shot prompting improved translation quality over zero-shot, and the style-adapted articles were preferred in pairwise evaluation without losing meaning.',
 
     reflection:
-      'Accuracy and style are separate problems. Translation quality comes from semantic grounding, while writing quality comes from contextual reference retrieval. Treating them as two independent stages produced far more reliable results.'
+      'Accuracy and style are separate problems. Translation quality comes from semantic grounding, while writing quality comes from contextual reference retrieval. Splitting them into two stages gave more reliable results.'
   },
   {
     id: 'smart-driving-assistance',
@@ -338,7 +337,7 @@ export const projects: Project[] = [
       'System successfully detected obstacles, triggered emergency stops, and provided real-time driving feedback. Autonomous parking learned initial maneuvers but struggled in complex reverse scenarios due to dataset limitations.',
 
     reflection:
-      'Data collection matters more than model complexity in imitation learning. Imitation learning fails due to distribution shift: the policy is trained only on expert states, but during execution, small mistakes lead it into unseen states where it does not know how to act, causing compounding errors. Methods such as DAgger fix this by repeatedly letting the learner act and querying the expert on the learner’s visited states, so the model learns how to recover from its own mistakes. Embedded latency, communication protocols, and real-world edge cases dominate system performance more than the ML model itself.',
+      'Parking failed mostly from distribution shift: small mistakes put the car in states the human demonstrations never covered, and errors compounded. DAgger-style data collection targets exactly this. Latency and BLE communication caused more trouble than the model.',
   },
   {
     id: 'visual-prompt-defect-detection',
@@ -351,13 +350,13 @@ export const projects: Project[] = [
     videoUrl: undefined,
     pdfUrl: undefined,
     description: [
-      'Built a Gradio-based interface to showcase visual prompting for defect detection, enabling prompt-based segmentation, prediction, and evaluation.',
+      'Built a Gradio interface to demo visual prompting for defect detection, enabling prompt-based segmentation, prediction, and evaluation.',
       'Implemented dataset-level evaluation workflows and prompt versioning so users could save, reload, edit, and benchmark prompts consistently.',
       'Created backend data ingestion that stores structured image datasets via internal APIs for repeatable demos and stakeholder review.',
     ],
 
     problem:
-      'Manufacturing defect inspection changes frequently, but conventional vision pipelines require huge amount of new labeled training data for each defect type. The team needed a fast way to demonstrate defect detection capabilities with minimal setup and a workflow that non-ML stakeholders could use.',
+      'Manufacturing defect inspection changes frequently, but conventional vision pipelines require a lot of new labeled training data for each defect type. The team needed a fast way to demonstrate defect detection capabilities with minimal setup and a workflow that non-ML stakeholders could use.',
 
     approach:
       'Used an existing SegGPT-based visual prompting model (not our contribution) as the inference engine, then focused engineering effort on productizing it: building a Gradio UI, adding prompt and dataset management, and adding evaluation tools (Dice/IoU/Precision) for measurable performance.',
@@ -369,7 +368,7 @@ export const projects: Project[] = [
       'Won 1st place in an internal internship project competition (team of three). Delivered an end-to-end demo workflow including interactive prompting, dataset evaluation, and prompt version control for reliable stakeholder testing.',
     
     reflection:
-      'Model choice matters, but demo reliability matters more: the biggest lift was building a clean data contract (HDF5 structure), predictable evaluation, and UI flows that make results reproducible and easy to trust. The competition was competitive, but I believe the winning edge was productizing the demo with a focus on reliability and user experience rather than just model performance.',
+      'The model was off the shelf. Most of our work went into the HDF5 data format, repeatable evaluation, and a UI that people outside the ML team could use.',
   },
   {
     id: 'isolated-flyback-power-supply',
@@ -407,7 +406,7 @@ export const projects: Project[] = [
     'Achieved regulated ±15V outputs across wide input range with stable closed-loop control. Efficiency measured around ~87–91% across load conditions. Converter remained thermally stable (~45°C with cooling) and recovered from load transients within ~175–207µs.',
 
     reflection:
-    'Unlike simulation-only circuits, real hardware required debugging parasitics, noise, and measurement mistakes. The key learning was that stability and protection design (snubber, compensation, layout) matter as much as topology, and the circuit worked only after understanding real switching behavior rather than ideal equations.'
+    'Most of the debugging was parasitics, noise and measurement mistakes. The circuit only worked once the snubber, compensation network and layout were right.'
   },
   {
     id: '5g-handoff-simulator',
@@ -439,7 +438,7 @@ export const projects: Project[] = [
       'Soft handoff consistently improved average allocation (~6% higher) and reduced unstable switching compared to hard handoff across both distance-based and SINR-based strategies.',
 
     reflection:
-      'This project showed me networking systems are not only about formulas, but that policy decisions matter too. The same physical model produced very different performance depending on the decision rule, and careful simulation was necessary to understand tradeoffs between stability and responsiveness.'
+      'The same physical model produced very different performance depending on the decision rule, and careful simulation was necessary to understand tradeoffs between stability and responsiveness.'
   },
   
   

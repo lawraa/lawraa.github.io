@@ -3,115 +3,74 @@ import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaf
 import { gyms } from '../data/bouldering'
 
 const COUNTRY_COLORS: Record<string, string> = {
-  USA:     '#3a6ff7',
-  Taiwan:  '#e8734a',
-  Thailand:'#3db88a',
+  USA:      '#1f4d3a',
+  Taiwan:   '#bf3a24',
+  Thailand: '#f3d36b',
 }
 
-const REGION_VIEWS: Record<string, { bounds: [[number,number],[number,number]] } | { center: [number,number]; zoom: number }> = {
-  all:      { center: [22, 140], zoom: 3 },
-  USA:      { bounds: [[33.8, -123.0], [38.2, -118.0]] },
+// Longitudes are unwrapped east of the antimeridian (US gyms at lng + 360) so one
+// Pacific-centred view holds Taiwan, Thailand and California together.
+const unwrap = (lng: number) => (lng < 0 ? lng + 360 : lng)
+
+const REGION_VIEWS: Record<string, { bounds: [[number, number], [number, number]] }> = {
+  all:      { bounds: [[6, 96], [48, 266]] },
+  USA:      { bounds: [[29.2, 236.8], [48.2, 265.0]] },
   Taiwan:   { bounds: [[24.6, 120.8], [25.2, 121.75]] },
   Thailand: { bounds: [[7.5, 98.0], [19.2, 99.5]] },
 }
 
-const REGIONS = [
-  { key: 'all',      label: 'All',      flag: '🌏' },
-  { key: 'USA',      label: 'USA',      flag: '🇺🇸' },
-  { key: 'Taiwan',   label: 'Taiwan',   flag: '🇹🇼' },
-  { key: 'Thailand', label: 'Thailand', flag: '🇹🇭' },
-]
+const REGIONS = ['all', 'USA', 'Taiwan', 'Thailand']
 
 function MapController({ region }: { region: string }) {
   const map = useMap()
   useEffect(() => {
     const view = REGION_VIEWS[region]
-    if (!view) return
-    if ('bounds' in view) {
-      map.flyToBounds(view.bounds, { padding: [32, 32], duration: 1.0 })
-    } else {
-      map.flyTo(view.center, view.zoom, { duration: 1.0 })
-    }
+    if (view) map.flyToBounds(view.bounds, { padding: [32, 32], duration: 1.0 })
   }, [region, map])
   return null
 }
 
 export default function BoulderingMap() {
   const [region, setRegion] = useState('all')
-  const [isDark, setIsDark] = useState(
-    document.documentElement.classList.contains('dark')
-  )
-
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.classList.contains('dark'))
-    })
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-    return () => observer.disconnect()
-  }, [])
-
-  const tileUrl = isDark
-    ? 'https://{s}.basemaps.cartocdn.com/dark_matter/{z}/{x}/{y}.png'
-    : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png'
-
   const visible = region === 'all' ? gyms : gyms.filter(g => g.country === region)
 
   return (
     <div>
-      {/* Region tabs */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {REGIONS.map(r => {
-          const count = r.key === 'all' ? gyms.length : gyms.filter(g => g.country === r.key).length
-          const active = region === r.key
+      <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label="Zoom to region">
+        {REGIONS.map(key => {
+          const count = key === 'all' ? gyms.length : gyms.filter(g => g.country === key).length
+          const active = region === key
           return (
             <button
-              key={r.key}
-              onClick={() => setRegion(r.key)}
-              className="flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-full transition-colors cursor-pointer"
-              style={{
-                backgroundColor: active ? COUNTRY_COLORS[r.key] ?? 'var(--color-text)' : 'var(--color-surface)',
-                color: active ? '#fff' : 'var(--color-secondary)',
-                border: `1px solid ${active ? 'transparent' : 'var(--color-border)'}`,
-              }}
+              key={key}
+              onClick={() => setRegion(key)}
+              aria-pressed={active}
+              className={`inline-flex cursor-pointer items-center gap-2 rounded-full px-3.5 py-1.5 text-[15px] font-semibold transition-colors ${
+                active ? 'bg-forest text-white' : 'bg-paper text-mute ring-1 ring-inset ring-line hover:text-ink hover:ring-forest'
+              }`}
             >
-              <span>{r.flag}</span>
-              <span>{r.label}</span>
-              <span style={{ opacity: 0.75 }}>({count})</span>
+              {key !== 'all' && <span className="h-2.5 w-2.5 rounded-full ring-1 ring-white/70" style={{ backgroundColor: COUNTRY_COLORS[key] }} />}
+              {key === 'all' ? 'All regions' : key}
+              <span className="tabular opacity-70">{count}</span>
             </button>
           )
         })}
       </div>
 
-      {/* Map */}
-      <div
-        className="rounded-xl overflow-hidden"
-        style={{ border: '1px solid var(--color-border)' }}
-      >
-        <MapContainer
-          center={[22, 140]}
-          zoom={3}
-          scrollWheelZoom={true}
-          style={{ width: '100%', height: '420px' }}
-        >
+      <div className="isolate overflow-hidden rounded-3xl ring-1 ring-line">
+        <MapContainer bounds={REGION_VIEWS.all.bounds} boundsOptions={{ padding: [32, 32] }} scrollWheelZoom={false} style={{ width: '100%', height: '440px' }}>
           <TileLayer
-            key={isDark ? 'dark' : 'light'}
-            url={tileUrl}
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OSM</a> &copy; <a href="https://carto.com/attributions" target="_blank">CARTO</a>'
-            subdomains="abcd"
-            maxZoom={19}
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+            attribution="Tiles &copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors"
+            maxZoom={16}
           />
           <MapController region={region} />
           {visible.map(gym => (
             <CircleMarker
               key={gym.name}
-              center={[gym.lat, gym.lng]}
-              radius={6}
-              pathOptions={{
-                fillColor: COUNTRY_COLORS[gym.country] ?? '#6b6b6b',
-                fillOpacity: 0.95,
-                color: isDark ? '#1a1a1a' : '#ffffff',
-                weight: 2,
-              }}
+              center={[gym.lat, unwrap(gym.lng)]}
+              radius={7}
+              pathOptions={{ fillColor: COUNTRY_COLORS[gym.country] ?? '#525a55', fillOpacity: 1, color: gym.country === 'Thailand' ? '#1f4d3a' : '#ffffff', weight: 2 }}
             >
               <Popup>
                 <div className="bouldering-popup">
@@ -123,19 +82,7 @@ export default function BoulderingMap() {
           ))}
         </MapContainer>
       </div>
-
-      {/* Legend */}
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 mt-3">
-        {Object.entries(COUNTRY_COLORS).map(([country, color]) => (
-          <span key={country} className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--color-secondary)' }}>
-            <span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: color }} />
-            {country} ({gyms.filter(g => g.country === country).length})
-          </span>
-        ))}
-        <span className="text-xs ml-auto" style={{ color: 'var(--color-secondary)', opacity: 0.6 }}>
-          click a pin to see details
-        </span>
-      </div>
+      <p className="mt-3 text-[15px] text-mute">Select a pin to see the gym.</p>
     </div>
   )
 }

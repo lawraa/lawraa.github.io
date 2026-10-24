@@ -1,22 +1,45 @@
-import { Link } from 'react-router-dom'
-import { resumeData } from '../data/resume'
+import type { ReactNode } from 'react'
+import { resumeData, type Experience } from '../data/resume'
+import { icons } from './links'
+import { PageIntro, Tag } from './ui'
 
-function SectionTitle({ children }: { children: React.ReactNode }) {
+const sections = [
+  { id: 'experience', label: 'Experience' },
+  { id: 'research', label: 'Research' },
+  { id: 'publications', label: 'Publications' },
+  { id: 'education', label: 'Education' },
+]
+
+function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
-    <h3
-      className="text-xs font-mono uppercase tracking-wider mb-6"
-      style={{ color: 'var(--color-accent)' }}
-    >
-      {children}
-    </h3>
+    <section id={id} className="scroll-mt-24 pt-12 first:pt-0" aria-labelledby={`${id}-h`}>
+      <h2 id={`${id}-h`} className="text-forest text-3xl font-bold tracking-[-0.02em]">{title}</h2>
+      <div className="mt-5 border-t border-line">{children}</div>
+    </section>
   )
 }
 
-function BulletList({ items }: { items: string[] }) {
+function Entry({ title, meta, dates, children }: { title: string; meta: string; dates?: string; children?: ReactNode }) {
   return (
-    <ul className="space-y-1 list-disc pl-5">
+    <div className="border-b border-line py-6">
+      <div className="grid gap-x-6 gap-y-0.5 sm:grid-cols-[minmax(0,1fr)_auto]">
+        <div className="min-w-0">
+          <h3 className="font-sans text-lg font-semibold leading-snug">{title}</h3>
+          <p className="text-[15px] text-mute">{meta}</p>
+        </div>
+        {dates && <p className="tabular text-[15px] text-mute sm:text-right sm:whitespace-nowrap">{dates}</p>}
+      </div>
+      {children}
+    </div>
+  )
+}
+
+function Bullets({ items }: { items: string[] }) {
+  if (items.length === 0) return null
+  return (
+    <ul className="mt-3 max-w-[78ch] space-y-2 text-[17px] leading-relaxed text-mute">
       {items.map((d, i) => (
-        <li key={i} className="text-sm" style={{ color: 'var(--color-secondary)' }}>
+        <li key={i} className="relative pl-5 before:absolute before:left-0 before:top-[0.8em] before:h-[2px] before:w-2.5 before:bg-forest">
           {d}
         </li>
       ))}
@@ -24,178 +47,74 @@ function BulletList({ items }: { items: string[] }) {
   )
 }
 
+const expMeta = (exp: Experience, withType = true) =>
+  [...new Set([exp.org, exp.location, withType ? exp.type : undefined].filter(Boolean))].join(' · ')
+
 export default function Resume() {
   return (
-    <div className="max-w-[800px] mx-auto px-6 pt-32 pb-20">
-      <Link to="/" className="link-underline text-sm mb-8 inline-block">
-        &larr; Back
-      </Link>
+    <div className="pb-24">
+      <PageIntro title="Resume" />
 
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-semibold tracking-tight">Resume</h2>
-        <a
-          href="/resume.pdf"
-          download
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-          style={{ backgroundColor: 'var(--color-accent)', color: '#fff' }}
-        >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
-          </svg>
-          Download PDF
-        </a>
-      </div>
-
-      {/* Summary */}
-      <div className="mb-12">
-        <SectionTitle>Summary</SectionTitle>
-        <div className="space-y-2">
-          {resumeData.summary.map((s, i) => (
-            <p key={i} className="text-sm" style={{ color: 'var(--color-secondary)' }}>
-              {s}
-            </p>
-          ))}
-        </div>
-      </div>
-
-      {/* Skills */}
-      <div className="mb-12">
-        <SectionTitle>Core Skills</SectionTitle>
-        <div className="flex flex-wrap gap-2">
-          {resumeData.skills.map((s) => (
-            <span
-              key={s}
-              className="text-xs font-mono px-2.5 py-1 rounded-full"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                color: 'var(--color-secondary)',
-                border: '1px solid var(--color-border, rgba(255,255,255,0.08))',
-              }}
-            >
-              {s}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Experience */}
-      <div className="mb-12">
-        <SectionTitle>Experience</SectionTitle>
-        <div className="space-y-10">
-          {resumeData.experience.map((exp) => (
-            <div key={exp.org + exp.role}>
-              <div className="flex items-start justify-between gap-4 mb-1">
-                <div className="min-w-0">
-                  <h4 className="font-medium">{exp.role}</h4>
-                  <p className="text-sm" style={{ color: 'var(--color-secondary)' }}>
-                    {exp.org}
-                    {exp.location ? ` · ${exp.location}` : ''}
-                    {exp.type ? ` · ${exp.type}` : ''}
-                  </p>
-                </div>
-                <span className="text-xs font-mono shrink-0" style={{ color: 'var(--color-secondary)' }}>
-                  {exp.dates}
-                </span>
-              </div>
-              <BulletList items={exp.bullets} />
+      <div className="grid gap-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+        <aside className="lg:sticky lg:top-24 lg:self-start">
+          <a
+            href="/resume.pdf"
+            download
+            className="inline-flex items-center gap-2 rounded-full bg-forest px-5 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-forest-deep"
+          >
+            <icons.download /> Download PDF
+          </a>
+          <nav className="mt-8 hidden lg:block" aria-label="Resume sections">
+            <ul className="space-y-2 text-[15px] font-medium">
+              {sections.map(s => (
+                <li key={s.id}><a href={`#${s.id}`} onClick={e => { e.preventDefault(); document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth' }) }} className="text-mute hover:text-tomato transition-colors">{s.label}</a></li>
+              ))}
+            </ul>
+          </nav>
+          <div className="mt-8">
+            <p className="text-[15px] font-semibold">Core skills</p>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {resumeData.skills.map(s => <Tag key={s}>{s}</Tag>)}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        </aside>
 
-      {/* Research */}
-      <div className="mb-12">
-        <SectionTitle>Research</SectionTitle>
-        <div className="space-y-10">
-          {resumeData.research.map((exp) => (
-            <div key={exp.org + exp.role}>
-              <div className="flex items-start justify-between gap-4 mb-1">
-                <div className="min-w-0">
-                  <h4 className="font-medium">{exp.role}</h4>
-                  <p className="text-sm" style={{ color: 'var(--color-secondary)' }}>
-                    {exp.org}
-                    {exp.location ? ` · ${exp.location}` : ''}
-                  </p>
-                </div>
-                <span className="text-xs font-mono shrink-0" style={{ color: 'var(--color-secondary)' }}>
-                  {exp.dates}
-                </span>
-              </div>
-              <BulletList items={exp.bullets} />
-            </div>
-          ))}
-        </div>
-      </div>
+        <div className="min-w-0">
+          <Section id="experience" title="Experience">
+            {resumeData.experience.map(exp => (
+              <Entry key={exp.org + exp.role} title={exp.role} meta={expMeta(exp)} dates={exp.dates}>
+                <Bullets items={exp.bullets} />
+              </Entry>
+            ))}
+          </Section>
 
-      {/* Publications */}
-      <div className="mb-12">
-        <SectionTitle>Publications & Service</SectionTitle>
-        <div className="space-y-6">
-          {resumeData.publications.map((p) => (
-            <div key={p.title}>
-              <div className="flex items-baseline justify-between gap-4">
-                <p className="text-sm font-medium">{p.title}</p>
-                <span className="text-xs font-mono shrink-0" style={{ color: 'var(--color-secondary)' }}>
-                  {p.venue} {p.year}
-                </span>
-              </div>
-              <p className="text-sm mt-1" style={{ color: 'var(--color-secondary)' }}>
-                {p.authorship ? `${p.authorship}` : ''}
-                {p.note ? `${p.authorship ? ' · ' : ''}${p.note}` : ''}
-              </p>
+          <Section id="research" title="Research">
+            {resumeData.research.map(exp => (
+              <Entry key={exp.org + exp.role} title={exp.role} meta={expMeta(exp, false)} dates={exp.dates}>
+                <Bullets items={exp.bullets} />
+              </Entry>
+            ))}
+          </Section>
 
-              {/* Optional links (only render if you later fill them) */}
-              {p.links && (p.links.paper || p.links.project || p.links.bibtex) && (
-                <div className="flex gap-3 mt-2 text-sm">
-                  {p.links.paper && (
-                    <a className="link-underline" href={p.links.paper} target="_blank" rel="noreferrer">
-                      Paper
-                    </a>
-                  )}
-                  {p.links.project && (
-                    <a className="link-underline" href={p.links.project} target="_blank" rel="noreferrer">
-                      Project
-                    </a>
-                  )}
-                  {p.links.bibtex && (
-                    <a className="link-underline" href={p.links.bibtex} target="_blank" rel="noreferrer">
-                      BibTeX
-                    </a>
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Education */}
-      <div>
-        <SectionTitle>Education</SectionTitle>
-        <div className="space-y-8">
-          {resumeData.education.map((edu) => (
-            <div key={edu.school + edu.degree}>
-              <div className="flex items-baseline justify-between gap-4 mb-1">
-                <h4 className="font-medium text-sm">{edu.degree}</h4>
-                {edu.dates && (
-                  <span className="text-xs font-mono shrink-0" style={{ color: 'var(--color-secondary)' }}>
-                    {edu.dates}
-                  </span>
+          <Section id="publications" title="Publications & service">
+            {resumeData.publications.map(p => (
+              <Entry key={p.title} title={p.title} meta={[p.authorship, p.note].filter(Boolean).join(' · ')} dates={`${p.venue} ${p.year}`}>
+                {p.links?.paper && (
+                  <a href={p.links.paper} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-[15px] font-semibold text-forest hover:text-tomato transition-colors">
+                    Paper <icons.external />
+                  </a>
                 )}
-              </div>
-              <p className="text-sm" style={{ color: 'var(--color-secondary)' }}>
-                {edu.school}
-                {edu.location ? ` · ${edu.location}` : ''}
-              </p>
-              {edu.note && (
-                <p className="text-sm mt-1" style={{ color: 'var(--color-secondary)' }}>
-                  {edu.note}
-                </p>
-              )}
-            </div>
-          ))}
+              </Entry>
+            ))}
+          </Section>
+
+          <Section id="education" title="Education">
+            {resumeData.education.map(edu => (
+              <Entry key={edu.school + edu.degree} title={edu.degree} meta={[edu.school, edu.location].filter(Boolean).join(' · ')} dates={edu.dates}>
+                {edu.note && <p className="mt-2 max-w-[78ch] text-[17px] text-mute">{edu.note}</p>}
+              </Entry>
+            ))}
+          </Section>
         </div>
       </div>
     </div>

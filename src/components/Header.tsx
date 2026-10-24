@@ -1,10 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-
-interface HeaderProps {
-  dark: boolean
-  onToggleDark: () => void
-}
 
 const navLinks = [
   { to: '/',             label: 'Home' },
@@ -15,114 +10,71 @@ const navLinks = [
   { to: '/drawing',      label: 'Drawing' },
 ]
 
-export default function Header({ dark, onToggleDark }: HeaderProps) {
-  const location = useLocation()
+export default function Header() {
+  const { pathname } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md"
-      style={{ backgroundColor: 'color-mix(in srgb, var(--color-bg) 85%, transparent)' }}
+      className={`sticky top-0 z-50 bg-sage transition-[border-color] duration-200 border-b ${scrolled || menuOpen ? 'border-line' : 'border-transparent'}`}
     >
-      <div className="max-w-[800px] mx-auto px-6 py-4 flex items-center justify-between">
-
-        {/* Monogram mark */}
-        <Link
-          to="/"
-          className="font-mono text-lg font-semibold transition-colors"
-          style={{ color: 'var(--color-text)', letterSpacing: '-0.02em' }}
-          onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-accent)')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text)')}
-          aria-label="Home"
-        >
-          LC
+      <div className="mx-auto flex h-[72px] max-w-[1160px] items-center justify-between px-5 sm:px-10">
+        <Link to="/" className="font-display text-xl font-bold tracking-[-0.01em] text-forest" aria-label="Lawrance Chen, home">
+          Lawrance Chen
         </Link>
 
-        {/* Right side: nav + controls */}
-        <div className="flex items-center gap-5">
+        <nav className="hidden md:flex items-center gap-7 text-[15px] font-medium" aria-label="Primary">
+          {navLinks.map(({ to, label }) => {
+            const active = pathname === to
+            return (
+              <Link
+                key={to}
+                to={to}
+                aria-current={active ? 'page' : undefined}
+                className={`py-1 border-b-2 transition-colors ${active ? 'text-ink border-tomato' : 'text-mute border-transparent hover:text-ink hover:border-line'}`}
+              >
+                {label}
+              </Link>
+            )
+          })}
+        </nav>
 
-          {/* Desktop nav */}
-          <nav className="hidden sm:flex gap-6 text-sm">
-            {navLinks.map(({ to, label }) => {
-              const active = location.pathname === to
-              return (
-                <Link
-                  key={to}
-                  to={to}
-                  className={`nav-link${active ? ' active' : ''}`}
-                >
-                  {label}
-                </Link>
-              )
-            })}
-          </nav>
-
-          {/* Mobile hamburger */}
-          <button
-            className="sm:hidden p-1.5 rounded-lg cursor-pointer transition-colors"
-            style={{ color: 'var(--color-secondary)' }}
-            aria-label="Toggle navigation"
-            onClick={() => setMenuOpen(prev => !prev)}
-          >
-            {menuOpen ? (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            ) : (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </svg>
-            )}
-          </button>
-
-          {/* Dark mode toggle */}
-          <button
-            onClick={onToggleDark}
-            className="p-1.5 rounded-lg transition-colors cursor-pointer"
-            style={{ color: 'var(--color-secondary)' }}
-            aria-label="Toggle dark mode"
-          >
-            {dark ? (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </svg>
-            ) : (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
-            )}
-          </button>
-        </div>
+        <button
+          className="md:hidden -mr-2 p-2 rounded-full text-forest cursor-pointer hover:bg-forest-tint transition-colors"
+          aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(o => !o)}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            {menuOpen ? <path d="M18 6 6 18M6 6l12 12" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+          </svg>
+        </button>
       </div>
 
-      {/* Mobile dropdown */}
       {menuOpen && (
-        <nav
-          className="sm:hidden border-t px-6 py-4 space-y-4"
-          style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
-        >
-          {navLinks.map(({ to, label }) => (
-            <Link
-              key={to}
-              to={to}
-              className="block text-sm font-medium transition-colors"
-              style={{ color: location.pathname === to ? 'var(--color-text)' : 'var(--color-secondary)' }}
-              onClick={() => setMenuOpen(false)}
-            >
-              {label}
-            </Link>
-          ))}
+        <nav className="md:hidden border-t border-line px-5 pb-5 pt-2" aria-label="Primary">
+          {navLinks.map(({ to, label }) => {
+            const active = pathname === to
+            return (
+              <Link
+                key={to}
+                to={to}
+                aria-current={active ? 'page' : undefined}
+                onClick={() => setMenuOpen(false)}
+                className={`flex items-center justify-between py-3 font-display text-2xl font-semibold border-b border-line last:border-b-0 ${active ? 'text-tomato' : 'text-forest'}`}
+              >
+                {label}
+              </Link>
+            )
+          })}
         </nav>
       )}
     </header>

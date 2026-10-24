@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-23T00:00:00Z",
+  "title": "Design System: Lawrance Chen",
+  "extensions": {
+    "colorMeta": {
+      "sage": { "role": "neutral", "displayName": "Sage Ground", "canonical": "#eef1ec", "oklch": "oklch(95.4% 0.007 132)", "tonalRamp": ["#0a0c09", "#232521", "#3e413d", "#5c5e5a", "#7c7e7a", "#9d9f9b", "#c2c5c0", "#edf0eb"] },
+      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#ffffff", "oklch": "oklch(100% 0 0)", "tonalRamp": ["#0b0b0b", "#242424", "#404040", "#5d5d5d", "#7d7d7d", "#9e9e9e", "#c4c4c4", "#eeeeee"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#1a1d1b", "oklch": "oklch(22.7% 0.006 157)", "tonalRamp": ["#090c0a", "#222523", "#3d413e", "#5b5f5c", "#7a7e7c", "#9c9f9d", "#c1c5c2", "#ebf0ed"] },
+      "mute": { "role": "neutral", "displayName": "Moss Gray", "canonical": "#525a55", "oklch": "oklch(45.9% 0.013 158)", "tonalRamp": ["#070d09", "#1f2622", "#3a423d", "#58605b", "#77807a", "#98a19b", "#bec7c1", "#e8f1eb"] },
+      "line": { "role": "neutral", "displayName": "Hairline", "canonical": "#cfd6cf", "oklch": "oklch(86.9% 0.012 145)", "tonalRamp": ["#080d08", "#202620", "#3c423c", "#596059", "#797f79", "#9aa09a", "#bfc6bf", "#eaf1ea"] },
+      "forest": { "role": "primary", "displayName": "Forest", "canonical": "#1f4d3a", "oklch": "oklch(38.2% 0.061 164)", "tonalRamp": ["#001205", "#002d1c", "#1b4a37", "#3b6954", "#5b8973", "#7bab94", "#a0d1ba", "#cafce4"] },
+      "forest-deep": { "role": "primary", "displayName": "Deep Forest", "canonical": "#173a2c", "oklch": "oklch(31.8% 0.048 165)", "tonalRamp": ["#001106", "#072b1e", "#254839", "#436657", "#628776", "#83a897", "#a8cfbc", "#d2f9e6"] },
+      "forest-tint": { "role": "primary", "displayName": "Forest Mist", "canonical": "#dce7df", "oklch": "oklch(91.7% 0.016 154)", "tonalRamp": ["#060d08", "#1e2621", "#39423c", "#57605a", "#768079", "#97a19a", "#bdc7bf", "#e7f2ea"] },
+      "tomato": { "role": "secondary", "displayName": "Tomato", "canonical": "#bf3a24", "oklch": "oklch(54.2% 0.173 32)", "tonalRamp": ["#390000", "#5e0000", "#840000", "#a9230c", "#d04a34", "#f76e55", "#ff957a", "#ffd1bc"] },
+      "butter": { "role": "tertiary", "displayName": "Butter", "canonical": "#f3d36b", "oklch": "oklch(87.3% 0.128 92)", "tonalRamp": ["#1d0200", "#3a1d00", "#583a00", "#775900", "#987a00", "#ba9b2d", "#e1c259", "#ffed8d"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Home hero name only, forest." },
+      "headline": { "displayName": "Headline", "purpose": "Page title on every inner route (3rem mobile, 3.75rem desktop)." },
+      "title": { "displayName": "Title", "purpose": "Section headings, 30px mobile / 34px desktop." },
+      "title-item": { "displayName": "Item title", "purpose": "Project and publication article headings, 24px mobile / 28px desktop." },
+      "body": { "displayName": "Body", "purpose": "Running text; mute for prose, ink for emphasis. Long-form 16px at 1.7." },
+      "body-strong": { "displayName": "Strong body", "purpose": "Card titles, gallery captions, list-row titles in Hanken." },
+      "label": { "displayName": "Label", "purpose": "Buttons, metadata, sub-headings inside sections; nav uses 500." },
+      "tag": { "displayName": "Tag", "purpose": "Pill tags." },
+      "code": { "displayName": "Code", "purpose": "BibTeX blocks only." }
+    },
+    "shadows": [
+      { "name": "lift", "value": "0 14px 28px -12px rgba(23, 58, 44, 0.35)", "purpose": "Media hover response, paired with translateY(-4px); removed under reduced motion." },
+      { "name": "float", "value": "0 10px 24px -10px rgba(23, 58, 44, 0.4)", "purpose": "Map popup only." }
+    ],
+    "motion": [
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The system easing for lift, highlighter draw and case-study expand." },
+      { "name": "mark-draw", "value": "0.9s 0.35s ease-out-expo, background-size 0% to 100%", "purpose": "The single authored motion: butter highlighter draws in once on load, only with prefers-reduced-motion: no-preference." },
+      { "name": "lift", "value": "0.35s ease-out-expo", "purpose": "Image hover lift." },
+      { "name": "expand", "value": "grid-template-rows 0fr to 1fr, 0.35s ease-out-expo", "purpose": "Case-study disclosure." },
+      { "name": "state", "value": "0.15s ease (links), 150-200ms color transitions", "purpose": "Hover color and underline changes." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Filled forest pill for the one main action on a surface.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">See projects <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px; background: var(--color-forest, #1f4d3a); color: #fff; padding: 12px 20px; font-family: var(--font-sans, 'Hanken Grotesk', sans-serif); font-size: 15px; font-weight: 600; text-decoration: none; transition: background-color 0.15s; } .ds-btn-primary:hover { background: var(--color-forest-deep, #173a2c); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-tomato, #bf3a24); outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Forest-ringed pill for the secondary action (Resume PDF, Read case study).",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Resume PDF <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 4v12M6 10l6 6 6-6M5 20h14\"/></svg></a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px; background: transparent; color: var(--color-forest, #1f4d3a); box-shadow: inset 0 0 0 1.5px var(--color-forest, #1f4d3a); padding: 12px 20px; font-family: var(--font-sans, 'Hanken Grotesk', sans-serif); font-size: 15px; font-weight: 600; text-decoration: none; transition: background-color 0.15s; } .ds-btn-outline:hover { background: var(--color-forest-tint, #dce7df); } .ds-btn-outline:focus-visible { outline: 2px solid var(--color-tomato, #bf3a24); outline-offset: 3px; }"
+    },
+    {
+      "name": "Tags",
+      "kind": "chip",
+      "refersTo": "tag-plain",
+      "description": "13px semibold pills in plain, butter, forest and mint tones.",
+      "html": "<div class=\"ds-tags\"><span class=\"ds-tag\">PyTorch</span><span class=\"ds-tag ds-tag-butter\">COLM 2024</span><span class=\"ds-tag ds-tag-forest\">Embedded systems</span><span class=\"ds-tag ds-tag-mint\">Research</span></div>",
+      "css": ".ds-tags { display: flex; flex-wrap: wrap; gap: 6px; } .ds-tag { display: inline-flex; align-items: center; border-radius: 9999px; padding: 0 10px; font-family: var(--font-sans, 'Hanken Grotesk', sans-serif); font-size: 13px; font-weight: 600; line-height: 24px; background: var(--color-paper, #fff); color: var(--color-mute, #525a55); box-shadow: inset 0 0 0 1px var(--color-line, #cfd6cf); } .ds-tag-butter { background: var(--color-butter, #f3d36b); color: var(--color-ink, #1a1d1b); box-shadow: none; } .ds-tag-forest { background: var(--color-forest, #1f4d3a); color: #fff; box-shadow: none; } .ds-tag-mint { background: var(--color-forest-tint, #dce7df); color: var(--color-forest, #1f4d3a); box-shadow: none; }"
+    },
+    {
+      "name": "Filter Pills",
+      "kind": "chip",
+      "refersTo": "filter-pill",
+      "description": "Topic filter on the projects page; selected is solid forest.",
+      "html": "<div class=\"ds-filters\"><button class=\"ds-filter is-active\" aria-pressed=\"true\">All <span class=\"ds-count\">13</span></button><button class=\"ds-filter\" aria-pressed=\"false\">Robotics <span class=\"ds-count\">5</span></button></div>",
+      "css": ".ds-filters { display: flex; flex-wrap: wrap; gap: 8px; } .ds-filter { cursor: pointer; border: 0; border-radius: 9999px; padding: 6px 14px; font-family: var(--font-sans, 'Hanken Grotesk', sans-serif); font-size: 14px; font-weight: 600; background: var(--color-paper, #fff); color: var(--color-mute, #525a55); box-shadow: inset 0 0 0 1px var(--color-line, #cfd6cf); transition: color 0.15s, box-shadow 0.15s, background-color 0.15s; } .ds-filter:hover { color: var(--color-ink, #1a1d1b); box-shadow: inset 0 0 0 1px var(--color-forest, #1f4d3a); } .ds-filter.is-active { background: var(--color-forest, #1f4d3a); color: #fff; box-shadow: none; } .ds-filter:focus-visible { outline: 2px solid var(--color-tomato, #bf3a24); outline-offset: 3px; } .ds-count { font-variant-numeric: tabular-nums; opacity: 0.7; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Sage sticky header: forest wordmark, text links with a tomato underline on the active one.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-wordmark\" href=\"#\">Lawrance Chen</a><nav class=\"ds-links\"><a href=\"#\" aria-current=\"page\">Home</a><a href=\"#\">Projects</a><a href=\"#\">Publications</a><a href=\"#\">Resume</a></nav></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 40px; background: var(--color-sage, #eef1ec); border-bottom: 1px solid var(--color-line, #cfd6cf); } .ds-wordmark { font-family: var(--font-display, 'Bricolage Grotesque', sans-serif); font-size: 20px; font-weight: 700; letter-spacing: -0.01em; color: var(--color-forest, #1f4d3a); text-decoration: none; } .ds-links { display: flex; gap: 28px; font-family: var(--font-sans, 'Hanken Grotesk', sans-serif); font-size: 15px; font-weight: 500; } .ds-links a { padding: 4px 0; color: var(--color-mute, #525a55); text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; } .ds-links a:hover { color: var(--color-ink, #1a1d1b); border-color: var(--color-line, #cfd6cf); } .ds-links a[aria-current=page] { color: var(--color-ink, #1a1d1b); border-color: var(--color-tomato, #bf3a24); } .ds-links a:focus-visible { outline: 2px solid var(--color-tomato, #bf3a24); outline-offset: 3px; border-radius: 6px; }"
+    },
+    {
+      "name": "Project Tile",
+      "kind": "card",
+      "refersTo": "media-tile",
+      "description": "White 16px image well with hover lift, Hanken title that turns tomato, subtitle and one tag.",
+      "html": "<a class=\"ds-tile\" href=\"#\"><div class=\"ds-tile-media\"></div><h3 class=\"ds-tile-title\">LLM-Driven Assistive Grasper</h3><p class=\"ds-tile-sub\">Per-patient gripper design from a language model pipeline.</p><span class=\"ds-tile-tag\">LLMs x Robotics</span></a>",
+      "css": ".ds-tile { display: block; max-width: 340px; text-decoration: none; color: var(--color-ink, #1a1d1b); font-family: var(--font-sans, 'Hanken Grotesk', sans-serif); } .ds-tile-media { aspect-ratio: 16 / 10; border-radius: 16px; background: var(--color-paper, #fff); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1); } .ds-tile:hover .ds-tile-media { transform: translateY(-4px); box-shadow: 0 14px 28px -12px rgba(23, 58, 44, 0.35); } .ds-tile-title { margin: 16px 0 0; font-size: 18px; font-weight: 600; line-height: 1.375; transition: color 0.15s; } .ds-tile:hover .ds-tile-title { color: var(--color-tomato, #bf3a24); } .ds-tile-sub { margin: 4px 0 12px; font-size: 15px; line-height: 1.625; color: var(--color-mute, #525a55); } .ds-tile-tag { display: inline-flex; border-radius: 9999px; padding: 0 10px; font-size: 13px; font-weight: 600; line-height: 24px; background: var(--color-butter, #f3d36b); color: var(--color-ink, #1a1d1b); } .ds-tile:focus-visible { outline: 2px solid var(--color-tomato, #bf3a24); outline-offset: 3px; border-radius: 6px; }"
+    },
+    {
+      "name": "Ruled List Row",
+      "kind": "custom",
+      "refersTo": "ruled-list",
+      "description": "Hairline-bounded rows for experience, publications and resume entries, dates right in tabular numerals.",
+      "html": "<ul class=\"ds-rows\"><li><div><p class=\"ds-row-title\">Industry Researcher</p><p class=\"ds-row-meta\">TrendForce Corporation</p></div><p class=\"ds-row-date\">Oct 2024 - Jun 2025</p></li><li><div><p class=\"ds-row-title\">Software Engineer Intern</p><p class=\"ds-row-meta\">Pegatron Corporation</p></div><p class=\"ds-row-date\">Jul - Aug 2023</p></li></ul>",
+      "css": ".ds-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--color-line, #cfd6cf); font-family: var(--font-sans, 'Hanken Grotesk', sans-serif); } .ds-rows li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 24px; padding: 16px 0; border-bottom: 1px solid var(--color-line, #cfd6cf); } .ds-rows p { margin: 0; } .ds-row-title { font-weight: 600; line-height: 1.375; color: var(--color-ink, #1a1d1b); } .ds-row-meta, .ds-row-date { font-size: 15px; color: var(--color-mute, #525a55); } .ds-row-date { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Highlighter Mark and Inline Link",
+      "kind": "custom",
+      "refersTo": "mark",
+      "description": "The butter highlighter stroke that draws in once, beside the tomato inline link.",
+      "html": "<p class=\"ds-prose\">I build systems that <span class=\"ds-mark\">reason about the physical world</span>, published at <a class=\"ds-link\" href=\"#\">COLM 2024</a>.</p>",
+      "css": ".ds-prose { font-family: var(--font-sans, 'Hanken Grotesk', sans-serif); font-size: 18px; line-height: 1.65; color: var(--color-mute, #525a55); max-width: 64ch; } .ds-mark { color: var(--color-ink, #1a1d1b); background-image: linear-gradient(var(--color-butter, #f3d36b), var(--color-butter, #f3d36b)); background-repeat: no-repeat; background-position: 0 88%; background-size: 100% 0.42em; padding: 0 0.08em; margin: 0 -0.08em; -webkit-box-decoration-break: clone; box-decoration-break: clone; } @media (prefers-reduced-motion: no-preference) { .ds-mark { animation: ds-mark-draw 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; } } @keyframes ds-mark-draw { from { background-size: 0% 0.42em; } to { background-size: 100% 0.42em; } } .ds-link { color: var(--color-tomato, #bf3a24); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: text-decoration-thickness 0.15s ease; } .ds-link:hover { text-decoration-thickness: 2px; } .ds-link:focus-visible { outline: 2px solid var(--color-tomato, #bf3a24); outline-offset: 3px; border-radius: 6px; }"
+    },
+    {
+      "name": "Now Card",
+      "kind": "card",
+      "refersTo": "now-card",
+      "description": "Compact forest panel under the hero portrait.",
+      "html": "<p class=\"ds-now\"><span class=\"ds-now-lead\">Now</span> - Berkeley MEng Capstone: LLM-driven assistive grasper design, submitted to IROS 2026</p>",
+      "css": ".ds-now { max-width: 340px; margin: 0; border-radius: 16px; background: var(--color-forest, #1f4d3a); color: var(--color-forest-tint, #dce7df); padding: 16px 20px; font-family: var(--font-sans, 'Hanken Grotesk', sans-serif); font-size: 15px; line-height: 1.375; } .ds-now-lead { font-weight: 600; color: var(--color-butter, #f3d36b); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Botanical Lab Bench",
+    "overview": "A classic engineer portfolio - name, bio, portrait, selected work, ruled lists of experience and papers, a contact close - whose character comes entirely from a disciplined four-ink palette and a confident grotesque display face. The structure is deliberately familiar; the craft lives in color restraint, generous whitespace, hairline rules and a single moment of authored motion. Pages read like a well-kept lab notebook pressed between sage pages: quiet ground, forest headings, a tomato pen for anything clickable, and a butter highlighter for the one phrase that matters.\n\nDensity is calm and editorial. One 1160px column, light theme only, white surfaces reserved for images and reading panels. Separation comes from 1px rules and whitespace rather than boxes and shadows. The system explicitly replaces a gray template look: no mono eyebrow labels over headings, no shadowed gray cards, no icon-tile skill grids, no dot timelines.",
+    "keyCharacteristics": [
+      "Sage ground, white image surfaces, forest headings, tomato interaction, butter emphasis.",
+      "Bricolage Grotesque bold headings at tight negative tracking; Hanken Grotesk for everything read.",
+      "Pills for everything pressed or tagged; 16-24px radii for images and panels.",
+      "Flat at rest; hairline rules organize lists; a soft forest-tinted lift only on hover.",
+      "One authored motion: the highlighter stroke drawing in once on load."
+    ],
+    "rules": [
+      { "name": "The Four Inks Rule", "body": "Sage ground plus forest, tomato and butter, with green-leaning neutrals. No fifth hue enters the UI; data marks reuse the same inks.", "section": "colors" },
+      { "name": "The Tomato Means Touch Rule", "body": "Tomato appears only on things that respond: links, hover, the active nav underline, focus and caret. Never use it for decoration or headings.", "section": "colors" },
+      { "name": "The Reserved Forest Rule", "body": "Solid forest fills are limited to primary buttons, the active filter pill, the forest tag, one compact dark card, and the footer. Never flood a content section with forest.", "section": "colors" },
+      { "name": "The Two Voices Rule", "body": "Bricolage sets page, section and article headings, the wordmark, the mobile menu and case-study row labels. Anything inside a card or list row is Hanken semibold.", "section": "typography" },
+      { "name": "The Sentence Case Rule", "body": "No uppercase, no letter-spaced labels, no small text placed above a heading. Headings stand alone; context goes in the line beneath them.", "section": "typography" },
+      { "name": "The Tabular Dates Rule", "body": "Dates and counts use tabular numerals and right-align in list rows on desktop.", "section": "typography" },
+      { "name": "The Hairline Not Shadow Rule", "body": "Cards and list rows never carry a resting shadow or a border box; group with a 1px hairline rule or a white well on sage.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep the page on sage and put images and reading panels on white wells with 16-24px corners.",
+      "Do use tomato only for interaction: links, hover, active nav underline, focus ring.",
+      "Do separate list content with 1px hairline rules and 16-24px row padding.",
+      "Do set page, section and article headings in Bricolage Grotesque 700 forest with negative tracking, and everything inside cards in Hanken Grotesk.",
+      "Do make every button, tag and filter a full pill.",
+      "Do reserve butter for the highlighter, selection, venue tags and the footer email action.",
+      "Do honor reduced motion: the highlighter appears static and the lift is removed.",
+      "Do keep the site light-only."
+    ],
+    "donts": [
+      "Don't add mono or uppercase eyebrow labels above headings.",
+      "Don't give cards a resting drop shadow or a gray fill; shadows are hover-only and forest-tinted.",
+      "Don't build skill sections as icon tiles; use plain columns of text.",
+      "Don't draw timelines with dots and connecting lines; use ruled rows.",
+      "Don't introduce a fifth hue or a dark theme.",
+      "Don't use more than one highlighter phrase per page section, or add other entrance animations."
+    ]
+  }
+}

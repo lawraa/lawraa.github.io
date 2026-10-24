@@ -10,7 +10,6 @@ export interface ClimbingPhoto {
   caption: string
   grade: string
   location: string
-  color: string
   src?: string
 }
 
@@ -36,7 +35,6 @@ export const photos: ClimbingPhoto[] = [
     caption: 'First competition ever',
     grade: '2nd Place',
     location: 'Taipei, Taiwan',
-    color: '#4a6741',
     src: '/bouldering/comp.JPG',
   },
   {
@@ -44,7 +42,6 @@ export const photos: ClimbingPhoto[] = [
     caption: 'Taiwan Home Gym',
     grade: 'Gym Bros',
     location: 'Taipei, Taiwan',
-    color: '#7a6b5d',
     src: '/bouldering/home_gym_taiwan.JPG',
   },
   {
@@ -52,15 +49,13 @@ export const photos: ClimbingPhoto[] = [
     caption: 'Thailand Climbing Trip',
     grade: 'Go Bould',
     location: 'Phuket, Thailand',
-    color: '#5b6e8a',
     src: '/bouldering/thailand.JPG',
   },
   {
     id: '4',
     caption: 'Climbing in the States',
-    grade: 'U.S. Home Gym',
+    grade: 'Climbing with friends',
     location: 'Berkeley, CA',
-    color: '#8a7a5b',
     src: '/bouldering/oaks.jpeg',
   },
   {
@@ -68,7 +63,6 @@ export const photos: ClimbingPhoto[] = [
     caption: 'Climbing in LA',
     grade: 'Bouldering Date',
     location: 'Los Angeles, CA',
-    color: '#6b5b7a',
     src: '/bouldering/LA.JPG',
   },
   {
@@ -76,7 +70,6 @@ export const photos: ClimbingPhoto[] = [
     caption: '2nd Competition',
     grade: 'Gym Bros',
     location: 'Redwood City, CA',
-    color: '#7a5b5b',
     src: '/bouldering/comp2.JPG',
   },
 ]
@@ -100,6 +93,10 @@ export const gyms: ClimbingGym[] = [
   { name: 'Cliffs of Id',                      city: 'Los Angeles',   country: 'USA',      lat: 34.0572, lng: -118.2294 },
   { name: 'Benchmark Climbing',                city: 'Berkeley',      country: 'USA',      lat: 37.8672, lng: -122.2780 },
   { name: 'UCB Recreational Sports Facility',  city: 'Berkeley',      country: 'USA',      lat: 37.8672, lng: -122.2585 },
+  { name: 'Seattle Bouldering Project - Poplar',     city: 'Seattle', country: 'USA', lat: 47.5937, lng: -122.3109 },
+  { name: 'Seattle Bouldering Project - Fremont',    city: 'Seattle', country: 'USA', lat: 47.6502, lng: -122.3418 },
+  { name: 'Seattle Bouldering Project - U District', city: 'Seattle', country: 'USA', lat: 47.6615, lng: -122.3130 },
+  { name: 'Momentum Indoor Climbing - Memorial',     city: 'Houston', country: 'USA', lat: 29.7852, lng: -95.5589 },
 
   // ── Taiwan ───────────────────────────────────────────────────────────
   { name: 'YongHe Climbing Gym',               city: 'Taipei',        country: 'Taiwan',   lat: 25.0094, lng: 121.5133 },

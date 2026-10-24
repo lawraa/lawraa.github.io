@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Impeccable working files (sketches, review captures, hook cache)
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/hook.cache.json

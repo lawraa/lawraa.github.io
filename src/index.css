@@ -1,71 +1,122 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-}
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
-:root {
-  --color-bg: #fafaf8;
-  --color-text: #111111;
-  --color-secondary: #6b6b6b;
-  --color-accent: #3a6ff7;
-  --color-border: #e5e5e5;
-  --color-surface: #f0f0ee;
-  --color-surface-hover: #e8e8e5;
-}
-
-.dark {
-  --color-bg: #1a1a1a;
-  --color-text: #e8e8e8;
-  --color-secondary: #999999;
-  --color-accent: #5b8af7;
-  --color-border: #333333;
-  --color-surface: #242424;
-  --color-surface-hover: #2e2e2e;
+  --color-sage: #eef1ec;
+  --color-paper: #ffffff;
+  --color-ink: #1a1d1b;
+  --color-mute: #525a55;
+  --color-line: #cfd6cf;
+  --color-forest: #1f4d3a;
+  --color-forest-deep: #173a2c;
+  --color-forest-tint: #dce7df;
+  --color-tomato: #bf3a24;
+  --color-butter: #f3d36b;
 }
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: var(--color-line) var(--color-sage);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--color-sage);
+  color: var(--color-ink);
   font-family: var(--font-sans);
-  transition: background-color 0.2s, color 0.2s;
+  font-size: 17px;
+  line-height: 1.6;
+  caret-color: var(--color-tomato);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Animated underline links */
-.link-underline {
-  position: relative;
-  text-decoration: none;
-  color: var(--color-accent);
+::selection {
+  background: var(--color-butter);
+  color: var(--color-ink);
 }
 
-.link-underline::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 0;
-  height: 1px;
-  background-color: var(--color-accent);
-  transition: width 0.2s ease;
+:focus-visible {
+  outline: 2px solid var(--color-tomato);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
-.link-underline:hover::after {
-  width: 100%;
+h1, h2, h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
 }
 
-/* Expand/collapse transition */
+p, li, dd {
+  text-wrap: pretty;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Inline text link: tomato with an offset underline that thickens on hover */
+.link {
+  color: var(--color-tomato);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-thickness 0.15s ease, color 0.15s ease;
+}
+
+.link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Highlighter mark: butter stroke drawn in once on load */
+.mark {
+  color: var(--color-ink);
+  background-image: linear-gradient(var(--color-butter), var(--color-butter));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 100% 0.42em;
+  padding: 0 0.08em;
+  margin: 0 -0.08em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mark {
+    animation: mark-draw 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+  }
+}
+
+@keyframes mark-draw {
+  from { background-size: 0% 0.42em; }
+  to   { background-size: 100% 0.42em; }
+}
+
+/* Image lift on hover, for project and gallery media */
+.lift {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .lift,
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px -12px rgba(23, 58, 44, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .lift, .group:hover .lift, .lift:hover { transition: none; transform: none; }
+}
+
+/* Expand/collapse for case studies */
 .expand-content {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .expand-content.expanded {
@@ -76,109 +127,32 @@ body {
   overflow: hidden;
 }
 
-/* Header nav links */
-.nav-link {
-  position: relative;
-  text-decoration: none;
-  color: var(--color-secondary);
-  transition: color 0.2s ease;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-  width: 0;
-  height: 1.5px;
-  background-color: var(--color-accent);
-  transition: width 0.2s ease;
-}
-
-.nav-link:hover {
-  color: var(--color-text);
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
-}
-
-.nav-link.active {
-  color: var(--color-text);
-}
-
-/* Sub-page entrance animation */
-@keyframes page-fade-up {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.page-animate {
-  animation: page-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Hero page-load animation */
-@keyframes hero-fade-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.hero-animate {
-  animation: hero-fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Scroll reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Card depth */
-.card {
-  border: 1px solid var(--color-border);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-  transition: background-color 0.2s, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09), 0 2px 4px rgba(0, 0, 0, 0.05);
-  border-color: color-mix(in srgb, var(--color-border) 60%, var(--color-accent) 40%);
-}
-
-.dark .card {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25);
-}
-
-.dark .card:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
 /* Fix Tailwind preflight breaking Leaflet tile images */
 .leaflet-container img {
   max-width: none !important;
   height: unset !important;
 }
 
-/* Leaflet map theme overrides */
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: var(--color-forest-tint);
+}
+
+/* Pull the gray basemap toward the sage palette */
+.leaflet-tile-pane {
+  filter: sepia(0.35) hue-rotate(55deg) saturate(0.7) brightness(1.02);
+}
+
 .leaflet-popup-content-wrapper {
-  background: var(--color-surface) !important;
-  color: var(--color-text) !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 10px !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  background: var(--color-paper) !important;
+  color: var(--color-ink) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 24px -10px rgba(23, 58, 44, 0.4) !important;
   padding: 0 !important;
 }
 
 .leaflet-popup-tip {
-  background: var(--color-surface) !important;
+  background: var(--color-paper) !important;
 }
 
 .leaflet-popup-content {
@@ -190,46 +164,44 @@ body {
   flex-direction: column;
   gap: 2px;
   padding: 10px 14px;
-  font-family: var(--font-sans);
 }
 
 .bouldering-popup strong {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-ink);
 }
 
 .bouldering-popup span {
-  font-size: 11px;
-  color: var(--color-secondary);
-  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-mute);
 }
 
 .leaflet-bar a {
-  background: var(--color-surface) !important;
-  color: var(--color-text) !important;
-  border-color: var(--color-border) !important;
+  background: var(--color-paper) !important;
+  color: var(--color-forest) !important;
+  border-color: var(--color-line) !important;
   line-height: 26px !important;
 }
 
 .leaflet-bar a:hover {
-  background: var(--color-surface-hover) !important;
+  background: var(--color-forest-tint) !important;
 }
 
 .leaflet-bar {
-  border: 1px solid var(--color-border) !important;
-  border-radius: 8px !important;
+  border: 1px solid var(--color-line) !important;
+  border-radius: 12px !important;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: none !important;
 }
 
 .leaflet-control-attribution {
-  background: color-mix(in srgb, var(--color-bg) 90%, transparent) !important;
-  color: var(--color-secondary) !important;
-  font-size: 9px !important;
-  border-radius: 4px 0 0 0 !important;
+  background: color-mix(in srgb, var(--color-paper) 85%, transparent) !important;
+  color: var(--color-mute) !important;
+  font-size: 13px !important;
+  border-radius: 6px 0 0 0 !important;
 }
 
 .leaflet-control-attribution a {
-  color: var(--color-accent) !important;
+  color: var(--color-forest) !important;
 }
