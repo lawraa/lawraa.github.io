@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { Project } from '../data/projects'
+import { fitClass } from './media'
 import { icons, ext } from './links'
 import { Lightbox, Tag } from './ui'
 
@@ -74,7 +75,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
               alt=""
               loading="lazy"
               decoding="async"
-              className={`h-full w-full ${project.thumbUrl ? 'object-contain' : project.imageFit === 'contain' ? 'object-contain p-4' : 'object-cover'}`}
+              className={`h-full w-full ${fitClass(project)}`}
             />
           </button>
         )}
@@ -84,7 +85,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             {title}
           </h2>
           {project.affiliation && <p className="mt-1.5 text-[0.9375rem] font-medium text-mute">{project.affiliation}</p>}
-          <p className="mt-3 max-w-[60ch] text-lg leading-relaxed">{project.subtitle}</p>
+          <p className="mt-3 max-w-[66ch] text-lg leading-relaxed">{project.subtitle}</p>
 
           <div className="mt-4 space-y-3 max-w-[70ch] text-[1.0625rem] leading-relaxed text-mute">
             {project.description.map((para, i) => <p key={i}>{para}</p>)}
@@ -94,7 +95,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             {project.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.9375rem] font-semibold">
+          <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-[0.9375rem] font-semibold">
             <button
               type="button"
               onClick={() => { setExpanded(e => !e); setOpened(true) }}

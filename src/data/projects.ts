@@ -159,6 +159,7 @@ export const projects: Project[] = [
     tags: ['Machine Learning', 'Embedded Systems', 'Robotics', 'Raspberry Pi', 'ROS'],
     imageUrl: '/projects/quad_quadruped.jpg',
     thumbUrl: '/thumbs/quad_quadruped.jpg',
+    imageFit: 'cover',
     codeUrl: 'https://github.com/lawraa/WristControlledQuadruped',
     pdfUrl: '/projects/149_final_quadruped.pdf',
     description: [
@@ -189,6 +190,7 @@ export const projects: Project[] = [
     subtitle: 'ResNet50 vs FastViT robustness under intentional racial imbalance (upscaling + race classification)',
     tags: ['Computer Vision', 'Model Evaluation', 'Fairness', 'ResNet50', 'Vision Transformer', 'PyTorch'],
     imageUrl: '/projects/cnnvit_architecture.jpg',
+    imageFit: 'contain',
     codeUrl: 'https://github.com/Maltomatic/RaceComp',
     pdfUrl: '/projects/CNN_ViT_Showdown_for_Racial_Equality.pdf',
     videoUrl: 'https://youtu.be/KG4sqW_j5PE',
@@ -279,6 +281,7 @@ export const projects: Project[] = [
     subtitle: 'Two-stage RAG pipeline for domain translation and editorial style alignment',
     tags: ['LLM', 'RAG', 'NLP', 'Evaluation', 'Embeddings'],
     imageUrl: '/projects/trendforce_pipeline.jpg',
+    imageFit: 'contain',
 
     description: [
       'TrendForce writers rewrite English tech news into Traditional Chinese by hand.',
@@ -307,6 +310,7 @@ export const projects: Project[] = [
     subtitle: 'Embedded perception, safety control, and behavioral cloning for autonomous parking',
     tags: ['Embedded Systems', 'Computer Vision', 'Raspberry Pi', 'STM32', 'Behavioral Cloning'],
     imageUrl: '/projects/smart-driving.jpg',
+    imageFit: 'contain',
     codeUrl: 'https://github.com/lawraa/ESLab_SmartParking/',
     pdfUrl: '/projects/smart-driving.pdf',
     detailImages: [
@@ -404,6 +408,7 @@ export const projects: Project[] = [
     subtitle: 'Network-level simulation comparing hard vs soft handoff using distance and SINR policies',
     tags: ['Networking', 'Simulation', 'Wireless Communication', 'Python', 'Systems Modeling'],
     imageUrl: '/projects/5g-handoff-simulator.jpg',
+    imageFit: 'contain',
     codeUrl: 'https://github.com/lawraa/WMN_intro/tree/main/Final_Project',
     pdfUrl: '/projects/5g-handoff-simulator.pdf',
 

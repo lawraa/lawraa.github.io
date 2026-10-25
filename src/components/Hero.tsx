@@ -3,7 +3,7 @@ import { EMAIL, icons, socials, ext } from './links'
 
 export default function Hero() {
   return (
-    <section className="grid gap-12 pt-10 pb-16 sm:pt-14 md:grid-cols-[minmax(0,1fr)_300px] md:gap-14 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-[72px]">
+    <section className="grid gap-12 pt-10 pb-20 sm:pt-14 sm:pb-24 md:grid-cols-[minmax(0,1fr)_300px] md:gap-14 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-[72px]">
       <div className="min-w-0">
         <h1 className="text-forest font-bold text-[clamp(2.75rem,6.4vw,4.75rem)] leading-[0.98] tracking-[-0.035em]">
           Shou-Jen (Lawrance) Chen
@@ -45,7 +45,7 @@ export default function Hero() {
           <ul className="flex flex-wrap items-center gap-x-4 text-[0.9375rem] font-semibold text-forest xl:ml-3">
             <li><a href={`mailto:${EMAIL}`} className="inline-flex min-h-11 items-center hover:text-tomato transition-colors">Email</a></li>
             {socials.map(({ label, href }) => (
-              <li key={label}><a href={href} {...ext} className="inline-flex min-h-11 min-w-6 items-center justify-center hover:text-tomato transition-colors">{label}</a></li>
+              <li key={label}><a href={href} {...ext} className="inline-flex min-h-11 min-w-6 items-center hover:text-tomato transition-colors">{label}</a></li>
             ))}
           </ul>
         </div>

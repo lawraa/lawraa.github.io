@@ -4,7 +4,7 @@ import { icons, ext } from './links'
 import { Tag } from './ui'
 
 const industryItems = [
-  { role: 'Software Development Engineer', org: 'Amazon · Seattle', dates: 'Sep 2026 – Present' },
+  { role: 'Software Development Engineer', org: 'Amazon\u00a0· Seattle', dates: 'Sep 2026 – Present' },
   { role: 'MEng in EECS, capstone', org: 'UC Berkeley', dates: 'Aug 2025 – May 2026' },
   { role: 'Industry/Lab Researcher', org: 'TrendForce Corporation', dates: 'Oct 2024 – Jun 2025' },
   { role: 'Software Engineer Intern', org: 'Pegatron Corporation', dates: 'Jun – Sep 2023' },
@@ -12,9 +12,9 @@ const industryItems = [
 ]
 
 const researchItems = [
-  { role: 'Research Assistant', org: 'NTU Robot Learning Lab · Shao-Hua Sun', dates: 'Oct 2023 – Jun 2025' },
-  { role: 'Undergraduate Researcher', org: 'NTU Speech Processing & ML Lab · Hung-yi Lee', dates: 'Jul 2023 – Jun 2025' },
-  { role: 'Undergraduate Researcher', org: 'NTU Wireless & Mobile Networking Lab · Hung\u2011Yu\u00a0Wei', dates: 'Jan 2023 – Jan 2024' },
+  { role: 'Research Assistant', org: 'NTU Robot Learning Lab\u00a0· Shao-Hua Sun', dates: 'Oct 2023 – Jun 2025' },
+  { role: 'Undergraduate Researcher', org: 'NTU Speech Processing & ML Lab\u00a0· Hung-yi Lee', dates: 'Jul 2023 – Jun 2025' },
+  { role: 'Undergraduate Researcher', org: 'NTU Wireless & Mobile Networking Lab\u00a0· Hung\u2011Yu\u00a0Wei', dates: 'Jan 2023 – Jan 2024' },
 ]
 
 
@@ -25,7 +25,8 @@ function Timeline({ items }: { items: { role: string; org: string; dates: string
         <li key={item.org + item.role} className="grid gap-x-6 gap-y-0.5 border-b border-line py-4 sm:grid-cols-[minmax(0,1fr)_auto]">
           <div className="min-w-0">
             <p className="font-semibold leading-snug">{item.role}</p>
-            <p className="text-[0.9375rem] text-mute">{item.org}</p>
+            {/* Plain wrapping (not the global 'pretty') so the line breaks after the dot, not before "Lab" */}
+            <p className="text-[0.9375rem] text-mute" style={{ textWrap: 'wrap' }}>{item.org}</p>
           </div>
           <p className="tabular text-[0.9375rem] text-mute sm:text-right sm:whitespace-nowrap">{item.dates}</p>
         </li>

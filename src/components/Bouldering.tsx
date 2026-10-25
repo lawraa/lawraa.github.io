@@ -70,7 +70,7 @@ export default function Bouldering() {
         </a>
       </PageIntro>
 
-      <section aria-labelledby="gallery" className="pb-20">
+      <section aria-labelledby="gallery" className="pb-20 sm:pb-24">
         <h2 id="gallery" className="text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">On the wall</h2>
         <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-3">
           {photos.map(photo => (
@@ -91,7 +91,7 @@ export default function Bouldering() {
         </ul>
       </section>
 
-      <section aria-labelledby="style" className="grid items-start gap-8 pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
+      <section aria-labelledby="style" className="grid items-start gap-8 pb-20 sm:pb-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
         <div className="lg:pt-8">
           <h2 id="style" className="text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">Style profile</h2>
           <p className="mt-4 text-[1.0625rem] text-mute">Self-rated, out of 10.</p>

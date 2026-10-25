@@ -75,7 +75,6 @@
   background: color-mix(in srgb, var(--color-paper) 85%, transparent) !important;
   color: var(--color-mute) !important;
   font-size: 0.8125rem !important;
-  border-radius: 6px 0 0 0 !important;
 }
 
 @media (max-width: 639px) {
@@ -87,4 +86,15 @@
 
 .leaflet-control-attribution a {
   color: var(--color-forest) !important;
+}
+
+/* Keep the attribution clear of the map's 24px rounded corners */
+.leaflet-bottom.leaflet-right {
+  right: 12px;
+  bottom: 6px;
+}
+
+.leaflet-control-attribution {
+  border-radius: 6px !important;
+  max-width: calc(100% - 24px);
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { papers, service } from '../data/research'
 import { useCopied } from '../hooks/useCopied'
+import { fitClass } from './media'
 import { icons, ext } from './links'
 import { PageIntro, Tag } from './ui'
 
@@ -55,7 +56,7 @@ export default function Research() {
           <article key={pub.id} className="grid gap-6 border-t border-line py-10 sm:py-12 md:grid-cols-[300px_minmax(0,1fr)] lg:gap-12">
             {pub.imageUrl && pub.paperUrl && (
               <a href={pub.paperUrl} {...ext} className="lift block aspect-[4/3] overflow-hidden rounded-2xl bg-paper" aria-label={`Open paper: ${pub.title}`}>
-                <img src={pub.thumbUrl ?? pub.imageUrl} alt="" decoding="async" className={`h-full w-full ${pub.thumbUrl ? 'object-contain' : 'object-cover'}`} />
+                <img src={pub.thumbUrl ?? pub.imageUrl} alt="" decoding="async" className={`h-full w-full ${fitClass(pub)}`} />
               </a>
             )}
             <div className="min-w-0">
@@ -102,7 +103,7 @@ export default function Research() {
       </div>
 
       {service.length > 0 && (
-        <section className="mt-16" aria-labelledby="service">
+        <section className="mt-20 sm:mt-24" aria-labelledby="service">
           <h2 id="service" className="text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">Academic service</h2>
           <ul className="mt-5 border-t border-line">
             {service.map(pub => (

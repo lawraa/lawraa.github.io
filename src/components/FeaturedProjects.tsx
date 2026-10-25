@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../data/projects'
+import { fitClass } from './media'
 import { icons } from './links'
 import { Tag, type TagTone } from './ui'
 
@@ -28,8 +29,8 @@ export default function FeaturedProjects() {
 
       <ul className="mt-6 grid gap-x-6 gap-y-10 md:grid-cols-3 md:gap-x-5 lg:gap-x-6">
         {featured.map(({ project, field, tone }) => (
-          <li key={project.id}>
-            <Link to={`/work#${project.id}`} className="group block">
+          <li key={project.id} className="flex">
+            <Link to={`/work#${project.id}`} className="group flex w-full flex-col">
               <div className="lift aspect-[16/10] overflow-hidden rounded-2xl bg-paper">
                 {project.imageUrl && (
                   <img
@@ -37,7 +38,7 @@ export default function FeaturedProjects() {
                     alt=""
                     loading="lazy"
                     decoding="async"
-                    className={`h-full w-full ${project.thumbUrl ? 'object-contain' : project.imageFit === 'contain' ? 'object-contain p-4' : 'object-cover'}`}
+                    className={`h-full w-full ${fitClass(project)}`}
                   />
                 )}
               </div>
@@ -45,7 +46,7 @@ export default function FeaturedProjects() {
                 {project.title.split(':')[0].replace(/ \(.*\)$/, '')}
               </h3>
               <p className="mt-1 text-[0.9375rem] leading-relaxed text-mute">{project.subtitle}</p>
-              <div className="mt-3"><Tag tone={tone}>{field}</Tag></div>
+              <div className="mt-auto pt-3"><Tag tone={tone}>{field}</Tag></div>
             </Link>
           </li>
         ))}

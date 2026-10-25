@@ -6,6 +6,7 @@ import { durationSince } from '../lib/duration'
 
 export default function Drawing() {
   const [lightbox, setLightbox] = useState<DrawingItem>()
+  const single = drawings.length === 1
 
   return (
     <div className="pb-24">
@@ -19,9 +20,10 @@ export default function Drawing() {
         </p>
       </PageIntro>
 
-      <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      {/* A single drawing sits beside its caption instead of alone in a three-column grid */}
+      <ul className={single ? 'max-w-[880px]' : 'grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3'}>
         {drawings.map(drawing => (
-          <li key={drawing.id}>
+          <li key={drawing.id} className={single ? 'sm:grid sm:grid-cols-2 sm:items-end sm:gap-10' : undefined}>
             <button
               type="button"
               onClick={() => setLightbox(drawing)}
@@ -30,21 +32,23 @@ export default function Drawing() {
             >
               <img src={drawing.src} alt="" className="h-full w-full object-cover" draggable={false} loading="lazy" decoding="async" />
             </button>
-            <h2 className="mt-4 font-sans text-lg font-semibold transition-colors peer-hover:text-tomato">{drawing.title}</h2>
-            <p className="text-[0.9375rem] text-mute">{drawing.medium} · {drawing.date}</p>
-            {drawing.description && (
-              <p className="mt-2 text-[1.0625rem] leading-relaxed text-mute">
-                {drawing.description}
-                {drawing.link && (
-                  <>
-                    {' '}
-                    <a href={drawing.link.url} {...ext} className="link inline-flex items-center gap-0.5">
-                      {drawing.link.label} <icons.external size={13} />
-                    </a>
-                  </>
-                )}
-              </p>
-            )}
+            <div className={`mt-4 peer-hover:[&>h2]:text-tomato ${single ? 'sm:mt-0' : ''}`}>
+              <h2 className="font-sans text-lg font-semibold transition-colors">{drawing.title}</h2>
+              <p className="text-[0.9375rem] text-mute">{drawing.medium} · {drawing.date}</p>
+              {drawing.description && (
+                <p className="mt-2 text-[1.0625rem] leading-relaxed text-mute">
+                  {drawing.description}
+                  {drawing.link && (
+                    <>
+                      {' '}
+                      <a href={drawing.link.url} {...ext} className="link inline-flex items-center gap-0.5">
+                        {drawing.link.label} <icons.external size={13} />
+                      </a>
+                    </>
+                  )}
+                </p>
+              )}
+            </div>
           </li>
         ))}
       </ul>
