@@ -53,7 +53,7 @@ export default function Research() {
 
       <div className="border-b border-line">
         {papers.map(pub => (
-          <article key={pub.id} className="grid gap-6 border-t border-line py-10 sm:py-12 md:grid-cols-[300px_minmax(0,1fr)] lg:gap-12">
+          <article key={pub.id} className={`grid gap-6 border-t border-line py-10 sm:py-12 ${pub.imageUrl && pub.paperUrl ? 'md:grid-cols-[300px_minmax(0,1fr)] lg:gap-12' : ''}`}>
             {pub.imageUrl && pub.paperUrl && (
               <a href={pub.paperUrl} {...ext} className="lift block aspect-[4/3] overflow-hidden rounded-2xl bg-paper" aria-label={`Open paper: ${pub.title}`}>
                 <img src={pub.thumbUrl ?? pub.imageUrl} alt="" decoding="async" className={`h-full w-full ${fitClass(pub)}`} />

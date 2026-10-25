@@ -13,6 +13,8 @@ const FEATURED: { id: string; field: string; tone: TagTone }[] = [
 export default function FeaturedProjects() {
   const featured = FEATURED.flatMap(f => {
     const project = projects.find(p => p.id === f.id)
+    // Skip the card rather than break the home page; the smoke test fails on this error.
+    if (!project) console.error(`Featured project "${f.id}" not found in projects.ts`)
     return project ? [{ ...f, project }] : []
   })
 

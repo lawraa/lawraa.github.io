@@ -81,10 +81,12 @@ export const photos: ClimbingPhoto[] = [
   },
 ]
 
+export type Country = 'USA' | 'Taiwan' | 'Thailand'
+
 export interface ClimbingGym {
   name: string
   city: string
-  country: string
+  country: Country
   lat: number
   lng: number
 }

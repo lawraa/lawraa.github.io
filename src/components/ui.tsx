@@ -54,7 +54,7 @@ export function Lightbox({ src, alt, caption, onClose }: { src: string; alt: str
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-4 p-4 sm:p-8 bg-forest-deep/95"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-4 p-4 sm:p-8 bg-forest-deep"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -66,7 +66,7 @@ export function Lightbox({ src, alt, caption, onClose }: { src: string; alt: str
         className="max-h-[80vh] max-w-[92vw] rounded-2xl object-contain bg-paper"
         onClick={e => e.stopPropagation()}
       />
-      {caption && <div className="text-center text-sm text-forest-tint">{caption}</div>}
+      {caption && <div className="text-center text-[0.9375rem] text-forest-tint">{caption}</div>}
       <button
         ref={closeRef}
         onClick={onClose}

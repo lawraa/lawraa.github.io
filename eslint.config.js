@@ -20,4 +20,13 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    files: ['scripts/**/*.mjs'],
+    extends: [js.configs.recommended],
+    languageOptions: {
+      ecmaVersion: 2022,
+      // Node script, but the callbacks passed to page.evaluate run in the browser
+      globals: { ...globals.node, ...globals.browser },
+    },
+  },
 ])

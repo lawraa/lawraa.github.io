@@ -171,7 +171,7 @@ A botanical four-ink palette on a pale sage ground: forest for structure, tomato
 
 ### Primary
 - **Forest** (forest): every page and section heading, the wordmark, primary filled buttons, the active filter pill, outline-button strokes, secondary text links, and the two dark surfaces (the home "Now" card and the closing footer).
-- **Deep Forest** (forest-deep): hover state of filled forest buttons and the 95% lightbox scrim. Never a resting color.
+- **Deep Forest** (forest-deep): hover state of filled forest buttons and the opaque lightbox backdrop (opaque so the forest footer does not show through as a band). Never a resting color.
 - **Forest Mist** (forest-tint): hover wash behind outline buttons and the mobile menu button, the "mint" tag tone, body text on forest surfaces, map and photo placeholder fill.
 
 ### Secondary
@@ -288,7 +288,7 @@ A compact forest panel (16px corners, 16px x 20px padding) under the hero portra
 A full-bleed forest close on every page: a white 36-48px Bricolage headline, an 18px forest-mist line, the butter email pill and copy-email outline, then a 15% white hairline over copyright and white social links with icons that hover to butter.
 
 ### Lightbox
-A 95% deep-forest scrim with the image on a white 16px-cornered well, a forest-mist caption, and a round close button.
+An opaque deep-forest backdrop with the image on a white 16px-cornered well, a forest-mist caption, and a round close button.
 
 ## Do's and Don'ts
 

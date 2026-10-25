@@ -75,6 +75,7 @@
   background: color-mix(in srgb, var(--color-paper) 85%, transparent) !important;
   color: var(--color-mute) !important;
   font-size: 0.8125rem !important;
+  border-radius: 6px !important;
 }
 
 @media (max-width: 639px) {
@@ -93,10 +94,6 @@
   right: 12px;
   bottom: 6px;
   max-width: calc(100% - 24px); /* resolves against the map; on the control it would shrink-wrap */
-}
-
-.leaflet-control-attribution {
-  border-radius: 6px !important;
 }
 
 /* The map wrapper and the zoom bar clip overflow, so draw focus rings inset */

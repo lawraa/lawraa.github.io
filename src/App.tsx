@@ -35,6 +35,12 @@ function RouteEffects() {
   return null
 }
 
+// The Resume page was replaced by the PDF; send old links there.
+function ResumeRedirect() {
+  useEffect(() => { window.location.replace('/resume.pdf') }, [])
+  return null
+}
+
 function App() {
   return (
     <HashRouter>
@@ -54,6 +60,7 @@ function App() {
           <Route path="/publications" element={<Research />} />
           <Route path="/bouldering" element={<Bouldering />} />
           <Route path="/drawing" element={<Drawing />} />
+          <Route path="/resume" element={<ResumeRedirect />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

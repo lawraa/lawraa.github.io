@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
-import { Browser } from 'leaflet'
+import { Browser, type LatLngBoundsLiteral, type PointTuple } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import './BoulderingMap.css'
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet'
-import { gyms } from '../data/bouldering'
+import { gyms, type Country } from '../data/bouldering'
 import { icons } from './links'
 import { pillClass, pillCountClass } from './pill'
 
-const COUNTRY_COLORS: Record<string, string> = {
+const COUNTRY_COLORS: Record<Country, string> = {
   USA:      '#1f4d3a',
   Taiwan:   '#bf3a24',
   Thailand: '#f3d36b',
@@ -17,7 +17,9 @@ const COUNTRY_COLORS: Record<string, string> = {
 // Pacific-centred view holds Taiwan, Thailand and California together.
 const unwrap = (lng: number) => (lng < 0 ? lng + 360 : lng)
 
-const REGION_VIEWS: Record<string, { bounds: [[number, number], [number, number]] }> = {
+type Region = Country | 'all'
+
+const REGION_VIEWS: Record<Region, { bounds: LatLngBoundsLiteral }> = {
   all:      { bounds: [[6, 96], [48, 266]] },
   USA:      { bounds: [[29.2, 236.8], [48.2, 265.0]] },
   Taiwan:   { bounds: [[24.6, 120.8], [25.2, 121.75]] },
@@ -25,13 +27,14 @@ const REGION_VIEWS: Record<string, { bounds: [[number, number], [number, number]
 }
 
 // Extra room at the bottom keeps pins clear of the attribution bar
-const FIT_PADDING = { paddingTopLeft: [32, 32] as [number, number], paddingBottomRight: [32, 64] as [number, number] }
+const FIT_PADDING: { paddingTopLeft: PointTuple; paddingBottomRight: PointTuple } = { paddingTopLeft: [32, 32], paddingBottomRight: [32, 64] }
 
-const REGIONS = ['all', 'USA', 'Taiwan', 'Thailand']
+const COUNTRIES = Object.keys(COUNTRY_COLORS) as Country[]
+const REGIONS: Region[] = ['all', ...COUNTRIES]
 
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-function MapController({ region }: { region: string }) {
+function MapController({ region }: { region: Region }) {
   const map = useMap()
   const regionRef = useRef(region)
   useEffect(() => {
@@ -42,7 +45,6 @@ function MapController({ region }: { region: string }) {
   useEffect(() => {
     regionRef.current = region
     const view = REGION_VIEWS[region]
-    if (!view) return
     if (reduceMotion()) map.fitBounds(view.bounds, { ...FIT_PADDING, animate: false })
     else map.flyToBounds(view.bounds, { ...FIT_PADDING, duration: 1.0 })
   }, [region, map])
@@ -63,7 +65,7 @@ function MapController({ region }: { region: string }) {
 }
 
 export default function BoulderingMap() {
-  const [region, setRegion] = useState('all')
+  const [region, setRegion] = useState<Region>('all')
   const visible = region === 'all' ? gyms : gyms.filter(g => g.country === region)
 
   return (
@@ -108,7 +110,7 @@ export default function BoulderingMap() {
               key={gym.name}
               center={[gym.lat, unwrap(gym.lng)]}
               radius={7}
-              pathOptions={{ fillColor: COUNTRY_COLORS[gym.country] ?? '#525a55', fillOpacity: 1, color: gym.country === 'Thailand' ? '#1f4d3a' : '#ffffff', weight: 2 }}
+              pathOptions={{ fillColor: COUNTRY_COLORS[gym.country], fillOpacity: 1, color: gym.country === 'Thailand' ? '#1f4d3a' : '#ffffff', weight: 2 }}
             >
               <Popup>
                 <div className="bouldering-popup">
@@ -128,7 +130,7 @@ export default function BoulderingMap() {
           <span className="transition-transform duration-300 motion-reduce:transition-none group-open:rotate-180"><icons.chevron /></span>
         </summary>
         <div className="grid gap-x-12 gap-y-8 pb-4 sm:grid-cols-2 lg:grid-cols-3">
-          {REGIONS.filter(r => r !== 'all').map(country => (
+          {COUNTRIES.map(country => (
             <div key={country}>
               <h3 className="flex items-center gap-2 font-sans text-[0.9375rem] font-semibold text-ink">
                 <span className="h-2.5 w-2.5 rounded-full ring-1 ring-forest/30" style={{ backgroundColor: COUNTRY_COLORS[country] }} aria-hidden="true" />

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState } from 'react'
-import { stats, styleRatings, photos, gyms } from '../data/bouldering'
+import { stats, styleRatings, photos, gyms, type ClimbingPhoto } from '../data/bouldering'
 import { icons, ext } from './links'
 import { Lightbox, PageIntro, Tag } from './ui'
 import { focusOpener } from './focusOpener'
@@ -46,7 +46,7 @@ function RadarChart() {
 }
 
 export default function Bouldering() {
-  const [lightbox, setLightbox] = useState<(typeof photos)[number]>()
+  const [lightbox, setLightbox] = useState<ClimbingPhoto>()
   const countries = new Set(gyms.map(g => g.country)).size
 
   return (

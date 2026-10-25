@@ -1,20 +1,29 @@
 name: CI
 
-# Lint, build and smoke-test every page in Chrome. Runs on pull requests and
-# on pushes to branches other than main (main is covered by the deploy workflow).
+# Lint, build and smoke-test every page in Chrome on pushes to branches other than main
+# (main is covered by the deploy workflow). Pull requests only run here when they come
+# from a fork; a branch in this repo is already covered by its push.
 on:
   pull_request:
   push:
     branches-ignore: [main]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
       - run: npm ci
       - run: npm run lint

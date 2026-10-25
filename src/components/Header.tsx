@@ -6,8 +6,16 @@ export default function Header() {
   const { pathname } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLElement>(null)
+  const [prevPath, setPrevPath] = useState(pathname)
+
+  // Close on any navigation, including browser Back/Forward
+  if (pathname !== prevPath) {
+    setPrevPath(pathname)
+    setMenuOpen(false)
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -24,23 +32,27 @@ export default function Header() {
       if (menuRef.current?.contains(document.activeElement)) toggleRef.current?.focus()
       setMenuOpen(false)
     }
-    // Close when the page scrolls or a tap lands outside the header.
-    const onScroll = () => setMenuOpen(false)
+    // Close when the page scrolls, a tap lands outside the site header, or the desktop nav takes over.
+    const close = () => setMenuOpen(false)
     const onPointer = (e: PointerEvent) => {
-      if (!(e.target as Element).closest('header')) setMenuOpen(false)
+      if (!headerRef.current?.contains(e.target as Node)) close()
     }
+    const desktop = window.matchMedia('(min-width: 768px)')
     window.addEventListener('keydown', onKey)
-    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('scroll', close, { passive: true })
     document.addEventListener('pointerdown', onPointer)
+    desktop.addEventListener('change', close)
     return () => {
       window.removeEventListener('keydown', onKey)
-      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('scroll', close)
       document.removeEventListener('pointerdown', onPointer)
+      desktop.removeEventListener('change', close)
     }
   }, [menuOpen])
 
   return (
     <header
+      ref={headerRef}
       className={`sticky top-0 z-50 bg-sage transition-[border-color] duration-200 border-b ${scrolled || menuOpen ? 'border-line' : 'border-transparent'}`}
     >
       <div className="mx-auto flex h-[72px] max-w-[1160px] items-center justify-between px-5 sm:px-10">
