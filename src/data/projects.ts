@@ -123,7 +123,7 @@ export const projects: Project[] = [
     subtitle: 'LLM-guided MuJoCo simulation for automated gripper personalization, 83% convergence across 12 runs, 4 participants',
     tags: ['LLMs', 'Robotics', 'MuJoCo', 'Simulation', 'Optimization', 'Assistive Technology'],
     imageUrl: '/projects/capstone_dorsal-grasper.jpg',
-    thumbUrl: '/projects/capstone_dorsal-grasper.jpg',
+    thumbUrl: '/thumbs/capstone_dorsal-grasper.jpg',
     pdfUrl: '/projects/AI_Driven_Dorsal_Grasper_IROS2026.pdf',
 
     description: [

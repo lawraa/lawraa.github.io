@@ -2,6 +2,7 @@ import { lazy, Suspense, useState } from 'react'
 import { stats, styleRatings, photos, gyms } from '../data/bouldering'
 import { icons, ext } from './links'
 import { Lightbox, PageIntro, Tag } from './ui'
+import { focusOpener } from './focusOpener'
 import { durationSince } from '../lib/duration'
 
 // Leaflet is only needed here, so it loads as its own chunk.
@@ -35,7 +36,7 @@ function RadarChart() {
         const ly = c + (maxR + 24) * Math.sin(a)
         const anchor = Math.abs(Math.cos(a)) < 0.1 ? 'middle' : Math.cos(a) > 0 ? 'start' : 'end'
         return (
-          <text key={label} x={lx} y={ly} textAnchor={anchor} dominantBaseline="middle" className="fill-mute">
+          <text key={label} x={lx} y={ly} textAnchor={anchor} dy="0.35em" className="fill-mute">
             {label} <tspan fontWeight="700" className="fill-ink">{value}</tspan>
           </text>
         )
@@ -73,15 +74,22 @@ export default function Bouldering() {
       <section aria-labelledby="gallery" className="pb-20 sm:pb-24">
         <h2 id="gallery" className="text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">On the wall</h2>
         <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-3">
-          {photos.map(photo => (
+          {photos.map((photo, i) => (
             <li key={photo.id}>
               <button
                 type="button"
-                onClick={() => setLightbox(photo)}
+                onClick={e => { focusOpener(e); setLightbox(photo) }}
                 className="peer lift block aspect-[4/5] w-full cursor-zoom-in overflow-hidden rounded-2xl bg-forest-tint"
                 aria-label={`Enlarge photo: ${photo.caption}`}
               >
-                <img src={photo.thumbUrl ?? photo.src} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
+                <img
+                  src={photo.thumbUrl ?? photo.src}
+                  alt=""
+                  className="h-full w-full object-cover"
+                  loading={i < 3 ? 'eager' : 'lazy'}
+                  fetchPriority={i === 0 ? 'high' : 'auto'}
+                  decoding="async"
+                />
               </button>
               <p className="mt-3 font-semibold leading-snug transition-colors peer-hover:text-tomato">{photo.caption}</p>
               <p className="mt-0.5 text-[0.9375rem] text-mute">{photo.location}</p>

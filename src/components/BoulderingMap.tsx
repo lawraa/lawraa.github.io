@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Browser } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import './BoulderingMap.css'
@@ -33,16 +33,32 @@ const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)')
 
 function MapController({ region }: { region: string }) {
   const map = useMap()
+  const regionRef = useRef(region)
   useEffect(() => {
     map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener noreferrer">Leaflet</a>')
+    map.getContainer().setAttribute('role', 'region')
     map.getContainer().setAttribute('aria-label', `Map of ${gyms.length} climbing gyms. The same gyms are listed below the map.`)
   }, [map])
   useEffect(() => {
+    regionRef.current = region
     const view = REGION_VIEWS[region]
     if (!view) return
     if (reduceMotion()) map.fitBounds(view.bounds, { ...FIT_PADDING, animate: false })
     else map.flyToBounds(view.bounds, { ...FIT_PADDING, duration: 1.0 })
   }, [region, map])
+  // Leaflet only re-measures on window resize. If the container was still collapsed when the map
+  // was created, the first fit lands at max zoom on an empty map, so re-measure and refit.
+  useEffect(() => {
+    let lastHeight = map.getSize().y
+    const ro = new ResizeObserver(() => {
+      map.invalidateSize()
+      const height = map.getSize().y
+      if (lastHeight < 100 && height >= 100) map.fitBounds(REGION_VIEWS[regionRef.current].bounds, { ...FIT_PADDING, animate: false })
+      lastHeight = height
+    })
+    ro.observe(map.getContainer())
+    return () => ro.disconnect()
+  }, [map])
   return null
 }
 

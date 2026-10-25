@@ -3,6 +3,7 @@ import type { Project } from '../data/projects'
 import { fitClass } from './media'
 import { icons, ext } from './links'
 import { Lightbox, Tag } from './ui'
+import { focusOpener } from './focusOpener'
 
 function DetailMedia({ src, alt, rows, poster, onOpen }: { src: string; alt: string; rows?: number; poster?: string; onOpen: (src: string) => void }) {
   const [wide, setWide] = useState(false)
@@ -28,7 +29,7 @@ function DetailMedia({ src, alt, rows, poster, onOpen }: { src: string; alt: str
           }}
         />
       ) : (
-        <button type="button" className="focus-inset block h-full w-full cursor-zoom-in" onClick={() => onOpen(src)} aria-label={`Enlarge ${alt}`}>
+        <button type="button" className="focus-inset block h-full w-full cursor-zoom-in" onClick={e => { focusOpener(e); onOpen(src) }} aria-label={`Enlarge ${alt}`}>
           <img
             src={src}
             alt={alt}
@@ -66,7 +67,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
         {project.imageUrl && (
           <button
             type="button"
-            onClick={() => setLightbox(project.imageUrl)}
+            onClick={e => { focusOpener(e); setLightbox(project.imageUrl) }}
             className="lift aspect-[4/3] w-full cursor-zoom-in overflow-hidden rounded-2xl bg-paper"
             aria-label={`Enlarge image for ${title}`}
           >

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { drawings, type Drawing as DrawingItem } from '../data/drawings'
 import { icons, ext } from './links'
 import { Lightbox, PageIntro } from './ui'
+import { focusOpener } from './focusOpener'
 import { durationSince } from '../lib/duration'
 
 export default function Drawing() {
@@ -26,7 +27,7 @@ export default function Drawing() {
           <li key={drawing.id} className={single ? 'sm:grid sm:grid-cols-2 sm:items-end sm:gap-10' : undefined}>
             <button
               type="button"
-              onClick={() => setLightbox(drawing)}
+              onClick={e => { focusOpener(e); setLightbox(drawing) }}
               className="peer lift block aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl bg-paper"
               aria-label={`View ${drawing.title} full size`}
             >
