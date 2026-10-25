@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { papers, service } from '../data/research'
+import { projects } from '../data/projects'
 import { useCopied } from '../hooks/useCopied'
 import { fitClass } from './media'
 import { icons, ext } from './links'
@@ -77,6 +79,11 @@ export default function Research() {
                   <a href={pub.codeUrl} {...ext} className="inline-flex items-center gap-1.5 text-forest hover:text-tomato transition-colors">
                     <icons.github size={16} /> Code
                   </a>
+                )}
+                {projects.some(p => p.id === pub.id) && (
+                  <Link to={`/work#${pub.id}`} className="inline-flex items-center gap-1.5 text-forest hover:text-tomato transition-colors">
+                    Case study <icons.arrow size={15} />
+                  </Link>
                 )}
                 {pub.projectUrl && (
                   <a href={pub.projectUrl} {...ext} className="inline-flex items-center gap-1 text-forest hover:text-tomato transition-colors">

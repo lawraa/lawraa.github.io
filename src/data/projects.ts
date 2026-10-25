@@ -279,7 +279,7 @@ export const projects: Project[] = [
     title: 'Automating Technology News Translation & Style Adaptation',
     affiliation: 'NTU RLL Lab x TrendForce · Industry-University Research Collaboration',
     subtitle: 'Two-stage RAG pipeline for domain translation and editorial style alignment',
-    tags: ['LLM', 'RAG', 'NLP', 'Evaluation', 'Embeddings'],
+    tags: ['LLMs', 'RAG', 'NLP', 'Evaluation', 'Embeddings'],
     imageUrl: '/projects/trendforce_pipeline.jpg',
     imageFit: 'contain',
 

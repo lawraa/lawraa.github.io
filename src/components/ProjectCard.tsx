@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { Project } from '../data/projects'
 import { fitClass } from './media'
 import { icons, ext } from './links'
@@ -50,6 +50,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
   // Gallery media mounts on first open so collapsed cards don't download it.
   const [opened, setOpened] = useState(defaultExpanded)
   const [lightbox, setLightbox] = useState<string>()
+  const toggleRef = useRef<HTMLButtonElement>(null)
   const sectionsId = `${project.id}-case-study`
   const title = project.title
 
@@ -98,6 +99,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
 
           <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-[0.9375rem] font-semibold">
             <button
+              ref={toggleRef}
               type="button"
               onClick={() => { setExpanded(e => !e); setOpened(true) }}
               aria-expanded={expanded}
@@ -149,6 +151,21 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
               </div>
             )}
           </dl>
+          {/* Long case studies: close from the bottom and return to the card's top */}
+          <button
+            type="button"
+            onClick={() => {
+              setExpanded(false)
+              toggleRef.current?.focus({ preventScroll: true })
+              document.getElementById(project.id)?.scrollIntoView({ block: 'start' })
+            }}
+            aria-controls={sectionsId}
+            aria-expanded
+            className="focus-inset mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-[0.9375rem] font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
+          >
+            Hide case study
+            <span className="rotate-180"><icons.chevron /></span>
+          </button>
         </div>
       </div>
 

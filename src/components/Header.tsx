@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useRef, useState, type MouseEvent } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { pages } from '../pages'
 
 export default function Header() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
+  const navigate = useNavigate()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
@@ -50,13 +51,22 @@ export default function Header() {
     }
   }, [menuOpen])
 
+  // Tapping the page you're on returns to its top (and drops a /work#project deep link)
+  const onNavClick = (to: string) => (e: MouseEvent) => {
+    setMenuOpen(false)
+    if (to !== pathname) return
+    e.preventDefault()
+    if (hash) navigate(to, { replace: true })
+    window.scrollTo({ top: 0 })
+  }
+
   return (
     <header
       ref={headerRef}
       className={`sticky top-0 z-50 bg-sage transition-[border-color] duration-200 border-b ${scrolled || menuOpen ? 'border-line' : 'border-transparent'}`}
     >
       <div className="mx-auto flex h-[72px] max-w-[1160px] items-center justify-between px-5 sm:px-10">
-        <Link to="/" onClick={() => setMenuOpen(false)} className="font-display text-xl font-bold tracking-[-0.01em] text-forest" aria-label="Lawrance Chen, home">
+        <Link to="/" onClick={onNavClick('/')} className="font-display text-xl font-bold tracking-[-0.01em] text-forest" aria-label="Lawrance Chen, home">
           Lawrance Chen
         </Link>
 
@@ -68,6 +78,7 @@ export default function Header() {
                 key={to}
                 to={to}
                 aria-current={active ? 'page' : undefined}
+                onClick={onNavClick(to)}
                 className={`py-1 border-b-2 transition-colors ${active ? 'text-ink border-tomato' : 'text-mute border-transparent hover:text-ink hover:border-line'}`}
               >
                 {label}
@@ -100,7 +111,7 @@ export default function Header() {
                 key={to}
                 to={to}
                 aria-current={active ? 'page' : undefined}
-                onClick={() => setMenuOpen(false)}
+                onClick={onNavClick(to)}
                 className={`flex items-center justify-between py-3 font-display text-2xl font-semibold border-b border-line last:border-b-0 ${active ? 'text-tomato' : 'text-forest'}`}
               >
                 {label}

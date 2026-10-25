@@ -1,5 +1,5 @@
 import { useCopied } from '../hooks/useCopied'
-import { EMAIL, socials, ext } from './links'
+import { EMAIL, socials, ext, icons } from './links'
 
 export default function Footer() {
   const [copied, copy] = useCopied()
@@ -24,6 +24,13 @@ export default function Footer() {
           >
             {copied ? 'Copied to clipboard' : 'Copy email'}
           </button>
+          <a
+            href="/resume.pdf"
+            {...ext}
+            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-[0.9375rem] font-semibold text-white ring-[1.5px] ring-inset ring-forest-tint/60 transition-colors hover:bg-white/10"
+          >
+            Resume PDF <icons.external size={16} />
+          </a>
           <span role="status" className="sr-only">{copied ? 'Email copied to clipboard' : ''}</span>
         </div>
 
