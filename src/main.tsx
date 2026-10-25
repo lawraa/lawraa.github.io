@@ -15,6 +15,15 @@ window.addEventListener('vite:preloadError', () => {
   location.reload()
 })
 
+// Rubber-band scrolling past either end shows the html background. Match it to the nearer end:
+// sage behind the header at the top, forest behind the footer at the bottom.
+const root = document.documentElement
+const matchOverscroll = () => {
+  const nearBottom = window.scrollY > (root.scrollHeight - window.innerHeight) / 2
+  root.style.backgroundColor = nearBottom ? 'var(--color-forest)' : ''
+}
+window.addEventListener('scroll', matchOverscroll, { passive: true })
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

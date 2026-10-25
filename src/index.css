@@ -66,7 +66,6 @@
 html {
   scroll-behavior: smooth;
   scrollbar-color: var(--color-line) var(--color-sage);
-  -webkit-text-size-adjust: 100%;
   color-scheme: light;
   /* Keep anything scrolled into view (keyboard focus, in-page links) clear of the 72px sticky header */
   scroll-padding-top: 6rem;
@@ -82,6 +81,11 @@ body {
   caret-color: var(--color-tomato);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* No double-tap zoom on controls, so quick taps on filter pills don't zoom the page on iOS */
+a, button, summary {
+  touch-action: manipulation;
 }
 
 ::selection {
