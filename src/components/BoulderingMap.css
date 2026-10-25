@@ -1,0 +1,78 @@
+/* Fix Tailwind preflight breaking Leaflet tile images */
+.leaflet-container img {
+  max-width: none !important;
+  height: unset !important;
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: var(--color-forest-tint);
+}
+
+/* Pull the gray basemap toward the sage palette */
+.leaflet-tile-pane {
+  filter: sepia(0.35) hue-rotate(55deg) saturate(0.7) brightness(1.02);
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--color-paper) !important;
+  color: var(--color-ink) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 24px -10px rgba(23, 58, 44, 0.4) !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--color-paper) !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+}
+
+.bouldering-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px;
+}
+
+.bouldering-popup strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.bouldering-popup span {
+  font-size: 13px;
+  color: var(--color-mute);
+}
+
+.leaflet-bar a {
+  background: var(--color-paper) !important;
+  color: var(--color-forest) !important;
+  border-color: var(--color-line) !important;
+  line-height: 26px !important;
+}
+
+.leaflet-bar a:hover {
+  background: var(--color-forest-tint) !important;
+}
+
+.leaflet-bar {
+  border: 1px solid var(--color-line) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: none !important;
+}
+
+.leaflet-control-attribution {
+  background: color-mix(in srgb, var(--color-paper) 85%, transparent) !important;
+  color: var(--color-mute) !important;
+  font-size: 13px !important;
+  border-radius: 6px 0 0 0 !important;
+}
+
+.leaflet-control-attribution a {
+  color: var(--color-forest) !important;
+}

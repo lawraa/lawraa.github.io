@@ -1,0 +1,26 @@
+name: CI
+
+# Lint, build and smoke-test every page in Chrome. Runs on pull requests and
+# on pushes to branches other than main (main is covered by the deploy workflow).
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - name: Smoke test
+        run: |
+          npx vite preview --port 4173 --strictPort &
+          curl --retry 10 --retry-connrefused --retry-delay 1 -s -o /dev/null http://localhost:4173/
+          CHROME_PATH="$(which google-chrome)" npm run smoke

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Browser } from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+import './BoulderingMap.css'
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet'
 import { gyms } from '../data/bouldering'
 import { icons } from './links'

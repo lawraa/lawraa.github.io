@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { stats, styleRatings, photos, gyms } from '../data/bouldering'
-import BoulderingMap from './BoulderingMap'
 import { icons } from './links'
 import { Lightbox, PageIntro, Tag } from './ui'
+
+// Leaflet is only needed here, so it loads as its own chunk.
+const BoulderingMap = lazy(() => import('./BoulderingMap'))
 
 function timeClimbing(): string {
   const start = new Date(2025, 1, 1) // Feb 2025
@@ -108,7 +110,9 @@ export default function Bouldering() {
 
       <section aria-labelledby="gyms">
         <h2 id="gyms" className="mb-6 text-forest text-3xl font-bold tracking-[-0.02em]">Gyms I've climbed</h2>
-        <BoulderingMap />
+        <Suspense fallback={<div className="h-[420px] rounded-3xl bg-forest-tint sm:h-[500px]" />}>
+          <BoulderingMap />
+        </Suspense>
       </section>
 
       {lightbox?.src && (
