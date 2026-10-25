@@ -12,7 +12,9 @@ const viewports = [
 ]
 const sameOrigin = url => { try { return new URL(url).origin === origin } catch { return false } }
 
-const browser = await puppeteer.launch({ executablePath: process.env.CHROME_PATH, args: ['--no-sandbox'] })
+// CI passes CHROME_PATH; locally fall back to the standard macOS install
+const executablePath = process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+const browser = await puppeteer.launch({ executablePath, args: ['--no-sandbox'] })
 const failures = []
 for (const viewport of viewports) {
   for (const route of routes) {
