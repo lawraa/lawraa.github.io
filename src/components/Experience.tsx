@@ -25,7 +25,7 @@ function Timeline({ items }: { items: { role: string; org: string; dates: string
           <div className="min-w-0">
             <p className="font-semibold leading-snug">{item.role}</p>
             {/* Plain wrapping (not the global 'pretty') so the line breaks after the dot, not before "Lab" */}
-            <p className="text-meta text-mute" style={{ textWrap: 'wrap' }}>{item.org}</p>
+            <p className="text-meta text-mute text-wrap">{item.org}</p>
           </div>
           <p className="tabular text-meta text-mute sm:text-right sm:whitespace-nowrap">{item.dates}</p>
         </li>
