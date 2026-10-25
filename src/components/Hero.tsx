@@ -44,7 +44,7 @@ export default function Hero() {
               Resume PDF <icons.external size={16} />
             </a>
           </div>
-          <ul className="flex flex-wrap items-center gap-x-4 text-meta font-semibold text-forest">
+          <ul className="flex flex-wrap items-center gap-x-3.5 sm:gap-x-4 text-meta font-semibold text-forest">
             <li><a href={`mailto:${EMAIL}`} className="inline-flex min-h-11 items-center hover:text-tomato transition-colors">Email</a></li>
             {socials.map(({ label, href }) => (
               <li key={label}><a href={href} {...ext} className="inline-flex min-h-11 min-w-6 items-center hover:text-tomato transition-colors">{label}</a></li>

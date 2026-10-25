@@ -124,7 +124,7 @@ export default function BoulderingMap() {
       </div>
       <p className="mt-3 text-meta text-mute">Select a pin to see the gym, or open the list below.</p>
 
-      <details className="group mt-6 border-t border-line">
+      <details className="group mt-6 border-y border-line">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold text-forest hover:text-tomato transition-colors [&::-webkit-details-marker]:hidden">
           All {gyms.length} gyms as a list
           <span className="transition-transform duration-300 motion-reduce:transition-none group-open:rotate-180"><icons.chevron /></span>

@@ -39,7 +39,7 @@ export const publications: Publication[] = [
   },
   {
     id: 'iclr-dynamic-superb',
-    title: 'Dynamic-SUPERB Phase-2: A Collaboratively Expanding Benchmark for Measuring the Capabilities of Spoken Language Models with 180 Tasks',
+    title: 'Dynamic-SUPERB Phase\u20112: A Collaboratively Expanding Benchmark for Measuring the Capabilities of Spoken Language Models with 180 Tasks',
     authors: ['Chien-yu Huang', 'Wei-Chih Chen', 'Shu-wen Yang', 'Shou-Jen Chen', 'et al.', 'Hung-yi Lee'],
     venue: 'ICLR',
     year: '2025',

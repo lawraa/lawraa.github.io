@@ -106,7 +106,11 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
               aria-controls={sectionsId}
               className="inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
             >
-              {expanded ? 'Hide case study' : 'Read case study'}
+              {/* Both labels share one cell so the button width (and the row's wrapping) stays put when toggled */}
+              <span className="grid">
+                <span className={`col-start-1 row-start-1 ${expanded ? 'invisible' : ''}`}>Read case study</span>
+                <span className={`col-start-1 row-start-1 ${expanded ? '' : 'invisible'}`}>Hide case study</span>
+              </span>
               <span className={`transition-transform duration-300 motion-reduce:transition-none ${expanded ? 'rotate-180' : ''}`}><icons.chevron /></span>
             </button>
             {project.codeUrl && (

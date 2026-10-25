@@ -22,7 +22,7 @@ export default function Footer() {
             onClick={copyEmail}
             className="cursor-pointer rounded-full px-5 py-3 text-meta font-semibold text-white ring-[1.5px] ring-inset ring-forest-tint/60 transition-colors hover:bg-white/10"
           >
-            {copied ? 'Copied to clipboard' : 'Copy email'}
+            {copied ? 'Copied' : 'Copy email'}
           </button>
           <a
             href="/resume.pdf"

@@ -12,8 +12,10 @@ function Authors({ authors, coFirstAuthors }: { authors: string[]; coFirstAuthor
     <p className="text-[1.0625rem] text-mute">
       {authors.map((author, i) => (
         <span key={author}>
-          {author === 'Shou-Jen Chen' ? <strong className="font-semibold text-ink">{author}</strong> : author}
-          {coFirstAuthors?.includes(author) && <sup>*</sup>}
+          <span className="whitespace-nowrap">
+            {author === 'Shou-Jen Chen' ? <strong className="font-semibold text-ink">{author}</strong> : author}
+            {coFirstAuthors?.includes(author) && <sup>*</sup>}
+          </span>
           {i < authors.length - 1 && ', '}
         </span>
       ))}
