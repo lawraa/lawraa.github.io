@@ -123,7 +123,7 @@ export default function Research() {
           <ul className="mt-5 border-t border-line">
             {service.map(pub => (
               <li key={pub.id} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-line py-4">
-                <p className="font-semibold">{pub.title}</p>
+                <p className="font-semibold text-balance">{pub.title}</p>
                 <p className="tabular text-meta text-mute">{pub.year}</p>
               </li>
             ))}

@@ -74,7 +74,7 @@ export function Lightbox({ src, alt, caption, onClose }: { src: string; alt: str
         className="max-h-[80vh] supports-[height:1svh]:max-h-[80svh] max-w-[92vw] rounded-2xl object-contain bg-paper"
         onClick={e => e.stopPropagation()}
       />
-      {caption && <div id={captionId} className="text-center text-meta text-forest-tint">{caption}</div>}
+      {caption && <div id={captionId} className="text-center text-meta text-balance text-forest-tint">{caption}</div>}
       <button
         ref={closeRef}
         onClick={onClose}

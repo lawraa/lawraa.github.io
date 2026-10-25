@@ -114,13 +114,16 @@ footer :focus-visible,
   outline: none;
 }
 
-h1, h2, h3 {
-  font-family: var(--font-display);
-  text-wrap: balance;
-}
+/* Element defaults go in the base layer so utility classes (font-sans, text-balance) can override them */
+@layer base {
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
 
-p, li, dd {
-  text-wrap: pretty;
+  p, li, dd {
+    text-wrap: pretty;
+  }
 }
 
 .tabular {

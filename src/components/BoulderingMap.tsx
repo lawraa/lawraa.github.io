@@ -139,7 +139,7 @@ export default function BoulderingMap() {
               <ul className="mt-2 border-t border-line">
                 {gyms.filter(g => g.country === country).map(gym => (
                   <li key={gym.name} className="flex items-baseline justify-between gap-4 border-b border-line py-2.5 text-meta">
-                    <span className="min-w-0">{gym.name.replace(' - ', '\u00a0- ')}</span>
+                    <span className="min-w-0">{gym.name.replace(' - ', '\u00a0-\u00a0')}</span>
                     <span className="shrink-0 text-mute">{gym.city}</span>
                   </li>
                 ))}

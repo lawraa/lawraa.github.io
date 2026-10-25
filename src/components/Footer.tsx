@@ -22,7 +22,11 @@ export default function Footer() {
             onClick={copyEmail}
             className="cursor-pointer rounded-full px-5 py-3 text-meta font-semibold text-white ring-[1.5px] ring-inset ring-forest-tint/60 transition-colors hover:bg-white/10"
           >
-            {copied ? 'Copied' : 'Copy email'}
+            {/* Both labels share one cell so the button keeps its width and the row doesn't shift */}
+            <span className="grid">
+              <span className={`col-start-1 row-start-1 ${copied ? 'invisible' : ''}`}>Copy email</span>
+              <span className={`col-start-1 row-start-1 ${copied ? '' : 'invisible'}`}>Copied</span>
+            </span>
           </button>
           <a
             href="/resume.pdf"
