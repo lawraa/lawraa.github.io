@@ -5,7 +5,7 @@ import { projects } from '../data/projects'
 import { useCopied } from '../hooks/useCopied'
 import { fitClass } from './media'
 import { icons, ext } from './links'
-import { PageIntro, Tag } from './ui'
+import { PageIntro, Tag, SectionHeading } from './ui'
 
 function Authors({ authors, coFirstAuthors }: { authors: string[]; coFirstAuthors?: string[] }) {
   return (
@@ -17,7 +17,7 @@ function Authors({ authors, coFirstAuthors }: { authors: string[]; coFirstAuthor
           {i < authors.length - 1 && ', '}
         </span>
       ))}
-      {coFirstAuthors && coFirstAuthors.length > 0 && <span className="block text-[0.9375rem]">* equal contribution</span>}
+      {coFirstAuthors && coFirstAuthors.length > 0 && <span className="block text-meta">* equal contribution</span>}
     </p>
   )
 }
@@ -69,7 +69,7 @@ export default function Research() {
               <div className="mt-3"><Authors authors={pub.authors} coFirstAuthors={pub.coFirstAuthors} /></div>
               <p className="mt-4 max-w-[72ch] text-[1.0625rem] leading-[1.7] text-mute">{pub.summary.trim()}</p>
 
-              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.9375rem] font-semibold">
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-meta font-semibold">
                 {pub.paperUrl && (
                   <a href={pub.paperUrl} {...ext} className="inline-flex items-center gap-2 rounded-full bg-forest px-4 py-2 text-white transition-colors hover:bg-forest-deep">
                     Read paper <icons.external />
@@ -111,12 +111,12 @@ export default function Research() {
 
       {service.length > 0 && (
         <section className="mt-20 sm:mt-24" aria-labelledby="service">
-          <h2 id="service" className="text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">Academic service</h2>
+          <SectionHeading id="service">Academic service</SectionHeading>
           <ul className="mt-5 border-t border-line">
             {service.map(pub => (
               <li key={pub.id} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-line py-4">
                 <p className="font-semibold">{pub.title}</p>
-                <p className="tabular text-[0.9375rem] text-mute">{pub.year}</p>
+                <p className="tabular text-meta text-mute">{pub.year}</p>
               </li>
             ))}
           </ul>

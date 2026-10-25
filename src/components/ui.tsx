@@ -11,6 +11,11 @@ export function PageIntro({ title, children }: { title: string; children?: React
   )
 }
 
+// A section inside a page; the page title itself is PageIntro's h1
+export function SectionHeading({ id, className = '', children }: { id: string; className?: string; children: ReactNode }) {
+  return <h2 id={id} className={`text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em] ${className}`}>{children}</h2>
+}
+
 const tagTones = {
   plain: 'bg-paper text-mute ring-1 ring-inset ring-line',
   butter: 'bg-butter text-ink',
@@ -66,7 +71,7 @@ export function Lightbox({ src, alt, caption, onClose }: { src: string; alt: str
         className="max-h-[80vh] max-w-[92vw] rounded-2xl object-contain bg-paper"
         onClick={e => e.stopPropagation()}
       />
-      {caption && <div className="text-center text-[0.9375rem] text-forest-tint">{caption}</div>}
+      {caption && <div className="text-center text-meta text-forest-tint">{caption}</div>}
       <button
         ref={closeRef}
         onClick={onClose}

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { papers } from '../data/research'
 import { icons, ext } from './links'
-import { Tag } from './ui'
+import { Tag, SectionHeading } from './ui'
 
 const industryItems = [
   { role: 'Software Development Engineer', org: 'Amazon\u00a0· Seattle', dates: 'Sep 2026 – Present' },
@@ -26,9 +26,9 @@ function Timeline({ items }: { items: { role: string; org: string; dates: string
           <div className="min-w-0">
             <p className="font-semibold leading-snug">{item.role}</p>
             {/* Plain wrapping (not the global 'pretty') so the line breaks after the dot, not before "Lab" */}
-            <p className="text-[0.9375rem] text-mute" style={{ textWrap: 'wrap' }}>{item.org}</p>
+            <p className="text-meta text-mute" style={{ textWrap: 'wrap' }}>{item.org}</p>
           </div>
-          <p className="tabular text-[0.9375rem] text-mute sm:text-right sm:whitespace-nowrap">{item.dates}</p>
+          <p className="tabular text-meta text-mute sm:text-right sm:whitespace-nowrap">{item.dates}</p>
         </li>
       ))}
     </ul>
@@ -38,20 +38,20 @@ function Timeline({ items }: { items: { role: string; org: string; dates: string
 export default function Experience() {
   return (
     <section className="pb-24" aria-labelledby="experience">
-      <h2 id="experience" className="text-forest font-bold text-3xl sm:text-[2.125rem] tracking-[-0.02em]">Experience</h2>
+      <SectionHeading id="experience">Experience</SectionHeading>
 
       <div className="mt-6 grid gap-12 lg:grid-cols-2 lg:gap-14">
         <div>
-          <h3 className="mb-3 font-sans text-[0.9375rem] font-semibold text-ink">Industry</h3>
+          <h3 className="mb-3 font-sans text-meta font-semibold text-ink">Industry</h3>
           <Timeline items={industryItems} />
         </div>
         <div>
-          <h3 className="mb-3 font-sans text-[0.9375rem] font-semibold text-ink">Research labs</h3>
+          <h3 className="mb-3 font-sans text-meta font-semibold text-ink">Research labs</h3>
           <Timeline items={researchItems} />
 
           <div className="mt-10 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
-            <h3 className="font-sans text-[0.9375rem] font-semibold text-ink">Publications</h3>
-            <Link to="/publications" className="inline-flex items-center gap-1.5 whitespace-nowrap text-[0.9375rem] font-semibold text-tomato hover:underline underline-offset-4">
+            <h3 className="font-sans text-meta font-semibold text-ink">Publications</h3>
+            <Link to="/publications" className="inline-flex items-center gap-1.5 whitespace-nowrap text-meta font-semibold text-tomato hover:underline underline-offset-4">
               All publications <icons.arrow size={15} />
             </Link>
           </div>
@@ -61,7 +61,7 @@ export default function Experience() {
                 <a href={pub.paperUrl} {...ext} className="min-w-0 font-semibold leading-snug hover:text-tomato transition-colors">
                   {pub.title.split(':')[0]}
                   {pub.coFirstAuthors?.includes('Shou-Jen Chen') && (
-                    <span className="block text-[0.9375rem] font-normal text-mute">Co-first author</span>
+                    <span className="block text-meta font-normal text-mute">Co-first author</span>
                   )}
                 </a>
                 <span className="shrink-0"><Tag tone="butter">{pub.venue} {pub.year}</Tag></span>

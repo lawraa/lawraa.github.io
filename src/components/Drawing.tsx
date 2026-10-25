@@ -35,7 +35,7 @@ export default function Drawing() {
             </button>
             <div className={`mt-4 peer-hover:[&>h2]:text-tomato ${single ? 'sm:mt-0' : ''}`}>
               <h2 className="font-sans text-lg font-semibold transition-colors">{drawing.title}</h2>
-              <p className="text-[0.9375rem] text-mute">{drawing.medium} · {drawing.date}</p>
+              <p className="text-meta text-mute">{drawing.medium} · {drawing.date}</p>
               {drawing.description && (
                 <p className="mt-2 text-[1.0625rem] leading-relaxed text-mute">
                   {drawing.description}

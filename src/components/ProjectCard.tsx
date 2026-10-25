@@ -86,7 +86,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
           <h2 className="text-forest text-2xl sm:text-[1.75rem] font-bold leading-[1.15] tracking-[-0.015em]">
             {title}
           </h2>
-          {project.affiliation && <p className="mt-1.5 text-[0.9375rem] font-medium text-mute">{project.affiliation}</p>}
+          {project.affiliation && <p className="mt-1.5 text-meta font-medium text-mute">{project.affiliation}</p>}
           <p className="mt-3 max-w-[66ch] text-lg leading-relaxed">{project.subtitle}</p>
 
           <div className="mt-4 space-y-3 max-w-[70ch] text-[1.0625rem] leading-relaxed text-mute">
@@ -97,7 +97,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             {project.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-[0.9375rem] font-semibold">
+          <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-meta font-semibold">
             <button
               ref={toggleRef}
               type="button"
@@ -161,7 +161,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             }}
             aria-controls={sectionsId}
             aria-expanded
-            className="focus-inset mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-[0.9375rem] font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
+            className="focus-inset mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-meta font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
           >
             Hide case study
             <span className="rotate-180"><icons.chevron /></span>

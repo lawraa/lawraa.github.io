@@ -48,6 +48,9 @@
   --font-sans: "Hanken Grotesk", "Hanken Grotesk Fallback", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
+  /* Secondary text: meta lines, labels, links in action rows, buttons */
+  --text-meta: 0.9375rem;
+
   --color-sage: #eef1ec;
   --color-paper: #ffffff;
   --color-ink: #1a1d1b;

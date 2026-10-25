@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState } from 'react'
 import { stats, styleRatings, photos, gyms, type ClimbingPhoto } from '../data/bouldering'
 import { icons, ext } from './links'
-import { Lightbox, PageIntro, Tag } from './ui'
+import { Lightbox, PageIntro, Tag, SectionHeading } from './ui'
 import { focusOpener } from './focusOpener'
 import { durationSince } from '../lib/duration'
 
@@ -72,7 +72,7 @@ export default function Bouldering() {
       </PageIntro>
 
       <section aria-labelledby="gallery" className="pb-20 sm:pb-24">
-        <h2 id="gallery" className="text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">On the wall</h2>
+        <SectionHeading id="gallery">On the wall</SectionHeading>
         <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-3">
           {photos.map((photo, i) => (
             <li key={photo.id}>
@@ -92,7 +92,7 @@ export default function Bouldering() {
                 />
               </button>
               <p className="mt-3 font-semibold leading-snug transition-colors peer-hover:text-tomato">{photo.caption}</p>
-              <p className="mt-0.5 text-[0.9375rem] text-mute">{photo.location}</p>
+              <p className="mt-0.5 text-meta text-mute">{photo.location}</p>
               <div className="mt-2"><Tag>{photo.grade}</Tag></div>
             </li>
           ))}
@@ -101,14 +101,14 @@ export default function Bouldering() {
 
       <section aria-labelledby="style" className="grid items-start gap-8 pb-20 sm:pb-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
         <div className="lg:pt-8">
-          <h2 id="style" className="text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">Style profile</h2>
+          <SectionHeading id="style">Style profile</SectionHeading>
           <p className="mt-4 text-[1.0625rem] text-mute">Self-rated, out of 10.</p>
         </div>
         <div className="flex justify-center rounded-3xl bg-paper p-4 sm:p-8"><RadarChart /></div>
       </section>
 
       <section aria-labelledby="gyms">
-        <h2 id="gyms" className="mb-6 text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">Gyms I've climbed</h2>
+        <SectionHeading id="gyms" className="mb-6">Gyms I've climbed</SectionHeading>
         {/* Placeholder matching the chips (two rows on phones), the map, and the caption and list row below it */}
         <Suspense fallback={<><div className="mb-4 h-[5.5rem] sm:h-10" /><div className="h-[360px] rounded-3xl bg-forest-tint sm:h-[min(440px,75svh)]" /><div className="h-[7.5rem]" /></>}>
           <BoulderingMap />

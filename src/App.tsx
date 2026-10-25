@@ -48,7 +48,7 @@ function App() {
       <a
         href="#main"
         onClick={e => { e.preventDefault(); document.getElementById('main')?.focus() }}
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-forest focus:px-5 focus:py-3 focus:text-[0.9375rem] focus:font-semibold focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-forest focus:px-5 focus:py-3 focus:text-meta focus:font-semibold focus:text-white"
       >
         Skip to content
       </a>

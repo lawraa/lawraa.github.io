@@ -14,27 +14,27 @@ export default function Footer() {
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <a
             href={`mailto:${EMAIL}`}
-            className="rounded-full bg-butter px-5 py-3 text-[0.9375rem] font-semibold text-ink transition-colors hover:bg-white"
+            className="rounded-full bg-butter px-5 py-3 text-meta font-semibold text-ink transition-colors hover:bg-white"
           >
             {EMAIL}
           </a>
           <button
             onClick={copyEmail}
-            className="cursor-pointer rounded-full px-5 py-3 text-[0.9375rem] font-semibold text-white ring-[1.5px] ring-inset ring-forest-tint/60 transition-colors hover:bg-white/10"
+            className="cursor-pointer rounded-full px-5 py-3 text-meta font-semibold text-white ring-[1.5px] ring-inset ring-forest-tint/60 transition-colors hover:bg-white/10"
           >
             {copied ? 'Copied to clipboard' : 'Copy email'}
           </button>
           <a
             href="/resume.pdf"
             {...ext}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-[0.9375rem] font-semibold text-white ring-[1.5px] ring-inset ring-forest-tint/60 transition-colors hover:bg-white/10"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-meta font-semibold text-white ring-[1.5px] ring-inset ring-forest-tint/60 transition-colors hover:bg-white/10"
           >
             Resume PDF <icons.external size={16} />
           </a>
           <span role="status" className="sr-only">{copied ? 'Email copied to clipboard' : ''}</span>
         </div>
 
-        <div className="mt-14 flex flex-col-reverse gap-6 border-t border-white/15 pt-6 text-[0.9375rem] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col-reverse gap-6 border-t border-white/15 pt-6 text-meta sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Shou-Jen (Lawrance) Chen</p>
           <ul className="grid grid-cols-2 gap-x-6 font-medium sm:flex sm:flex-wrap">
             {socials.map(({ label, href, Icon }) => (

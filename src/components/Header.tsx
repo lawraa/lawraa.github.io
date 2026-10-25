@@ -70,7 +70,7 @@ export default function Header() {
           Lawrance Chen
         </Link>
 
-        <nav className="hidden md:flex items-center gap-7 text-[0.9375rem] font-medium" aria-label="Primary">
+        <nav className="hidden md:flex items-center gap-7 text-meta font-medium" aria-label="Primary">
           {pages.map(({ path: to, label }) => {
             const active = pathname === to
             return (

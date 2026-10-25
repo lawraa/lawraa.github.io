@@ -210,7 +210,7 @@ A botanical four-ink palette on a pale sage ground: forest for structure, tomato
 - **Item title** (700, 24px mobile / 28px desktop, 1.15, -0.015em): project and publication article headings.
 - **Body** (400, 17px, 1.6; long-form 16px at 1.7 capped at 70-72ch): mute for prose, ink for emphasis. Lede lines run 18-20px weight 500.
 - **Strong body** (600, 18px, snug): card titles, gallery captions, list-row titles in Hanken, never Bricolage.
-- **Label** (600, 15px): buttons, nav (500), metadata rows, sub-headings inside sections ("Industry", "Research labs"), in sentence case.
+- **Label** (600, 15px, the `text-meta` token): buttons, nav (500), metadata rows, sub-headings inside sections ("Industry", "Research labs"), in sentence case.
 - **Tag** (600, 13px, 24px line box): pill tags.
 
 ### Named Rules
