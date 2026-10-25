@@ -112,6 +112,7 @@ const active = page => page.evaluate(() => {
   if (await expanded(page) !== 'false') errors.push('tap outside the menu left it open')
   await page.tap('header button[aria-expanded]')
   await page.keyboard.press('Tab')
+  if (await active(page) !== 'Home') errors.push(`Tab from the toggle went to "${await active(page)}", not the first menu link`)
   await page.keyboard.press('Escape')
   if (await expanded(page) !== 'false') errors.push('Escape left the menu open')
   if (!(await active(page)).includes('navigation')) errors.push(`focus after Escape on "${await active(page)}", not the menu toggle`)
@@ -142,8 +143,11 @@ const active = page => page.evaluate(() => {
 for (const viewport of [phone, desktop]) {
   const id = 'emg-imu-quadruped'
   const { page, errors } = await open(viewport, `#/work#${id}`)
-  await page.evaluate(() => document.fonts.ready)
-  await new Promise(r => setTimeout(r, 300))
+  // Projects scrolls to the card after fonts.ready and one animation frame; wait two frames past that
+  await page.evaluate(async () => {
+    await document.fonts.ready
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))
+  })
   const res = await page.evaluate(id => {
     const card = document.getElementById(id)
     const toggle = card?.querySelector('button[aria-expanded]')
@@ -172,16 +176,17 @@ for (const viewport of [phone, desktop]) {
   await page.setViewport(desktop)
   await page.setRequestInterception(true)
   page.on('request', r => /BoulderingMap-[\w-]+\.js/.test(r.url()) ? r.abort() : r.continue())
+  let loads = 0
+  page.on('load', () => loads++)
   await page.goto(base + '#/bouldering', { waitUntil: 'networkidle2', timeout: 60000 })
-  await page.waitForFunction(() => document.body.innerText.includes("The map couldn't load"), { timeout: 15000 }).catch(() => {})
-  const res = await page.evaluate(() => ({
-    header: !!document.querySelector('header'),
-    footer: !!document.querySelector('footer'),
-    message: document.body.innerText.includes("The map couldn't load"),
-  }))
   const errors = []
-  if (!res.header || !res.footer) errors.push('page unmounted')
-  if (!res.message) errors.push('no map fallback shown')
+  // main.tsx reloads once for a possibly new build, then the guard stops it and the map's boundary shows a retry
+  const shown = await page.waitForFunction(() => document.body.innerText.includes("The map couldn't load"), { timeout: 15000 })
+    .then(() => true, () => false)
+  if (!shown) errors.push('no map fallback shown')
+  if (loads !== 2) errors.push(`expected one reload, saw ${loads - 1}`)
+  const kept = await page.evaluate(() => !!document.querySelector('header') && !!document.querySelector('footer'))
+  if (!kept) errors.push('page unmounted')
   report('map chunk failure keeps the page', errors)
   await page.close()
 }

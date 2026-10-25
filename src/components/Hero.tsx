@@ -9,7 +9,7 @@ export default function Hero() {
           Shou-Jen (Lawrance) Chen
         </h1>
         <p className="mt-5 text-lg sm:text-xl font-medium">
-          Software Development Engineer at Amazon{'\u00a0'}·{' '}
+          Software Development Engineer at Amazon&nbsp;·{' '}
           <span className="whitespace-nowrap">UC Berkeley EECS MEng</span>
         </p>
 
@@ -65,7 +65,7 @@ export default function Hero() {
           />
         </div>
         <p className="mt-3 rounded-2xl bg-forest px-5 py-4 forced-colors:outline forced-colors:outline-1 forced-colors:-outline-offset-1 text-meta leading-snug text-forest-tint">
-          <span className="font-semibold text-butter">Now</span> · Software Development Engineer at Amazon, Seattle
+          <span className="font-semibold text-butter">Now</span>&nbsp;· Software Development Engineer at Amazon, Seattle
         </p>
       </div>
     </section>

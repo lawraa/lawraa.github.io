@@ -53,7 +53,6 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
   const [lightbox, setLightbox] = useState<string>()
   const toggleRef = useRef<HTMLButtonElement>(null)
   const sectionsId = `${project.id}-case-study`
-  const title = project.title
 
   const sections = [
     { label: 'Problem', value: project.problem },
@@ -71,7 +70,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             type="button"
             onClick={e => { focusOpener(e); setLightbox(project.imageUrl) }}
             className="lift aspect-[4/3] w-full cursor-zoom-in overflow-hidden rounded-2xl bg-paper"
-            aria-label={`Enlarge image: ${title}`}
+            aria-label={`Enlarge image: ${project.title}`}
           >
             <img
               src={project.thumbUrl ?? project.imageUrl}
@@ -85,7 +84,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
 
         <div className="min-w-0">
           <h2 className="text-forest text-2xl sm:text-[1.75rem] font-bold leading-[1.15] tracking-[-0.015em]">
-            {title}
+            {project.title}
           </h2>
           {project.affiliation && <p className="mt-1.5 text-meta font-medium text-mute">{typeset(project.affiliation)}</p>}
           <p className="mt-3 max-w-[66ch] text-lg leading-relaxed">{typeset(project.subtitle)}</p>
@@ -150,7 +149,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
                     const src = typeof item === 'string' ? item : item.src
                     const rows = typeof item === 'string' ? undefined : item.rows
                     const poster = typeof item === 'string' ? undefined : item.poster
-                    return <DetailMedia key={src} src={src} rows={rows} poster={poster} alt={`Figure ${i + 1}: ${title}`} onOpen={setLightbox} />
+                    return <DetailMedia key={src} src={src} rows={rows} poster={poster} alt={`Figure ${i + 1}: ${project.title}`} onOpen={setLightbox} />
                   })}
                 </dd>
               </div>
@@ -174,7 +173,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
         </div>
       </div>
 
-      {lightbox && <Lightbox src={lightbox} alt={title} caption={title} onClose={() => setLightbox(undefined)} />}
+      {lightbox && <Lightbox src={lightbox} alt={project.title} caption={project.title} onClose={() => setLightbox(undefined)} />}
     </article>
   )
 }

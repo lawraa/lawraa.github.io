@@ -206,7 +206,8 @@ p, li, dd {
 }
 
 /* Windows High Contrast and other forced-colors modes drop background fills and box-shadow rings,
-   so pills, the selected state and the highlighter need real borders and system colors there */
+   so pills, the selected state and the highlighter need real borders and system colors there.
+   Fixes for single elements (tags, Now card, footer, nav links, radar) are forced-colors: variants in their components. */
 @media (forced-colors: active) {
   :is(a, button).rounded-full {
     border: 1px solid ButtonText;

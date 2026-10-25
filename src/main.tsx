@@ -26,6 +26,7 @@ const matchOverscroll = () => {
   root.style.backgroundColor = nearBottom ? 'var(--color-forest)' : ''
 }
 window.addEventListener('scroll', matchOverscroll, { passive: true })
+matchOverscroll() // a restored scroll position may already be near the bottom
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -10,14 +10,14 @@ const FEATURED: { id: string; field: string; tone: TagTone }[] = [
   { id: 'colm-llm-discussion', field: 'Research · COLM 2024', tone: 'mint' },
 ]
 
-export default function FeaturedProjects() {
-  const featured = FEATURED.flatMap(f => {
-    const project = projects.find(p => p.id === f.id)
-    // Skip the card rather than break the home page; the smoke test fails on this error.
-    if (!project) console.error(`Featured project "${f.id}" not found in projects.ts`)
-    return project ? [{ ...f, project }] : []
-  })
+const featured = FEATURED.flatMap(f => {
+  const project = projects.find(p => p.id === f.id)
+  // Skip the card rather than break the home page; the smoke test fails on this error.
+  if (!project) console.error(`Featured project "${f.id}" not found in projects.ts`)
+  return project ? [{ ...f, project }] : []
+})
 
+export default function FeaturedProjects() {
   return (
     <section className="pb-24" aria-labelledby="selected-work">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">

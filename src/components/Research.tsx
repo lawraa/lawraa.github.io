@@ -29,7 +29,7 @@ function Bibtex({ id, text }: { id: string; text: string }) {
   const [selected, setSelected] = useState(false)
   const preRef = useRef<HTMLPreElement>(null)
   // Clipboard can be blocked; select the text instead so it can be copied by hand.
-  const copyText = () => copy(text).catch(() => {
+  const copyText = () => copy(text).then(() => setSelected(false), () => {
     if (preRef.current) window.getSelection()?.selectAllChildren(preRef.current)
     setSelected(true)
   })

@@ -17,7 +17,6 @@ const researchItems = [
   { role: 'Undergraduate Researcher', org: 'NTU Wireless & Mobile Networking Lab\u00a0· Hung\u2011Yu\u00a0Wei', dates: 'Jan 2023 – Jan 2024' },
 ]
 
-
 function Timeline({ items }: { items: { role: string; org: string; dates: string }[] }) {
   return (
     <ul className="border-t border-line">
