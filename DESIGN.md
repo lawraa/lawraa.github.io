@@ -250,7 +250,7 @@ Confident, rounded and quiet: filled forest for the one main action, an outline 
 - **Shape:** full pill.
 - **Primary:** forest fill, white 15px semibold text, 12px x 20px padding (8px x 16px in dense article action rows), trailing 16-18px line icon with 8px gap.
 - **Hover / Focus:** fill darkens to deep forest via color transition; global 2px tomato focus ring.
-- **Outline:** transparent with an inset 1.5px forest ring and forest text; hover washes forest mist. Used for "Resume PDF" and "Read case study" (with a chevron that rotates 180deg when open). A dense 8px x 16px variant closes an open case study from its end ("Hide case study") and retries the failed map ("Try again", which hovers to paper on its mist panel).
+- **Outline:** transparent with an inset 1.5px forest ring and forest text (with `transform-gpu`, since Firefox drops part of the ring when the pill lands on a half pixel); hover washes forest mist. Used for "Resume PDF" and "Read case study" (with a chevron that rotates 180deg when open). A dense 8px x 16px variant closes an open case study from its end ("Hide case study") and retries the failed map ("Try again", which hovers to paper on its mist panel).
 - **On forest (footer):** butter fill with ink text (hover turns white), paired with a white-text outline using a 60% forest-mist ring and a 10% white hover wash.
 - **Text actions:** forest semibold 15px with optional icon, hover to tomato. Arrow links ("All 13 projects") are tomato with an underline on hover.
 

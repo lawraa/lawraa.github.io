@@ -39,7 +39,7 @@ export default function Hero() {
             <a
               href="/resume.pdf"
               {...ext}
-              className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-meta font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
+              className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-meta font-semibold text-forest ring-[1.5px] ring-inset transform-gpu ring-forest transition-colors hover:bg-forest-tint"
             >
               Resume PDF <icons.external size={16} />
             </a>

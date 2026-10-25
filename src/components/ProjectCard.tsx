@@ -107,7 +107,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
               aria-expanded={expanded}
               aria-controls={sectionsId}
               aria-describedby={titleId}
-              className="inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
+              className="inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-forest ring-[1.5px] ring-inset transform-gpu ring-forest transition-colors hover:bg-forest-tint"
             >
               {/* Both labels share one cell so the button width (and the row's wrapping) stays put when toggled */}
               <span className="grid">
@@ -173,7 +173,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             }}
             aria-controls={sectionsId}
             aria-expanded
-            className="focus-inset mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-meta font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
+            className="focus-inset mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-meta font-semibold text-forest ring-[1.5px] ring-inset transform-gpu ring-forest transition-colors hover:bg-forest-tint"
           >
             Hide case study
             <span className="rotate-180"><icons.chevron /></span>

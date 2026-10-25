@@ -21,7 +21,7 @@ export default function Footer() {
           <button
             onClick={copyEmail}
             aria-label="Copy email"
-            className="cursor-pointer rounded-full px-5 py-3 text-meta font-semibold text-white ring-[1.5px] ring-inset ring-forest-tint/60 transition-colors hover:bg-white/10"
+            className="cursor-pointer rounded-full px-5 py-3 text-meta font-semibold text-white ring-[1.5px] ring-inset transform-gpu ring-forest-tint/60 transition-colors hover:bg-white/10"
           >
             {/* Both labels share one cell so the button keeps its width and the row doesn't shift */}
             <span className="grid">
@@ -32,7 +32,7 @@ export default function Footer() {
           <a
             href="/resume.pdf"
             {...ext}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-meta font-semibold text-white ring-[1.5px] ring-inset ring-forest-tint/60 transition-colors hover:bg-white/10"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-meta font-semibold text-white ring-[1.5px] ring-inset transform-gpu ring-forest-tint/60 transition-colors hover:bg-white/10"
           >
             Resume PDF <icons.external size={16} />
           </a>

@@ -53,7 +53,7 @@ function MapUnavailable() {
       <button
         type="button"
         onClick={() => location.reload()}
-        className="cursor-pointer rounded-full px-4 py-2 text-meta font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-paper"
+        className="cursor-pointer rounded-full px-4 py-2 text-meta font-semibold text-forest ring-[1.5px] ring-inset transform-gpu ring-forest transition-colors hover:bg-paper"
       >
         Try again
       </button>
