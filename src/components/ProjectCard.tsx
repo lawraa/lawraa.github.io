@@ -116,6 +116,9 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
               </span>
               <span className={`transition-transform duration-300 motion-reduce:transition-none ${expanded ? 'rotate-180' : ''}`}><icons.chevron /></span>
             </button>
+            {/* Secondary links wrap together, so one never sits alone on a line */}
+            {(project.codeUrl || project.pdfUrl || project.videoUrl) && (
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
             {project.codeUrl && (
               <a href={project.codeUrl} {...ext} aria-describedby={titleId} className="inline-flex items-center gap-1.5 text-forest hover:text-tomato transition-colors">
                 <icons.github size={16} /> Code
@@ -130,6 +133,8 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
               <a href={project.videoUrl} {...ext} aria-describedby={titleId} className="inline-flex items-center gap-1 text-forest hover:text-tomato transition-colors">
                 Video <icons.external />
               </a>
+            )}
+            </div>
             )}
           </div>
         </div>

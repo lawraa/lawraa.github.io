@@ -82,7 +82,14 @@ export default function BoulderingMap() {
               aria-pressed={active}
               className={`inline-flex items-center gap-2 ${pillClass(active)}`}
             >
-              {key !== 'all' && <span className="h-2.5 w-2.5 rounded-full ring-1 ring-white/70 forced-color-adjust-none" style={{ backgroundColor: COUNTRY_COLORS[key] }} aria-hidden="true" />}
+              {key !== 'all' && (
+                <span
+                  className={`h-2.5 w-2.5 rounded-full ring-1 forced-color-adjust-none ${key === 'Thailand' ? 'ring-forest/60' : 'ring-white/70'}`}
+                  // A forest dot would vanish on the selected (forest) chip
+                  style={{ backgroundColor: active && COUNTRY_COLORS[key] === COUNTRY_COLORS.USA ? 'var(--color-paper)' : COUNTRY_COLORS[key] }}
+                  aria-hidden="true"
+                />
+              )}
               {key === 'all' ? 'All regions' : key}{' '}
               <span className={pillCountClass(active)}>{count}</span>
             </button>
@@ -138,7 +145,7 @@ export default function BoulderingMap() {
                 {country}
               </h3>
               <ul className="mt-2 border-t border-line">
-                {gyms.filter(g => g.country === country).map(gym => (
+                {gyms.filter(g => g.country === country).sort((a, b) => a.city.localeCompare(b.city) || a.name.localeCompare(b.name)).map(gym => (
                   <li key={gym.name} className="flex items-baseline justify-between gap-4 border-b border-line py-2.5 text-meta">
                     <span className="min-w-0">{gym.name.replace(' - ', '\u00a0-\u00a0')}</span>
                     <span className="shrink-0 text-mute">{gym.city}</span>

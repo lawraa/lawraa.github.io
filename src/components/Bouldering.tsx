@@ -72,7 +72,7 @@ export default function Bouldering() {
           <strong className="font-semibold text-forest">{gyms.length} gyms</strong> in{' '}
           <strong className="font-semibold text-forest">{countries} countries</strong>, a peak grade of{' '}
           <strong className="font-semibold text-forest">{stats.highestGrade}</strong>, and{' '}
-          <strong className="font-semibold text-forest">{durationSince(new Date(2025, 1, 1))}</strong> on the wall.
+          <strong className="font-semibold text-forest">{durationSince(stats.since)}</strong> on the wall.
         </p>
         <p className="mt-3">
           I like studying a route, planning the moves, and getting a little further each attempt. Always happy to climb

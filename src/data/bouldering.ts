@@ -1,5 +1,6 @@
 export interface ClimbingStats {
   highestGrade: string
+  since: Date // first month on the wall, for "N years and M months"
   apeIndex: string
   homegym: string
   instagram: string
@@ -16,6 +17,7 @@ export interface ClimbingPhoto {
 
 export const stats: ClimbingStats = {
   highestGrade: 'V8',
+  since: new Date(2025, 1, 1),
   apeIndex: '+9 cm',
   homegym: 'Oaks, CA',
   instagram: 'climblog.lawry',

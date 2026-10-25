@@ -8,6 +8,9 @@ export interface Drawing {
   link?: { label: string; url: string }
 }
 
+// First month of practice, for "N months of practice so far"
+export const drawingSince = new Date(2026, 4, 1)
+
 export const drawings: Drawing[] = [
   {
     id: '1',

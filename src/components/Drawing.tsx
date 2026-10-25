@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { drawings, type Drawing as DrawingItem } from '../data/drawings'
+import { drawings, drawingSince, type Drawing as DrawingItem } from '../data/drawings'
 import { icons, ext } from './links'
 import { Lightbox, PageIntro } from './ui'
 import { focusOpener } from './focusOpener'
@@ -14,7 +14,7 @@ export default function Drawing() {
       <PageIntro title="Drawing">
         <p>
           <strong className="font-semibold text-forest">{drawings.length} {drawings.length === 1 ? 'drawing' : 'drawings'}</strong> and{' '}
-          <strong className="font-semibold text-forest">{durationSince(new Date(2026, 4, 1))}</strong> of practice so far.
+          <strong className="font-semibold text-forest">{durationSince(drawingSince)}</strong> of practice so far.
         </p>
         <p className="mt-3">
           Right now I'm working on realistic portraits in pencil.

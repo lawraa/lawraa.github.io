@@ -21,13 +21,12 @@ function Timeline({ items }: { items: { role: string; org: string; dates: string
   return (
     <ul className="border-t border-line">
       {items.map(item => (
-        <li key={item.org + item.role} className="grid gap-x-6 gap-y-0.5 border-b border-line py-4 sm:grid-cols-[minmax(0,1fr)_auto]">
-          <div className="min-w-0">
-            <p className="font-semibold leading-snug">{item.role}</p>
-            {/* Plain wrapping (not the global 'pretty') so the line breaks after the dot, not before "Lab" */}
-            <p className="text-meta text-mute text-wrap">{item.org}</p>
-          </div>
-          <p className="tabular text-meta text-mute sm:text-right sm:whitespace-nowrap">{item.dates}</p>
+        // Dates share the role's line on desktop, so the org line gets the full width
+        <li key={item.org + item.role} className="grid gap-x-6 border-b border-line py-4 sm:grid-cols-[minmax(0,1fr)_auto]">
+          <p className="min-w-0 font-semibold leading-snug">{item.role}</p>
+          {/* Plain wrapping (not the global 'pretty') so the line breaks after the dot, not before "Lab" */}
+          <p className="text-meta text-mute text-wrap sm:col-span-2 sm:row-start-2">{item.org}</p>
+          <p className="mt-0.5 tabular text-meta text-mute sm:col-start-2 sm:row-start-1 sm:mt-0 sm:text-right sm:whitespace-nowrap">{item.dates}</p>
         </li>
       ))}
     </ul>

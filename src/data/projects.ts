@@ -91,6 +91,7 @@ export const projects: Project[] = [
     subtitle: 'Spring Boot microservice with Kafka, H2 SQL, and REST API integration for real-time transaction processing',
     tags: ['Java', 'Spring Boot', 'Kafka', 'SQL', 'REST API', 'Backend', 'Distributed Systems'],
     imageUrl: '/projects/JPMorgan_cert.jpg',
+    thumbUrl: '/thumbs/JPMorgan_cert.jpg',
     imageFit: 'contain',
     codeUrl: 'https://github.com/lawraa/forage-midas',
     pdfUrl: '/projects/JPMorgan_cert.pdf',
@@ -190,6 +191,7 @@ export const projects: Project[] = [
     subtitle: 'ResNet50 vs FastViT robustness under intentional racial imbalance (upscaling + race classification)',
     tags: ['Computer Vision', 'Model Evaluation', 'Fairness', 'ResNet50', 'Vision Transformer', 'PyTorch'],
     imageUrl: '/projects/cnnvit_architecture.jpg',
+    thumbUrl: '/thumbs/cnnvit_architecture.jpg',
     imageFit: 'contain',
     codeUrl: 'https://github.com/Maltomatic/RaceComp',
     pdfUrl: '/projects/CNN_ViT_Showdown_for_Racial_Equality.pdf',
@@ -281,6 +283,7 @@ export const projects: Project[] = [
     subtitle: 'Two-stage RAG pipeline for domain translation and editorial style alignment',
     tags: ['LLMs', 'RAG', 'NLP', 'Evaluation', 'Embeddings'],
     imageUrl: '/projects/trendforce_pipeline.jpg',
+    thumbUrl: '/thumbs/trendforce_pipeline.jpg',
     imageFit: 'contain',
 
     description: [
@@ -310,6 +313,7 @@ export const projects: Project[] = [
     subtitle: 'Embedded perception, safety control, and behavioral cloning for autonomous parking',
     tags: ['Embedded Systems', 'Computer Vision', 'Raspberry Pi', 'STM32', 'Behavioral Cloning'],
     imageUrl: '/projects/smart-driving.jpg',
+    thumbUrl: '/thumbs/smart-driving.jpg',
     imageFit: 'contain',
     codeUrl: 'https://github.com/lawraa/ESLab_SmartParking/',
     pdfUrl: '/projects/smart-driving.pdf',
@@ -344,6 +348,8 @@ export const projects: Project[] = [
     subtitle: 'In-context visual prompting demo with dataset evaluation and prompt versioning',
     tags: ['Computer Vision', 'In-Context Learning', 'Gradio', 'SegGPT', 'HDF5', 'APIs'],
     imageUrl: '/projects/visual-prompt-defect-detection.jpg',
+    thumbUrl: '/thumbs/visual-prompt-defect-detection.jpg',
+    imageFit: 'contain',
     description: [
       'Built a Gradio interface to demo visual prompting for defect detection, enabling prompt-based segmentation, prediction, and evaluation.',
       'Implemented dataset-level evaluation workflows and prompt versioning so users could save, reload, edit, and benchmark prompts consistently.',
@@ -374,6 +380,8 @@ export const projects: Project[] = [
     tags: ['Power Electronics', 'Analog Circuits', 'Control Systems', 'PCB Design', 'Hardware Testing'],
 
     imageUrl: '/projects/flyback-converter.jpg',
+    thumbUrl: '/thumbs/flyback-converter.jpg',
+    imageFit: 'cover',
     pdfUrl: '/projects/flyback-converter.pdf',
     detailImages: [
       '/projects/flyback-converter_soft-start.png',
@@ -408,6 +416,7 @@ export const projects: Project[] = [
     subtitle: 'Network-level simulation comparing hard vs soft handoff using distance and SINR policies',
     tags: ['Networking', 'Simulation', 'Wireless Communication', 'Python', 'Systems Modeling'],
     imageUrl: '/projects/5g-handoff-simulator.jpg',
+    thumbUrl: '/thumbs/5g-handoff-simulator.jpg',
     imageFit: 'contain',
     codeUrl: 'https://github.com/lawraa/WMN_intro/tree/main/Final_Project',
     pdfUrl: '/projects/5g-handoff-simulator.pdf',

@@ -5,4 +5,5 @@ export const pillClass = (active: boolean) =>
   }`
 
 // The count inside a chip; dimmed only on the forest background, where it still passes contrast.
-export const pillCountClass = (active: boolean) => `tabular ${active ? 'opacity-70' : ''}`
+// Regular weight against the semibold label, so "Python 3" doesn't read as a version.
+export const pillCountClass = (active: boolean) => `tabular font-normal ${active ? 'opacity-70' : ''}`
