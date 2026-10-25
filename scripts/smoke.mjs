@@ -142,7 +142,7 @@ const active = page => page.evaluate(() => {
   await page.close()
 }
 
-// Deep link into /work: lands below the sticky header with the case study open and its gallery loaded
+// Deep link into /work: lands below the sticky header, focused, with the case study open and its gallery loaded
 for (const viewport of [phone, desktop]) {
   const id = 'emg-imu-quadruped'
   const { page, errors } = await open(viewport, `#/work#${id}`)
@@ -157,6 +157,7 @@ for (const viewport of [phone, desktop]) {
     const region = toggle && document.getElementById(toggle.getAttribute('aria-controls'))
     return {
       top: card ? Math.round(card.getBoundingClientRect().top) : null,
+      focused: document.activeElement === card,
       expanded: toggle?.getAttribute('aria-expanded'),
       inert: region?.inert,
       media: region ? region.querySelectorAll('img, video').length : 0,
@@ -164,6 +165,7 @@ for (const viewport of [phone, desktop]) {
   }, id)
   if (res.top === null) errors.push(`no project "${id}" on /work; pick another id with a gallery video in this check`)
   else if (res.top < 0 || res.top > 120) errors.push(`card top at ${res.top}px`)
+  if (res.top !== null && !res.focused) errors.push('card did not take focus')
   if (res.expanded !== 'true' || res.inert !== false) errors.push('case study not open')
   if (res.media === 0) errors.push('gallery did not mount')
   await page.waitForNetworkIdle({ idleTime: 300, timeout: 30000 })
