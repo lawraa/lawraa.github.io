@@ -106,7 +106,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
               className="inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
             >
               {expanded ? 'Hide case study' : 'Read case study'}
-              <span className={`transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}><icons.chevron /></span>
+              <span className={`transition-transform duration-300 motion-reduce:transition-none ${expanded ? 'rotate-180' : ''}`}><icons.chevron /></span>
             </button>
             {project.codeUrl && (
               <a href={project.codeUrl} {...ext} className="inline-flex items-center gap-1.5 text-forest hover:text-tomato transition-colors">

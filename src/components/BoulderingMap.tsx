@@ -23,11 +23,18 @@ const REGION_VIEWS: Record<string, { bounds: [[number, number], [number, number]
 
 const REGIONS = ['all', 'USA', 'Taiwan', 'Thailand']
 
+const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 function MapController({ region }: { region: string }) {
   const map = useMap()
   useEffect(() => {
+    map.getContainer().setAttribute('aria-label', `Map of ${gyms.length} climbing gyms. The same gyms are listed below the map.`)
+  }, [map])
+  useEffect(() => {
     const view = REGION_VIEWS[region]
-    if (view) map.flyToBounds(view.bounds, { padding: [32, 32], duration: 1.0 })
+    if (!view) return
+    if (reduceMotion()) map.fitBounds(view.bounds, { padding: [32, 32], animate: false })
+    else map.flyToBounds(view.bounds, { padding: [32, 32], duration: 1.0 })
   }, [region, map])
   return null
 }
@@ -51,9 +58,9 @@ export default function BoulderingMap() {
                 active ? 'bg-forest text-white' : 'bg-paper text-mute ring-1 ring-inset ring-line hover:text-ink hover:ring-forest'
               }`}
             >
-              {key !== 'all' && <span className="h-2.5 w-2.5 rounded-full ring-1 ring-white/70" style={{ backgroundColor: COUNTRY_COLORS[key] }} />}
-              {key === 'all' ? 'All regions' : key}
-              <span className="tabular opacity-70">{count}</span>
+              {key !== 'all' && <span className="h-2.5 w-2.5 rounded-full ring-1 ring-white/70" style={{ backgroundColor: COUNTRY_COLORS[key] }} aria-hidden="true" />}
+              {key === 'all' ? 'All regions' : key}{' '}
+              <span className={`tabular ${active ? 'opacity-70' : ''}`}>{count}</span>
             </button>
           )
         })}
@@ -66,6 +73,7 @@ export default function BoulderingMap() {
           boundsOptions={{ padding: [32, 32] }}
           scrollWheelZoom={false}
           dragging={!Browser.mobile}
+          zoomAnimation={!reduceMotion()}
           className="h-full w-full"
         >
           <TileLayer
@@ -91,16 +99,16 @@ export default function BoulderingMap() {
           ))}
         </MapContainer>
       </div>
-      <p className="mt-3 text-[15px] text-mute">Select a pin to see the gym.</p>
+      <p className="mt-3 text-[15px] text-mute">Select a pin to see the gym, or open the list below.</p>
 
       <details className="group mt-6 border-t border-line">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold text-forest hover:text-tomato transition-colors [&::-webkit-details-marker]:hidden">
           All {gyms.length} gyms as a list
-          <span className="transition-transform duration-300 group-open:rotate-180"><icons.chevron /></span>
+          <span className="transition-transform duration-300 motion-reduce:transition-none group-open:rotate-180"><icons.chevron /></span>
         </summary>
         <div className="grid gap-x-12 gap-y-8 pb-4 sm:grid-cols-2 lg:grid-cols-3">
           {REGIONS.filter(r => r !== 'all').map(country => (
-            <section key={country} aria-label={country}>
+            <div key={country}>
               <h3 className="flex items-center gap-2 font-sans text-[15px] font-semibold text-ink">
                 <span className="h-2.5 w-2.5 rounded-full ring-1 ring-forest/30" style={{ backgroundColor: COUNTRY_COLORS[country] }} aria-hidden="true" />
                 {country}
@@ -113,7 +121,7 @@ export default function BoulderingMap() {
                   </li>
                 ))}
               </ul>
-            </section>
+            </div>
           ))}
         </div>
       </details>

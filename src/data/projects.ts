@@ -86,7 +86,7 @@ export const projects: Project[] = [
       'All five pipelines are runnable side-by-side via a single /compare endpoint. Test suite (8 unit tests) passes with no API key required, covering chunker correctness and hybrid retrieval fusion logic.',
 
     reflection:
-      'The most instructive design decision was the shared RAGResponse model with a trace field: it forced every pipeline to emit structured metadata about what it retrieved and why, which made debugging retrieval failures much easier. Each part of the "advanced" pipeline (hybrid + rerank + HyDE) fixes a different failure: BM25 catches exact-match cases that dense retrieval misses, reranking corrects initial ranking errors, and HyDE closes the query–document vocabulary gap.',
+      'Every pipeline returns a shared RAGResponse model with a trace field. So each one emits structured metadata about what it retrieved and why, which made retrieval failures much easier to debug. Each part of the "advanced" pipeline (hybrid + rerank + HyDE) fixes a different failure: BM25 catches exact-match cases that dense retrieval misses, reranking corrects initial ranking errors, and HyDE closes the query–document vocabulary gap.',
   },
   {
     id: 'jpmorgan-midas-core',
@@ -118,7 +118,7 @@ export const projects: Project[] = [
       'All five Maven test suites passed: TaskOneTests through TaskFiveTests. Final submission outputs included Waldorf\'s balance of 627 (Task 3), Wilbur\'s balance of 3089 (Task 4), and all 13 user balances queried via the REST endpoint (Task 5). Received a Certificate of Completion from JPMorgan Chase & Co. issued April 17, 2026.',
 
     reflection:
-      'The most instructive debugging was Kafka\'s offset-reset behavior: the default "latest" policy caused the consumer to miss messages sent before it fully connected, requiring "earliest" plus allow.auto.create.topics to make the embedded test environment reliable.',
+      'The hardest bug was Kafka\'s offset-reset behavior: the default "latest" policy caused the consumer to miss messages sent before it fully connected, requiring "earliest" plus allow.auto.create.topics to make the embedded test environment reliable.',
   },
   {
     id: 'llm-personalized-assistive-design',
@@ -154,7 +154,7 @@ export const projects: Project[] = [
 
     reflection:
       'The primary failure mode was not budget but LLM plateau. Every failed run shared the same pattern: the model anchored on finger_spread_angle=0.09 across 64 of 100 iterations despite the critical threshold being ~0.11, and doubling the iteration budget did not break the loop. '
-      + 'The most surprising finding was Phase 2 generalization: in one run, sphere_lift was never solved in 30 Phase 1 iterations, yet the Phase 2 seed (optimized for a different task) passed sphere_lift anyway via geometric coincidence. Missing a task in Phase 1 is not always fatal. '
+      + 'Phase 2 sometimes generalized: in one run, sphere_lift was never solved in 30 Phase 1 iterations, yet the Phase 2 seed (optimized for a different task) passed sphere_lift anyway via geometric coincidence. Missing a task in Phase 1 is not always fatal. '
       + 'Most of the work was in how simulation results are summarized for the LLM: the metric abstraction and prompt structure, more than the optimizer itself.',
   },
   {
@@ -251,7 +251,7 @@ export const projects: Project[] = [
     id: 'colm-llm-discussion',
     title: 'LLM Discussion: Enhancing the Creativity of Large Language Models via Discussion Framework and Role-Play',
     affiliation: 'National Taiwan University · COLM 2024',
-    subtitle: 'Multi-agent discussion framework with role-playing to boost LLM creative reasoning',
+    subtitle: 'Multi-agent discussion framework with role-play for open-ended questions',
     tags: ['LLMs', 'Multi-Agent', 'NLP', 'Evaluation', 'Creativity'],
     imageUrl: '/research/llm-discussion.png',
     thumbUrl: '/thumbs/llm-discussion.jpg',
@@ -438,7 +438,7 @@ export const projects: Project[] = [
       'Soft handoff consistently improved average allocation (~6% higher) and reduced unstable switching compared to hard handoff across both distance-based and SINR-based strategies.',
 
     reflection:
-      'The same physical model produced very different performance depending on the decision rule, and careful simulation was necessary to understand tradeoffs between stability and responsiveness.'
+      'The same physical model produced very different results depending on the decision rule: soft handoff traded a little responsiveness for fewer unstable switches.'
   },
   
   

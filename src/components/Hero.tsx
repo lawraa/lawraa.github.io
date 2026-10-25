@@ -52,7 +52,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <aside className="w-full md:max-w-[340px] md:justify-self-end">
+      <div className="w-full md:max-w-[340px] md:justify-self-end">
         <div className="aspect-[340/400] overflow-hidden rounded-3xl bg-paper">
           <img
             src="/lawry/portrait.jpg"
@@ -63,7 +63,7 @@ export default function Hero() {
         <p className="mt-3 rounded-2xl bg-forest px-5 py-4 text-[15px] leading-snug text-forest-tint">
           <span className="font-semibold text-butter">Now</span> · Software Development Engineer at Amazon, Seattle
         </p>
-      </aside>
+      </div>
     </section>
   )
 }

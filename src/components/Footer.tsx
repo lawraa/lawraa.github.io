@@ -30,10 +30,10 @@ export default function Footer() {
           <button
             onClick={copyEmail}
             className="cursor-pointer rounded-full px-5 py-3 text-[15px] font-semibold text-white ring-[1.5px] ring-inset ring-forest-tint/60 transition-colors hover:bg-white/10"
-            aria-live="polite"
           >
             {copied ? 'Copied to clipboard' : 'Copy email'}
           </button>
+          <span role="status" className="sr-only">{copied ? 'Email copied to clipboard' : ''}</span>
         </div>
 
         <div className="mt-14 flex flex-col-reverse gap-6 border-t border-white/15 pt-6 text-[15px] sm:flex-row sm:items-center sm:justify-between">

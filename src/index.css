@@ -43,7 +43,12 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-tomato);
   outline-offset: 3px;
-  border-radius: 6px;
+}
+
+/* Tomato is too dark to see on forest, so dark panels get a butter ring */
+footer :focus-visible,
+[role="dialog"] :focus-visible {
+  outline-color: var(--color-butter);
 }
 
 h1, h2, h3 {

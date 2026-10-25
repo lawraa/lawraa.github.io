@@ -43,7 +43,7 @@ export default function Projects() {
 
       <div className="flex flex-wrap gap-2 pb-8" role="group" aria-label="Filter projects by topic">
         <button onClick={() => setActiveTag(null)} className={pill(activeTag === null)} aria-pressed={activeTag === null}>
-          All <span className="tabular opacity-70">{projects.length}</span>
+          All <span className={`tabular ${activeTag === null ? 'opacity-70' : ''}`}>{projects.length}</span>
         </button>
         {filterTags.map(tag => (
           <button
@@ -52,11 +52,12 @@ export default function Projects() {
             className={pill(activeTag === tag)}
             aria-pressed={activeTag === tag}
           >
-            {tag} <span className="tabular opacity-70">{tagCounts[tag]}</span>
+            {tag} <span className={`tabular ${activeTag === tag ? 'opacity-70' : ''}`}>{tagCounts[tag]}</span>
           </button>
         ))}
       </div>
 
+      <p role="status" className="sr-only">Showing {filtered.length} of {projects.length} projects</p>
       <div className="border-b border-line">
         {filtered.map(project => (
           <ProjectCard key={project.id} project={project} defaultExpanded={project.id === target} />

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -29,10 +29,14 @@ const TITLES: Record<string, string> = {
 
 function RouteEffects() {
   const { pathname } = useLocation()
+  const prevPath = useRef(pathname)
   useEffect(() => {
     window.scrollTo(0, 0)
     const page = TITLES[pathname]
     document.title = page ? `${page} - Lawrance Chen` : 'Lawrance Chen'
+    // After client-side navigation, start keyboard and screen reader users at the new page.
+    if (prevPath.current !== pathname) document.getElementById('main')?.focus({ preventScroll: true })
+    prevPath.current = pathname
   }, [pathname])
   return null
 }

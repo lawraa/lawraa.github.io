@@ -20,7 +20,7 @@ function Authors({ authors, coFirstAuthors }: { authors: string[]; coFirstAuthor
   )
 }
 
-function Bibtex({ text }: { text: string }) {
+function Bibtex({ id, text }: { id: string; text: string }) {
   const [copied, setCopied] = useState(false)
 
   const copy = async () => {
@@ -34,18 +34,18 @@ function Bibtex({ text }: { text: string }) {
   }
 
   return (
-    <div className="relative mt-4">
+    <div id={id} className="relative mt-4">
       <pre className="max-h-72 overflow-auto rounded-2xl bg-paper p-5 pr-24 font-mono text-[13px] leading-relaxed text-mute whitespace-pre-wrap break-words">
         {text}
       </pre>
       <button
         type="button"
         onClick={copy}
-        aria-live="polite"
         className="absolute top-3 right-3 cursor-pointer rounded-full bg-sage px-3 py-1 text-[13px] font-semibold text-forest ring-1 ring-inset ring-line transition-colors hover:ring-forest"
       >
         {copied ? 'Copied' : 'Copy'}
       </button>
+      <span role="status" className="sr-only">{copied ? 'BibTeX copied to clipboard' : ''}</span>
     </div>
   )
 }
@@ -98,6 +98,7 @@ export default function Research() {
                     type="button"
                     onClick={() => setOpenBibtex(openBibtex === pub.id ? null : pub.id)}
                     aria-expanded={openBibtex === pub.id}
+                    aria-controls={`${pub.id}-bibtex`}
                     className="cursor-pointer text-forest hover:text-tomato transition-colors"
                   >
                     {openBibtex === pub.id ? 'Hide BibTeX' : 'BibTeX'}
@@ -105,7 +106,7 @@ export default function Research() {
                 )}
               </div>
 
-              {openBibtex === pub.id && pub.bibtex && <Bibtex text={pub.bibtex} />}
+              {openBibtex === pub.id && pub.bibtex && <Bibtex id={`${pub.id}-bibtex`} text={pub.bibtex} />}
             </div>
           </article>
         ))}

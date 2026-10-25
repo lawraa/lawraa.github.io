@@ -82,12 +82,15 @@ export default function Bouldering() {
         <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-3">
           {photos.map(photo => (
             <li key={photo.id}>
-              <button type="button" onClick={() => setLightbox(photo)} className="group block w-full cursor-zoom-in text-left" aria-label={`Enlarge photo: ${photo.caption}`}>
-                <div className="lift aspect-[4/5] overflow-hidden rounded-2xl bg-forest-tint">
-                  {photo.src && <img src={photo.src} alt="" className="h-full w-full object-cover" loading="lazy" />}
-                </div>
-                <p className="mt-3 font-semibold leading-snug group-hover:text-tomato transition-colors">{photo.caption}</p>
+              <button
+                type="button"
+                onClick={() => setLightbox(photo)}
+                className="peer lift block aspect-[4/5] w-full cursor-zoom-in overflow-hidden rounded-2xl bg-forest-tint"
+                aria-label={`Enlarge photo: ${photo.caption}`}
+              >
+                {photo.src && <img src={photo.src} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />}
               </button>
+              <p className="mt-3 font-semibold leading-snug transition-colors peer-hover:text-tomato">{photo.caption}</p>
               <p className="mt-0.5 text-[15px] text-mute">{photo.location}</p>
               <div className="mt-2"><Tag>{photo.grade}</Tag></div>
             </li>

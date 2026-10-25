@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 const navLinks = [
@@ -13,6 +13,8 @@ export default function Header() {
   const { pathname } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -23,7 +25,12 @@ export default function Header() {
 
   useEffect(() => {
     if (!menuOpen) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenuOpen(false) }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      // The menu unmounts on close, so hand focus back to the toggle if it was inside.
+      if (menuRef.current?.contains(document.activeElement)) toggleRef.current?.focus()
+      setMenuOpen(false)
+    }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [menuOpen])
@@ -54,6 +61,7 @@ export default function Header() {
         </nav>
 
         <button
+          ref={toggleRef}
           className="md:hidden -mr-[11px] p-[11px] rounded-full text-forest cursor-pointer hover:bg-forest-tint transition-colors"
           aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
           aria-expanded={menuOpen}
@@ -66,7 +74,7 @@ export default function Header() {
       </div>
 
       {menuOpen && (
-        <nav className="md:hidden border-t border-line px-5 pb-5 pt-2" aria-label="Primary">
+        <nav ref={menuRef} className="md:hidden border-t border-line px-5 pb-5 pt-2" aria-label="Primary">
           {navLinks.map(({ to, label }) => {
             const active = pathname === to
             return (
