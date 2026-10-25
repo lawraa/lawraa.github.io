@@ -198,7 +198,7 @@ A botanical four-ink palette on a pale sage ground: forest for structure, tomato
 
 **Display Font:** Bricolage Grotesque (with ui-sans-serif, system-ui fallback), weights 500-800 loaded, 700 used.
 **Body Font:** Hanken Grotesk (with ui-sans-serif, system-ui fallback), 400/500/600 and 400 italic.
-**Fallback faces:** "Hanken Grotesk Fallback" and "Bricolage Grotesque Fallback" are local Arial / Arial Bold with size-adjust and ascent/descent overrides measured from the web font files, so the swap from fallback to web font does not reflow text.
+**Fallback faces:** "Hanken Grotesk Fallback" and "Bricolage Grotesque Fallback" are local Arial / Arial Bold with size-adjust and ascent/descent overrides measured from the web font files, so the swap from fallback to web font barely reflows text. Hanken has one fallback face per weight in use (400, 500, 600+), since it widens as it gets heavier.
 **Label/Mono Font:** system mono stack, only for BibTeX.
 
 **Character:** A chunky, slightly quirky grotesque for headings set tight and bold against a clean, friendly text grotesque; confident without shouting.
