@@ -3,7 +3,7 @@ import type { Project } from '../data/projects'
 import { icons } from './links'
 import { Lightbox, Tag } from './ui'
 
-function DetailMedia({ src, alt, rows, onOpen }: { src: string; alt: string; rows?: number; onOpen: (src: string) => void }) {
+function DetailMedia({ src, alt, rows, poster, onOpen }: { src: string; alt: string; rows?: number; poster?: string; onOpen: (src: string) => void }) {
   const [wide, setWide] = useState(false)
   const isVideo = /\.(mp4|webm|ogg)$/i.test(src)
 
@@ -15,6 +15,7 @@ function DetailMedia({ src, alt, rows, onOpen }: { src: string; alt: string; row
       {isVideo ? (
         <video
           src={src}
+          poster={poster}
           className="h-full w-full object-cover"
           controls
           muted
@@ -143,7 +144,8 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
                   {project.detailImages.map((item, i) => {
                     const src = typeof item === 'string' ? item : item.src
                     const rows = typeof item === 'string' ? undefined : item.rows
-                    return <DetailMedia key={src} src={src} rows={rows} alt={`${title}, figure ${i + 1}`} onOpen={setLightbox} />
+                    const poster = typeof item === 'string' ? undefined : item.poster
+                    return <DetailMedia key={src} src={src} rows={rows} poster={poster} alt={`${title}, figure ${i + 1}`} onOpen={setLightbox} />
                   })}
                 </dd>
               </div>

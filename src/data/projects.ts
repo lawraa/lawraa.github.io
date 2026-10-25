@@ -6,7 +6,7 @@ export interface Project {
   imageUrl?: string
   thumbUrl?: string
   imageFit?: 'cover' | 'contain'
-  detailImages?: (string | { src: string; rows?: number })[]
+  detailImages?: (string | { src: string; rows?: number; poster?: string })[]
   codeUrl?: string
   videoUrl?: string
   pdfUrl?: string
@@ -163,7 +163,8 @@ export const projects: Project[] = [
     affiliation: 'UC Berkeley · EECS 249',
     subtitle: 'Wearable IMU/EMG teleoperation with a reproducible 3D-printed quadruped platform',
     tags: ['Machine Learning', 'Embedded Systems', 'Robotics', 'Raspberry Pi', 'ROS'],
-    imageUrl: '/projects/quad_quadruped.jpg', 
+    imageUrl: '/projects/quad_quadruped.jpg',
+    thumbUrl: '/thumbs/quad_quadruped.jpg',
     codeUrl: 'https://github.com/lawraa/WristControlledQuadruped',
     pdfUrl: '/projects/149_final_quadruped.pdf', 
     description: [
@@ -182,7 +183,7 @@ export const projects: Project[] = [
       'Most of the work was integration: real-time scheduling, the sensor and serial interfaces, and gait sequencing. EMG decoding was limited mainly by electrode contact consistency; IMU provided robust low-latency intent while EMG offered higher-resolution cues when signal quality allowed.',
     detailImages: [
       '/projects/quad_system-architecture.jpg',
-      { src: '/projects/quad_control.mp4', rows: 2 },
+      { src: '/projects/quad_control.mp4', rows: 2, poster: '/projects/quad_control_poster.jpg' },
       '/projects/quad_wristband.jpg',
       '/projects/quad_quadruped.jpg',
     ],
@@ -312,7 +313,7 @@ export const projects: Project[] = [
     affiliation: 'National Taiwan University · EE3021',
     subtitle: 'Embedded perception, safety control, and behavioral cloning for autonomous parking',
     tags: ['Embedded Systems', 'Computer Vision', 'Raspberry Pi', 'STM32', 'Behavioral Cloning'],
-    imageUrl: '/projects/smart-driving.png',
+    imageUrl: '/projects/smart-driving.jpg',
     codeUrl: 'https://github.com/lawraa/ESLab_SmartParking/',
     pdfUrl: '/projects/smart-driving.pdf',
     detailImages: [
@@ -378,13 +379,13 @@ export const projects: Project[] = [
 
     tags: ['Power Electronics', 'Analog Circuits', 'Control Systems', 'PCB Design', 'Hardware Testing'],
 
-    imageUrl: '/projects/flyback-converter.png',
+    imageUrl: '/projects/flyback-converter.jpg',
     codeUrl: undefined,
     videoUrl: undefined,
     pdfUrl: '/projects/flyback-converter.pdf',
     detailImages: [
       '/projects/flyback-converter_soft-start.png',
-      '/projects/flyback-converter_burn-in.png',
+      '/projects/flyback-converter_burn-in.jpg',
 
     ],
     description: [

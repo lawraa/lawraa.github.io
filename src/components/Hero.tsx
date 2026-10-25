@@ -56,6 +56,9 @@ export default function Hero() {
         <div className="aspect-[340/400] overflow-hidden rounded-3xl bg-paper">
           <img
             src="/lawry/portrait.jpg"
+            width={1200}
+            height={1200}
+            fetchPriority="high"
             alt="Portrait of Lawrance Chen in Berkeley graduation regalia"
             className="h-full w-full object-cover object-[50%_20%]"
           />

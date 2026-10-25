@@ -11,6 +11,7 @@ export interface ClimbingPhoto {
   grade: string
   location: string
   src?: string
+  thumb?: string
 }
 
 export const stats: ClimbingStats = {
@@ -36,6 +37,7 @@ export const photos: ClimbingPhoto[] = [
     grade: '2nd Place',
     location: 'Taipei, Taiwan',
     src: '/bouldering/comp.JPG',
+    thumb: '/thumbs/bouldering/comp.jpg',
   },
   {
     id: '2',
@@ -43,6 +45,7 @@ export const photos: ClimbingPhoto[] = [
     grade: 'Gym Bros',
     location: 'Taipei, Taiwan',
     src: '/bouldering/home_gym_taiwan.JPG',
+    thumb: '/thumbs/bouldering/home_gym_taiwan.jpg',
   },
   {
     id: '3',
@@ -50,6 +53,7 @@ export const photos: ClimbingPhoto[] = [
     grade: 'Go Bould',
     location: 'Phuket, Thailand',
     src: '/bouldering/thailand.JPG',
+    thumb: '/thumbs/bouldering/thailand.jpg',
   },
   {
     id: '4',
@@ -57,6 +61,7 @@ export const photos: ClimbingPhoto[] = [
     grade: 'Climbing with friends',
     location: 'Berkeley, CA',
     src: '/bouldering/oaks.jpeg',
+    thumb: '/thumbs/bouldering/oaks.jpg',
   },
   {
     id: '5',
@@ -64,6 +69,7 @@ export const photos: ClimbingPhoto[] = [
     grade: 'Bouldering Date',
     location: 'Los Angeles, CA',
     src: '/bouldering/LA.JPG',
+    thumb: '/thumbs/bouldering/LA.jpg',
   },
   {
     id: '6',
@@ -71,6 +77,7 @@ export const photos: ClimbingPhoto[] = [
     grade: 'Gym Bros',
     location: 'Redwood City, CA',
     src: '/bouldering/comp2.JPG',
+    thumb: '/thumbs/bouldering/comp2.jpg',
   },
 ]
 

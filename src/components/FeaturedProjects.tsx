@@ -35,6 +35,8 @@ export default function FeaturedProjects() {
                   <img
                     src={project.thumbUrl ?? project.imageUrl}
                     alt=""
+                    loading="lazy"
+                    decoding="async"
                     className={`h-full w-full ${project.thumbUrl ? 'object-contain' : project.imageFit === 'contain' ? 'object-contain p-4' : 'object-cover'}`}
                   />
                 )}

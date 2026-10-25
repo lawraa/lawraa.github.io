@@ -88,7 +88,7 @@ export default function Bouldering() {
                 className="peer lift block aspect-[4/5] w-full cursor-zoom-in overflow-hidden rounded-2xl bg-forest-tint"
                 aria-label={`Enlarge photo: ${photo.caption}`}
               >
-                {photo.src && <img src={photo.src} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />}
+                {photo.src && <img src={photo.thumb ?? photo.src} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />}
               </button>
               <p className="mt-3 font-semibold leading-snug transition-colors peer-hover:text-tomato">{photo.caption}</p>
               <p className="mt-0.5 text-[15px] text-mute">{photo.location}</p>
