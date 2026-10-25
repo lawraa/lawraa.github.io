@@ -95,9 +95,9 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             {project.description.map((para, i) => <p key={i}>{typeset(para)}</p>)}
           </div>
 
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {project.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
-          </div>
+          <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Topics">
+            {project.tags.map(tag => <li key={tag} className="flex"><Tag>{tag}</Tag></li>)}
+          </ul>
 
           <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-meta font-semibold">
             <button
