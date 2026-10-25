@@ -26,7 +26,7 @@ export default function FeaturedProjects() {
         </Link>
       </div>
 
-      <ul className="mt-6 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-6 grid gap-x-6 gap-y-10 md:grid-cols-3 md:gap-x-5 lg:gap-x-6">
         {featured.map(({ project, field, tone }) => (
           <li key={project.id}>
             <Link to={`/work#${project.id}`} className="group block">

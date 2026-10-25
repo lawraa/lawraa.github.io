@@ -11,7 +11,8 @@ export default function Hero() {
           Shou-Jen (Lawrance) Chen
         </h1>
         <p className="mt-5 text-lg sm:text-xl font-medium">
-          Software Development Engineer at Amazon · UC Berkeley EECS MEng
+          Software Development Engineer at Amazon ·{' '}
+          <span className="whitespace-nowrap">UC Berkeley EECS MEng</span>
         </p>
 
         <div className="mt-6 max-w-[64ch] space-y-4 text-mute text-[17px] sm:text-lg leading-[1.65]">
@@ -43,10 +44,10 @@ export default function Hero() {
           >
             Resume PDF <icons.download />
           </a>
-          <ul className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[15px] font-semibold text-forest sm:ml-3">
-            <li><a href={`mailto:${EMAIL}`} className="hover:text-tomato transition-colors">Email</a></li>
+          <ul className="flex flex-wrap items-center gap-x-4 text-[15px] font-semibold text-forest xl:ml-3">
+            <li><a href={`mailto:${EMAIL}`} className="inline-flex min-h-11 items-center hover:text-tomato transition-colors">Email</a></li>
             {socials.map(({ label, href }) => (
-              <li key={label}><a href={href} {...ext} className="hover:text-tomato transition-colors">{label}</a></li>
+              <li key={label}><a href={href} {...ext} className="inline-flex min-h-11 min-w-6 items-center justify-center hover:text-tomato transition-colors">{label}</a></li>
             ))}
           </ul>
         </div>

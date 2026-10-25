@@ -35,13 +35,13 @@ function Bibtex({ id, text }: { id: string; text: string }) {
 
   return (
     <div id={id} className="relative mt-4">
-      <pre className="max-h-72 overflow-auto rounded-2xl bg-paper p-5 pr-24 font-mono text-[13px] leading-relaxed text-mute whitespace-pre-wrap break-words">
+      <pre className="max-h-72 overflow-auto rounded-2xl bg-paper p-5 pt-12 font-mono sm:pt-5 sm:pr-24 text-[13px] leading-relaxed text-mute whitespace-pre-wrap break-words">
         {text}
       </pre>
       <button
         type="button"
         onClick={copy}
-        className="absolute top-3 right-3 cursor-pointer rounded-full bg-sage px-3 py-1 text-[13px] font-semibold text-forest ring-1 ring-inset ring-line transition-colors hover:ring-forest"
+        className="absolute top-3 right-3 cursor-pointer rounded-full bg-sage px-3 py-1.5 text-[13px] font-semibold text-forest ring-1 ring-inset ring-line transition-colors hover:ring-forest"
       >
         {copied ? 'Copied' : 'Copy'}
       </button>
@@ -99,7 +99,7 @@ export default function Research() {
                     onClick={() => setOpenBibtex(openBibtex === pub.id ? null : pub.id)}
                     aria-expanded={openBibtex === pub.id}
                     aria-controls={`${pub.id}-bibtex`}
-                    className="cursor-pointer text-forest hover:text-tomato transition-colors"
+                    className="-my-2 cursor-pointer py-2 text-forest hover:text-tomato transition-colors"
                   >
                     {openBibtex === pub.id ? 'Hide BibTeX' : 'BibTeX'}
                   </button>

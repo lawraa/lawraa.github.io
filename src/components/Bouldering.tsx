@@ -31,7 +31,7 @@ function RadarChart() {
   const data = styleRatings.map(({ value }, i) => { const p = point(value, i); return `${p.x},${p.y}` }).join(' ')
 
   return (
-    <svg viewBox={`-48 0 ${size + 96} ${size}`} className="w-full max-w-[420px]" role="img"
+    <svg viewBox={`-64 0 ${size + 128} ${size}`} className="w-full max-w-[440px] [&_text]:text-[23px] sm:[&_text]:text-[14px]" role="img"
       aria-label={`Self-rated climbing style out of 10: ${styleRatings.map(r => `${r.label} ${r.value}`).join(', ')}`}>
       {[1, 2, 3, 4, 5].map(l => <polygon key={l} points={ring(l)} fill="none" stroke="#cfd6cf" strokeWidth="1" />)}
       {styleRatings.map((_, i) => { const p = point(10, i); return <line key={i} x1={c} y1={c} x2={p.x} y2={p.y} stroke="#cfd6cf" strokeWidth="1" /> })}
@@ -43,7 +43,7 @@ function RadarChart() {
         const ly = c + (maxR + 24) * Math.sin(a)
         const anchor = Math.abs(Math.cos(a)) < 0.1 ? 'middle' : Math.cos(a) > 0 ? 'start' : 'end'
         return (
-          <text key={label} x={lx} y={ly} textAnchor={anchor} dominantBaseline="middle" fontSize="13" fontFamily="Hanken Grotesk, sans-serif" fill="#525a55">
+          <text key={label} x={lx} y={ly} textAnchor={anchor} dominantBaseline="middle" fontFamily="Hanken Grotesk, sans-serif" fill="#525a55">
             {label} <tspan fontWeight="700" fill="#1a1d1b">{value}</tspan>
           </text>
         )
@@ -100,12 +100,12 @@ export default function Bouldering() {
         </ul>
       </section>
 
-      <section aria-labelledby="style" className="grid items-center gap-10 pb-20 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-        <div>
+      <section aria-labelledby="style" className="grid items-start gap-8 pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
+        <div className="lg:pt-8">
           <h2 id="style" className="text-forest text-3xl font-bold tracking-[-0.02em]">Style profile</h2>
           <p className="mt-4 text-[17px] text-mute">Self-rated, out of 10.</p>
         </div>
-        <div className="flex justify-center rounded-3xl bg-paper p-6 sm:p-8"><RadarChart /></div>
+        <div className="flex justify-center rounded-3xl bg-paper p-4 sm:p-8"><RadarChart /></div>
       </section>
 
       <section aria-labelledby="gyms">

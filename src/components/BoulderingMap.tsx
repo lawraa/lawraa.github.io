@@ -56,7 +56,7 @@ export default function BoulderingMap() {
               key={key}
               onClick={() => setRegion(key)}
               aria-pressed={active}
-              className={`inline-flex cursor-pointer items-center gap-2 rounded-full px-3.5 py-1.5 text-[15px] font-semibold transition-colors ${
+              className={`inline-flex cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-[15px] font-semibold transition-colors ${
                 active ? 'bg-forest text-white' : 'bg-paper text-mute ring-1 ring-inset ring-line hover:text-ink hover:ring-forest'
               }`}
             >
@@ -68,7 +68,7 @@ export default function BoulderingMap() {
         })}
       </div>
 
-      <div className="isolate h-[360px] overflow-hidden rounded-3xl ring-1 ring-line sm:h-[440px]">
+      <div className="isolate h-[360px] overflow-hidden rounded-3xl ring-1 ring-line sm:h-[min(440px,75svh)]">
         {/* One-finger drag would trap page scrolling on phones; zoom buttons and pinch still work there. */}
         <MapContainer
           bounds={REGION_VIEWS.all.bounds}
@@ -118,7 +118,7 @@ export default function BoulderingMap() {
               <ul className="mt-2 border-t border-line">
                 {gyms.filter(g => g.country === country).map(gym => (
                   <li key={gym.name} className="flex items-baseline justify-between gap-4 border-b border-line py-2.5 text-[15px]">
-                    <span className="min-w-0">{gym.name}</span>
+                    <span className="min-w-0">{gym.name.replace(' - ', '\u00a0- ')}</span>
                     <span className="shrink-0 text-mute">{gym.city}</span>
                   </li>
                 ))}

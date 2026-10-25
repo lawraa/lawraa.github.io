@@ -38,10 +38,10 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col-reverse gap-6 border-t border-white/15 pt-6 text-[15px] sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Shou-Jen (Lawrance) Chen</p>
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 font-medium">
+          <ul className="flex flex-wrap gap-x-6 font-medium">
             {socials.map(({ label, href, Icon }) => (
               <li key={label}>
-                <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white hover:text-butter transition-colors">
+                <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 py-2.5 text-white hover:text-butter transition-colors">
                   <Icon size={label === 'X' ? 14 : 16} /> {label}
                 </a>
               </li>

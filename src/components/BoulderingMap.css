@@ -34,7 +34,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 10px 14px;
+  padding: 10px 30px 10px 14px;
 }
 
 .bouldering-popup strong {
@@ -52,7 +52,12 @@
   background: var(--color-paper) !important;
   color: var(--color-forest) !important;
   border-color: var(--color-line) !important;
-  line-height: 26px !important;
+}
+
+.leaflet-touch .leaflet-bar a {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
 }
 
 .leaflet-bar a:hover {
@@ -71,6 +76,13 @@
   color: var(--color-mute) !important;
   font-size: 13px !important;
   border-radius: 6px 0 0 0 !important;
+}
+
+@media (max-width: 639px) {
+  .leaflet-control-attribution {
+    font-size: 11px !important;
+    line-height: 1.4;
+  }
 }
 
 .leaflet-control-attribution a {

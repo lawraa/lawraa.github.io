@@ -28,7 +28,7 @@ export default function Projects() {
   const filtered = activeTag ? projects.filter(p => p.tags.includes(activeTag)) : projects
 
   const pill = (active: boolean) =>
-    `cursor-pointer rounded-full px-3.5 py-1.5 text-[15px] font-semibold transition-colors ${
+    `cursor-pointer rounded-full px-3.5 py-2 text-[15px] font-semibold transition-colors ${
       active ? 'bg-forest text-white' : 'bg-paper text-mute ring-1 ring-inset ring-line hover:text-ink hover:ring-forest'
     }`
 

@@ -22,7 +22,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'risk-triggered-latent-correction',
-    title: 'Risk-Triggered Latent-Space Corrections for Near-Failure Recovery in Deep RL',
+    title: 'Risk\u2011Triggered Latent\u2011Space Corrections for Near\u2011Failure Recovery in Deep RL',
     affiliation: 'UC Berkeley · CS 285 Final Project',
     subtitle: 'Decoupled SAC with risk-triggered latent correction achieving 100% success on Meta-World pick-place-v3, 25–29% more sample-efficient than baseline SAC',
     tags: ['Deep RL', 'SAC', 'Robotics', 'Meta-World', 'Latent Space', 'PyTorch', 'Research'],

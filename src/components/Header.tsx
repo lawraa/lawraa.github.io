@@ -31,8 +31,19 @@ export default function Header() {
       if (menuRef.current?.contains(document.activeElement)) toggleRef.current?.focus()
       setMenuOpen(false)
     }
+    // Close when the page scrolls or a tap lands outside the header.
+    const onScroll = () => setMenuOpen(false)
+    const onPointer = (e: PointerEvent) => {
+      if (!(e.target as Element).closest('header')) setMenuOpen(false)
+    }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    document.addEventListener('pointerdown', onPointer)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('scroll', onScroll)
+      document.removeEventListener('pointerdown', onPointer)
+    }
   }, [menuOpen])
 
   return (

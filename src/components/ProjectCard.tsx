@@ -88,7 +88,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             {ongoing && <span className="ml-3 align-middle"><Tag tone="butter">Ongoing</Tag></span>}
           </h2>
           {project.affiliation && <p className="mt-1.5 text-[15px] font-medium text-mute">{project.affiliation}</p>}
-          <p className="mt-3 text-lg leading-relaxed">{project.subtitle}</p>
+          <p className="mt-3 max-w-[60ch] text-lg leading-relaxed">{project.subtitle}</p>
 
           <div className="mt-4 space-y-3 max-w-[70ch] text-[17px] leading-relaxed text-mute">
             {project.description.map((para, i) => <p key={i}>{para}</p>)}
@@ -130,16 +130,16 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
 
       <div id={sectionsId} className={`expand-content ${expanded ? 'expanded' : ''}`} inert={!expanded}>
         <div className="expand-inner">
-          <dl className="mt-10 grid gap-x-12 gap-y-6 rounded-3xl bg-paper p-6 sm:p-10 md:grid-cols-[160px_minmax(0,1fr)]">
-            {sections.map(({ label, value }) => (
+          <dl className="mt-10 grid gap-x-12 gap-y-1.5 rounded-3xl bg-paper p-6 sm:p-10 md:grid-cols-[160px_minmax(0,1fr)] md:gap-y-6">
+            {sections.map(({ label, value }, i) => (
               <div key={label} className="contents">
-                <dt className="font-display text-lg font-bold text-forest">{label}</dt>
+                <dt className={`font-display text-lg font-bold text-forest md:mt-0 ${i > 0 ? 'mt-5' : ''}`}>{label}</dt>
                 <dd className="max-w-[72ch] text-[17px] leading-[1.7] text-mute">{value}</dd>
               </div>
             ))}
             {opened && project.detailImages && project.detailImages.length > 0 && (
               <div className="contents">
-                <dt className="font-display text-lg font-bold text-forest">Gallery</dt>
+                <dt className="mt-5 font-display text-lg font-bold text-forest md:mt-0">Gallery</dt>
                 <dd className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {project.detailImages.map((item, i) => {
                     const src = typeof item === 'string' ? item : item.src

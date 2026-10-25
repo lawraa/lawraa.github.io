@@ -14,7 +14,7 @@ const industryItems = [
 const researchItems = [
   { role: 'Research Assistant', org: 'NTU Robot Learning Lab · Shao-Hua Sun', dates: 'Oct 2023 – Jun 2025' },
   { role: 'Undergraduate Researcher', org: 'NTU Speech Processing & ML Lab · Hung-yi Lee', dates: 'Jul 2023 – Jun 2025' },
-  { role: 'Undergraduate Researcher', org: 'NTU Wireless & Mobile Networking Lab\u00a0· Hung\u2011Yu\u00a0Wei', dates: 'Jan 2023 – Jan 2024' },
+  { role: 'Undergraduate Researcher', org: 'NTU Wireless & Mobile Networking Lab · Hung\u2011Yu\u00a0Wei', dates: 'Jan 2023 – Jan 2024' },
 ]
 
 const papers = publications.filter(p => !p.tags.includes('Review'))
