@@ -37,9 +37,9 @@ export default function Footer() {
         <div className="mt-14 flex flex-col-reverse gap-6 border-t border-white/15 pt-6 text-meta sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Shou-Jen (Lawrance) Chen</p>
           <ul className="grid grid-cols-2 gap-x-6 font-medium sm:flex sm:flex-wrap">
-            {socials.map(({ label, href, Icon }) => (
+            {socials.map(({ label, href, Icon, ariaLabel }) => (
               <li key={label}>
-                <a href={href} {...ext} className="inline-flex items-center gap-2 py-2.5 text-white hover:text-butter transition-colors">
+                <a href={href} {...ext} aria-label={ariaLabel} className="inline-flex items-center gap-2 py-2.5 text-white hover:text-butter transition-colors">
                   <Icon size={label === 'X' ? 14 : 16} /> {label}
                 </a>
               </li>

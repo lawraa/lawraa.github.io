@@ -29,7 +29,7 @@ export default function Drawing() {
               type="button"
               onClick={e => { focusOpener(e); setLightbox(drawing) }}
               className="peer lift block aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl bg-paper"
-              aria-label={`View ${drawing.title} full size`}
+              aria-label={`Enlarge drawing: ${drawing.title}`}
             >
               <img src={drawing.src} alt="" className="h-full w-full object-cover" draggable={false} loading="lazy" decoding="async" />
             </button>

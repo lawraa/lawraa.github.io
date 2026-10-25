@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode } from 'react'
+import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { icons } from './links'
 
@@ -35,6 +35,7 @@ export function Tag({ children, tone = 'plain' }: { children: ReactNode; tone?: 
 
 export function Lightbox({ src, alt, caption, onClose }: { src: string; alt: string; caption?: ReactNode; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null)
+  const captionId = useId()
 
   // Lock scroll, move focus into the dialog and hand it back on close.
   useEffect(() => {
@@ -63,7 +64,9 @@ export function Lightbox({ src, alt, caption, onClose }: { src: string; alt: str
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={alt}
+      // Name the dialog by its visible caption when there is one, so the title isn't read twice
+      aria-label={caption ? undefined : alt}
+      aria-labelledby={caption ? captionId : undefined}
     >
       <img
         src={src}
@@ -71,7 +74,7 @@ export function Lightbox({ src, alt, caption, onClose }: { src: string; alt: str
         className="max-h-[80vh] supports-[height:1svh]:max-h-[80svh] max-w-[92vw] rounded-2xl object-contain bg-paper"
         onClick={e => e.stopPropagation()}
       />
-      {caption && <div className="text-center text-meta text-forest-tint">{caption}</div>}
+      {caption && <div id={captionId} className="text-center text-meta text-forest-tint">{caption}</div>}
       <button
         ref={closeRef}
         onClick={onClose}

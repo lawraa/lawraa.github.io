@@ -9,20 +9,20 @@ export default function Hero() {
           Shou-Jen (Lawrance) Chen
         </h1>
         <p className="mt-5 text-lg sm:text-xl font-medium">
-          Software Development Engineer at Amazon ·{' '}
+          Software Development Engineer at Amazon{'\u00a0'}·{' '}
           <span className="whitespace-nowrap">UC Berkeley EECS MEng</span>
         </p>
 
         <div className="mt-6 max-w-[64ch] space-y-4 text-mute text-[1.0625rem] sm:text-lg leading-[1.65]">
           <p>
-            Before Amazon, I did a Master of Engineering in EECS at UC Berkeley, focused on robotics and embedded systems. My capstone used an LLM to design
+            Before Amazon, I did a Master of Engineering in EECS at UC&nbsp;Berkeley, focused on robotics and embedded systems. My capstone used an LLM to design
             a <span className="mark">custom assistive gripper for each patient</span>, testing every design in MuJoCo
             simulation. I've also built a quadruped you steer with a wristband, and co-authored a paper on multi-agent LLM discussion at{' '}
             <a href="https://arxiv.org/abs/2405.06373" {...ext} className="link">COLM&nbsp;2024</a>.
           </p>
           <p>
             Before Berkeley I studied Electrical Engineering at National Taiwan University and did research with{' '}
-            <a href="https://shaohua0116.github.io/" {...ext} className="link">Shao-Hua Sun</a> and{' '}
+            <a href="https://shaohua0116.github.io/" {...ext} className="link">Shao&#8209;Hua&nbsp;Sun</a> and{' '}
             <a href="https://speech.ee.ntu.edu.tw/~hylee/index.php" {...ext} className="link">Hung&#8209;yi Lee</a>.
             Outside of work I boulder and draw.
           </p>
@@ -46,8 +46,8 @@ export default function Hero() {
           </div>
           <ul className="flex flex-wrap items-center gap-x-3.5 sm:gap-x-4 text-meta font-semibold text-forest">
             <li><a href={`mailto:${EMAIL}`} className="inline-flex min-h-11 items-center hover:text-tomato transition-colors">Email</a></li>
-            {socials.map(({ label, href }) => (
-              <li key={label}><a href={href} {...ext} className="inline-flex min-h-11 min-w-6 items-center hover:text-tomato transition-colors">{label}</a></li>
+            {socials.map(({ label, href, ariaLabel }) => (
+              <li key={label}><a href={href} {...ext} aria-label={ariaLabel} className="inline-flex min-h-11 min-w-6 items-center hover:text-tomato transition-colors">{label}</a></li>
             ))}
           </ul>
         </div>

@@ -107,7 +107,7 @@ export default function Bouldering() {
                   decoding="async"
                 />
               </button>
-              <p className="mt-3 font-semibold leading-snug transition-colors peer-hover:text-tomato">{photo.caption}</p>
+              <p className="mt-3 font-semibold leading-snug text-balance transition-colors peer-hover:text-tomato">{photo.caption}</p>
               <p className="mt-0.5 text-meta text-mute">{photo.location}</p>
               <div className="mt-2"><Tag>{photo.grade}</Tag></div>
             </li>

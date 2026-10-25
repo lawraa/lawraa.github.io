@@ -82,7 +82,7 @@ export const projects: Project[] = [
       'All five pipelines are runnable side-by-side via a single /compare endpoint. Test suite (8 unit tests) passes with no API key required, covering chunker correctness and hybrid retrieval fusion logic.',
 
     reflection:
-      'Every pipeline returns a shared RAGResponse model with a trace field. So each one emits structured metadata about what it retrieved and why, which made retrieval failures much easier to debug. Each part of the "advanced" pipeline (hybrid + rerank + HyDE) fixes a different failure: BM25 catches exact-match cases that dense retrieval misses, reranking corrects initial ranking errors, and HyDE closes the query–document vocabulary gap.',
+      'Every pipeline returns a shared RAGResponse model with a trace field. So each one emits structured metadata about what it retrieved and why, which made retrieval failures much easier to debug. Each part of the "advanced" pipeline (hybrid + rerank + HyDE) fixes a different failure: BM25 catches exact-match cases that dense retrieval misses, reranking corrects initial ranking errors, and HyDE closes the query-document vocabulary gap.',
   },
   {
     id: 'jpmorgan-midas-core',
@@ -185,7 +185,7 @@ export const projects: Project[] = [
   },
   {
     id: 'cnn-vit-fairness',
-    title: 'CNN–ViT Showdown for Racial Equality in Upscaling and Racial Recognition',
+    title: 'CNN-ViT Showdown for Racial Equality in Upscaling and Racial Recognition',
     affiliation: 'UC Berkeley · CS 289',
     subtitle: 'ResNet50 vs FastViT robustness under intentional racial imbalance (upscaling + race classification)',
     tags: ['Computer Vision', 'Model Evaluation', 'Fairness', 'ResNet50', 'Vision Transformer', 'PyTorch'],
@@ -277,7 +277,7 @@ export const projects: Project[] = [
   {
     id: 'trendforce-news-translation',
     title: 'Automating Technology News Translation & Style Adaptation',
-    affiliation: 'NTU RLL Lab x TrendForce · Industry-University Research Collaboration',
+    affiliation: 'NTU RLL Lab × TrendForce · Industry-University Research Collaboration',
     subtitle: 'Two-stage RAG pipeline for domain translation and editorial style alignment',
     tags: ['LLMs', 'RAG', 'NLP', 'Evaluation', 'Embeddings'],
     imageUrl: '/projects/trendforce_pipeline.jpg',
@@ -285,7 +285,7 @@ export const projects: Project[] = [
 
     description: [
       'TrendForce writers rewrite English tech news into Traditional Chinese by hand.',
-      'This project builds an automated pipeline that first translates articles accurately, then rewrites them to match TrendForce’s editorial writing style.'
+      'This project builds an automated pipeline that first translates articles accurately, then rewrites them to match TrendForce\'s editorial writing style.'
     ],
 
     problem:
@@ -367,7 +367,7 @@ export const projects: Project[] = [
   },
   {
     id: 'isolated-flyback-power-supply',
-    title: 'Isolated Flyback Converter ±15V Power Supply',
+    title: 'Isolated Flyback Converter ±15 V Power Supply',
     affiliation: 'National Taiwan University · EE3022',
     subtitle: 'Design, build, and validate a closed-loop regulated offline SMPS',
 
@@ -381,22 +381,22 @@ export const projects: Project[] = [
 
     ],
     description: [
-    'Designed and built an isolated flyback switching power supply generating ±15V outputs from AC mains.',
+    'Designed and built an isolated flyback switching power supply generating ±15 V outputs from AC mains.',
     'Implemented closed-loop feedback control and verified operation through oscilloscope waveform analysis.',
     'Validated stability using load transient, startup, efficiency, burn-in, and frequency response testing.'
     ],
 
     problem:
-    'Linear regulators waste significant power and cannot efficiently step down high AC input voltage while providing isolated dual outputs. The goal was to design a compact, efficient, and regulated ±15V supply suitable for real electronics systems.',
+    'Linear regulators waste significant power and cannot efficiently step down high AC input voltage while providing isolated dual outputs. The goal was to design a compact, efficient, and regulated ±15 V supply suitable for real electronics systems.',
 
     approach:
     'Designed a flyback topology with transformer isolation, PWM control (UC3845), feedback compensation network, snubber protection, and rectification filtering. Built the PCB, wound the transformer, and iteratively debugged switching behavior using oscilloscope measurements.',
 
     architecture:
-    'AC mains → rectifier → high-voltage DC bus → PWM switch (MOSFET) → flyback transformer → secondary rectifiers → LC filters → ±15V outputs → feedback control loop → PWM duty adjustment',
+    'AC mains → rectifier → high-voltage DC bus → PWM switch (MOSFET) → flyback transformer → secondary rectifiers → LC filters → ±15 V outputs → feedback control loop → PWM duty adjustment',
 
     results:
-    'Achieved regulated ±15V outputs across wide input range with stable closed-loop control. Efficiency measured around ~87–91% across load conditions. Converter remained thermally stable (~45°C with cooling) and recovered from load transients within ~175–207µs.',
+    'Achieved regulated ±15 V outputs across wide input range with stable closed-loop control. Efficiency measured around ~87–91% across load conditions. Converter remained thermally stable (~45°C with cooling) and recovered from load transients within ~175–207 µs.',
 
     reflection:
     'Most of the debugging was parasitics, noise and measurement mistakes. The circuit only worked once the snubber, compensation network and layout were right.'
@@ -413,7 +413,7 @@ export const projects: Project[] = [
     pdfUrl: '/projects/5g-handoff-simulator.pdf',
 
     description: [
-      'Built a Python simulator modeling mobile device handoff behavior in a multi–base station 5G cellular network.',
+      'Built a Python simulator modeling mobile device handoff behavior in a multi-base station 5G cellular network.',
       'Implemented signal propagation, interference, and SINR calculations to evaluate realistic connection quality.',
       'Compared distance-based and SINR-based handoff strategies under both hard and soft handoff policies.'
     ],

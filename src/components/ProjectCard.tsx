@@ -4,6 +4,7 @@ import { fitClass } from './media'
 import { icons, ext } from './links'
 import { Lightbox, Tag } from './ui'
 import { focusOpener } from './focusOpener'
+import { typeset } from '../lib/typeset'
 
 function DetailMedia({ src, alt, rows, poster, onOpen }: { src: string; alt: string; rows?: number; poster?: string; onOpen: (src: string) => void }) {
   const [wide, setWide] = useState(false)
@@ -70,7 +71,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             type="button"
             onClick={e => { focusOpener(e); setLightbox(project.imageUrl) }}
             className="lift aspect-[4/3] w-full cursor-zoom-in overflow-hidden rounded-2xl bg-paper"
-            aria-label={`Enlarge image for ${title}`}
+            aria-label={`Enlarge image: ${title}`}
           >
             <img
               src={project.thumbUrl ?? project.imageUrl}
@@ -86,11 +87,11 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
           <h2 className="text-forest text-2xl sm:text-[1.75rem] font-bold leading-[1.15] tracking-[-0.015em]">
             {title}
           </h2>
-          {project.affiliation && <p className="mt-1.5 text-meta font-medium text-mute">{project.affiliation}</p>}
-          <p className="mt-3 max-w-[66ch] text-lg leading-relaxed">{project.subtitle}</p>
+          {project.affiliation && <p className="mt-1.5 text-meta font-medium text-mute">{typeset(project.affiliation)}</p>}
+          <p className="mt-3 max-w-[66ch] text-lg leading-relaxed">{typeset(project.subtitle)}</p>
 
           <div className="mt-4 space-y-3 max-w-[70ch] text-[1.0625rem] leading-relaxed text-mute">
-            {project.description.map((para, i) => <p key={i}>{para}</p>)}
+            {project.description.map((para, i) => <p key={i}>{typeset(para)}</p>)}
           </div>
 
           <div className="mt-4 flex flex-wrap gap-1.5">
@@ -138,7 +139,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             {sections.map(({ label, value }, i) => (
               <div key={label} className="contents">
                 <dt className={`font-display text-lg font-bold text-forest md:mt-0 ${i > 0 ? 'mt-5' : ''}`}>{label}</dt>
-                <dd className="max-w-[72ch] text-[1.0625rem] leading-[1.7] text-mute">{value}</dd>
+                <dd className="max-w-[72ch] text-[1.0625rem] leading-[1.7] text-mute">{typeset(value)}</dd>
               </div>
             ))}
             {opened && project.detailImages && project.detailImages.length > 0 && (
@@ -149,7 +150,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
                     const src = typeof item === 'string' ? item : item.src
                     const rows = typeof item === 'string' ? undefined : item.rows
                     const poster = typeof item === 'string' ? undefined : item.poster
-                    return <DetailMedia key={src} src={src} rows={rows} poster={poster} alt={`${title}, figure ${i + 1}`} onOpen={setLightbox} />
+                    return <DetailMedia key={src} src={src} rows={rows} poster={poster} alt={`Figure ${i + 1}: ${title}`} onOpen={setLightbox} />
                   })}
                 </dd>
               </div>

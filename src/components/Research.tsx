@@ -42,6 +42,7 @@ function Bibtex({ id, text }: { id: string; text: string }) {
       <button
         type="button"
         onClick={copyText}
+        aria-label="Copy BibTeX"
         className="absolute top-3 right-3 cursor-pointer rounded-full bg-sage px-3 py-1.5 text-[0.8125rem] font-semibold text-forest ring-1 ring-inset ring-line transition-colors hover:ring-forest"
       >
         {copied ? 'Copied' : selected ? 'Selected' : 'Copy'}

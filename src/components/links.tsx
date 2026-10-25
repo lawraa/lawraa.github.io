@@ -59,5 +59,5 @@ export const socials = [
   { label: 'GitHub', href: 'https://github.com/lawraa', Icon: icons.github },
   { label: 'Scholar', href: 'https://scholar.google.com/citations?user=CfXMOEYAAAAJ&hl=en&oi=sra', Icon: icons.scholar },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/shou-jen-chen/', Icon: icons.linkedin },
-  { label: 'X', href: 'https://x.com/laythelaww', Icon: icons.x },
+  { label: 'X', ariaLabel: 'X (Twitter)', href: 'https://x.com/laythelaww', Icon: icons.x },
 ]
