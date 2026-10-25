@@ -2,7 +2,8 @@
 // - static: an asset path in src/ or index.html with no file in public/, or 404.html routes out of sync with src/pages.ts
 // - every route, phone and desktop: console errors, broken same-origin requests, a missing or duplicate h1,
 //   horizontal overflow, broken images
-// - interactions: mobile menu closing, lightbox focus handling, and /work deep links opening the case study
+// - interactions: mobile menu closing, lightbox focus handling, /work deep links opening the case study,
+//   and the map chunk failing without taking the page down
 import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 import puppeteer from 'puppeteer-core'
@@ -162,6 +163,26 @@ for (const viewport of [phone, desktop]) {
   const videos = await page.$$eval(`#${id} video`, vs => vs.map(v => ({ src: v.currentSrc, ok: v.readyState >= 1 && !v.error })))
   for (const v of videos) if (!v.ok) errors.push(`video did not load ${v.src}`)
   report(`${viewport.width}px deep link /#/work#${id}`, errors)
+  await page.close()
+}
+
+// The lazy map chunk failing to load (offline, or a deploy mid-session) leaves the rest of the page standing
+{
+  const page = await browser.newPage()
+  await page.setViewport(desktop)
+  await page.setRequestInterception(true)
+  page.on('request', r => /BoulderingMap-[\w-]+\.js/.test(r.url()) ? r.abort() : r.continue())
+  await page.goto(base + '#/bouldering', { waitUntil: 'networkidle2', timeout: 60000 })
+  await page.waitForFunction(() => document.body.innerText.includes("The map couldn't load"), { timeout: 15000 }).catch(() => {})
+  const res = await page.evaluate(() => ({
+    header: !!document.querySelector('header'),
+    footer: !!document.querySelector('footer'),
+    message: document.body.innerText.includes("The map couldn't load"),
+  }))
+  const errors = []
+  if (!res.header || !res.footer) errors.push('page unmounted')
+  if (!res.message) errors.push('no map fallback shown')
+  report('map chunk failure keeps the page', errors)
   await page.close()
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { papers, service } from '../data/research'
 import { projects } from '../data/projects'
@@ -26,12 +26,17 @@ function Authors({ authors, coFirstAuthors }: { authors: string[]; coFirstAuthor
 
 function Bibtex({ id, text }: { id: string; text: string }) {
   const [copied, copy] = useCopied()
-  // Clipboard can be blocked; the text is still selectable.
-  const copyText = () => copy(text).catch(() => {})
+  const [selected, setSelected] = useState(false)
+  const preRef = useRef<HTMLPreElement>(null)
+  // Clipboard can be blocked; select the text instead so it can be copied by hand.
+  const copyText = () => copy(text).catch(() => {
+    if (preRef.current) window.getSelection()?.selectAllChildren(preRef.current)
+    setSelected(true)
+  })
 
   return (
     <div id={id} className="relative mt-4">
-      <pre className="max-h-72 overflow-auto rounded-2xl bg-paper p-5 pt-12 font-mono sm:pt-5 sm:pr-24 text-[0.8125rem] leading-relaxed text-mute whitespace-pre-wrap break-words">
+      <pre ref={preRef} className="max-h-72 overflow-auto rounded-2xl bg-paper p-5 pt-12 font-mono sm:pt-5 sm:pr-24 text-[0.8125rem] leading-relaxed text-mute whitespace-pre-wrap break-words">
         {text}
       </pre>
       <button
@@ -39,9 +44,9 @@ function Bibtex({ id, text }: { id: string; text: string }) {
         onClick={copyText}
         className="absolute top-3 right-3 cursor-pointer rounded-full bg-sage px-3 py-1.5 text-[0.8125rem] font-semibold text-forest ring-1 ring-inset ring-line transition-colors hover:ring-forest"
       >
-        {copied ? 'Copied' : 'Copy'}
+        {copied ? 'Copied' : selected ? 'Selected' : 'Copy'}
       </button>
-      <span role="status" className="sr-only">{copied ? 'BibTeX copied to clipboard' : ''}</span>
+      <span role="status" className="sr-only">{copied ? 'BibTeX copied to clipboard' : selected ? 'Clipboard unavailable; BibTeX text selected' : ''}</span>
     </div>
   )
 }

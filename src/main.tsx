@@ -4,11 +4,14 @@ import './index.css'
 import App from './App.tsx'
 
 // A deploy changes chunk hashes; a tab opened before it can't load the lazy map chunk.
-// Reload once to pick up the new build instead of rendering a blank page.
+// Reload to pick up the new build. If that can't help (offline, or it just reloaded and the
+// chunk still fails), skip it and let the map's error boundary show a retry instead.
 window.addEventListener('vite:preloadError', () => {
+  if (!navigator.onLine) return // reloading offline would replace the site with the browser's error page
   try {
-    if (sessionStorage.getItem('reloaded-for-new-build')) return
-    sessionStorage.setItem('reloaded-for-new-build', '1')
+    const last = Number(sessionStorage.getItem('reloaded-for-new-build') ?? 0)
+    if (Date.now() - last < 10_000) return
+    sessionStorage.setItem('reloaded-for-new-build', String(Date.now()))
   } catch {
     return // storage blocked: skip the reload rather than risk a loop
   }

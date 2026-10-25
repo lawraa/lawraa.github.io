@@ -4,6 +4,7 @@ import { icons, ext } from './links'
 import { Lightbox, PageIntro, Tag, SectionHeading } from './ui'
 import { focusOpener } from './focusOpener'
 import { durationSince } from '../lib/duration'
+import ErrorBoundary from './ErrorBoundary'
 
 // Leaflet is only needed here, so it loads as its own chunk.
 const BoulderingMap = lazy(() => import('./BoulderingMap'))
@@ -42,6 +43,21 @@ function RadarChart() {
         )
       })}
     </svg>
+  )
+}
+
+function MapUnavailable() {
+  return (
+    <div className="flex h-[360px] flex-col items-center justify-center gap-4 rounded-3xl bg-forest-tint px-6 text-center sm:h-[min(440px,75svh)]">
+      <p className="text-mute">The map couldn't load.</p>
+      <button
+        type="button"
+        onClick={() => location.reload()}
+        className="cursor-pointer rounded-full px-4 py-2 text-meta font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-paper"
+      >
+        Try again
+      </button>
+    </div>
   )
 }
 
@@ -110,9 +126,11 @@ export default function Bouldering() {
       <section aria-labelledby="gyms">
         <SectionHeading id="gyms" className="mb-6">Gyms I've climbed</SectionHeading>
         {/* Placeholder matching the chips (two rows on phones), the map, and the caption and list row below it */}
-        <Suspense fallback={<><div className="mb-4 h-[5.5rem] sm:h-10" /><div className="h-[360px] rounded-3xl bg-forest-tint sm:h-[min(440px,75svh)]" /><div className="h-[7.5rem]" /></>}>
-          <BoulderingMap />
-        </Suspense>
+        <ErrorBoundary fallback={<MapUnavailable />}>
+          <Suspense fallback={<><div className="mb-4 h-[5.5rem] sm:h-10" /><div className="h-[360px] rounded-3xl bg-forest-tint sm:h-[min(440px,75svh)]" /><div className="h-[7.5rem]" /></>}>
+            <BoulderingMap />
+          </Suspense>
+        </ErrorBoundary>
       </section>
 
       {lightbox && (

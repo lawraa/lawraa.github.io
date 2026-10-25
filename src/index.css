@@ -195,6 +195,12 @@ p, li, dd {
   overflow: hidden;
 }
 
+/* Backs up the inert attribute for browsers without it; waits for the collapse to finish */
+.expand-content:not(.expanded) .expand-inner {
+  visibility: hidden;
+  transition: visibility 0s 0.35s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .expand-content { transition: none; }
 }

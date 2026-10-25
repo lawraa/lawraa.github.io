@@ -10,6 +10,8 @@ import Research from './components/Research'
 import Bouldering from './components/Bouldering'
 import Drawing from './components/Drawing'
 import { pages } from './pages'
+import ErrorBoundary from './components/ErrorBoundary'
+import { PageIntro } from './components/ui'
 
 function HomePage() {
   return (
@@ -41,6 +43,33 @@ function ResumeRedirect() {
   return null
 }
 
+function PageError() {
+  return (
+    <PageIntro title="This page couldn't load">
+      <p>
+        <button type="button" onClick={() => location.reload()} className="link cursor-pointer">Reload</button> to try again.
+      </p>
+    </PageIntro>
+  )
+}
+
+function Pages() {
+  const { pathname } = useLocation()
+  return (
+    <ErrorBoundary key={pathname} fallback={<PageError />}>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/work" element={<Projects />} />
+        <Route path="/publications" element={<Research />} />
+        <Route path="/bouldering" element={<Bouldering />} />
+        <Route path="/drawing" element={<Drawing />} />
+        <Route path="/resume" element={<ResumeRedirect />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </ErrorBoundary>
+  )
+}
+
 function App() {
   return (
     <HashRouter>
@@ -54,15 +83,7 @@ function App() {
       </a>
       <Header />
       <main id="main" tabIndex={-1} className="mx-auto w-full max-w-[1160px] px-5 outline-none sm:px-10">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/work" element={<Projects />} />
-          <Route path="/publications" element={<Research />} />
-          <Route path="/bouldering" element={<Bouldering />} />
-          <Route path="/drawing" element={<Drawing />} />
-          <Route path="/resume" element={<ResumeRedirect />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <Pages />
       </main>
       <Footer />
     </HashRouter>
