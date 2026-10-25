@@ -7,7 +7,7 @@ related_targets: ["src/components"]
 
 # Surface brief: lawraa.github.io (all routes)
 
-Scope: the whole personal site (Home, Projects, Publications, Resume, Bouldering, Drawing). Visitor mode: Experience (portfolio), audience split evenly between industry hiring and research readers.
+Scope: the whole personal site (Home, Projects, Publications, Bouldering, Drawing). Visitor mode: Experience (portfolio), audience split evenly between industry hiring and research readers.
 
 Job: within one viewport the visitor knows who Lawrance is, sees real work, and can reach the resume or email. Proof comes only from the data files; no invented claims.
 
@@ -23,7 +23,7 @@ OWN-WORLD: Sage-gray ground #eef1ec with white image and panel surfaces; forest 
 
 STORY: The visitor reads one paragraph that says what Lawrance builds, sees three real projects with their images, scans experience and publications as clean ruled lists, and leaves with the resume PDF or an email.
 
-FIRST VIEWPORT: 1160px column. Header: forest wordmark left, six text links right with a tomato underline on the active one. Hero grid 1fr / 340px: left a 76px forest name over two lines, role line, bio with butter highlighter on one phrase and tomato links, then pill buttons (See projects, Resume PDF) plus Email / GitHub / Scholar / LinkedIn text links. Right: 340x400 rounded portrait with a forest "Now" card beneath it. "Selected work" heading and the top of a 3-up project image row appear above the fold at 1440x900.
+FIRST VIEWPORT: 1160px column. Header: forest wordmark left, five text links right with a tomato underline on the active one. Hero grid 1fr / 340px: left a 76px forest name over two lines, role line, bio with butter highlighter on one phrase and tomato links, then pill buttons (See projects, Resume PDF) plus Email / GitHub / Scholar / LinkedIn text links. Right: 340x400 rounded portrait with a forest "Now" card beneath it. "Selected work" heading and the top of a 3-up project image row appear above the fold at 1440x900.
 
 SIGNATURE: the butter highlighter marks draw in left to right once on load (the single authored motion moment, exponential ease-out, content visible by default and under reduced motion); project images lift slightly on hover.
 

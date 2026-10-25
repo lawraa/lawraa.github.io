@@ -223,7 +223,7 @@ A botanical four-ink palette on a pale sage ground: forest for structure, tomato
 
 A single centered column (container 1160px) with 20px gutters on mobile and 40px from 640px. The header is sticky, 72px tall, sage-filled, and gains a hairline bottom border only once the page scrolls. Sections are separated by 96px of bottom space, not by dividers.
 
-The home hero is a two-column grid: flexible text left, a fixed portrait column right (300px at 768px, 340px at 1024px, 56-72px gap), stacking on mobile. Project and publication articles use a 300px media column beside text from 768px. Image grids run 1, 2 then 3 columns (24px column gap, 40px row gap); experience splits into two columns at 1024px. The resume uses a 220px sticky sidebar beside content at 1024px. Inner pages open with 56-80px top padding before the page title.
+The home hero is a two-column grid: flexible text left, a fixed portrait column right (300px at 768px, 340px at 1024px, 56-72px gap), stacking on mobile. Project and publication articles use a 300px media column beside text from 768px. Image grids run 1, 2 then 3 columns (24px column gap, 40px row gap); experience splits into two columns at 1024px. Inner pages open with 56-80px top padding before the page title.
 
 Lists are ruled, not boxed: a top hairline, then each row closed by a bottom hairline with 16-24px vertical padding, text left and dates right. Measures stay readable: 62-64ch for intros and bio, 70-78ch for long-form.
 
@@ -240,7 +240,7 @@ Flat by default. Depth comes from tone (white surfaces on sage, forest surfaces 
 
 ## Shapes
 
-Soft geometry with two families. Everything pressed or labeled is a full pill: buttons, tags, filter chips, icon buttons. Everything shown is a softly rounded rectangle: images and media wells at 16px, gallery figures and the map popup at 12px, large reading panels (case study, radar chart) and the hero portrait at 24px. The focus outline is 2px tomato with a 3px offset and 6px corners. Rules are straight 1px hairlines; there are no decorative borders, outlines on cards, or offset shapes. Resume bullets are a short 10x2px forest dash rather than a dot.
+Soft geometry with two families. Everything pressed or labeled is a full pill: buttons, tags, filter chips, icon buttons. Everything shown is a softly rounded rectangle: images and media wells at 16px, gallery figures and the map popup at 12px, large reading panels (case study, radar chart) and the hero portrait at 24px. The focus outline is 2px tomato with a 3px offset and 6px corners. Rules are straight 1px hairlines; there are no decorative borders, outlines on cards, or offset shapes.
 
 ## Components
 
@@ -269,7 +269,7 @@ Confident, rounded and quiet: filled forest for the one main action, an outline 
 - **Mobile:** below 768px a 22px stroked hamburger in forest on a pill hover wash opens a full-width list of 24px Bricolage semibold links separated by hairlines, forest by default and tomato when active.
 
 ### Ruled List Row
-The site's list grammar for experience, publications, resume entries and service: hairline-bounded rows, a semibold title over a 15px mute meta line, tabular dates right-aligned on desktop, and an optional butter tag at the trailing edge.
+The site's list grammar for experience, publications and service: hairline-bounded rows, a semibold title over a 15px mute meta line, tabular dates right-aligned on desktop, and an optional butter tag at the trailing edge.
 
 ### Project Tile
 White 16:10 (home) or 4:3 (articles) image well with 16px corners and the Lift hover, followed by an 18px semibold Hanken title that turns tomato on group hover, a mute 15px subtitle, and one tag.

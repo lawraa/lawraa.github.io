@@ -81,7 +81,7 @@
       "kind": "nav",
       "refersTo": "nav",
       "description": "Sage sticky header: forest wordmark, text links with a tomato underline on the active one.",
-      "html": "<header class=\"ds-nav\"><a class=\"ds-wordmark\" href=\"#\">Lawrance Chen</a><nav class=\"ds-links\"><a href=\"#\" aria-current=\"page\">Home</a><a href=\"#\">Projects</a><a href=\"#\">Publications</a><a href=\"#\">Resume</a></nav></header>",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-wordmark\" href=\"#\">Lawrance Chen</a><nav class=\"ds-links\"><a href=\"#\" aria-current=\"page\">Home</a><a href=\"#\">Projects</a><a href=\"#\">Publications</a><a href=\"#\">Bouldering</a></nav></header>",
       "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 40px; background: var(--color-sage, #eef1ec); border-bottom: 1px solid var(--color-line, #cfd6cf); } .ds-wordmark { font-family: var(--font-display, 'Bricolage Grotesque', sans-serif); font-size: 20px; font-weight: 700; letter-spacing: -0.01em; color: var(--color-forest, #1f4d3a); text-decoration: none; } .ds-links { display: flex; gap: 28px; font-family: var(--font-sans, 'Hanken Grotesk', sans-serif); font-size: 15px; font-weight: 500; } .ds-links a { padding: 4px 0; color: var(--color-mute, #525a55); text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; } .ds-links a:hover { color: var(--color-ink, #1a1d1b); border-color: var(--color-line, #cfd6cf); } .ds-links a[aria-current=page] { color: var(--color-ink, #1a1d1b); border-color: var(--color-tomato, #bf3a24); } .ds-links a:focus-visible { outline: 2px solid var(--color-tomato, #bf3a24); outline-offset: 3px; border-radius: 6px; }"
     },
     {
@@ -96,7 +96,7 @@
       "name": "Ruled List Row",
       "kind": "custom",
       "refersTo": "ruled-list",
-      "description": "Hairline-bounded rows for experience, publications and resume entries, dates right in tabular numerals.",
+      "description": "Hairline-bounded rows for experience, publications and service, dates right in tabular numerals.",
       "html": "<ul class=\"ds-rows\"><li><div><p class=\"ds-row-title\">Industry Researcher</p><p class=\"ds-row-meta\">TrendForce Corporation</p></div><p class=\"ds-row-date\">Oct 2024 - Jun 2025</p></li><li><div><p class=\"ds-row-title\">Software Engineer Intern</p><p class=\"ds-row-meta\">Pegatron Corporation</p></div><p class=\"ds-row-date\">Jul - Aug 2023</p></li></ul>",
       "css": ".ds-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--color-line, #cfd6cf); font-family: var(--font-sans, 'Hanken Grotesk', sans-serif); } .ds-rows li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 24px; padding: 16px 0; border-bottom: 1px solid var(--color-line, #cfd6cf); } .ds-rows p { margin: 0; } .ds-row-title { font-weight: 600; line-height: 1.375; color: var(--color-ink, #1a1d1b); } .ds-row-meta, .ds-row-date { font-size: 15px; color: var(--color-mute, #525a55); } .ds-row-date { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }"
     },

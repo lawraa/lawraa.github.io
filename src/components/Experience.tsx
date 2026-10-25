@@ -6,15 +6,15 @@ import { Tag } from './ui'
 const industryItems = [
   { role: 'Software Development Engineer', org: 'Amazon · Seattle', dates: 'Sep 2026 – Present' },
   { role: 'MEng in EECS, capstone', org: 'UC Berkeley', dates: 'Aug 2025 – May 2026' },
-  { role: 'Software Engineering Job Simulation', org: 'JPMorgan Chase & Co. (Forage)', dates: 'Apr 2026' },
-  { role: 'Industry Researcher', org: 'TrendForce Corporation', dates: 'Oct 2024 – Jun 2025' },
-  { role: 'Software Engineer Intern', org: 'Pegatron Corporation', dates: 'Jul – Aug 2023' },
-  { role: 'Software Engineer Intern', org: 'IADIY Photonics', dates: '2020 & 2021' },
+  { role: 'Industry/Lab Researcher', org: 'TrendForce Corporation', dates: 'Oct 2024 – Jun 2025' },
+  { role: 'Software Engineer Intern', org: 'Pegatron Corporation', dates: 'Jun – Sep 2023' },
+  { role: 'Software Engineer Intern', org: 'IADIY Photonics', dates: 'Summers 2021 & 2022' },
 ]
 
 const researchItems = [
   { role: 'Research Assistant', org: 'NTU Robot Learning Lab · Shao-Hua Sun', dates: 'Oct 2023 – Jun 2025' },
   { role: 'Undergraduate Researcher', org: 'NTU Speech Processing & ML Lab · Hung-yi Lee', dates: 'Jul 2023 – Jun 2025' },
+  { role: 'Undergraduate Researcher', org: 'NTU Wireless & Mobile Networking Lab\u00a0· Hung\u2011Yu\u00a0Wei', dates: 'Jan 2023 – Jan 2024' },
 ]
 
 const papers = publications.filter(p => !p.tags.includes('Review'))
