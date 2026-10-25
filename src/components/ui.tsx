@@ -5,7 +5,7 @@ import { icons } from './links'
 export function PageIntro({ title, children }: { title: string; children?: ReactNode }) {
   return (
     <header className="pt-14 sm:pt-20 pb-10 sm:pb-14">
-      <h1 className="text-forest font-bold text-5xl sm:text-6xl tracking-[-0.03em] leading-[1.02]">{title}</h1>
+      <h1 className="text-forest font-bold text-[min(3rem,13vw)] sm:text-6xl tracking-[-0.03em] leading-[1.02]">{title}</h1>
       {children && <div className="mt-5 max-w-[62ch] text-lg text-mute">{children}</div>}
     </header>
   )
@@ -22,7 +22,7 @@ export type TagTone = keyof typeof tagTones
 
 export function Tag({ children, tone = 'plain' }: { children: ReactNode; tone?: TagTone }) {
   return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[0.8125rem] font-semibold leading-6 ${tagTones[tone]}`}>
+    <span className={`inline-flex items-center rounded-full px-2.5 py-[0.3125rem] text-[0.8125rem] font-semibold leading-[1.125rem] ${tagTones[tone]}`}>
       {children}
     </span>
   )

@@ -101,8 +101,8 @@ export default function Bouldering() {
 
       <section aria-labelledby="gyms">
         <h2 id="gyms" className="mb-6 text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">Gyms I've climbed</h2>
-        {/* Placeholder roughly the height of the region chips plus the map, to limit layout shift */}
-        <Suspense fallback={<><div className="mb-4 h-10" /><div className="h-[360px] rounded-3xl bg-forest-tint sm:h-[min(440px,75svh)]" /></>}>
+        {/* Placeholder matching the chips (two rows on phones), the map, and the caption and list row below it */}
+        <Suspense fallback={<><div className="mb-4 h-[5.5rem] sm:h-10" /><div className="h-[360px] rounded-3xl bg-forest-tint sm:h-[min(440px,75svh)]" /><div className="h-[7.5rem]" /></>}>
           <BoulderingMap />
         </Suspense>
       </section>

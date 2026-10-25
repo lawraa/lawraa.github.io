@@ -28,21 +28,23 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-4">
-          <Link
-            to="/work"
-            className="inline-flex items-center gap-2 rounded-full bg-forest px-5 py-3 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-forest-deep"
-          >
-            See projects <icons.arrow />
-          </Link>
-          <a
-            href="/resume.pdf"
-            {...ext}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-[0.9375rem] font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
-          >
-            Resume PDF <icons.external size={16} />
-          </a>
-          <ul className="flex flex-wrap items-center gap-x-4 text-[0.9375rem] font-semibold text-forest xl:ml-3">
+        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+          <div className="flex flex-wrap gap-x-3 gap-y-4">
+            <Link
+              to="/work"
+              className="inline-flex items-center gap-2 rounded-full bg-forest px-5 py-3 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-forest-deep"
+            >
+              See projects <icons.arrow />
+            </Link>
+            <a
+              href="/resume.pdf"
+              {...ext}
+              className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-[0.9375rem] font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
+            >
+              Resume PDF <icons.external size={16} />
+            </a>
+          </div>
+          <ul className="flex flex-wrap items-center gap-x-4 text-[0.9375rem] font-semibold text-forest">
             <li><a href={`mailto:${EMAIL}`} className="inline-flex min-h-11 items-center hover:text-tomato transition-colors">Email</a></li>
             {socials.map(({ label, href }) => (
               <li key={label}><a href={href} {...ext} className="inline-flex min-h-11 min-w-6 items-center hover:text-tomato transition-colors">{label}</a></li>
@@ -51,7 +53,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="w-full md:max-w-[340px] md:justify-self-end">
+      <div className="w-full max-w-[400px] md:max-w-[340px] md:justify-self-end print:max-w-[3in]">
         <div className="aspect-[340/400] overflow-hidden rounded-3xl bg-paper">
           <img
             src="/lawry/portrait.jpg"

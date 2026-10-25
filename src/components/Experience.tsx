@@ -12,8 +12,8 @@ const industryItems = [
 ]
 
 const researchItems = [
-  { role: 'Research Assistant', org: 'NTU Robot Learning Lab\u00a0· Shao-Hua Sun', dates: 'Oct 2023 – Jun 2025' },
-  { role: 'Undergraduate Researcher', org: 'NTU Speech Processing & ML Lab\u00a0· Hung-yi Lee', dates: 'Jul 2023 – Jun 2025' },
+  { role: 'Research Assistant', org: 'NTU Robot Learning Lab\u00a0· Shao\u2011Hua\u00a0Sun', dates: 'Oct 2023 – Jun 2025' },
+  { role: 'Undergraduate Researcher', org: 'NTU Speech Processing & ML Lab\u00a0· Hung\u2011yi\u00a0Lee', dates: 'Jul 2023 – Jun 2025' },
   { role: 'Undergraduate Researcher', org: 'NTU Wireless & Mobile Networking Lab\u00a0· Hung\u2011Yu\u00a0Wei', dates: 'Jan 2023 – Jan 2024' },
 ]
 
@@ -49,9 +49,9 @@ export default function Experience() {
           <h3 className="mb-3 font-sans text-[0.9375rem] font-semibold text-ink">Research labs</h3>
           <Timeline items={researchItems} />
 
-          <div className="mt-10 flex items-baseline justify-between gap-4">
+          <div className="mt-10 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
             <h3 className="font-sans text-[0.9375rem] font-semibold text-ink">Publications</h3>
-            <Link to="/publications" className="inline-flex items-center gap-1.5 text-[0.9375rem] font-semibold text-tomato hover:underline underline-offset-4">
+            <Link to="/publications" className="inline-flex items-center gap-1.5 whitespace-nowrap text-[0.9375rem] font-semibold text-tomato hover:underline underline-offset-4">
               All publications <icons.arrow size={15} />
             </Link>
           </div>
@@ -64,7 +64,7 @@ export default function Experience() {
                     <span className="block text-[0.9375rem] font-normal text-mute">Co-first author</span>
                   )}
                 </a>
-                <Tag tone="butter">{pub.venue} {pub.year}</Tag>
+                <span className="shrink-0"><Tag tone="butter">{pub.venue} {pub.year}</Tag></span>
               </li>
             ))}
           </ul>

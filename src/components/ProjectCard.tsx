@@ -28,7 +28,7 @@ function DetailMedia({ src, alt, rows, poster, onOpen }: { src: string; alt: str
           }}
         />
       ) : (
-        <button type="button" className="block h-full w-full cursor-zoom-in" onClick={() => onOpen(src)} aria-label={`Enlarge ${alt}`}>
+        <button type="button" className="focus-inset block h-full w-full cursor-zoom-in" onClick={() => onOpen(src)} aria-label={`Enlarge ${alt}`}>
           <img
             src={src}
             alt={alt}
@@ -61,7 +61,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
   ]
 
   return (
-    <article id={project.id} className="scroll-mt-24 border-t border-line py-10 sm:py-12">
+    <article id={project.id} className="border-t border-line py-10 sm:py-12">
       <div className={`grid gap-6 sm:gap-8 ${project.imageUrl ? 'md:grid-cols-[300px_minmax(0,1fr)] lg:gap-12' : ''}`}>
         {project.imageUrl && (
           <button

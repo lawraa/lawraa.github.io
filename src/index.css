@@ -43,6 +43,8 @@ html {
   scrollbar-color: var(--color-line) var(--color-sage);
   -webkit-text-size-adjust: 100%;
   color-scheme: light;
+  /* Keep anything scrolled into view (keyboard focus, in-page links) clear of the 72px sticky header */
+  scroll-padding-top: 6rem;
 }
 
 body {
@@ -73,14 +75,14 @@ footer :focus-visible,
   outline-color: var(--color-butter);
 }
 
+/* Inside a clipping parent an outside ring gets cut off, so draw it inset */
+.focus-inset:focus-visible {
+  outline-offset: -3px;
+}
+
 /* main takes focus after navigation only so screen readers start there; no ring around the page */
 #main:focus {
   outline: none;
-}
-
-/* Keep in-page headings clear of the sticky header */
-h2[id] {
-  scroll-margin-top: 6rem;
 }
 
 h1, h2, h3 {
@@ -177,5 +179,9 @@ p, li, dd {
     display: none !important;
   }
   footer { background: none !important; }
+  /* Keep headings and thumbnails with what follows, keep short rows whole, and shrink images to a fraction of a page */
+  h1, h2, h3, main [class*="aspect-"] { break-after: avoid; }
+  li, footer { break-inside: avoid; }
+  main [class*="aspect-"] { max-width: 3in; }
   footer, footer * { color: var(--color-ink) !important; }
 }

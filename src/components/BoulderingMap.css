@@ -98,3 +98,13 @@
 .leaflet-control-attribution {
   border-radius: 6px !important;
 }
+
+/* The map wrapper and the zoom bar clip overflow, so draw focus rings inset */
+.leaflet-container:focus-visible {
+  outline-offset: -4px;
+  border-radius: 24px; /* matches the wrapper's rounded-3xl so the ring follows the corners */
+}
+
+.leaflet-bar a:focus-visible {
+  outline-offset: -3px;
+}
