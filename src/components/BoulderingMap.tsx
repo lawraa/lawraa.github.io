@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import { Browser } from 'leaflet'
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet'
 import { gyms } from '../data/bouldering'
+import { icons } from './links'
 
 const COUNTRY_COLORS: Record<string, string> = {
   USA:      '#1f4d3a',
@@ -57,8 +59,15 @@ export default function BoulderingMap() {
         })}
       </div>
 
-      <div className="isolate overflow-hidden rounded-3xl ring-1 ring-line">
-        <MapContainer bounds={REGION_VIEWS.all.bounds} boundsOptions={{ padding: [32, 32] }} scrollWheelZoom={false} style={{ width: '100%', height: '440px' }}>
+      <div className="isolate h-[360px] overflow-hidden rounded-3xl ring-1 ring-line sm:h-[440px]">
+        {/* One-finger drag would trap page scrolling on phones; zoom buttons and pinch still work there. */}
+        <MapContainer
+          bounds={REGION_VIEWS.all.bounds}
+          boundsOptions={{ padding: [32, 32] }}
+          scrollWheelZoom={false}
+          dragging={!Browser.mobile}
+          className="h-full w-full"
+        >
           <TileLayer
             url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
             attribution="Tiles &copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors"
@@ -83,6 +92,31 @@ export default function BoulderingMap() {
         </MapContainer>
       </div>
       <p className="mt-3 text-[15px] text-mute">Select a pin to see the gym.</p>
+
+      <details className="group mt-6 border-t border-line">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold text-forest hover:text-tomato transition-colors [&::-webkit-details-marker]:hidden">
+          All {gyms.length} gyms as a list
+          <span className="transition-transform duration-300 group-open:rotate-180"><icons.chevron /></span>
+        </summary>
+        <div className="grid gap-x-12 gap-y-8 pb-4 sm:grid-cols-2 lg:grid-cols-3">
+          {REGIONS.filter(r => r !== 'all').map(country => (
+            <section key={country} aria-label={country}>
+              <h3 className="flex items-center gap-2 font-sans text-[15px] font-semibold text-ink">
+                <span className="h-2.5 w-2.5 rounded-full ring-1 ring-forest/30" style={{ backgroundColor: COUNTRY_COLORS[country] }} aria-hidden="true" />
+                {country}
+              </h3>
+              <ul className="mt-2 border-t border-line">
+                {gyms.filter(g => g.country === country).map(gym => (
+                  <li key={gym.name} className="flex items-baseline justify-between gap-4 border-b border-line py-2.5 text-[15px]">
+                    <span className="min-w-0">{gym.name}</span>
+                    <span className="shrink-0 text-mute">{gym.city}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </details>
     </div>
   )
 }

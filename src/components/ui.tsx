@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { icons } from './links'
 
@@ -29,14 +29,27 @@ export function Tag({ children, tone = 'plain' }: { children: ReactNode; tone?: 
 }
 
 export function Lightbox({ src, alt, caption, onClose }: { src: string; alt: string; caption?: ReactNode; onClose: () => void }) {
+  const closeRef = useRef<HTMLButtonElement>(null)
+
+  // Lock scroll, move focus into the dialog and hand it back on close.
   useEffect(() => {
+    const opener = document.activeElement as HTMLElement | null
     document.body.style.overflow = 'hidden'
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
-    window.addEventListener('keydown', onKey)
+    closeRef.current?.focus()
     return () => {
       document.body.style.overflow = ''
-      window.removeEventListener('keydown', onKey)
+      opener?.focus()
     }
+  }, [])
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+      // The close button is the only control, so Tab stays on it.
+      if (e.key === 'Tab') { e.preventDefault(); closeRef.current?.focus() }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
   return createPortal(
@@ -55,8 +68,9 @@ export function Lightbox({ src, alt, caption, onClose }: { src: string; alt: str
       />
       {caption && <div className="text-center text-sm text-forest-tint">{caption}</div>}
       <button
+        ref={closeRef}
         onClick={onClose}
-        className="absolute top-4 right-4 p-2 rounded-full text-forest-tint hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+        className="absolute top-[max(1rem,env(safe-area-inset-top))] right-[max(1rem,env(safe-area-inset-right))] p-2 rounded-full text-forest-tint hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
         aria-label="Close"
       >
         <icons.close />

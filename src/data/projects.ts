@@ -124,7 +124,7 @@ export const projects: Project[] = [
     id: 'llm-personalized-assistive-design',
     title: 'LLM-Driven Personalized Assistive Device Design',
     affiliation: 'UC Berkeley · MEng Capstone Project',
-    subtitle: 'LLM guided MuJoCo simulation for automated gripper personalization, 83% convergence across 12 runs, 4 participants',
+    subtitle: 'LLM-guided MuJoCo simulation for automated gripper personalization, 83% convergence across 12 runs, 4 participants',
     tags: ['LLMs', 'Robotics', 'MuJoCo', 'Simulation', 'Optimization', 'Assistive Technology'],
     imageUrl: '/projects/capstone_dorsal-grasper.jpg',
     thumbUrl: '/thumbs/capstone_dorsal-grasper.jpg',
@@ -153,7 +153,7 @@ export const projects: Project[] = [
       + 'Also built full supporting infrastructure: parallel multi-user runner, result cleanup and renumbering tooling, offscreen MuJoCo video export, and a publication-ready 4-panel results figure.',
 
     reflection:
-      'The primary failure mode was not budget but LLM plateau. Every failed run shared the same pattern: the model anchored on finger_spread_angle=0.09 across 64 of 100 iterations despite the critical threshold being ~0.11, and doubling the iteration budget did not break the loop.' 
+      'The primary failure mode was not budget but LLM plateau. Every failed run shared the same pattern: the model anchored on finger_spread_angle=0.09 across 64 of 100 iterations despite the critical threshold being ~0.11, and doubling the iteration budget did not break the loop. '
       + 'The most surprising finding was Phase 2 generalization: in one run, sphere_lift was never solved in 30 Phase 1 iterations, yet the Phase 2 seed (optimized for a different task) passed sphere_lift anyway via geometric coincidence. Missing a task in Phase 1 is not always fatal. '
       + 'Most of the work was in how simulation results are summarized for the LLM: the metric abstraction and prompt structure, more than the optimizer itself.',
   },

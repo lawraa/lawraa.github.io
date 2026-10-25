@@ -104,8 +104,7 @@ export default function Bouldering() {
       </section>
 
       <section aria-labelledby="gyms">
-        <h2 id="gyms" className="text-forest text-3xl font-bold tracking-[-0.02em]">Gyms I've climbed</h2>
-        <div className="mb-6" />
+        <h2 id="gyms" className="mb-6 text-forest text-3xl font-bold tracking-[-0.02em]">Gyms I've climbed</h2>
         <BoulderingMap />
       </section>
 

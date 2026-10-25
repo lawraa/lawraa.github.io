@@ -21,12 +21,19 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenuOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [menuOpen])
+
   return (
     <header
       className={`sticky top-0 z-50 bg-sage transition-[border-color] duration-200 border-b ${scrolled || menuOpen ? 'border-line' : 'border-transparent'}`}
     >
       <div className="mx-auto flex h-[72px] max-w-[1160px] items-center justify-between px-5 sm:px-10">
-        <Link to="/" className="font-display text-xl font-bold tracking-[-0.01em] text-forest" aria-label="Lawrance Chen, home">
+        <Link to="/" onClick={() => setMenuOpen(false)} className="font-display text-xl font-bold tracking-[-0.01em] text-forest" aria-label="Lawrance Chen, home">
           Lawrance Chen
         </Link>
 
@@ -47,7 +54,7 @@ export default function Header() {
         </nav>
 
         <button
-          className="md:hidden -mr-2 p-2 rounded-full text-forest cursor-pointer hover:bg-forest-tint transition-colors"
+          className="md:hidden -mr-[11px] p-[11px] rounded-full text-forest cursor-pointer hover:bg-forest-tint transition-colors"
           aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen(o => !o)}

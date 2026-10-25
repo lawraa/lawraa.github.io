@@ -46,6 +46,8 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' } as const
 
 export default function ProjectCard({ project, defaultExpanded = false }: { project: Project; defaultExpanded?: boolean }) {
   const [expanded, setExpanded] = useState(defaultExpanded)
+  // Gallery media mounts on first open so collapsed cards don't download it.
+  const [opened, setOpened] = useState(defaultExpanded)
   const [lightbox, setLightbox] = useState<string>()
   const sectionsId = `${project.id}-case-study`
   const ongoing = /\(Ongoing\)$/.test(project.title)
@@ -72,6 +74,8 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             <img
               src={project.thumbUrl ?? project.imageUrl}
               alt=""
+              loading="lazy"
+              decoding="async"
               className={`h-full w-full ${project.thumbUrl ? 'object-contain' : project.imageFit === 'contain' ? 'object-contain p-4' : 'object-cover'}`}
             />
           </button>
@@ -96,7 +100,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-[15px] font-semibold">
             <button
               type="button"
-              onClick={() => setExpanded(e => !e)}
+              onClick={() => { setExpanded(e => !e); setOpened(true) }}
               aria-expanded={expanded}
               aria-controls={sectionsId}
               className="inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
@@ -132,7 +136,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
                 <dd className="max-w-[72ch] text-[17px] leading-[1.7] text-mute">{value}</dd>
               </div>
             ))}
-            {project.detailImages && project.detailImages.length > 0 && (
+            {opened && project.detailImages && project.detailImages.length > 0 && (
               <div className="contents">
                 <dt className="font-display text-lg font-bold text-forest">Gallery</dt>
                 <dd className="grid grid-cols-1 gap-3 sm:grid-cols-2">

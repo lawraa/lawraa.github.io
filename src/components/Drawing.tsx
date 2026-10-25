@@ -40,7 +40,7 @@ export default function Drawing() {
               aria-label={`View ${drawing.title} full size`}
             >
               <div className="lift aspect-square overflow-hidden rounded-2xl bg-paper">
-                <img src={drawing.src} alt="" className="h-full w-full object-cover" draggable={false} />
+                <img src={drawing.src} alt="" className="h-full w-full object-cover" draggable={false} loading="lazy" decoding="async" />
               </div>
               <h2 className="mt-4 font-sans text-lg font-semibold group-hover:text-tomato transition-colors">{drawing.title}</h2>
             </button>

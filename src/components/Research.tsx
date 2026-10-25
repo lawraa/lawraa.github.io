@@ -20,6 +20,36 @@ function Authors({ authors, coFirstAuthors }: { authors: string[]; coFirstAuthor
   )
 }
 
+function Bibtex({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false)
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Clipboard can be blocked; the text is still selectable.
+    }
+  }
+
+  return (
+    <div className="relative mt-4">
+      <pre className="max-h-72 overflow-auto rounded-2xl bg-paper p-5 pr-24 font-mono text-[13px] leading-relaxed text-mute whitespace-pre-wrap break-words">
+        {text}
+      </pre>
+      <button
+        type="button"
+        onClick={copy}
+        aria-live="polite"
+        className="absolute top-3 right-3 cursor-pointer rounded-full bg-sage px-3 py-1 text-[13px] font-semibold text-forest ring-1 ring-inset ring-line transition-colors hover:ring-forest"
+      >
+        {copied ? 'Copied' : 'Copy'}
+      </button>
+    </div>
+  )
+}
+
 export default function Research() {
   const [openBibtex, setOpenBibtex] = useState<string | null>(null)
   const papers = publications.filter(pub => !pub.tags.includes('Review'))
@@ -36,7 +66,7 @@ export default function Research() {
           <article key={pub.id} className="grid gap-6 border-t border-line py-10 sm:py-12 md:grid-cols-[300px_minmax(0,1fr)] lg:gap-12">
             {pub.imageUrl && (
               <a href={pub.paperUrl} {...ext} className="lift block aspect-[4/3] overflow-hidden rounded-2xl bg-paper" aria-label={`Open paper: ${pub.title}`}>
-                <img src={pub.thumbUrl ?? pub.imageUrl} alt="" className={`h-full w-full ${pub.thumbUrl ? 'object-contain' : 'object-cover'}`} />
+                <img src={pub.thumbUrl ?? pub.imageUrl} alt="" decoding="async" className={`h-full w-full ${pub.thumbUrl ? 'object-contain' : 'object-cover'}`} />
               </a>
             )}
             <div className="min-w-0">
@@ -75,11 +105,7 @@ export default function Research() {
                 )}
               </div>
 
-              {openBibtex === pub.id && pub.bibtex && (
-                <pre className="mt-4 max-h-72 overflow-auto rounded-2xl bg-paper p-5 font-mono text-[13px] leading-relaxed text-mute whitespace-pre-wrap break-words">
-                  {pub.bibtex}
-                </pre>
-              )}
+              {openBibtex === pub.id && pub.bibtex && <Bibtex text={pub.bibtex} />}
             </div>
           </article>
         ))}

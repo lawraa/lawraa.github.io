@@ -127,6 +127,10 @@ p, li, dd {
   overflow: hidden;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .expand-content { transition: none; }
+}
+
 /* Fix Tailwind preflight breaking Leaflet tile images */
 .leaflet-container img {
   max-width: none !important;
