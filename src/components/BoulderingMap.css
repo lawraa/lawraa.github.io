@@ -1,8 +1,5 @@
-/* Fix Tailwind preflight breaking Leaflet tile images */
-.leaflet-container img {
-  max-width: none !important;
-  height: unset !important;
-}
+/* leaflet.css loads right before this file, so equal-specificity rules here win by order.
+   !important is kept only where Leaflet's selector is more specific. */
 
 .leaflet-container {
   font-family: var(--font-sans);
@@ -21,19 +18,19 @@
 }
 
 .leaflet-popup-content-wrapper {
-  background: var(--color-paper) !important;
-  color: var(--color-ink) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 10px 24px -10px rgba(23, 58, 44, 0.4) !important;
-  padding: 0 !important;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px -10px rgba(23, 58, 44, 0.4);
+  padding: 0;
 }
 
 .leaflet-popup-tip {
-  background: var(--color-paper) !important;
+  background: var(--color-paper);
 }
 
 .leaflet-popup-content {
-  margin: 0 !important;
+  margin: 0;
 }
 
 .bouldering-popup {
@@ -54,10 +51,12 @@
   color: var(--color-mute);
 }
 
-.leaflet-bar a {
-  background: var(--color-paper) !important;
-  color: var(--color-forest) !important;
-  border-color: var(--color-line) !important;
+/* :focus too, since Leaflet greys out focused buttons with a more specific selector */
+.leaflet-bar a,
+.leaflet-bar a:focus {
+  background: var(--color-paper);
+  color: var(--color-forest);
+  border-color: var(--color-line);
 }
 
 .leaflet-touch .leaflet-bar a {
@@ -67,21 +66,21 @@
 }
 
 .leaflet-bar a:hover {
-  background: var(--color-forest-tint) !important;
+  background: var(--color-forest-tint);
 }
 
 .leaflet-bar {
   border: 1px solid var(--color-line) !important;
-  border-radius: 12px !important;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 .leaflet-control-attribution {
   background: color-mix(in srgb, var(--color-paper) 85%, transparent) !important;
-  color: var(--color-mute) !important;
+  color: var(--color-mute);
   font-size: 0.8125rem !important;
-  border-radius: 6px !important;
+  border-radius: 6px;
 }
 
 @media (max-width: 639px) {
@@ -92,7 +91,7 @@
 }
 
 .leaflet-control-attribution a {
-  color: var(--color-forest) !important;
+  color: var(--color-forest);
 }
 
 /* Keep the attribution clear of the map's 24px rounded corners */
