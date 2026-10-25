@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { Project } from '../data/projects'
-import { icons } from './links'
+import { icons, ext } from './links'
 import { Lightbox, Tag } from './ui'
 
 function DetailMedia({ src, alt, rows, poster, onOpen }: { src: string; alt: string; rows?: number; poster?: string; onOpen: (src: string) => void }) {
@@ -43,16 +43,13 @@ function DetailMedia({ src, alt, rows, poster, onOpen }: { src: string; alt: str
   )
 }
 
-const ext = { target: '_blank', rel: 'noopener noreferrer' } as const
-
 export default function ProjectCard({ project, defaultExpanded = false }: { project: Project; defaultExpanded?: boolean }) {
   const [expanded, setExpanded] = useState(defaultExpanded)
   // Gallery media mounts on first open so collapsed cards don't download it.
   const [opened, setOpened] = useState(defaultExpanded)
   const [lightbox, setLightbox] = useState<string>()
   const sectionsId = `${project.id}-case-study`
-  const ongoing = /\(Ongoing\)$/.test(project.title)
-  const title = project.title.replace(/ \(Ongoing\)$/, '')
+  const title = project.title
 
   const sections = [
     { label: 'Problem', value: project.problem },
@@ -85,7 +82,6 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
         <div className="min-w-0">
           <h2 className="text-forest text-2xl sm:text-[28px] font-bold leading-[1.15] tracking-[-0.015em]">
             {title}
-            {ongoing && <span className="ml-3 align-middle"><Tag tone="butter">Ongoing</Tag></span>}
           </h2>
           {project.affiliation && <p className="mt-1.5 text-[15px] font-medium text-mute">{project.affiliation}</p>}
           <p className="mt-3 max-w-[60ch] text-lg leading-relaxed">{project.subtitle}</p>
@@ -116,7 +112,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             )}
             {project.pdfUrl && (
               <a href={project.pdfUrl} {...ext} className="inline-flex items-center gap-1 text-forest hover:text-tomato transition-colors">
-                {project.pdfUrl.includes('cert') ? 'Certificate' : 'Report PDF'} <icons.external />
+                {project.pdfLabel ?? 'Report PDF'} <icons.external />
               </a>
             )}
             {project.videoUrl && (

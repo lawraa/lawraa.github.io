@@ -29,8 +29,10 @@ for (const viewport of viewports) {
       h1: document.querySelectorAll('h1').length,
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
+      brokenImages: [...document.images].filter(i => i.complete && i.naturalWidth === 0 && i.loading !== 'lazy').map(i => i.src),
     }))
     if (res.h1 !== 1) errors.push(`h1 count ${res.h1}`)
+    for (const src of res.brokenImages) if (sameOrigin(src)) errors.push(`broken image ${src}`)
     if (res.scrollWidth > res.clientWidth) errors.push(`horizontal overflow ${res.scrollWidth} > ${res.clientWidth}`)
     const id = `${viewport.width}px /${route}`
     console.log(errors.length ? 'FAIL' : 'ok  ', id, errors.join(' | '))

@@ -5,6 +5,7 @@ import './BoulderingMap.css'
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet'
 import { gyms } from '../data/bouldering'
 import { icons } from './links'
+import { pillClass, pillCountClass } from './pill'
 
 const COUNTRY_COLORS: Record<string, string> = {
   USA:      '#1f4d3a',
@@ -56,13 +57,11 @@ export default function BoulderingMap() {
               key={key}
               onClick={() => setRegion(key)}
               aria-pressed={active}
-              className={`inline-flex cursor-pointer items-center gap-2 rounded-full px-3.5 py-2 text-[15px] font-semibold transition-colors ${
-                active ? 'bg-forest text-white' : 'bg-paper text-mute ring-1 ring-inset ring-line hover:text-ink hover:ring-forest'
-              }`}
+              className={`inline-flex items-center gap-2 ${pillClass(active)}`}
             >
               {key !== 'all' && <span className="h-2.5 w-2.5 rounded-full ring-1 ring-white/70" style={{ backgroundColor: COUNTRY_COLORS[key] }} aria-hidden="true" />}
               {key === 'all' ? 'All regions' : key}{' '}
-              <span className={`tabular ${active ? 'opacity-70' : ''}`}>{count}</span>
+              <span className={pillCountClass(active)}>{count}</span>
             </button>
           )
         })}

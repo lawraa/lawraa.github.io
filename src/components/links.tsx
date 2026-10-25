@@ -61,6 +61,9 @@ export const icons = {
   ),
 }
 
+// Props for links that open in a new tab
+export const ext = { target: '_blank', rel: 'noopener noreferrer' } as const
+
 export const EMAIL = 'chenlawrance@gmail.com'
 
 export const socials = [

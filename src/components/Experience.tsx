@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { publications } from '../data/research'
-import { icons } from './links'
+import { papers } from '../data/research'
+import { icons, ext } from './links'
 import { Tag } from './ui'
 
 const industryItems = [
@@ -17,7 +17,6 @@ const researchItems = [
   { role: 'Undergraduate Researcher', org: 'NTU Wireless & Mobile Networking Lab · Hung\u2011Yu\u00a0Wei', dates: 'Jan 2023 – Jan 2024' },
 ]
 
-const papers = publications.filter(p => !p.tags.includes('Review'))
 
 function Timeline({ items }: { items: { role: string; org: string; dates: string }[] }) {
   return (
@@ -58,7 +57,7 @@ export default function Experience() {
           <ul className="mt-3 border-t border-line">
             {papers.map(pub => (
               <li key={pub.id} className="flex items-start justify-between gap-4 border-b border-line py-4">
-                <a href={pub.paperUrl} target="_blank" rel="noopener noreferrer" className="min-w-0 font-semibold leading-snug hover:text-tomato transition-colors">
+                <a href={pub.paperUrl} {...ext} className="min-w-0 font-semibold leading-snug hover:text-tomato transition-colors">
                   {pub.title.split(':')[0]}
                   {pub.coFirstAuthors?.includes('Shou-Jen Chen') && (
                     <span className="block text-[15px] font-normal text-mute">Co-first author</span>

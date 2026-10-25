@@ -240,7 +240,7 @@ Flat by default. Depth comes from tone (white surfaces on sage, forest surfaces 
 
 ## Shapes
 
-Soft geometry with two families. Everything pressed or labeled is a full pill: buttons, tags, filter chips, icon buttons. Everything shown is a softly rounded rectangle: images and media wells at 16px, gallery figures and the map popup at 12px, large reading panels (case study, radar chart) and the hero portrait at 24px. The focus outline is 2px tomato with a 3px offset and 6px corners. Rules are straight 1px hairlines; there are no decorative borders, outlines on cards, or offset shapes.
+Soft geometry with two families. Everything pressed or labeled is a full pill: buttons, tags, filter chips, icon buttons. Everything shown is a softly rounded rectangle: images and media wells at 16px, gallery figures and the map popup at 12px, large reading panels (case study, radar chart) and the hero portrait at 24px. The focus outline is 2px tomato with a 3px offset and follows each element's own corners; inside the footer and lightbox it switches to butter, since tomato is too dark on forest. Rules are straight 1px hairlines; there are no decorative borders, outlines on cards, or offset shapes.
 
 ## Components
 
@@ -255,7 +255,7 @@ Confident, rounded and quiet: filled forest for the one main action, an outline 
 
 ### Chips (Tags and Filters)
 - **Tag:** 13px semibold pill, 10px horizontal padding. Tones: plain (white, mute text, inset hairline ring) for topics and grades; butter for venues and "Ongoing"; forest and mint for featured-project fields.
-- **Filter pill:** 14px semibold, 6px x 14px. Unselected is a plain tag that darkens text and rings forest on hover; selected is solid forest with white text. Counts sit inside at 70% opacity in tabular numerals.
+- **Filter pill:** 15px semibold, 8px x 14px (40px tall). Unselected is a plain tag that darkens text and rings forest on hover; selected is solid forest with white text. Counts sit inside in tabular numerals, dimmed to 70% only on the selected (forest) pill where contrast allows it.
 
 ### Cards / Containers
 - **Corner Style:** 16px media wells, 24px panels.
@@ -265,7 +265,7 @@ Confident, rounded and quiet: filled forest for the one main action, an outline 
 - **Internal Padding:** 24px mobile / 40px desktop for panels; project tiles have no padding, only image then text stacked below.
 
 ### Navigation
-- **Desktop:** forest Bricolage wordmark (20px bold) left; six 15px medium text links right with 28px gaps. Default mute; hover ink with a hairline underline; active ink with a 2px tomato underline.
+- **Desktop:** forest Bricolage wordmark (20px bold) left; five 15px medium text links right with 28px gaps. Default mute; hover ink with a hairline underline; active ink with a 2px tomato underline.
 - **Mobile:** below 768px a 22px stroked hamburger in forest on a pill hover wash opens a full-width list of 24px Bricolage semibold links separated by hairlines, forest by default and tomato when active.
 
 ### Ruled List Row
@@ -284,7 +284,7 @@ Tomato text with a 1px underline offset 3px; on hover the underline thickens to 
 A compact forest panel (16px corners, 16px x 20px padding) under the hero portrait: 15px forest-mist text led inline by a butter semibold word.
 
 ### Footer
-A full-bleed forest close on every page: a white 36-48px Bricolage headline capped at 24ch, an 18px forest-mist line, the butter email pill and copy-email outline, then a 15% white hairline over copyright and white social links with icons that hover to butter.
+A full-bleed forest close on every page: a white 36-48px Bricolage headline, an 18px forest-mist line, the butter email pill and copy-email outline, then a 15% white hairline over copyright and white social links with icons that hover to butter.
 
 ### Lightbox
 A 95% deep-forest scrim with the image on a white 16px-cornered well, a forest-mist caption, and a round close button.

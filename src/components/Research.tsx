@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { publications } from '../data/research'
-import { icons } from './links'
+import { papers, service } from '../data/research'
+import { useCopied } from '../hooks/useCopied'
+import { icons, ext } from './links'
 import { PageIntro, Tag } from './ui'
-
-const ext = { target: '_blank', rel: 'noopener noreferrer' } as const
 
 function Authors({ authors, coFirstAuthors }: { authors: string[]; coFirstAuthors?: string[] }) {
   return (
@@ -21,17 +20,9 @@ function Authors({ authors, coFirstAuthors }: { authors: string[]; coFirstAuthor
 }
 
 function Bibtex({ id, text }: { id: string; text: string }) {
-  const [copied, setCopied] = useState(false)
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch {
-      // Clipboard can be blocked; the text is still selectable.
-    }
-  }
+  const [copied, copy] = useCopied()
+  // Clipboard can be blocked; the text is still selectable.
+  const copyText = () => copy(text).catch(() => {})
 
   return (
     <div id={id} className="relative mt-4">
@@ -40,7 +31,7 @@ function Bibtex({ id, text }: { id: string; text: string }) {
       </pre>
       <button
         type="button"
-        onClick={copy}
+        onClick={copyText}
         className="absolute top-3 right-3 cursor-pointer rounded-full bg-sage px-3 py-1.5 text-[13px] font-semibold text-forest ring-1 ring-inset ring-line transition-colors hover:ring-forest"
       >
         {copied ? 'Copied' : 'Copy'}
@@ -52,8 +43,6 @@ function Bibtex({ id, text }: { id: string; text: string }) {
 
 export default function Research() {
   const [openBibtex, setOpenBibtex] = useState<string | null>(null)
-  const papers = publications.filter(pub => !pub.tags.includes('Review'))
-  const service = publications.filter(pub => pub.tags.includes('Review'))
 
   return (
     <div className="pb-24">
@@ -64,7 +53,7 @@ export default function Research() {
       <div className="border-b border-line">
         {papers.map(pub => (
           <article key={pub.id} className="grid gap-6 border-t border-line py-10 sm:py-12 md:grid-cols-[300px_minmax(0,1fr)] lg:gap-12">
-            {pub.imageUrl && (
+            {pub.imageUrl && pub.paperUrl && (
               <a href={pub.paperUrl} {...ext} className="lift block aspect-[4/3] overflow-hidden rounded-2xl bg-paper" aria-label={`Open paper: ${pub.title}`}>
                 <img src={pub.thumbUrl ?? pub.imageUrl} alt="" decoding="async" className={`h-full w-full ${pub.thumbUrl ? 'object-contain' : 'object-cover'}`} />
               </a>
@@ -118,7 +107,7 @@ export default function Research() {
           <ul className="mt-5 border-t border-line">
             {service.map(pub => (
               <li key={pub.id} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-line py-4">
-                <p className="font-semibold">Reviewer, IEEE Spoken Language Technology Workshop</p>
+                <p className="font-semibold">{pub.title}</p>
                 <p className="tabular text-[15px] text-mute">{pub.year}</p>
               </li>
             ))}

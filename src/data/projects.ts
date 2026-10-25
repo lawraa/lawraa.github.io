@@ -4,12 +4,14 @@ export interface Project {
   subtitle: string
   tags: string[]
   imageUrl?: string
+  // Card image composed to fit its frame; shown with object-contain instead of cropping imageUrl
   thumbUrl?: string
   imageFit?: 'cover' | 'contain'
   detailImages?: (string | { src: string; rows?: number; poster?: string })[]
   codeUrl?: string
   videoUrl?: string
   pdfUrl?: string
+  pdfLabel?: string
   affiliation?: string
   description: string[]
   problem: string
@@ -26,10 +28,7 @@ export const projects: Project[] = [
     affiliation: 'UC Berkeley · CS 285 Final Project',
     subtitle: 'Decoupled SAC with risk-triggered latent correction achieving 100% success on Meta-World pick-place-v3, 25–29% more sample-efficient than baseline SAC',
     tags: ['Deep RL', 'SAC', 'Robotics', 'Meta-World', 'Latent Space', 'PyTorch', 'Research'],
-    imageUrl: undefined,
     codeUrl: 'https://github.com/lawraa/latent-recovery-rl',
-    videoUrl: undefined,
-    pdfUrl: undefined,
 
     description: [
       'Studied near-failure recovery in deep RL: detecting when a policy is drifting toward failure but is still recoverable, then applying a targeted correction to the actor\'s internal latent representation (rather than to actions directly) to steer it back on track.',
@@ -57,10 +56,7 @@ export const projects: Project[] = [
     affiliation: 'Personal Project',
     subtitle: 'Five RAG pipelines in one codebase, built to understand how different retrieval approaches compare in practice',
     tags: ['RAG', 'LLMs', 'Python', 'FastAPI', 'Streamlit', 'Qdrant', 'LangChain', 'NLP'],
-    imageUrl: undefined,
     codeUrl: 'https://github.com/lawraa/rag-forge',
-    videoUrl: undefined,
-    pdfUrl: undefined,
 
     description: [
       'A personal learning project exploring different RAG architectures. Implemented five retrieval pipelines that share a common ingest/query interface, ranging from a naive dense-only baseline to graph-based and agentic pipelines with reflection and corrective grading.',
@@ -97,8 +93,8 @@ export const projects: Project[] = [
     imageUrl: '/projects/JPMorgan_cert.jpg',
     imageFit: 'contain',
     codeUrl: 'https://github.com/lawraa/forage-midas',
-    videoUrl: undefined,
     pdfUrl: '/projects/JPMorgan_cert.pdf',
+    pdfLabel: 'Certificate',
 
     description: [
       'Built key backend components of Midas, a transaction-processing microservice, as part of JPMorgan Chase\'s Software Engineering Job Simulation on the Forage platform.',
@@ -127,9 +123,7 @@ export const projects: Project[] = [
     subtitle: 'LLM-guided MuJoCo simulation for automated gripper personalization, 83% convergence across 12 runs, 4 participants',
     tags: ['LLMs', 'Robotics', 'MuJoCo', 'Simulation', 'Optimization', 'Assistive Technology'],
     imageUrl: '/projects/capstone_dorsal-grasper.jpg',
-    thumbUrl: '/thumbs/capstone_dorsal-grasper.jpg',
-    codeUrl: undefined,
-    videoUrl: undefined,
+    thumbUrl: '/projects/capstone_dorsal-grasper.jpg',
     pdfUrl: '/projects/AI_Driven_Dorsal_Grasper_IROS2026.pdf',
 
     description: [
@@ -166,7 +160,7 @@ export const projects: Project[] = [
     imageUrl: '/projects/quad_quadruped.jpg',
     thumbUrl: '/thumbs/quad_quadruped.jpg',
     codeUrl: 'https://github.com/lawraa/WristControlledQuadruped',
-    pdfUrl: '/projects/149_final_quadruped.pdf', 
+    pdfUrl: '/projects/149_final_quadruped.pdf',
     description: [
       'Built a low-cost, mechanically simplified quadruped platform for educational and maker settings using 3D-printed parts and off-the-shelf components, requiring no machining or custom PCBs.',
       'Developed a wrist-worn controller combining IMU motion sensing and surface EMG to map user intent into real-time locomotion commands, executed on a Raspberry Pi with synchronized Dynamixel motor control.',
@@ -194,7 +188,7 @@ export const projects: Project[] = [
     affiliation: 'UC Berkeley · CS 289',
     subtitle: 'ResNet50 vs FastViT robustness under intentional racial imbalance (upscaling + race classification)',
     tags: ['Computer Vision', 'Model Evaluation', 'Fairness', 'ResNet50', 'Vision Transformer', 'PyTorch'],
-    imageUrl: '/projects/cnnvit_architecture.jpg', 
+    imageUrl: '/projects/cnnvit_architecture.jpg',
     codeUrl: 'https://github.com/Maltomatic/RaceComp',
     pdfUrl: '/projects/CNN_ViT_Showdown_for_Racial_Equality.pdf',
     videoUrl: 'https://youtu.be/KG4sqW_j5PE',
@@ -223,9 +217,7 @@ export const projects: Project[] = [
     affiliation: 'UC Berkeley · Data 100',
     subtitle: '99% accuracy on disaster-type classification using handcrafted LBP/Gabor features; 0.677 weighted F1 on damage severity with a soft-voting ensemble',
     tags: ['Machine Learning', 'Computer Vision', 'Scikit-learn', 'Feature Engineering', 'XGBoost', 'Python'],
-    imageUrl: undefined,
     pdfUrl: '/projects/data100_satellite_classification.pdf',
-    codeUrl: undefined,
 
     description: [
       'Evaluated interpretable, feature-based ML pipelines for post-disaster satellite image classification on the xView2 dataset, deliberately avoiding deep networks to understand how far handcrafted features can go.',
@@ -258,6 +250,7 @@ export const projects: Project[] = [
     thumbUrl: '/thumbs/llm-discussion.jpg',
     codeUrl: 'https://github.com/lawraa/LLM-Discussion',
     pdfUrl: 'https://arxiv.org/abs/2405.06373',
+    pdfLabel: 'Paper',
 
     description: [
       'LLMs tend to give similar answers to open-ended creative questions.',
@@ -346,10 +339,7 @@ export const projects: Project[] = [
     affiliation: 'Pegatron · Software Engineer Internship',
     subtitle: 'In-context visual prompting demo with dataset evaluation and prompt versioning',
     tags: ['Computer Vision', 'In-Context Learning', 'Gradio', 'SegGPT', 'HDF5', 'APIs'],
-    imageUrl: '/projects/visual-prompt-defect-detection.jpg', // put a UI screenshot or pipeline diagram here
-    codeUrl: undefined,
-    videoUrl: undefined,
-    pdfUrl: undefined,
+    imageUrl: '/projects/visual-prompt-defect-detection.jpg',
     description: [
       'Built a Gradio interface to demo visual prompting for defect detection, enabling prompt-based segmentation, prediction, and evaluation.',
       'Implemented dataset-level evaluation workflows and prompt versioning so users could save, reload, edit, and benchmark prompts consistently.',
@@ -367,7 +357,7 @@ export const projects: Project[] = [
 
     results:
       'Won 1st place in an internal internship project competition (team of three). Delivered an end-to-end demo workflow including interactive prompting, dataset evaluation, and prompt version control for reliable stakeholder testing.',
-    
+
     reflection:
       'The model was off the shelf. Most of our work went into the HDF5 data format, repeatable evaluation, and a UI that people outside the ML team could use.',
   },
@@ -380,8 +370,6 @@ export const projects: Project[] = [
     tags: ['Power Electronics', 'Analog Circuits', 'Control Systems', 'PCB Design', 'Hardware Testing'],
 
     imageUrl: '/projects/flyback-converter.jpg',
-    codeUrl: undefined,
-    videoUrl: undefined,
     pdfUrl: '/projects/flyback-converter.pdf',
     detailImages: [
       '/projects/flyback-converter_soft-start.png',
@@ -417,7 +405,6 @@ export const projects: Project[] = [
     tags: ['Networking', 'Simulation', 'Wireless Communication', 'Python', 'Systems Modeling'],
     imageUrl: '/projects/5g-handoff-simulator.jpg',
     codeUrl: 'https://github.com/lawraa/WMN_intro/tree/main/Final_Project',
-    videoUrl: undefined,
     pdfUrl: '/projects/5g-handoff-simulator.pdf',
 
     description: [
@@ -441,6 +428,6 @@ export const projects: Project[] = [
     reflection:
       'The same physical model produced very different results depending on the decision rule: soft handoff traded a little responsiveness for fewer unstable switches.'
   },
-  
-  
+
+
 ]

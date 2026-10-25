@@ -9,6 +9,7 @@ import Projects from './components/Projects'
 import Research from './components/Research'
 import Bouldering from './components/Bouldering'
 import Drawing from './components/Drawing'
+import { pages } from './pages'
 
 function HomePage() {
   return (
@@ -20,20 +21,13 @@ function HomePage() {
   )
 }
 
-const TITLES: Record<string, string> = {
-  '/work': 'Projects',
-  '/publications': 'Publications',
-  '/bouldering': 'Bouldering',
-  '/drawing': 'Drawing',
-}
-
 function RouteEffects() {
   const { pathname } = useLocation()
   const prevPath = useRef(pathname)
   useEffect(() => {
-    window.scrollTo(0, 0)
-    const page = TITLES[pathname]
-    document.title = page ? `${page} - Lawrance Chen` : 'Lawrance Chen'
+    // 'instant' overrides the smooth scroll-behavior set on html.
+    window.scrollTo({ top: 0, behavior: 'instant' })
+    document.title = pages.find(p => p.path === pathname)?.title ?? 'Lawrance Chen'
     // After client-side navigation, start keyboard and screen reader users at the new page.
     if (prevPath.current !== pathname) document.getElementById('main')?.focus({ preventScroll: true })
     prevPath.current = pathname

@@ -1,19 +1,8 @@
 import { useState } from 'react'
 import { drawings, type Drawing as DrawingItem } from '../data/drawings'
-import { icons } from './links'
+import { icons, ext } from './links'
 import { Lightbox, PageIntro } from './ui'
-
-function timeDrawing(): string {
-  const start = new Date(2026, 4, 1) // May 2026
-  const now = new Date()
-  const totalMonths = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth())
-  if (totalMonths < 1) return 'less than a month'
-  const years = Math.floor(totalMonths / 12)
-  const months = totalMonths % 12
-  const y = years ? `${years} year${years > 1 ? 's' : ''}` : ''
-  const m = months ? `${months} month${months > 1 ? 's' : ''}` : ''
-  return [y, m].filter(Boolean).join(' and ')
-}
+import { durationSince } from '../lib/duration'
 
 export default function Drawing() {
   const [lightbox, setLightbox] = useState<DrawingItem>()
@@ -23,7 +12,7 @@ export default function Drawing() {
       <PageIntro title="Drawing">
         <p>
           <strong className="font-semibold text-forest">{drawings.length} {drawings.length === 1 ? 'drawing' : 'drawings'}</strong> and{' '}
-          <strong className="font-semibold text-forest">{timeDrawing()}</strong> of practice so far.
+          <strong className="font-semibold text-forest">{durationSince(new Date(2026, 4, 1))}</strong> of practice so far.
         </p>
         <p className="mt-3">
           Right now I'm working on realistic portraits in pencil.
@@ -49,7 +38,7 @@ export default function Drawing() {
                 {drawing.link && (
                   <>
                     {' '}
-                    <a href={drawing.link.url} target="_blank" rel="noopener noreferrer" className="link inline-flex items-center gap-0.5">
+                    <a href={drawing.link.url} {...ext} className="link inline-flex items-center gap-0.5">
                       {drawing.link.label} <icons.external size={13} />
                     </a>
                   </>

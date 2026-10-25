@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom'
-import { EMAIL, icons, socials } from './links'
-
-const ext = { target: '_blank', rel: 'noopener noreferrer' } as const
+import { EMAIL, icons, socials, ext } from './links'
 
 export default function Hero() {
   return (

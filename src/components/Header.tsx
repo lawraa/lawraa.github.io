@@ -1,13 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-
-const navLinks = [
-  { to: '/',             label: 'Home' },
-  { to: '/work',         label: 'Projects' },
-  { to: '/publications', label: 'Publications' },
-  { to: '/bouldering',   label: 'Bouldering' },
-  { to: '/drawing',      label: 'Drawing' },
-]
+import { pages } from '../pages'
 
 export default function Header() {
   const { pathname } = useLocation()
@@ -56,7 +49,7 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-7 text-[15px] font-medium" aria-label="Primary">
-          {navLinks.map(({ to, label }) => {
+          {pages.map(({ path: to, label }) => {
             const active = pathname === to
             return (
               <Link
@@ -73,6 +66,7 @@ export default function Header() {
 
         <button
           ref={toggleRef}
+          // 22px icon + 11px padding = 44px tap target; the negative margin keeps it aligned to the edge
           className="md:hidden -mr-[11px] p-[11px] rounded-full text-forest cursor-pointer hover:bg-forest-tint transition-colors"
           aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
           aria-expanded={menuOpen}
@@ -86,7 +80,7 @@ export default function Header() {
 
       {menuOpen && (
         <nav ref={menuRef} className="md:hidden border-t border-line px-5 pb-5 pt-2" aria-label="Primary">
-          {navLinks.map(({ to, label }) => {
+          {pages.map(({ path: to, label }) => {
             const active = pathname === to
             return (
               <Link

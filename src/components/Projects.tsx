@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { projects } from '../data/projects'
 import ProjectCard from './ProjectCard'
+import { pillClass, pillCountClass } from './pill'
 import { PageIntro } from './ui'
 
 const tagCounts = projects.reduce<Record<string, number>>((acc, p) => {
@@ -27,11 +28,6 @@ export default function Projects() {
 
   const filtered = activeTag ? projects.filter(p => p.tags.includes(activeTag)) : projects
 
-  const pill = (active: boolean) =>
-    `cursor-pointer rounded-full px-3.5 py-2 text-[15px] font-semibold transition-colors ${
-      active ? 'bg-forest text-white' : 'bg-paper text-mute ring-1 ring-inset ring-line hover:text-ink hover:ring-forest'
-    }`
-
   return (
     <div className="pb-16">
       <PageIntro title="Projects">
@@ -42,17 +38,17 @@ export default function Projects() {
       </PageIntro>
 
       <div className="flex flex-wrap gap-2 pb-8" role="group" aria-label="Filter projects by topic">
-        <button onClick={() => setActiveTag(null)} className={pill(activeTag === null)} aria-pressed={activeTag === null}>
-          All <span className={`tabular ${activeTag === null ? 'opacity-70' : ''}`}>{projects.length}</span>
+        <button onClick={() => setActiveTag(null)} className={pillClass(activeTag === null)} aria-pressed={activeTag === null}>
+          All <span className={pillCountClass(activeTag === null)}>{projects.length}</span>
         </button>
         {filterTags.map(tag => (
           <button
             key={tag}
             onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-            className={pill(activeTag === tag)}
+            className={pillClass(activeTag === tag)}
             aria-pressed={activeTag === tag}
           >
-            {tag} <span className={`tabular ${activeTag === tag ? 'opacity-70' : ''}`}>{tagCounts[tag]}</span>
+            {tag} <span className={pillCountClass(activeTag === tag)}>{tagCounts[tag]}</span>
           </button>
         ))}
       </div>

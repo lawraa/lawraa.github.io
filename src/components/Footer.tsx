@@ -1,18 +1,9 @@
-import { useState } from 'react'
-import { EMAIL, socials } from './links'
+import { useCopied } from '../hooks/useCopied'
+import { EMAIL, socials, ext } from './links'
 
 export default function Footer() {
-  const [copied, setCopied] = useState(false)
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(EMAIL)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch {
-      window.location.href = `mailto:${EMAIL}`
-    }
-  }
+  const [copied, copy] = useCopied()
+  const copyEmail = () => copy(EMAIL).catch(() => { window.location.href = `mailto:${EMAIL}` })
 
   return (
     <footer id="contact" className="bg-forest text-forest-tint">
@@ -41,7 +32,7 @@ export default function Footer() {
           <ul className="flex flex-wrap gap-x-6 font-medium">
             {socials.map(({ label, href, Icon }) => (
               <li key={label}>
-                <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 py-2.5 text-white hover:text-butter transition-colors">
+                <a href={href} {...ext} className="inline-flex items-center gap-2 py-2.5 text-white hover:text-butter transition-colors">
                   <Icon size={label === 'X' ? 14 : 16} /> {label}
                 </a>
               </li>

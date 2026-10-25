@@ -60,7 +60,7 @@ year={2025}
   },
   {
     id: 'ieee-slt-review',
-    title: 'IEEE SLT Workshop - Reviewer',
+    title: 'Reviewer, IEEE Spoken Language Technology Workshop',
     authors: ['Shou-Jen Chen'],
     venue: 'IEEE SLT',
     year: '2024',
@@ -69,3 +69,6 @@ year={2025}
     tags: ['Review', 'Speech'],
   },
 ]
+
+export const papers = publications.filter(pub => !pub.tags.includes('Review'))
+export const service = publications.filter(pub => pub.tags.includes('Review'))
