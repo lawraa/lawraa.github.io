@@ -27,3 +27,6 @@ dist-ssr
 .impeccable/mocks/
 .impeccable/review/
 .impeccable/hook.cache.json
+
+# Stray screenshots from local testing
+/*.png
