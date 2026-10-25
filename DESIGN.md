@@ -178,7 +178,7 @@ A botanical four-ink palette on a pale sage ground: forest for structure, tomato
 - **Tomato** (tomato): the interaction color. Inline links (underlined), "All projects" style arrow links, hover color for titles and forest text links, the active nav underline and active mobile-menu item, the focus ring, and the text caret.
 
 ### Tertiary
-- **Butter** (butter): the highlighter stroke under one key phrase, text selection, the venue/"Ongoing" tag tone, the footer's email button, and the "Now" lead-in word on the forest card.
+- **Butter** (butter): the highlighter stroke under one key phrase, text selection, the venue/"Ongoing" tag tone, the footer's email button, the "Now" lead-in word on the forest card, and the favicon lettering (Bricolage 800 outlines on a forest tile).
 
 ### Neutral
 - **Sage Ground** (sage): page background and sticky header fill.
@@ -206,7 +206,7 @@ A botanical four-ink palette on a pale sage ground: forest for structure, tomato
 ### Hierarchy
 - **Display** (700, clamp 2.75-4.75rem, 0.98, -0.035em): the home hero name only, in forest.
 - **Headline** (700, 3rem mobile / 3.75rem desktop, 1.02, -0.03em): the page title on every inner route, in forest, followed by an 18px mute intro capped at 62ch.
-- **Title** (700, 30px mobile / 34px desktop, -0.02em): section headings ("Selected work", "Experience"), in forest. Inner pages use 30px.
+- **Title** (700, 30px mobile / 34px desktop, -0.02em): section headings ("Selected work", "Experience"), in forest.
 - **Item title** (700, 24px mobile / 28px desktop, 1.15, -0.015em): project and publication article headings.
 - **Body** (400, 17px, 1.6; long-form 16px at 1.7 capped at 70-72ch): mute for prose, ink for emphasis. Lede lines run 18-20px weight 500.
 - **Strong body** (600, 18px, snug): card titles, gallery captions, list-row titles in Hanken, never Bricolage.
@@ -241,7 +241,7 @@ Flat by default. Depth comes from tone (white surfaces on sage, forest surfaces 
 
 ## Shapes
 
-Soft geometry with two families. Everything pressed or labeled is a full pill: buttons, tags, filter chips, icon buttons. Everything shown is a softly rounded rectangle: images and media wells at 16px, gallery figures and the map popup at 12px, large reading panels (case study, radar chart) and the hero portrait at 24px. The focus outline is 2px tomato with a 3px offset and follows each element's own corners; inside the footer and lightbox it switches to butter, since tomato is too dark on forest. Rules are straight 1px hairlines; there are no decorative borders, outlines on cards, or offset shapes.
+Soft geometry with two families. Everything pressed or labeled is a full pill: buttons, tags, filter chips, icon buttons. Everything shown is a softly rounded rectangle: images and media wells at 16px, gallery figures and the map popup at 12px, large reading panels (case study, radar chart) and the hero portrait at 24px. The focus outline is 2px tomato with a 3px offset and follows each element's own corners; inside the footer and lightbox it switches to butter, since tomato is too dark on forest. Rules are straight 1px hairlines; there are no decorative borders, outlines on cards, or offset shapes. Under forced colors (Windows High Contrast), pills, tags and the Now card take a 1px system-color border or outline, the selected filter switches to Highlight, and the highlighter to Mark.
 
 ## Components
 
@@ -250,7 +250,7 @@ Confident, rounded and quiet: filled forest for the one main action, an outline 
 - **Shape:** full pill.
 - **Primary:** forest fill, white 15px semibold text, 12px x 20px padding (8px x 16px in dense article action rows), trailing 16-18px line icon with 8px gap.
 - **Hover / Focus:** fill darkens to deep forest via color transition; global 2px tomato focus ring.
-- **Outline:** transparent with an inset 1.5px forest ring and forest text; hover washes forest mist. Used for "Resume PDF" and "Read case study" (with a chevron that rotates 180deg when open).
+- **Outline:** transparent with an inset 1.5px forest ring and forest text; hover washes forest mist. Used for "Resume PDF" and "Read case study" (with a chevron that rotates 180deg when open). A dense 8px x 16px variant closes an open case study from its end ("Hide case study") and retries the failed map ("Try again", which hovers to paper on its mist panel).
 - **On forest (footer):** butter fill with ink text (hover turns white), paired with a white-text outline using a 60% forest-mist ring and a 10% white hover wash.
 - **Text actions:** forest semibold 15px with optional icon, hover to tomato. Arrow links ("All 13 projects") are tomato with an underline on hover.
 
@@ -285,7 +285,7 @@ Tomato text with a 1px underline offset 3px; on hover the underline thickens to 
 A compact forest panel (16px corners, 16px x 20px padding) under the hero portrait: 15px forest-mist text led inline by a butter semibold word.
 
 ### Footer
-A full-bleed forest close on every page: a white 36-48px Bricolage headline, an 18px forest-mist line, the butter email pill and copy-email outline, then a 15% white hairline over copyright and white social links with icons that hover to butter.
+A full-bleed forest close on every page: a white 36-48px Bricolage headline, an 18px forest-mist line, the butter email pill, a copy-email outline and a Resume PDF outline with a trailing external-arrow icon, then a 15% white hairline over copyright and white social links with icons that hover to butter.
 
 ### Lightbox
 An opaque deep-forest backdrop with the image on a white 16px-cornered well, a forest-mist caption, and a round close button.

@@ -64,7 +64,7 @@ export default function Hero() {
             className="h-full w-full object-cover object-[50%_20%]"
           />
         </div>
-        <p className="mt-3 rounded-2xl bg-forest px-5 py-4 text-meta leading-snug text-forest-tint">
+        <p className="mt-3 rounded-2xl bg-forest px-5 py-4 forced-colors:outline forced-colors:outline-1 forced-colors:-outline-offset-1 text-meta leading-snug text-forest-tint">
           <span className="font-semibold text-butter">Now</span> · Software Development Engineer at Amazon, Seattle
         </p>
       </div>

@@ -6,7 +6,7 @@ export default function Footer() {
   const copyEmail = () => copy(EMAIL).catch(() => { window.location.href = `mailto:${EMAIL}` })
 
   return (
-    <footer id="contact" className="bg-forest text-forest-tint">
+    <footer id="contact" className="bg-forest text-forest-tint forced-colors:border-t forced-colors:border-[CanvasText]">
       <div className="mx-auto max-w-[1160px] px-5 py-16 sm:px-10 sm:py-20">
         <h2 className="text-4xl font-bold leading-[1.05] tracking-[-0.025em] text-white sm:text-5xl">Contact</h2>
         <p className="mt-5 max-w-[56ch] text-lg">Email is the best way to reach me.</p>
