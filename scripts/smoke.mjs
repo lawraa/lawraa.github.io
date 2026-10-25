@@ -77,10 +77,13 @@ for (const viewport of [phone, desktop]) {
     const hash = path === '/' ? '' : `#${path}`
     const { page, errors } = await open(viewport, hash)
     const res = await page.evaluate(() => ({
+      hash: location.hash,
       h1: document.querySelectorAll('h1').length,
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
     }))
+    // An unknown route redirects home, so a page listed in pages.ts without a <Route> in App.tsx shows up here
+    if (res.hash !== hash) errors.push(`landed on "${res.hash || '/'}" (missing <Route> in App.tsx?)`)
     if (res.h1 !== 1) errors.push(`h1 count ${res.h1}`)
     for (const src of await brokenImages(page)) if (sameOrigin(src)) errors.push(`broken image ${src}`)
     if (res.scrollWidth > res.clientWidth) errors.push(`horizontal overflow ${res.scrollWidth} > ${res.clientWidth}`)
@@ -159,7 +162,8 @@ for (const viewport of [phone, desktop]) {
       media: region ? region.querySelectorAll('img, video').length : 0,
     }
   }, id)
-  if (res.top === null || res.top < 0 || res.top > 120) errors.push(`card top at ${res.top}px`)
+  if (res.top === null) errors.push(`no project "${id}" on /work; pick another id with a gallery video in this check`)
+  else if (res.top < 0 || res.top > 120) errors.push(`card top at ${res.top}px`)
   if (res.expanded !== 'true' || res.inert !== false) errors.push('case study not open')
   if (res.media === 0) errors.push('gallery did not mount')
   await page.waitForNetworkIdle({ idleTime: 300, timeout: 30000 })

@@ -1,6 +1,6 @@
 name: CI
 
-# Lint, build and smoke-test every page in Chrome on pushes to branches other than main
+# Lint, unit-test, build and smoke-test every page in Chrome on pushes to branches other than main
 # (main is covered by the deploy workflow). Pull requests only run here when they come
 # from a fork; a branch in this repo is already covered by its push.
 on:

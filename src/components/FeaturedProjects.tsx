@@ -1,19 +1,13 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../data/projects'
+import { featuredProjects } from '../data/featured'
 import { fitClass } from './media'
 import { icons } from './links'
-import { Tag, type TagTone, SectionHeading } from './ui'
+import { Tag, SectionHeading } from './ui'
 
-const FEATURED: { id: string; field: string; tone: TagTone }[] = [
-  { id: 'llm-personalized-assistive-design', field: 'LLMs × Robotics', tone: 'butter' },
-  { id: 'emg-imu-quadruped', field: 'Embedded systems', tone: 'forest' },
-  { id: 'colm-llm-discussion', field: 'Research · COLM 2024', tone: 'mint' },
-]
-
-const featured = FEATURED.flatMap(f => {
+// A bad id is caught by tests/featured.test.ts; at runtime the card is skipped rather than breaking the page
+const featured = featuredProjects.flatMap(f => {
   const project = projects.find(p => p.id === f.id)
-  // Skip the card rather than break the home page; the smoke test fails on this error.
-  if (!project) console.error(`Featured project "${f.id}" not found in projects.ts`)
   return project ? [{ ...f, project }] : []
 })
 

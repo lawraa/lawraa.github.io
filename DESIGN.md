@@ -255,7 +255,7 @@ Confident, rounded and quiet: filled forest for the one main action, an outline 
 - **Text actions:** forest semibold 15px with optional icon, hover to tomato. Arrow links ("All 13 projects") are tomato with an underline on hover.
 
 ### Chips (Tags and Filters)
-- **Tag:** 13px semibold pill, 10px horizontal padding. Tones: plain (white, mute text, inset hairline ring) for topics and grades; butter for venues and "Ongoing"; forest and mint for featured-project fields.
+- **Tag:** 13px semibold pill, 10px horizontal padding. Tones: plain (white, mute text, inset hairline ring) for topics and grades; butter for venues and "Ongoing"; butter, forest and mint for the three featured-project fields on the home page.
 - **Filter pill:** 15px semibold, 8px x 14px (40px tall). Unselected is a plain tag that darkens text and rings forest on hover; selected is solid forest with white text. Counts sit inside in tabular numerals, dimmed to 70% only on the selected (forest) pill where contrast allows it.
 
 ### Cards / Containers
