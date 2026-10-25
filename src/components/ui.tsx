@@ -78,7 +78,7 @@ export function Lightbox({ src, alt, caption, onClose }: { src: string; alt: str
       <button
         ref={closeRef}
         onClick={onClose}
-        className="absolute top-[max(1rem,env(safe-area-inset-top))] right-[max(1rem,env(safe-area-inset-right))] p-2 rounded-full text-forest-tint hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+        className="absolute top-[max(1rem,env(safe-area-inset-top))] right-[max(1rem,env(safe-area-inset-right))] p-2 rounded-full bg-forest text-forest-tint hover:text-white hover:bg-forest/70 transition-colors cursor-pointer"
         aria-label="Close"
       >
         <icons.close />

@@ -288,7 +288,7 @@ A compact forest panel (16px corners, 16px x 20px padding) under the hero portra
 A full-bleed forest close on every page: a white 36-48px Bricolage headline, an 18px forest-mist line, the butter email pill, a copy-email outline and a Resume PDF outline with a trailing external-arrow icon, then a 15% white hairline over copyright and white social links with icons that hover to butter.
 
 ### Lightbox
-An opaque deep-forest backdrop with the image on a white 16px-cornered well, a forest-mist caption, and a round close button.
+An opaque deep-forest backdrop with the image on a white 16px-cornered well, a forest-mist caption, and a round forest close button that stays legible over wide images.
 
 ## Do's and Don'ts
 
