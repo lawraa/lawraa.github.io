@@ -26,8 +26,8 @@ function RadarChart() {
     // so label size is set per breakpoint to land near 14px on screen.
     <svg viewBox={`-64 0 ${size + 128} ${size}`} className="w-full max-w-[440px] [&_text]:text-[23px] sm:[&_text]:text-[14px]" role="img"
       aria-label={`Self-rated climbing style out of 10: ${styleRatings.map(r => `${r.label} ${r.value}`).join(', ')}`}>
-      {[1, 2, 3, 4, 5].map(l => <polygon key={l} points={ring(l)} className="fill-none stroke-line" strokeWidth="1" />)}
-      {styleRatings.map((_, i) => { const p = point(10, i); return <line key={i} x1={c} y1={c} x2={p.x} y2={p.y} className="stroke-line" strokeWidth="1" /> })}
+      {[1, 2, 3, 4, 5].map(l => <polygon key={l} points={ring(l)} className="fill-none stroke-line forced-colors:stroke-[GrayText]" strokeWidth="1" />)}
+      {styleRatings.map((_, i) => { const p = point(10, i); return <line key={i} x1={c} y1={c} x2={p.x} y2={p.y} className="stroke-line forced-colors:stroke-[GrayText]" strokeWidth="1" /> })}
       <polygon points={data} className="fill-butter stroke-forest" fillOpacity="0.55" strokeWidth="2.5" strokeLinejoin="round" />
       {styleRatings.map(({ value }, i) => { const p = point(value, i); return <circle key={i} cx={p.x} cy={p.y} r="4.5" className="fill-tomato stroke-white" strokeWidth="1.5" /> })}
       {styleRatings.map(({ label, value }, i) => {
@@ -36,8 +36,8 @@ function RadarChart() {
         const ly = c + (maxR + 24) * Math.sin(a)
         const anchor = Math.abs(Math.cos(a)) < 0.1 ? 'middle' : Math.cos(a) > 0 ? 'start' : 'end'
         return (
-          <text key={label} x={lx} y={ly} textAnchor={anchor} dy="0.35em" className="fill-mute">
-            {label} <tspan fontWeight="700" className="fill-ink">{value}</tspan>
+          <text key={label} x={lx} y={ly} textAnchor={anchor} dy="0.35em" className="fill-mute forced-colors:fill-[CanvasText]">
+            {label} <tspan fontWeight="700" className="fill-ink forced-colors:fill-[CanvasText]">{value}</tspan>
           </text>
         )
       })}

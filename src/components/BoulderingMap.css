@@ -9,6 +9,12 @@
   background: var(--color-forest-tint);
 }
 
+/* Leaflet blends tiles with plus-lighter, which turns the antialiased seams between tile rows
+   into 1-device-pixel white lines on HiDPI screens */
+.leaflet-container img.leaflet-tile {
+  mix-blend-mode: normal;
+}
+
 /* Pull the gray basemap toward the sage palette. On the tiles, not the pane: Safari skips a filter on the pane. */
 .leaflet-tile {
   filter: sepia(0.35) hue-rotate(55deg) saturate(0.7) brightness(1.02);

@@ -79,7 +79,7 @@ export default function Header() {
                 to={to}
                 aria-current={active ? 'page' : undefined}
                 onClick={onNavClick(to)}
-                className={`py-1 border-b-2 transition-colors ${active ? 'text-ink border-tomato' : 'text-mute border-transparent hover:text-ink hover:border-line'}`}
+                className={`py-1 border-b-2 transition-colors ${active ? 'text-ink border-tomato' : 'text-mute border-transparent hover:text-ink hover:border-line forced-colors:border-[Canvas]'}`}
               >
                 {label}
               </Link>
@@ -112,7 +112,7 @@ export default function Header() {
                 to={to}
                 aria-current={active ? 'page' : undefined}
                 onClick={onNavClick(to)}
-                className={`flex items-center justify-between py-3 font-display text-2xl font-semibold border-b border-line last:border-b-0 ${active ? 'text-tomato' : 'text-forest'}`}
+                className={`flex items-center justify-between py-3 font-display text-2xl font-semibold border-b border-line last:border-b-0 ${active ? 'text-tomato forced-colors:underline forced-colors:underline-offset-4' : 'text-forest'}`}
               >
                 {label}
               </Link>

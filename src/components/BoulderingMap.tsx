@@ -81,7 +81,7 @@ export default function BoulderingMap() {
               aria-pressed={active}
               className={`inline-flex items-center gap-2 ${pillClass(active)}`}
             >
-              {key !== 'all' && <span className="h-2.5 w-2.5 rounded-full ring-1 ring-white/70" style={{ backgroundColor: COUNTRY_COLORS[key] }} aria-hidden="true" />}
+              {key !== 'all' && <span className="h-2.5 w-2.5 rounded-full ring-1 ring-white/70 forced-color-adjust-none" style={{ backgroundColor: COUNTRY_COLORS[key] }} aria-hidden="true" />}
               {key === 'all' ? 'All regions' : key}{' '}
               <span className={pillCountClass(active)}>{count}</span>
             </button>
@@ -133,7 +133,7 @@ export default function BoulderingMap() {
           {COUNTRIES.map(country => (
             <div key={country}>
               <h3 className="flex items-center gap-2 font-sans text-meta font-semibold text-ink">
-                <span className="h-2.5 w-2.5 rounded-full ring-1 ring-forest/30" style={{ backgroundColor: COUNTRY_COLORS[country] }} aria-hidden="true" />
+                <span className="h-2.5 w-2.5 rounded-full ring-1 ring-forest/30 forced-color-adjust-none" style={{ backgroundColor: COUNTRY_COLORS[country] }} aria-hidden="true" />
                 {country}
               </h3>
               <ul className="mt-2 border-t border-line">

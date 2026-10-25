@@ -195,6 +195,27 @@ p, li, dd {
   .expand-content { transition: none; }
 }
 
+/* Windows High Contrast and other forced-colors modes drop background fills and box-shadow rings,
+   so pills, the selected state and the highlighter need real borders and system colors there */
+@media (forced-colors: active) {
+  :is(a, button).rounded-full {
+    border: 1px solid ButtonText;
+  }
+
+  [aria-pressed="true"] {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+    border-color: Highlight;
+  }
+
+  .mark {
+    forced-color-adjust: none;
+    background: Mark;
+    color: MarkText;
+  }
+}
+
 @media print {
   html, body { background: #fff !important; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }

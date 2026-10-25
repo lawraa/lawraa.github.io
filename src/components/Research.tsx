@@ -69,7 +69,7 @@ export default function Research() {
               <div className="mt-3"><Authors authors={pub.authors} coFirstAuthors={pub.coFirstAuthors} /></div>
               <p className="mt-4 max-w-[72ch] text-[1.0625rem] leading-[1.7] text-mute">{pub.summary.trim()}</p>
 
-              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-meta font-semibold">
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-4 text-meta font-semibold">
                 {pub.paperUrl && (
                   <a href={pub.paperUrl} {...ext} className="inline-flex items-center gap-2 rounded-full bg-forest px-4 py-2 text-white transition-colors hover:bg-forest-deep">
                     Read paper <icons.external />
