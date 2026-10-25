@@ -13,7 +13,7 @@ export default function Hero() {
           <span className="whitespace-nowrap">UC Berkeley EECS MEng</span>
         </p>
 
-        <div className="mt-6 max-w-[64ch] space-y-4 text-mute text-[17px] sm:text-lg leading-[1.65]">
+        <div className="mt-6 max-w-[64ch] space-y-4 text-mute text-[1.0625rem] sm:text-lg leading-[1.65]">
           <p>
             Before Amazon, I did a Master of Engineering in EECS at UC Berkeley, focused on robotics and embedded systems. My capstone used an LLM to design
             a <span className="mark">custom assistive gripper for each patient</span>, testing every design in MuJoCo
@@ -31,18 +31,18 @@ export default function Hero() {
         <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-4">
           <Link
             to="/work"
-            className="inline-flex items-center gap-2 rounded-full bg-forest px-5 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-forest-deep"
+            className="inline-flex items-center gap-2 rounded-full bg-forest px-5 py-3 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-forest-deep"
           >
             See projects <icons.arrow />
           </Link>
           <a
             href="/resume.pdf"
             {...ext}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-[15px] font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-[0.9375rem] font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
           >
             Resume PDF <icons.download />
           </a>
-          <ul className="flex flex-wrap items-center gap-x-4 text-[15px] font-semibold text-forest xl:ml-3">
+          <ul className="flex flex-wrap items-center gap-x-4 text-[0.9375rem] font-semibold text-forest xl:ml-3">
             <li><a href={`mailto:${EMAIL}`} className="inline-flex min-h-11 items-center hover:text-tomato transition-colors">Email</a></li>
             {socials.map(({ label, href }) => (
               <li key={label}><a href={href} {...ext} className="inline-flex min-h-11 min-w-6 items-center justify-center hover:text-tomato transition-colors">{label}</a></li>
@@ -62,7 +62,7 @@ export default function Hero() {
             className="h-full w-full object-cover object-[50%_20%]"
           />
         </div>
-        <p className="mt-3 rounded-2xl bg-forest px-5 py-4 text-[15px] leading-snug text-forest-tint">
+        <p className="mt-3 rounded-2xl bg-forest px-5 py-4 text-[0.9375rem] leading-snug text-forest-tint">
           <span className="font-semibold text-butter">Now</span> · Software Development Engineer at Amazon, Seattle
         </p>
       </div>

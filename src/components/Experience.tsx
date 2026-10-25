@@ -25,9 +25,9 @@ function Timeline({ items }: { items: { role: string; org: string; dates: string
         <li key={item.org + item.role} className="grid gap-x-6 gap-y-0.5 border-b border-line py-4 sm:grid-cols-[minmax(0,1fr)_auto]">
           <div className="min-w-0">
             <p className="font-semibold leading-snug">{item.role}</p>
-            <p className="text-[15px] text-mute">{item.org}</p>
+            <p className="text-[0.9375rem] text-mute">{item.org}</p>
           </div>
-          <p className="tabular text-[15px] text-mute sm:text-right sm:whitespace-nowrap">{item.dates}</p>
+          <p className="tabular text-[0.9375rem] text-mute sm:text-right sm:whitespace-nowrap">{item.dates}</p>
         </li>
       ))}
     </ul>
@@ -37,20 +37,20 @@ function Timeline({ items }: { items: { role: string; org: string; dates: string
 export default function Experience() {
   return (
     <section className="pb-24" aria-labelledby="experience">
-      <h2 id="experience" className="text-forest font-bold text-3xl sm:text-[34px] tracking-[-0.02em]">Experience</h2>
+      <h2 id="experience" className="text-forest font-bold text-3xl sm:text-[2.125rem] tracking-[-0.02em]">Experience</h2>
 
       <div className="mt-6 grid gap-12 lg:grid-cols-2 lg:gap-14">
         <div>
-          <h3 className="mb-3 font-sans text-[15px] font-semibold text-ink">Industry</h3>
+          <h3 className="mb-3 font-sans text-[0.9375rem] font-semibold text-ink">Industry</h3>
           <Timeline items={industryItems} />
         </div>
         <div>
-          <h3 className="mb-3 font-sans text-[15px] font-semibold text-ink">Research labs</h3>
+          <h3 className="mb-3 font-sans text-[0.9375rem] font-semibold text-ink">Research labs</h3>
           <Timeline items={researchItems} />
 
           <div className="mt-10 flex items-baseline justify-between gap-4">
-            <h3 className="font-sans text-[15px] font-semibold text-ink">Publications</h3>
-            <Link to="/publications" className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-tomato hover:underline underline-offset-4">
+            <h3 className="font-sans text-[0.9375rem] font-semibold text-ink">Publications</h3>
+            <Link to="/publications" className="inline-flex items-center gap-1.5 text-[0.9375rem] font-semibold text-tomato hover:underline underline-offset-4">
               All publications <icons.arrow size={15} />
             </Link>
           </div>
@@ -60,7 +60,7 @@ export default function Experience() {
                 <a href={pub.paperUrl} {...ext} className="min-w-0 font-semibold leading-snug hover:text-tomato transition-colors">
                   {pub.title.split(':')[0]}
                   {pub.coFirstAuthors?.includes('Shou-Jen Chen') && (
-                    <span className="block text-[15px] font-normal text-mute">Co-first author</span>
+                    <span className="block text-[0.9375rem] font-normal text-mute">Co-first author</span>
                   )}
                 </a>
                 <Tag tone="butter">{pub.venue} {pub.year}</Tag>

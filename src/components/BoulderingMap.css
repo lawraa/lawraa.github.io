@@ -38,13 +38,13 @@
 }
 
 .bouldering-popup strong {
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: var(--color-ink);
 }
 
 .bouldering-popup span {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: var(--color-mute);
 }
 
@@ -74,13 +74,13 @@
 .leaflet-control-attribution {
   background: color-mix(in srgb, var(--color-paper) 85%, transparent) !important;
   color: var(--color-mute) !important;
-  font-size: 13px !important;
+  font-size: 0.8125rem !important;
   border-radius: 6px 0 0 0 !important;
 }
 
 @media (max-width: 639px) {
   .leaflet-control-attribution {
-    font-size: 11px !important;
+    font-size: 0.6875rem !important;
     line-height: 1.4;
   }
 }

@@ -80,13 +80,13 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
         )}
 
         <div className="min-w-0">
-          <h2 className="text-forest text-2xl sm:text-[28px] font-bold leading-[1.15] tracking-[-0.015em]">
+          <h2 className="text-forest text-2xl sm:text-[1.75rem] font-bold leading-[1.15] tracking-[-0.015em]">
             {title}
           </h2>
-          {project.affiliation && <p className="mt-1.5 text-[15px] font-medium text-mute">{project.affiliation}</p>}
+          {project.affiliation && <p className="mt-1.5 text-[0.9375rem] font-medium text-mute">{project.affiliation}</p>}
           <p className="mt-3 max-w-[60ch] text-lg leading-relaxed">{project.subtitle}</p>
 
-          <div className="mt-4 space-y-3 max-w-[70ch] text-[17px] leading-relaxed text-mute">
+          <div className="mt-4 space-y-3 max-w-[70ch] text-[1.0625rem] leading-relaxed text-mute">
             {project.description.map((para, i) => <p key={i}>{para}</p>)}
           </div>
 
@@ -94,7 +94,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             {project.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-[15px] font-semibold">
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.9375rem] font-semibold">
             <button
               type="button"
               onClick={() => { setExpanded(e => !e); setOpened(true) }}
@@ -130,7 +130,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             {sections.map(({ label, value }, i) => (
               <div key={label} className="contents">
                 <dt className={`font-display text-lg font-bold text-forest md:mt-0 ${i > 0 ? 'mt-5' : ''}`}>{label}</dt>
-                <dd className="max-w-[72ch] text-[17px] leading-[1.7] text-mute">{value}</dd>
+                <dd className="max-w-[72ch] text-[1.0625rem] leading-[1.7] text-mute">{value}</dd>
               </div>
             ))}
             {opened && project.detailImages && project.detailImages.length > 0 && (

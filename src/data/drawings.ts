@@ -15,7 +15,7 @@ export const drawings: Drawing[] = [
     title: 'Portrait Study',
     date: 'May 2026',
     medium: 'Pencil on paper',
-    description: 'First drawing following a tutorial.',
-    link: { label: 'Tutorial', url: 'https://youtu.be/Zi0zRKOm6GM?si=VCuNcA5d3rM2vEFc' },
+    description: 'First drawing, following',
+    link: { label: 'this tutorial', url: 'https://youtu.be/Zi0zRKOm6GM?si=VCuNcA5d3rM2vEFc' },
   },
 ]

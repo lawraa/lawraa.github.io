@@ -64,14 +64,14 @@ export default function Bouldering() {
         <a
           href={`https://instagram.com/${stats.instagram}`}
           {...ext}
-          className="mt-5 inline-flex items-center gap-2 text-[17px] font-semibold text-forest hover:text-tomato transition-colors"
+          className="mt-5 inline-flex items-center gap-2 text-[1.0625rem] font-semibold text-forest hover:text-tomato transition-colors"
         >
           <icons.instagram /> @{stats.instagram}
         </a>
       </PageIntro>
 
       <section aria-labelledby="gallery" className="pb-20">
-        <h2 id="gallery" className="text-forest text-3xl font-bold tracking-[-0.02em]">On the wall</h2>
+        <h2 id="gallery" className="text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">On the wall</h2>
         <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-3">
           {photos.map(photo => (
             <li key={photo.id}>
@@ -84,7 +84,7 @@ export default function Bouldering() {
                 <img src={photo.thumbUrl ?? photo.src} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
               </button>
               <p className="mt-3 font-semibold leading-snug transition-colors peer-hover:text-tomato">{photo.caption}</p>
-              <p className="mt-0.5 text-[15px] text-mute">{photo.location}</p>
+              <p className="mt-0.5 text-[0.9375rem] text-mute">{photo.location}</p>
               <div className="mt-2"><Tag>{photo.grade}</Tag></div>
             </li>
           ))}
@@ -93,16 +93,16 @@ export default function Bouldering() {
 
       <section aria-labelledby="style" className="grid items-start gap-8 pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
         <div className="lg:pt-8">
-          <h2 id="style" className="text-forest text-3xl font-bold tracking-[-0.02em]">Style profile</h2>
-          <p className="mt-4 text-[17px] text-mute">Self-rated, out of 10.</p>
+          <h2 id="style" className="text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">Style profile</h2>
+          <p className="mt-4 text-[1.0625rem] text-mute">Self-rated, out of 10.</p>
         </div>
         <div className="flex justify-center rounded-3xl bg-paper p-4 sm:p-8"><RadarChart /></div>
       </section>
 
       <section aria-labelledby="gyms">
-        <h2 id="gyms" className="mb-6 text-forest text-3xl font-bold tracking-[-0.02em]">Gyms I've climbed</h2>
+        <h2 id="gyms" className="mb-6 text-forest text-3xl sm:text-[2.125rem] font-bold tracking-[-0.02em]">Gyms I've climbed</h2>
         {/* Placeholder roughly the height of the region chips plus the map, to limit layout shift */}
-        <Suspense fallback={<div className="h-[420px] rounded-3xl bg-forest-tint sm:h-[500px]" />}>
+        <Suspense fallback={<><div className="mb-4 h-10" /><div className="h-[360px] rounded-3xl bg-forest-tint sm:h-[min(440px,75svh)]" /></>}>
           <BoulderingMap />
         </Suspense>
       </section>

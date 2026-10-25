@@ -18,10 +18,10 @@ export default function FeaturedProjects() {
   return (
     <section className="pb-24" aria-labelledby="selected-work">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-        <h2 id="selected-work" className="text-forest font-bold text-3xl sm:text-[34px] tracking-[-0.02em]">
+        <h2 id="selected-work" className="text-forest font-bold text-3xl sm:text-[2.125rem] tracking-[-0.02em]">
           Selected work
         </h2>
-        <Link to="/work" className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-tomato hover:underline underline-offset-4">
+        <Link to="/work" className="inline-flex items-center gap-1.5 text-[0.9375rem] font-semibold text-tomato hover:underline underline-offset-4">
           All {projects.length} projects <icons.arrow size={15} />
         </Link>
       </div>
@@ -44,7 +44,7 @@ export default function FeaturedProjects() {
               <h3 className="mt-4 font-sans text-lg font-semibold leading-snug group-hover:text-tomato transition-colors">
                 {project.title.split(':')[0].replace(/ \(.*\)$/, '')}
               </h3>
-              <p className="mt-1 text-[15px] leading-relaxed text-mute">{project.subtitle}</p>
+              <p className="mt-1 text-[0.9375rem] leading-relaxed text-mute">{project.subtitle}</p>
               <div className="mt-3"><Tag tone={tone}>{field}</Tag></div>
             </Link>
           </li>

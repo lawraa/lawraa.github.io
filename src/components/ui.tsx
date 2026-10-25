@@ -22,7 +22,7 @@ export type TagTone = keyof typeof tagTones
 
 export function Tag({ children, tone = 'plain' }: { children: ReactNode; tone?: TagTone }) {
   return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[13px] font-semibold leading-6 ${tagTones[tone]}`}>
+    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[0.8125rem] font-semibold leading-6 ${tagTones[tone]}`}>
       {children}
     </span>
   )

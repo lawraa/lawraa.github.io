@@ -100,7 +100,7 @@ export default function BoulderingMap() {
           ))}
         </MapContainer>
       </div>
-      <p className="mt-3 text-[15px] text-mute">Select a pin to see the gym, or open the list below.</p>
+      <p className="mt-3 text-[0.9375rem] text-mute">Select a pin to see the gym, or open the list below.</p>
 
       <details className="group mt-6 border-t border-line">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold text-forest hover:text-tomato transition-colors [&::-webkit-details-marker]:hidden">
@@ -110,13 +110,13 @@ export default function BoulderingMap() {
         <div className="grid gap-x-12 gap-y-8 pb-4 sm:grid-cols-2 lg:grid-cols-3">
           {REGIONS.filter(r => r !== 'all').map(country => (
             <div key={country}>
-              <h3 className="flex items-center gap-2 font-sans text-[15px] font-semibold text-ink">
+              <h3 className="flex items-center gap-2 font-sans text-[0.9375rem] font-semibold text-ink">
                 <span className="h-2.5 w-2.5 rounded-full ring-1 ring-forest/30" style={{ backgroundColor: COUNTRY_COLORS[country] }} aria-hidden="true" />
                 {country}
               </h3>
               <ul className="mt-2 border-t border-line">
                 {gyms.filter(g => g.country === country).map(gym => (
-                  <li key={gym.name} className="flex items-baseline justify-between gap-4 border-b border-line py-2.5 text-[15px]">
+                  <li key={gym.name} className="flex items-baseline justify-between gap-4 border-b border-line py-2.5 text-[0.9375rem]">
                     <span className="min-w-0">{gym.name.replace(' - ', '\u00a0- ')}</span>
                     <span className="shrink-0 text-mute">{gym.city}</span>
                   </li>

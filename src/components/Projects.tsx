@@ -11,7 +11,7 @@ const tagCounts = projects.reduce<Record<string, number>>((acc, p) => {
 }, {})
 
 const filterTags = Object.entries(tagCounts)
-  .filter(([, count]) => count >= 2)
+  .filter(([, count]) => count >= 3)
   .sort((a, b) => b[1] - a[1])
   .map(([tag]) => tag)
 
@@ -29,7 +29,7 @@ export default function Projects() {
   const filtered = activeTag ? projects.filter(p => p.tags.includes(activeTag)) : projects
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <PageIntro title="Projects">
         <p>
           Course, research and internship projects from Berkeley, National Taiwan University and industry. Papers are

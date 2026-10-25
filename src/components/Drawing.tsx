@@ -31,9 +31,9 @@ export default function Drawing() {
               <img src={drawing.src} alt="" className="h-full w-full object-cover" draggable={false} loading="lazy" decoding="async" />
             </button>
             <h2 className="mt-4 font-sans text-lg font-semibold transition-colors peer-hover:text-tomato">{drawing.title}</h2>
-            <p className="text-[15px] text-mute">{drawing.medium} · {drawing.date}</p>
+            <p className="text-[0.9375rem] text-mute">{drawing.medium} · {drawing.date}</p>
             {drawing.description && (
-              <p className="mt-2 text-[17px] leading-relaxed text-mute">
+              <p className="mt-2 text-[1.0625rem] leading-relaxed text-mute">
                 {drawing.description}
                 {drawing.link && (
                   <>

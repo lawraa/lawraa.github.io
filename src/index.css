@@ -21,6 +21,7 @@ html {
   scroll-behavior: smooth;
   scrollbar-color: var(--color-line) var(--color-sage);
   -webkit-text-size-adjust: 100%;
+  color-scheme: light;
 }
 
 body {
@@ -28,7 +29,7 @@ body {
   background-color: var(--color-sage);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  font-size: 17px;
+  font-size: 1.0625rem; /* 17px at the default root size, but follows the browser's text size setting */
   line-height: 1.6;
   caret-color: var(--color-tomato);
   -webkit-font-smoothing: antialiased;
@@ -49,6 +50,16 @@ body {
 footer :focus-visible,
 [role="dialog"] :focus-visible {
   outline-color: var(--color-butter);
+}
+
+/* main takes focus after navigation only so screen readers start there; no ring around the page */
+#main:focus {
+  outline: none;
+}
+
+/* Keep in-page headings clear of the sticky header */
+h2[id] {
+  scroll-margin-top: 6rem;
 }
 
 h1, h2, h3 {
@@ -134,4 +145,16 @@ p, li, dd {
 
 @media (prefers-reduced-motion: reduce) {
   .expand-content { transition: none; }
+}
+
+@media print {
+  html, body { background: #fff !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Interactive chrome and collapsed content mean nothing on paper */
+  header.sticky, a[href="#main"], [role="group"], main button[aria-expanded], footer button,
+  .expand-content:not(.expanded) {
+    display: none !important;
+  }
+  footer { background: none !important; }
+  footer, footer * { color: var(--color-ink) !important; }
 }
