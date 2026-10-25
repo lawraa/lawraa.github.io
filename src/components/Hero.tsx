@@ -40,7 +40,7 @@ export default function Hero() {
             {...ext}
             className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-[0.9375rem] font-semibold text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
           >
-            Resume PDF <icons.download />
+            Resume PDF <icons.external size={16} />
           </a>
           <ul className="flex flex-wrap items-center gap-x-4 text-[0.9375rem] font-semibold text-forest xl:ml-3">
             <li><a href={`mailto:${EMAIL}`} className="inline-flex min-h-11 items-center hover:text-tomato transition-colors">Email</a></li>

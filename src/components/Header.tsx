@@ -78,8 +78,9 @@ export default function Header() {
         </button>
       </div>
 
+      {/* Overlay below the bar, so opening it never changes the header height or shifts the page */}
       {menuOpen && (
-        <nav ref={menuRef} className="md:hidden border-t border-line px-5 pb-5 pt-2" aria-label="Primary">
+        <nav ref={menuRef} className="absolute inset-x-0 top-full border-y border-line bg-sage px-5 pb-5 pt-2 md:hidden" aria-label="Primary">
           {pages.map(({ path: to, label }) => {
             const active = pathname === to
             return (

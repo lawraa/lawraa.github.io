@@ -20,10 +20,14 @@ export default function Projects() {
   const { hash } = useLocation()
   const target = hash.slice(1)
 
+  // Wait for web fonts so the layout above the card has settled, then jump without animating.
   useEffect(() => {
     if (!target) return
-    const el = document.getElementById(target)
-    if (el) requestAnimationFrame(() => el.scrollIntoView({ block: 'start' }))
+    let cancelled = false
+    document.fonts.ready.then(() => requestAnimationFrame(() => {
+      if (!cancelled) document.getElementById(target)?.scrollIntoView({ block: 'start', behavior: 'instant' })
+    }))
+    return () => { cancelled = true }
   }, [target])
 
   const filtered = activeTag ? projects.filter(p => p.tags.includes(activeTag)) : projects
@@ -56,7 +60,8 @@ export default function Projects() {
       <p role="status" className="sr-only">Showing {filtered.length} of {projects.length} projects</p>
       <div className="border-b border-line">
         {filtered.map(project => (
-          <ProjectCard key={project.id} project={project} defaultExpanded={project.id === target} />
+          // Keyed on being the target so a hash change on an open page remounts that card expanded
+          <ProjectCard key={project.id === target ? `${project.id}#target` : project.id} project={project} defaultExpanded={project.id === target} />
         ))}
       </div>
     </div>

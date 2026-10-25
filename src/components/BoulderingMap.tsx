@@ -24,6 +24,9 @@ const REGION_VIEWS: Record<string, { bounds: [[number, number], [number, number]
   Thailand: { bounds: [[7.5, 98.0], [19.2, 99.5]] },
 }
 
+// Extra room at the bottom keeps pins clear of the attribution bar
+const FIT_PADDING = { paddingTopLeft: [32, 32] as [number, number], paddingBottomRight: [32, 64] as [number, number] }
+
 const REGIONS = ['all', 'USA', 'Taiwan', 'Thailand']
 
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -31,13 +34,14 @@ const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)')
 function MapController({ region }: { region: string }) {
   const map = useMap()
   useEffect(() => {
+    map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener noreferrer">Leaflet</a>')
     map.getContainer().setAttribute('aria-label', `Map of ${gyms.length} climbing gyms. The same gyms are listed below the map.`)
   }, [map])
   useEffect(() => {
     const view = REGION_VIEWS[region]
     if (!view) return
-    if (reduceMotion()) map.fitBounds(view.bounds, { padding: [32, 32], animate: false })
-    else map.flyToBounds(view.bounds, { padding: [32, 32], duration: 1.0 })
+    if (reduceMotion()) map.fitBounds(view.bounds, { ...FIT_PADDING, animate: false })
+    else map.flyToBounds(view.bounds, { ...FIT_PADDING, duration: 1.0 })
   }, [region, map])
   return null
 }
@@ -71,7 +75,7 @@ export default function BoulderingMap() {
         {/* One-finger drag would trap page scrolling on phones; zoom buttons and pinch still work there. */}
         <MapContainer
           bounds={REGION_VIEWS.all.bounds}
-          boundsOptions={{ padding: [32, 32] }}
+          boundsOptions={FIT_PADDING}
           scrollWheelZoom={false}
           dragging={!Browser.mobile}
           zoomAnimation={!reduceMotion()}

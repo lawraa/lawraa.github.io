@@ -92,9 +92,9 @@
 .leaflet-bottom.leaflet-right {
   right: 12px;
   bottom: 6px;
+  max-width: calc(100% - 24px); /* resolves against the map; on the control it would shrink-wrap */
 }
 
 .leaflet-control-attribution {
   border-radius: 6px !important;
-  max-width: calc(100% - 24px);
 }
