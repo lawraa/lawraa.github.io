@@ -109,8 +109,8 @@ footer :focus-visible,
   outline-offset: -3px;
 }
 
-/* main takes focus after navigation only so screen readers start there; no ring around the page */
-#main:focus {
+/* main and deep-linked project cards take focus only so screen readers start there; no ring around them */
+[tabindex="-1"]:focus {
   outline: none;
 }
 

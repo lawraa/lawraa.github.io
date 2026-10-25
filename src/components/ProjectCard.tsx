@@ -6,7 +6,7 @@ import { Lightbox, Tag } from './ui'
 import { focusOpener } from './focusOpener'
 import { typeset } from '../lib/typeset'
 
-function DetailMedia({ src, alt, rows, poster, onOpen }: { src: string; alt: string; rows?: number; poster?: string; onOpen: (src: string) => void }) {
+function DetailMedia({ src, alt, rows, poster, onOpen }: { src: string; alt: string; rows?: number; poster?: string; onOpen: (src: string, alt: string) => void }) {
   const [wide, setWide] = useState(false)
   const isVideo = /\.(mp4|webm|ogg)$/i.test(src)
 
@@ -18,6 +18,7 @@ function DetailMedia({ src, alt, rows, poster, onOpen }: { src: string; alt: str
       {isVideo ? (
         <video
           src={src}
+          aria-label={alt}
           poster={poster}
           className="h-full w-full object-cover"
           controls
@@ -30,7 +31,7 @@ function DetailMedia({ src, alt, rows, poster, onOpen }: { src: string; alt: str
           }}
         />
       ) : (
-        <button type="button" className="focus-inset block h-full w-full cursor-zoom-in" onClick={e => { focusOpener(e); onOpen(src) }} aria-label={`Enlarge ${alt}`}>
+        <button type="button" className="focus-inset block h-full w-full cursor-zoom-in" onClick={e => { focusOpener(e); onOpen(src, alt) }} aria-label={`Enlarge ${alt}`}>
           <img
             src={src}
             alt={alt}
@@ -50,7 +51,8 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
   const [expanded, setExpanded] = useState(defaultExpanded)
   // Gallery media mounts on first open so collapsed cards don't download it.
   const [opened, setOpened] = useState(defaultExpanded)
-  const [lightbox, setLightbox] = useState<string>()
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string }>()
+  const titleId = `${project.id}-title`
   const toggleRef = useRef<HTMLButtonElement>(null)
   const sectionsId = `${project.id}-case-study`
 
@@ -63,12 +65,12 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
   ]
 
   return (
-    <article id={project.id} className="border-t border-line py-10 sm:py-12">
+    <article id={project.id} tabIndex={-1} className="border-t border-line py-10 sm:py-12">
       <div className={`grid gap-6 sm:gap-8 ${project.imageUrl ? 'md:grid-cols-[300px_minmax(0,1fr)] lg:gap-12' : ''}`}>
         {project.imageUrl && (
           <button
             type="button"
-            onClick={e => { focusOpener(e); setLightbox(project.imageUrl) }}
+            onClick={e => { focusOpener(e); setLightbox({ src: project.imageUrl!, alt: project.title }) }}
             className="lift aspect-[4/3] w-full cursor-zoom-in overflow-hidden rounded-2xl bg-paper"
             aria-label={`Enlarge image: ${project.title}`}
           >
@@ -83,7 +85,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
         )}
 
         <div className="min-w-0">
-          <h2 className="text-forest text-2xl sm:text-[1.75rem] font-bold leading-[1.15] tracking-[-0.015em]">
+          <h2 id={titleId} className="text-forest text-2xl sm:text-[1.75rem] font-bold leading-[1.15] tracking-[-0.015em]">
             {project.title}
           </h2>
           {project.affiliation && <p className="mt-1.5 text-meta font-medium text-mute">{typeset(project.affiliation)}</p>}
@@ -104,6 +106,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
               onClick={() => { setExpanded(e => !e); setOpened(true) }}
               aria-expanded={expanded}
               aria-controls={sectionsId}
+              aria-describedby={titleId}
               className="inline-flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-forest ring-[1.5px] ring-inset ring-forest transition-colors hover:bg-forest-tint"
             >
               {/* Both labels share one cell so the button width (and the row's wrapping) stays put when toggled */}
@@ -114,17 +117,17 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
               <span className={`transition-transform duration-300 motion-reduce:transition-none ${expanded ? 'rotate-180' : ''}`}><icons.chevron /></span>
             </button>
             {project.codeUrl && (
-              <a href={project.codeUrl} {...ext} className="inline-flex items-center gap-1.5 text-forest hover:text-tomato transition-colors">
+              <a href={project.codeUrl} {...ext} aria-describedby={titleId} className="inline-flex items-center gap-1.5 text-forest hover:text-tomato transition-colors">
                 <icons.github size={16} /> Code
               </a>
             )}
             {project.pdfUrl && (
-              <a href={project.pdfUrl} {...ext} className="inline-flex items-center gap-1 text-forest hover:text-tomato transition-colors">
+              <a href={project.pdfUrl} {...ext} aria-describedby={titleId} className="inline-flex items-center gap-1 text-forest hover:text-tomato transition-colors">
                 {project.pdfLabel ?? 'Report PDF'} <icons.external />
               </a>
             )}
             {project.videoUrl && (
-              <a href={project.videoUrl} {...ext} className="inline-flex items-center gap-1 text-forest hover:text-tomato transition-colors">
+              <a href={project.videoUrl} {...ext} aria-describedby={titleId} className="inline-flex items-center gap-1 text-forest hover:text-tomato transition-colors">
                 Video <icons.external />
               </a>
             )}
@@ -149,7 +152,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
                     const src = typeof item === 'string' ? item : item.src
                     const rows = typeof item === 'string' ? undefined : item.rows
                     const poster = typeof item === 'string' ? undefined : item.poster
-                    return <DetailMedia key={src} src={src} rows={rows} poster={poster} alt={`Figure ${i + 1}: ${project.title}`} onOpen={setLightbox} />
+                    return <DetailMedia key={src} src={src} rows={rows} poster={poster} alt={`Figure ${i + 1}: ${project.title}`} onOpen={(src, alt) => setLightbox({ src, alt })} />
                   })}
                 </dd>
               </div>
@@ -173,7 +176,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
         </div>
       </div>
 
-      {lightbox && <Lightbox src={lightbox} alt={project.title} caption={project.title} onClose={() => setLightbox(undefined)} />}
+      {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} caption={project.title} onClose={() => setLightbox(undefined)} />}
     </article>
   )
 }

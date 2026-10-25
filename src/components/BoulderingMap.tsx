@@ -41,6 +41,7 @@ function MapController({ region }: { region: Region }) {
     map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener noreferrer">Leaflet</a>')
     map.getContainer().setAttribute('role', 'region')
     map.getContainer().setAttribute('aria-label', `Map of ${gyms.length} climbing gyms. The same gyms are listed below the map.`)
+    map.getPanes().overlayPane.setAttribute('aria-hidden', 'true') // pins aren't focusable; the list covers them
   }, [map])
   useEffect(() => {
     regionRef.current = region

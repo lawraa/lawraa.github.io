@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="grid gap-12 pt-10 pb-20 sm:pt-14 sm:pb-24 md:grid-cols-[minmax(0,1fr)_300px] md:gap-14 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-[72px]">
       <div className="min-w-0">
-        <h1 className="text-forest font-bold text-[clamp(2.75rem,6.4vw,4.75rem)] leading-[0.98] tracking-[-0.035em]">
+        <h1 id="page-title" className="text-forest font-bold text-[clamp(2.75rem,6.4vw,4.75rem)] leading-[0.98] tracking-[-0.035em]">
           Shou-Jen (Lawrance) Chen
         </h1>
         <p className="mt-5 text-lg sm:text-xl font-medium">

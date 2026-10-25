@@ -5,7 +5,7 @@ import { icons } from './links'
 export function PageIntro({ title, children }: { title: string; children?: ReactNode }) {
   return (
     <header className="pt-14 sm:pt-20 pb-10 sm:pb-14">
-      <h1 className="text-forest font-bold text-[min(3rem,13vw)] sm:text-6xl tracking-[-0.03em] leading-[1.02]">{title}</h1>
+      <h1 id="page-title" className="text-forest font-bold text-[min(3rem,13vw)] sm:text-6xl tracking-[-0.03em] leading-[1.02]">{title}</h1>
       {children && <div className="mt-5 max-w-[62ch] text-lg text-mute">{children}</div>}
     </header>
   )
@@ -40,9 +40,12 @@ export function Lightbox({ src, alt, caption, onClose }: { src: string; alt: str
   // Lock scroll, move focus into the dialog and hand it back on close.
   useEffect(() => {
     const opener = document.activeElement as HTMLElement | null
+    const page = document.getElementById('root')
     document.body.style.overflow = 'hidden'
+    page?.setAttribute('inert', '') // the dialog is portaled outside #root, so it stays reachable
     closeRef.current?.focus()
     return () => {
+      page?.removeAttribute('inert')
       document.body.style.overflow = ''
       opener?.focus()
     }

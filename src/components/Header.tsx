@@ -33,17 +33,23 @@ export default function Header() {
       if (menuRef.current?.contains(document.activeElement)) toggleRef.current?.focus()
       setMenuOpen(false)
     }
-    // Close when the page scrolls, a tap lands outside the site header, or the desktop nav takes over.
+    // Close when the page scrolls, a tap lands or focus moves outside the site header, or the desktop nav takes over.
     const close = () => setMenuOpen(false)
     const onPointer = (e: PointerEvent) => {
       if (!headerRef.current?.contains(e.target as Node)) close()
     }
+    const onFocusOut = (e: FocusEvent) => {
+      if (e.relatedTarget && !headerRef.current?.contains(e.relatedTarget as Node)) close()
+    }
+    const header = headerRef.current
     const desktop = window.matchMedia('(min-width: 768px)')
     window.addEventListener('keydown', onKey)
     window.addEventListener('scroll', close, { passive: true })
     document.addEventListener('pointerdown', onPointer)
     desktop.addEventListener('change', close)
+    header?.addEventListener('focusout', onFocusOut)
     return () => {
+      header?.removeEventListener('focusout', onFocusOut)
       window.removeEventListener('keydown', onKey)
       window.removeEventListener('scroll', close)
       document.removeEventListener('pointerdown', onPointer)

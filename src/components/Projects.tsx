@@ -25,7 +25,11 @@ export default function Projects() {
     if (!target) return
     let cancelled = false
     document.fonts.ready.then(() => requestAnimationFrame(() => {
-      if (!cancelled) document.getElementById(target)?.scrollIntoView({ block: 'start', behavior: 'instant' })
+      const card = document.getElementById(target)
+      if (cancelled || !card) return
+      card.scrollIntoView({ block: 'start', behavior: 'instant' })
+      // Reading and Tab continue from the card, not from the top of the page
+      card.focus({ preventScroll: true })
     }))
     return () => { cancelled = true }
   }, [target])
@@ -57,7 +61,7 @@ export default function Projects() {
         ))}
       </div>
 
-      <p role="status" className="sr-only">Showing {filtered.length} of {projects.length} projects</p>
+      <p role="status" className="sr-only">Showing {filtered.length} of {projects.length} projects{activeTag && ` tagged ${activeTag}`}</p>
       <div className="border-b border-line">
         {filtered.map(project => (
           // Keyed on being the target so a hash change on an open page remounts that card expanded

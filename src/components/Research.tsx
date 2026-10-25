@@ -65,12 +65,12 @@ export default function Research() {
         {papers.map(pub => (
           <article key={pub.id} className={`grid gap-6 border-t border-line py-10 sm:py-12 ${pub.imageUrl && pub.paperUrl ? 'md:grid-cols-[300px_minmax(0,1fr)] lg:gap-12' : ''}`}>
             {pub.imageUrl && pub.paperUrl && (
-              <a href={pub.paperUrl} {...ext} className="lift block aspect-[4/3] overflow-hidden rounded-2xl bg-paper" aria-label={`Open paper: ${pub.title}`}>
+              <a href={pub.paperUrl} {...ext} tabIndex={-1} aria-hidden="true" className="lift block aspect-[4/3] overflow-hidden rounded-2xl bg-paper">
                 <img src={pub.thumbUrl ?? pub.imageUrl} alt="" decoding="async" className={`h-full w-full ${fitClass(pub)}`} />
               </a>
             )}
             <div className="min-w-0">
-              <h2 className="text-forest text-2xl sm:text-[1.75rem] font-bold leading-[1.15] tracking-[-0.015em]">
+              <h2 id={`${pub.id}-title`} className="text-forest text-2xl sm:text-[1.75rem] font-bold leading-[1.15] tracking-[-0.015em]">
                 {pub.title}
               </h2>
               <div className="mt-3"><Tag tone="butter">{pub.venue} {pub.year}</Tag></div>
@@ -79,22 +79,22 @@ export default function Research() {
 
               <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-4 text-meta font-semibold">
                 {pub.paperUrl && (
-                  <a href={pub.paperUrl} {...ext} className="inline-flex items-center gap-2 rounded-full bg-forest px-4 py-2 text-white transition-colors hover:bg-forest-deep">
+                  <a href={pub.paperUrl} {...ext} aria-describedby={`${pub.id}-title`} className="inline-flex items-center gap-2 rounded-full bg-forest px-4 py-2 text-white transition-colors hover:bg-forest-deep">
                     Read paper <icons.external />
                   </a>
                 )}
                 {pub.codeUrl && (
-                  <a href={pub.codeUrl} {...ext} className="inline-flex items-center gap-1.5 text-forest hover:text-tomato transition-colors">
+                  <a href={pub.codeUrl} {...ext} aria-describedby={`${pub.id}-title`} className="inline-flex items-center gap-1.5 text-forest hover:text-tomato transition-colors">
                     <icons.github size={16} /> Code
                   </a>
                 )}
                 {projects.some(p => p.id === pub.id) && (
-                  <Link to={`/work#${pub.id}`} className="inline-flex items-center gap-1.5 text-forest hover:text-tomato transition-colors">
+                  <Link to={`/work#${pub.id}`} aria-describedby={`${pub.id}-title`} className="inline-flex items-center gap-1.5 text-forest hover:text-tomato transition-colors">
                     Case study <icons.arrow size={15} />
                   </Link>
                 )}
                 {pub.projectUrl && (
-                  <a href={pub.projectUrl} {...ext} className="inline-flex items-center gap-1 text-forest hover:text-tomato transition-colors">
+                  <a href={pub.projectUrl} {...ext} aria-describedby={`${pub.id}-title`} className="inline-flex items-center gap-1 text-forest hover:text-tomato transition-colors">
                     Project page <icons.external />
                   </a>
                 )}
@@ -104,6 +104,7 @@ export default function Research() {
                     onClick={() => setOpenBibtex(openBibtex === pub.id ? null : pub.id)}
                     aria-expanded={openBibtex === pub.id}
                     aria-controls={`${pub.id}-bibtex`}
+                    aria-describedby={`${pub.id}-title`}
                     className="-my-2 cursor-pointer py-2 text-forest hover:text-tomato transition-colors"
                   >
                     {openBibtex === pub.id ? 'Hide BibTeX' : 'BibTeX'}

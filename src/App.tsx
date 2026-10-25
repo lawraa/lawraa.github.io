@@ -82,7 +82,7 @@ function App() {
         Skip to content
       </a>
       <Header />
-      <main id="main" tabIndex={-1} className="mx-auto w-full max-w-[1160px] px-5 sm:px-10">
+      <main id="main" tabIndex={-1} aria-labelledby="page-title" className="mx-auto w-full max-w-[1160px] px-5 sm:px-10">
         <Pages />
       </main>
       <Footer />

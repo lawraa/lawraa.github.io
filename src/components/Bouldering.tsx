@@ -37,7 +37,7 @@ function RadarChart() {
         const ly = c + (maxR + 24) * Math.sin(a)
         const anchor = Math.abs(Math.cos(a)) < 0.1 ? 'middle' : Math.cos(a) > 0 ? 'start' : 'end'
         return (
-          <text key={label} x={lx} y={ly} textAnchor={anchor} dy="0.35em" className="fill-mute forced-colors:fill-[CanvasText]">
+          <text key={label} x={lx} y={ly} textAnchor={anchor} dy="0.35em" aria-hidden="true" className="fill-mute forced-colors:fill-[CanvasText]">
             {label} <tspan fontWeight="700" className="fill-ink forced-colors:fill-[CanvasText]">{value}</tspan>
           </text>
         )
@@ -81,6 +81,7 @@ export default function Bouldering() {
         <a
           href={`https://instagram.com/${stats.instagram}`}
           {...ext}
+          aria-label={`Instagram @${stats.instagram}`}
           className="mt-5 inline-flex items-center gap-2 text-[1.0625rem] font-semibold text-forest hover:text-tomato transition-colors"
         >
           <icons.instagram /> @{stats.instagram}
