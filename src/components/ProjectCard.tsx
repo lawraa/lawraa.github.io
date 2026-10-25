@@ -89,7 +89,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
           {project.affiliation && <p className="mt-1.5 text-meta font-medium text-mute">{typeset(project.affiliation)}</p>}
           <p className="mt-3 max-w-[66ch] text-lg leading-relaxed">{typeset(project.subtitle)}</p>
 
-          <div className="mt-4 space-y-3 max-w-[70ch] text-[1.0625rem] leading-relaxed text-mute">
+          <div className="mt-4 space-y-3 max-w-[70ch] leading-relaxed text-mute">
             {project.description.map((para, i) => <p key={i}>{typeset(para)}</p>)}
           </div>
 
@@ -138,7 +138,7 @@ export default function ProjectCard({ project, defaultExpanded = false }: { proj
             {sections.map(({ label, value }, i) => (
               <div key={label} className="contents">
                 <dt className={`font-display text-lg font-bold text-forest md:mt-0 ${i > 0 ? 'mt-5' : ''}`}>{label}</dt>
-                <dd className="max-w-[72ch] text-[1.0625rem] leading-[1.7] text-mute">{typeset(value)}</dd>
+                <dd className="max-w-[72ch] leading-[1.7] text-mute">{typeset(value)}</dd>
               </div>
             ))}
             {opened && project.detailImages && project.detailImages.length > 0 && (

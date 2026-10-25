@@ -37,7 +37,7 @@ export default function Drawing() {
               <h2 className="font-sans text-lg font-semibold transition-colors">{drawing.title}</h2>
               <p className="text-meta text-mute">{drawing.medium} · {drawing.date}</p>
               {drawing.description && (
-                <p className="mt-2 text-[1.0625rem] leading-relaxed text-mute">
+                <p className="mt-2 leading-relaxed text-mute">
                   {drawing.description}
                   {drawing.link && (
                     <>

@@ -9,7 +9,7 @@ import { PageIntro, Tag, SectionHeading } from './ui'
 
 function Authors({ authors, coFirstAuthors }: { authors: string[]; coFirstAuthors?: string[] }) {
   return (
-    <p className="text-[1.0625rem] text-mute">
+    <p className="text-mute">
       {authors.map((author, i) => (
         <span key={author}>
           <span className="whitespace-nowrap">
@@ -75,7 +75,7 @@ export default function Research() {
               </h2>
               <div className="mt-3"><Tag tone="butter">{pub.venue} {pub.year}</Tag></div>
               <div className="mt-3"><Authors authors={pub.authors} coFirstAuthors={pub.coFirstAuthors} /></div>
-              <p className="mt-4 max-w-[72ch] text-[1.0625rem] leading-[1.7] text-mute">{pub.summary.trim()}</p>
+              <p className="mt-4 max-w-[72ch] leading-[1.7] text-mute">{pub.summary.trim()}</p>
 
               <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-4 text-meta font-semibold">
                 {pub.paperUrl && (

@@ -118,7 +118,7 @@ export default function Bouldering() {
       <section aria-labelledby="style" className="grid items-start gap-8 pb-20 sm:pb-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
         <div className="lg:pt-8">
           <SectionHeading id="style">Style profile</SectionHeading>
-          <p className="mt-4 text-[1.0625rem] text-mute">Self-rated, out of 10.</p>
+          <p className="mt-4 text-mute">Self-rated, out of 10.</p>
         </div>
         <div className="flex justify-center rounded-3xl bg-paper p-4 sm:p-8"><RadarChart /></div>
       </section>
