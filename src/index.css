@@ -1,8 +1,29 @@
 @import "tailwindcss";
 
+/* Arial scaled to match the web fonts' metrics (measured from the font files), so text
+   doesn't re-wrap and shift the layout when Google Fonts finishes loading. */
+@font-face {
+  font-family: "Hanken Grotesk Fallback";
+  src: local("Arial");
+  size-adjust: 99.9%;
+  ascent-override: 100.1%;
+  descent-override: 30.3%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 500 800;
+  size-adjust: 97.3%;
+  ascent-override: 95.6%;
+  descent-override: 27.8%;
+  line-gap-override: 0%;
+}
+
 @theme {
-  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Bricolage Grotesque Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Hanken Grotesk", "Hanken Grotesk Fallback", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
   --color-sage: #eef1ec;
