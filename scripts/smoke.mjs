@@ -19,7 +19,7 @@ const report = (id, errors) => {
 // Static checks
 const pagePaths = [...readFileSync('src/pages.ts', 'utf8').matchAll(/path: '([^']+)'/g)].map(m => m[1])
 {
-  const sources = ['index.html']
+  const sources = ['index.html', 'src/index.css']
   const walk = dir => readdirSync(dir, { withFileTypes: true }).forEach(e => {
     const p = join(dir, e.name)
     if (e.isDirectory()) walk(p)
@@ -28,7 +28,7 @@ const pagePaths = [...readFileSync('src/pages.ts', 'utf8').matchAll(/path: '([^'
   walk('src')
   const missing = new Set()
   for (const file of sources) {
-    for (const [, path] of readFileSync(file, 'utf8').matchAll(/['"`](\/[\w./-]+\.(?:jpe?g|png|webp|svg|pdf|mp4|ico))['"`]/g)) {
+    for (const [, path] of readFileSync(file, 'utf8').matchAll(/['"`](\/[\w./-]+\.(?:jpe?g|png|webp|svg|pdf|mp4|ico|woff2))['"`]/g)) {
       if (!existsSync(join('public', path))) missing.add(`${path} (${file})`)
     }
   }

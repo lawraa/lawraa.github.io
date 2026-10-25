@@ -37,7 +37,7 @@ Pushing to `main` deploys: `.github/workflows/deploy.yml` runs lint, unit tests,
 
 - `src/data/projects.ts`, `research.ts`, `bouldering.ts`, `drawings.ts`: all page content. `src/data/featured.ts` picks the home page's featured projects by id, each with a short field label and tag tone; a unit test checks the ids exist. A project needs every case-study field (`problem`, `approach`, `architecture`, `results`, `reflection`); TypeScript reports any that are missing.
 - `src/pages.ts`: nav order and tab titles. To add or rename a route, also add its `<Route>` in `src/App.tsx` and update the list in `public/404.html`; the smoke test fails until all three agree.
-- `public/`: images, PDFs and `resume.pdf`, served as-is at the same path.
+- `public/`: images, PDFs and `resume.pdf`, served as-is at the same path. `public/fonts/` holds the self-hosted Bricolage Grotesque and Hanken Grotesk files (SIL Open Font License), declared at the top of `src/index.css`.
 - `DESIGN.md`: colors, type, components and rules for the visual design. `PRODUCT.md`: who the site is for.
 
 ## Adding images
