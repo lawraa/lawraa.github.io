@@ -14,44 +14,44 @@ colors:
   butter: "#f3d36b"
 typography:
   display:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Bricolage Grotesque, Bricolage Grotesque Fallback, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.75rem, 6.4vw, 4.75rem)"
     fontWeight: 700
     lineHeight: 0.98
     letterSpacing: "-0.035em"
   headline:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Bricolage Grotesque, Bricolage Grotesque Fallback, ui-sans-serif, system-ui, sans-serif"
     fontSize: "3.75rem"
     fontWeight: 700
     lineHeight: 1.02
     letterSpacing: "-0.03em"
   title:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Bricolage Grotesque, Bricolage Grotesque Fallback, ui-sans-serif, system-ui, sans-serif"
     fontSize: "34px"
     fontWeight: 700
     letterSpacing: "-0.02em"
   title-item:
-    fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Bricolage Grotesque, Bricolage Grotesque Fallback, ui-sans-serif, system-ui, sans-serif"
     fontSize: "28px"
     fontWeight: 700
     lineHeight: 1.15
     letterSpacing: "-0.015em"
   body:
-    fontFamily: "Hanken Grotesk, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Hanken Grotesk, Hanken Grotesk Fallback, ui-sans-serif, system-ui, sans-serif"
     fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.6
   body-strong:
-    fontFamily: "Hanken Grotesk, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Hanken Grotesk, Hanken Grotesk Fallback, ui-sans-serif, system-ui, sans-serif"
     fontSize: "18px"
     fontWeight: 600
     lineHeight: 1.375
   label:
-    fontFamily: "Hanken Grotesk, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Hanken Grotesk, Hanken Grotesk Fallback, ui-sans-serif, system-ui, sans-serif"
     fontSize: "15px"
     fontWeight: 600
   tag:
-    fontFamily: "Hanken Grotesk, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Hanken Grotesk, Hanken Grotesk Fallback, ui-sans-serif, system-ui, sans-serif"
     fontSize: "13px"
     fontWeight: 600
     lineHeight: "24px"
@@ -198,6 +198,7 @@ A botanical four-ink palette on a pale sage ground: forest for structure, tomato
 
 **Display Font:** Bricolage Grotesque (with ui-sans-serif, system-ui fallback), weights 500-800 loaded, 700 used.
 **Body Font:** Hanken Grotesk (with ui-sans-serif, system-ui fallback), 400/500/600 and 400 italic.
+**Fallback faces:** "Hanken Grotesk Fallback" and "Bricolage Grotesque Fallback" are local Arial / Arial Bold with size-adjust and ascent/descent overrides measured from the web font files, so the swap from fallback to web font does not reflow text.
 **Label/Mono Font:** system mono stack, only for BibTeX.
 
 **Character:** A chunky, slightly quirky grotesque for headings set tight and bold against a clean, friendly text grotesque; confident without shouting.
